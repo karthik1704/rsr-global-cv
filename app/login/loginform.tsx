@@ -1,3 +1,4 @@
+import { Facebook, Globe, Linkedin } from "lucide-react";
 import Image from "next/image";
 import img1 from '@/public/google-play-img-1.png';
 import img2 from '@/public/app-store-img-1.png';
