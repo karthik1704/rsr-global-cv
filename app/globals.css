@@ -18,16 +18,16 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.clipy_path{
+  clip-path: polygon(0 1%, 100% 0, 100% 81%, 77% 87%, 74% 26%, 38% 56%, 31% 94%, 0 100%);
+  z-index: -1;
+
 }
