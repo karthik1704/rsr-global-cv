@@ -1,4 +1,3 @@
-import { Facebook, Globe, Linkedin } from "lucide-react";
 import Image from "next/image";
 import img1 from '@/public/google-play-img-1.png';
 import img2 from '@/public/app-store-img-1.png';
@@ -34,30 +33,6 @@ const LoginForm = () => {
               Next
             </button>
           </div>
-
-          {/* <div className="flex justify-center content-center mb-6">
-            <hr className="w-1/4 border-t-2 border-gray-400" />
-            <div className="text-2xl mx-4">Or</div>
-            <hr className="w-1/4 border-t-2 border-gray-400" />
-          </div> */}
-
-          {/* <div className="text-sm mx-12 mb-6">
-          If you do not wish to create an EU Login account, you can sign in by using one of the following third-party sign-in options ("Sign-in Service"). <span className="underline font-bold">Read more</span> 
-          </div> */}
-
-          {/* <div className="flex justify-evenly mb-6 mx-12">
-          <Globe size={40} color="#ffffff" strokeWidth={1.5} absoluteStrokeWidth className="bg-teal-600 p-2" />
-          <a className="underline text-blue-800" href="#">Sign in with your eID</a>
-          </div>
-<div className="flex justify-evenly mb-6 mx-12">
-<Facebook size={40} color="#ffffff" strokeWidth={1.5} absoluteStrokeWidth  className="bg-blue-700 p-2" />
-          <a className="underline text-blue-800" href="#">Sign in with facebook</a>
-          </div>
-
-          <div className="flex justify-evenly mb-6 mx-12">
-<Linkedin size={40} color="#ffffff" strokeWidth={1.5} absoluteStrokeWidth className="bg-blue-500 p-2" />
-          <a className="underline text-blue-800" href="#">Sign in with LinkedIn</a>
-          </div> */}
 
         </div>
 
