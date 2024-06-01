@@ -1,113 +1,106 @@
 import Image from "next/image";
+import Link from "next/link";
+import Navbar from "@/components/navbar";
+import { ChevronRight } from 'lucide-react';
+
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="flex min-h-screen  items-center flex-col">
+      <header className="w-3/5 p-5">
+        <div className="flex items-center justify-between">
+          <Link href={"/"}>
+            <div className="flex gap-2">
+              <div className="w-20">
+                <img
+                  className="w-full h-full"
+                  src="https://w7.pngwing.com/pngs/978/749/png-transparent-flag-europe-symbol-flag-of-europe-european-flag-european-union-eu-international.png"
+                  alt="flag"
+                />
+              </div>
+              <h3>
+                europass <br /> European union
+              </h3>
+            </div>
+          </Link>
+          <p>
+            <Link href={"/"}>English</Link>
+          </p>
         </div>
-      </div>
+        <div>
+          <ul className="flex gap-4 mt-5 font-bold">
+            <li>Home </li>
+            <li>Create your Europass CV</li>
+          </ul>
+        </div>
+      </header>
+      <Navbar />
+      <section className="w-3/5 flex flex-col gap-8 my-7">
+        <div className="flex flex-col gap-4">
+          <h4 className="text-3xl font-bold">Your Europass Profile</h4>
+          <p className="text-lg leading-8">This is your personal space where you can record all your experiences and achievements. You can add your work experiences, learning experiences, different kinds of skills, publications, awards, licenses, memberships, volunteering and international experiences and even create new sections where you can add information, images, files and links to media that are relevant.</p>
+          <button className="border-2 border-blue-700 p-3 text-blue-600 max-w-fit">Create/Edit your Europass profile</button>
+        </div>
+        <div className="flex flex-col gap-4">
+          <h4 className="text-3xl font-bold">Your Europass library</h4>
+          <p className="text-lg leading-8">Once you have created your profile, you can add, save and share all supporting documents such as your certificates, motivation letter, cover letters, CVs, photos, or any other document on your Europass Library. </p>
+          <button className="border-2 border-blue-700 p-3 text-blue-600 max-w-fit font-bold rounded-md">Go to Library(Only for registered users)</button>
+        </div>
+        <div className="flex flex-col gap-4">
+          <h4 className="text-3xl font-bold">CV editor</h4>
+          <p className="text-lg leading-8">You can create a CV or many CVs with just a few clicks from your Europass profile or from scratch.</p>
+          <button className="border-2 border-blue-700 p-3 text-blue-600 max-w-fit font-bold rounded-md">Create CV</button>
+          <button className="border-2 border-blue-700 p-3 text-blue-600 max-w-fit font-bold rounded-md">Watch quick tutorial video</button>
+        </div>
+        <div className="flex flex-col gap-4">
+          <h4 className="text-3xl font-bold">Cover letter builder</h4>
+          <p className="text-lg leading-8">Europass makes it as simple as possible for you to create a Cover letter that stands out and follows the standard structure.</p>
+          <button className="border-2 border-blue-700 p-3 text-blue-600 max-w-fit font-bold rounded-md">Create Cover Letter</button>
+          <button className="border-2 border-blue-700 p-3 text-blue-600 max-w-fit font-bold rounded-md">Watch quick tutorial video</button>
+        </div>
+        <div className="flex flex-col gap-4">
+          <h4 className="text-3xl font-bold">My skills</h4>
+          <p className="text-lg leading-8">Add your skills to the "My skills" section and Europass will suggest other relevant and related sets of skills you might also have. These skills also come with descriptions that will help you understand the related sets of skills by describing and defining them in the context of different jobs.</p>
+          <button className="border-2 border-blue-700 p-3 text-blue-600 max-w-fit font-bold rounded-md">Reflect on your skills(Only for registered users)</button>
+        </div>
+        <div className="flex flex-col gap-4">
+          <h4 className="text-3xl font-bold">Your interests</h4>
+          <p className="text-lg leading-8">You can define your interests and understand your learning or career goals by adding topics you are interested in, where you want to work or study and what goals you want to achieve.</p>
+          <button className="border-2 border-blue-700 p-3 text-blue-600 max-w-fit font-bold rounded-md">Identify your interests (Only for registered users)</button>
+        </div>
+        <div className="flex flex-col gap-4">
+          <h4 className="text-3xl font-bold">European digital credentials</h4>
+          <p className="text-lg leading-8">European Digital Credentials (EDCs) are digital diplomas and certificates presented in a way that is recognized across Europe. You can receive European Digital Credentials easily from your education or training institute with a Europass account and store it in your Digital wallet. It is signed with a unique e-seal that will make it authentic and easily verifiable to employers or recruitment professionals.</p>
+          <button className="border-2 border-blue-700 p-3 text-blue-600 max-w-fit font-bold rounded-md">Read more</button>
+        </div>
+        <div className="flex flex-col gap-4">
+          <h4 className="text-3xl font-bold">Information and support</h4>
+          <p className="text-lg leading-8">The European Union offers many services that support you in your path to learn or work in Europe. You can search for courses, jobs, get advice from guidance counsellors, learn about how your qualifications and how they compare in a European country where are interested to learn or work and much more. You can check specific national services and European initiatives that can support you on the Europass platform.</p>
+          <button className="border-2 border-blue-700 p-3 text-blue-600 max-w-fit font-bold rounded-md">Find more information</button>
+        </div>
+      </section>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <section className="w-3/5 flex">
+        <div className="flex">
+          <div className="h-36 aspect-video">
+            <img className="w-full h-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQEr1AiVE3QtBxw5y7e8r6UKkbqfdzT0MJUA&s" alt="" />
+          </div>
+          <p className="text-xl font-bold text-blue-600">Plan your career with Europass</p>
+        </div>
+        <div className="flex">
+          <div className="h-36 aspect-video">
+            <img className="w-full h-full" src="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?cs=srgb&dl=pexels-pixabay-206359.jpg&fm=jpg" alt="" />
+          </div>
+          <p className="text-xl font-bold text-blue-600">Plan your learning</p>
+        </div>
+        <div className="flex">
+          <div className="h-36 aspect-video">
+            <img className="w-full h-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH7no3J-uHTAksDFCkMhHel8xdSVJNWhkHwQ&s" alt="" />
+          </div>
+          <p className="text-xl font-bold text-blue-600">Develop your skills through volunteering</p>
+        </div>
+      </section>
     </main>
   );
 }
