@@ -31,3 +31,11 @@ body {
     text-wrap: balance;
   }
 }
+
+.europass{
+
+  clip-path: polygon(0 0, 100% 0, 100% 65%, 0% 100%);
+
+
+
+}
