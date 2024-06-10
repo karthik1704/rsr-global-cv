@@ -28,6 +28,12 @@ body {
 
 .clipy_path{
   clip-path: polygon(0 1%, 100% 0, 100% 81%, 77% 87%, 74% 26%, 38% 56%, 31% 94%, 0 100%);
-  z-index: -1;
+  /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 2vw)); */
+  z-index:0;
+  background-color: #cddaee;
 
+}
+
+.clipy_path_two{
+  clip-path: polygon(0 0, 100% 9%, 100% 90%, 0% 100%);
 }
