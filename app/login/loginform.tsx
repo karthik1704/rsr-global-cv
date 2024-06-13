@@ -1,7 +1,7 @@
 import { Facebook, Globe, Linkedin } from "lucide-react";
 import Image from "next/image";
-import img1 from '@/public/google-play-img-1.png';
-import img2 from '@/public/app-store-img-1.png';
+import img1 from "@/public/google-play-img-1.png";
+import img2 from "@/public/app-store-img-1.png";
 
 const LoginForm = () => {
   return (
@@ -34,24 +34,25 @@ const LoginForm = () => {
               Next
             </button>
           </div>
-
         </div>
 
-        <p className="text-left m-6" >Easy, fast and secure: download the <span className="font-bold">EU Login app</span></p>
-        
-            <ul className="flex">
-                <li className="mx-2">
-                  <a href="#">
-<Image src={img1} height={150} width={100} alt=""/>
-</a>
-                </li>
-                <li className="mx-2 rounded-md">
-                <a href="#">
-                  <Image src={img2} height={150} width={100} alt=""/>
-                  </a>
-                </li>
-            </ul>
-        
+        <p className="text-left m-6">
+          Easy, fast and secure: download the{" "}
+          <span className="font-bold">EU Login app</span>
+        </p>
+
+        <ul className="flex">
+          <li className="mx-2">
+            <a href="#">
+              <Image src={img1} height={150} width={100} alt="" />
+            </a>
+          </li>
+          <li className="mx-2 rounded-md">
+            <a href="#">
+              <Image src={img2} height={150} width={100} alt="" />
+            </a>
+          </li>
+        </ul>
       </div>
     </>
   );

@@ -3,7 +3,9 @@ import Faq from "./faq";
 function page() {
   return (
     <>
-      <Faq />
+      <div className="py-6 bg-white">
+        <Faq />
+      </div>
     </>
   );
 }
