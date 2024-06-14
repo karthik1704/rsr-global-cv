@@ -12,7 +12,7 @@ import {
 import { HtmlProps } from "node_modules/react-pdf-html/dist/types/Html";
 import React from "react";
 import Html from "react-pdf-html";
-import htmlRenderers from "./pdfhtml";
+import {htmlRenderers} from "./pdfhtml";
 import resumeConfig from "../edit-me/resume-config";
 import Theme from "../edit-me/resume-config";
 import { contrastColor } from "../helpers/colorcontrast";
@@ -32,6 +32,8 @@ import { CircleIdCard } from "./Icons/Circlecard";
 import { CirclePaintbrush } from "./Icons/Circlepaintbrush";
 import { CircleUser } from "./Icons/Circleuser";
 import { Star } from "./Icons/Star";
+import PDFDownloadButton from './pfddwld';
+
 
 const theme = resumeConfig.pdfTheme;
 const albertSrc = "https://fonts.gstatic.com/s/albertsans/v1";
@@ -433,6 +435,8 @@ const PDF: React.FC<PDFProps> = ({}) => {
         </View>
       </Page>
     </Document>
+   <PDFDownloadButton secret={secret} />
+
   );
 };
 
