@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-
+"use client";
 // import { PrivateField, additionalInfo, allSkills, personal } from "@content";
 import {
   Document,
@@ -12,7 +12,7 @@ import {
 import { HtmlProps } from "node_modules/react-pdf-html/dist/types/Html";
 import React from "react";
 import Html from "react-pdf-html";
-import htmlRenderers from "./pdfhtml";
+import {htmlRenderers} from "./pdfhtml";
 import resumeConfig from "../edit-me/resume-config";
 import Theme from "../edit-me/resume-config";
 import { contrastColor } from "../helpers/colorcontrast";
@@ -245,7 +245,7 @@ const htmlProps: Omit<HtmlProps, "children"> = {
 };
 
 interface PDFProps {
-  privateInformation?: PrivateField[];
+  // privateInformation?: PrivateField[];
 }
 
 const fullName = "karthik";
@@ -287,19 +287,20 @@ const privateInformation = [
 const additionalInfo = {
   title: "Hobbies & Interests\r",
   body: {
-    raw: "\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra justo nec ultrices. Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis nisl rhoncus mattis rhoncus urna neque viverra.\r\n\r\nAll Markdown files will be rendered as rich text, so you can include features such as [links](#).\r\n",
-    html: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra justo nec ultrices. Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis nisl rhoncus mattis rhoncus urna neque viverra.</p>\n<p>All Markdown files will be rendered as rich text, so you can include features such as <a href="#">links</a>.</p>',
+    raw: "\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra justo nec ultrices. Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis nisl rhoncus mattis rhoncus urna neque viverra.\r\n\r\nAll Markdown files will be rendered as rich text, so you can include features such as \r\n",
+    html: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra justo nec ultrices. Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis nisl rhoncus mattis rhoncus urna neque viverra.</p>\n<p>All Markdown files will be rendered as rich text, so you can include features such as .</p>',
   },
 
   type: "AdditionalInfo",
 };
 
-const sortedAchievements = [];
+const sortedAchievements:[] = [];
 const sortedProfessionalExperiences = [
   {
     title: "Official Job Title",
     organization: "Some Company",
     startDate: "August 2019\r",
+    endDate: "August 2019\r",
     body: {
       raw: "\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra justo nec ultrices. Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis `nisl rhoncus mattis` rhoncus urna neque viverra. Tristique senectus et netus et malesuada fames ac. Arcu cursus euismod quis viverra nibh cras pulvinar mattis nunc. Volutpat consequat mauris nunc congue nisi vitae suscipit. Venenatis lectus magna fringilla urna porttitor rhoncus. Id porta nibh venenatis cras. Felis bibendum ut tristique et egestas quis ipsum suspendisse.\r\n",
       html: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra justo nec ultrices. Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis <code>nisl rhoncus mattis</code> rhoncus urna neque viverra. Tristique senectus et netus et malesuada fames ac. Arcu cursus euismod quis viverra nibh cras pulvinar mattis nunc. Volutpat consequat mauris nunc congue nisi vitae suscipit. Venenatis lectus magna fringilla urna porttitor rhoncus. Id porta nibh venenatis cras. Felis bibendum ut tristique et egestas quis ipsum suspendisse.</p>",
@@ -308,7 +309,7 @@ const sortedProfessionalExperiences = [
   },
 ];
 
-const PDF: React.FC<PDFProps> = ({}) => {
+const PDF= ({}) => {
   const year = new Date().getFullYear();
 
   return (
@@ -338,8 +339,8 @@ const PDF: React.FC<PDFProps> = ({}) => {
                 <Text style={styles.bold}>Location:</Text>
                 <Text>&nbsp;{personal.location}</Text>
               </View>
-              {privateInformation?.map((privateField) => (
-                <View key={privateField._id}>
+              {privateInformation?.map((privateField, idx) => (
+                <View key={idx}>
                   <Text style={styles.bold}>{privateField.label}:&nbsp;</Text>
                   <Html {...htmlProps}>{privateField.body.html}</Html>
                 </View>
@@ -351,7 +352,7 @@ const PDF: React.FC<PDFProps> = ({}) => {
                 <Text>Skills &amp; Expertise</Text>
               </View>
               {allSkills.map((skill, skillIndex) => (
-                <View key={skill._id}>
+                <View key={skillIndex}>
                   <View style={styles.itemHeading}>
                     <View style={styles.sectionHeadingStars}>
                       {Array.from(Array(allSkills.length - skillIndex)).map(
@@ -374,8 +375,8 @@ const PDF: React.FC<PDFProps> = ({}) => {
               <CircleBriefcase size={fontSizes.m} />
               <Text>Professional Experience</Text>
             </View>
-            {sortedProfessionalExperiences.map((professionalExperience) => (
-              <View key={professionalExperience._id}>
+            {sortedProfessionalExperiences.map((professionalExperience, idx) => (
+              <View key={idx}>
                 <View style={styles.itemHeading}>
                   <Text style={styles.professionalTitle}>
                     {professionalExperience.title}
@@ -400,18 +401,18 @@ const PDF: React.FC<PDFProps> = ({}) => {
               <CircleGraduationCap size={fontSizes.m} />
               <Text>Achievements</Text>
             </View>
-            {sortedAchievements.map((achievement) => (
-              <View key={achievement._id}>
+            {sortedAchievements.map((achievement, idx) => (
+              <View key={idx}>
                 <View style={styles.itemHeading}>
-                  <Text style={styles.bold}>{achievement.achievement}</Text>
+                  <Text style={styles.bold}>{achievement?.achievement}</Text>
                 </View>
                 <View style={styles.itemSubheadingRow}>
                   <BuildingColumns size={fontSizes.xxs} />
                   <Text style={styles.itemSubheading}>
-                    {achievement.organization}
+                    {achievement?.organization}
                   </Text>
                 </View>
-                <Html {...htmlProps}>{achievement.body.html}</Html>
+                <Html {...htmlProps}>{achievement?.body?.html}</Html>
               </View>
             ))}
           </View>

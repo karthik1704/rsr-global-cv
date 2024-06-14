@@ -1,16 +1,15 @@
-import React from "react";
 import PDF from "./pdf";
 import PDFDownloadButton from "./pfddwld";
-import htmlRenderers from "./pdfhtml";
+import {htmlRenderers} from "./pdfhtml";
 
-function page() {
+function Page() {
   return (
     <div>
       <PDF />
       <PDFDownloadButton />
-      <htmlRenderers />
+      {/* {htmlRenderers} */}
     </div>
   );
 }
 
-export default page;
+export default Page;
