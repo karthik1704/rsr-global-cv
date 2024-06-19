@@ -32,6 +32,8 @@ import { CircleIdCard } from "./Icons/Circlecard";
 import { CirclePaintbrush } from "./Icons/Circlepaintbrush";
 import { CircleUser } from "./Icons/Circleuser";
 import { Star } from "./Icons/Star";
+import PDFDownloadButton from './pfddwld';
+
 
 const theme = resumeConfig.pdfTheme;
 const albertSrc = "https://fonts.gstatic.com/s/albertsans/v1";
@@ -434,6 +436,8 @@ const PDF= ({}) => {
         </View>
       </Page>
     </Document>
+   <PDFDownloadButton secret={secret} />
+
   );
 };
 
