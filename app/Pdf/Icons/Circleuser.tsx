@@ -1,12 +1,11 @@
 import { Path, Svg } from '@react-pdf/renderer';
-import React from 'react';
 import resumeConfig from '../../edit-me/resume-config';
 import { getNeutralColor } from '../../helpers/colors';
 
 const theme = resumeConfig.pdfTheme;
 const neutralColor = getNeutralColor(12, theme);
 
-export const CircleUser: React.FC<PdfIconProps> = ({ size }) => {
+export const CircleUser  = ({ size }:PdfIconProps) => {
   return (
     <Svg style={{ height: size, width: size }} viewBox="0 0 512 512">
       <Path
