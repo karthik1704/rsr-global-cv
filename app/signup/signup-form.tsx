@@ -8,10 +8,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Link from "next/link";
 
 const SignUp = () => {
   return (
-      <div className="mt-4 mb-4 min-h-screen flex flex-col justify-center items-center bg-slate-100">
+      <div className="p-8 mb-4 min-h-screen flex flex-col justify-center items-center bg-slate-100">
         <h1 className="text-4xl font-bold mb-4 text-center ">
           Create an account
         </h1>
@@ -52,6 +53,25 @@ const SignUp = () => {
               </label>
               <input
                 type="text"
+                className="border border-black px-3 py-2 mt-1 block w-full"
+              />
+            </div>
+            <div className="mb-4 mx-12">
+              <label className="block text-gray-700 font-bold">
+                Password             </label>
+              <input
+                type="password"
+                name="password"
+                className="border border-black px-3 py-2 mt-1 block w-full"
+              />
+            </div>
+            <div className="mb-4 mx-12">
+              <label className="block text-gray-700 font-bold">
+                Confirm password
+              </label>
+              <input
+                type="password"
+                name="password2"
                 className="border border-black px-3 py-2 mt-1 block w-full"
               />
             </div>
@@ -97,12 +117,12 @@ const SignUp = () => {
               >
                 Create an account
               </button>
-              <button
-                type="button"
+              <Link
+                href="/"
                 className="bg-gray-300 text-gray-700 py-2 px-4 hover:bg-gray-400 focus:outline-none focus:bg-gray-400 mx-2"
               >
                 Cancel
-              </button>
+              </Link>
             </div>
           </form>
         </div>
