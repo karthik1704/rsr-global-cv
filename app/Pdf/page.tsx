@@ -25,7 +25,7 @@ import Skills from "src/components/Articles/Skills";
 // import { Footer } from 'src/components/Footer/Footer';
 // import { Header } from 'src/components/Header/Header';
 
-const Page: React.FC<PageProps> = () => {
+const Page = () => {
   return (
     <>
       <Header />

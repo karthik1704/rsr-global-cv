@@ -1,4 +1,3 @@
-import { Facebook, Globe, Linkedin } from "lucide-react";
 import Image from "next/image";
 import img1 from "@/public/google-play-img-1.png";
 import img2 from "@/public/app-store-img-1.png";
@@ -14,10 +13,21 @@ const LoginForm = () => {
           <form>
             <div className="mb-4 mx-12">
               <label className="block text-gray-700 font-bold">
-                Enter your e-mail address or unique identifier
+                Enter your e-mail address
               </label>
               <input
                 type="text"
+                name="username"
+                className="border border-black px-3 py-2 mt-1 block w-full"
+              />
+            </div>
+            <div className="mb-4 mx-12">
+              <label className="block text-gray-700 font-bold">
+                Enter your password
+              </label>
+              <input
+                type="password"
+                name="password"
                 className="border border-black px-3 py-2 mt-1 block w-full"
               />
             </div>
@@ -30,15 +40,18 @@ const LoginForm = () => {
             >
               Create an account
             </a>
-            <button className="bg-blue-700 text-white py-2 px-4 hover:bg-blue-950 mx-12 mb-6">
-              Next
+            <button
+              type="submit"
+              className="bg-blue-700 text-white py-2 px-4 hover:bg-blue-950 mx-12 mb-6"
+            >
+              Login
             </button>
           </div>
         </div>
 
         <p className="text-left m-6">
           Easy, fast and secure: download the{" "}
-          <span className="font-bold">EU Login app</span>
+          <span className="font-bold">RSR Login app</span>
         </p>
 
         <ul className="flex">
