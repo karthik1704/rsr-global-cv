@@ -41,9 +41,7 @@ const LoginForm = () => {
               className="border border-black px-3 py-2 mt-1 block w-full"
             />
           </div>
-        </form>
-
-        <div className="flex justify-between">
+          <div className="flex justify-between">
           <Link
             href="/signup"
             className="text-blue-800 hover:text-blue-950 underline text-sm mx-12 mb-6"
@@ -57,6 +55,9 @@ const LoginForm = () => {
             Login
           </button>
         </div>
+        </form>
+
+       
       </div>
 
       <p className="text-left m-6">
