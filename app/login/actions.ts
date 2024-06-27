@@ -75,7 +75,7 @@ export async function signinJwt(prevState: any, formData: any) {
     if(res.status ===200){
     const resJson = await res.json();
     console.log(resJson);
-    cookies().set("access_token", resJson.access_token);
+    cookies().set("access", resJson.access_token);
     }
   } catch (e) {
     console.log(e);
