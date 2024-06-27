@@ -12,7 +12,7 @@ import {
 import { HtmlProps } from "node_modules/react-pdf-html/dist/types/Html";
 import React from "react";
 import Html from "react-pdf-html";
-import {htmlRenderers} from "./pdfhtml";
+import { htmlRenderers } from "./pdfhtml";
 import resumeConfig from "../edit-me/resume-config";
 import Theme from "../edit-me/resume-config";
 import { contrastColor } from "../helpers/colorcontrast";
@@ -32,8 +32,7 @@ import { CircleIdCard } from "./Icons/Circlecard";
 import { CirclePaintbrush } from "./Icons/Circlepaintbrush";
 import { CircleUser } from "./Icons/Circleuser";
 import { Star } from "./Icons/Star";
-import PDFDownloadButton from './pfddwld';
-
+import PDFDownloadButton from "./pfddwld";
 
 const theme = resumeConfig.pdfTheme;
 const albertSrc = "https://fonts.gstatic.com/s/albertsans/v1";
@@ -290,13 +289,13 @@ const additionalInfo = {
   title: "Hobbies & Interests\r",
   body: {
     raw: "\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra justo nec ultrices. Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis nisl rhoncus mattis rhoncus urna neque viverra.\r\n\r\nAll Markdown files will be rendered as rich text, so you can include features such as \r\n",
-    html: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra justo nec ultrices. Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis nisl rhoncus mattis rhoncus urna neque viverra.</p>\n<p>All Markdown files will be rendered as rich text, so you can include features such as .</p>',
+    html: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra justo nec ultrices. Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis nisl rhoncus mattis rhoncus urna neque viverra.</p>\n<p>All Markdown files will be rendered as rich text, so you can include features such as .</p>",
   },
 
   type: "AdditionalInfo",
 };
 
-const sortedAchievements:[] = [];
+const sortedAchievements: [] = [];
 const sortedProfessionalExperiences = [
   {
     title: "Official Job Title",
@@ -311,7 +310,7 @@ const sortedProfessionalExperiences = [
   },
 ];
 
-const PDF= ({}) => {
+const PDF = ({}) => {
   const year = new Date().getFullYear();
 
   return (
@@ -377,26 +376,28 @@ const PDF= ({}) => {
               <CircleBriefcase size={fontSizes.m} />
               <Text>Professional Experience</Text>
             </View>
-            {sortedProfessionalExperiences.map((professionalExperience, idx) => (
-              <View key={idx}>
-                <View style={styles.itemHeading}>
-                  <Text style={styles.professionalTitle}>
-                    {professionalExperience.title}
-                  </Text>
-                  <Text>&nbsp;at {professionalExperience.organization}</Text>
+            {sortedProfessionalExperiences.map(
+              (professionalExperience, idx) => (
+                <View key={idx}>
+                  <View style={styles.itemHeading}>
+                    <Text style={styles.professionalTitle}>
+                      {professionalExperience.title}
+                    </Text>
+                    <Text>&nbsp;at {professionalExperience.organization}</Text>
+                  </View>
+                  <View style={styles.itemSubheadingRow}>
+                    <Calendar size={fontSizes.xxs} />
+                    <Text style={styles.itemSubheading}>
+                      {professionalExperience.startDate}—
+                      {professionalExperience.endDate
+                        ? professionalExperience.endDate
+                        : "Current"}
+                    </Text>
+                  </View>
+                  <Html {...htmlProps}>{professionalExperience.body.html}</Html>
                 </View>
-                <View style={styles.itemSubheadingRow}>
-                  <Calendar size={fontSizes.xxs} />
-                  <Text style={styles.itemSubheading}>
-                    {professionalExperience.startDate}—
-                    {professionalExperience.endDate
-                      ? professionalExperience.endDate
-                      : "Current"}
-                  </Text>
-                </View>
-                <Html {...htmlProps}>{professionalExperience.body.html}</Html>
-              </View>
-            ))}
+              )
+            )}
           </View>
           <View style={styles.section}>
             <View style={styles.sectionHeading}>
@@ -436,8 +437,6 @@ const PDF= ({}) => {
         </View>
       </Page>
     </Document>
-   <PDFDownloadButton secret={secret} />
-
   );
 };
 

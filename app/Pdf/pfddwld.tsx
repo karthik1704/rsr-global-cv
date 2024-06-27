@@ -6,10 +6,10 @@ interface PDFDownloadButtonProps {
   secret?: string;
 }
 
-const PDFDownloadButton: React.FC<PDFDownloadButtonProps> = ({ secret }) => {
+const PDFDownloadButton: React.FC<PDFDownloadButtonProps> = () => {
   return (
     <ButtonLink
-      href={secret ? `/api/pdf?secret=${secret}` : "/api/pdf"}
+      href={"/api/pdf"}
       size="lg"
     >
       {/* <DocumentIcon className="h-6" /> */}
