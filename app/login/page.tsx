@@ -1,10 +1,10 @@
-import LoginForm from "./loginform"
+import LoginForm from "./login-form";
 
-const Login =()=>{
-    return(
-        <>
-<LoginForm/>
-        </>
-    )
-}
-export default Login
+const Login = () => {
+  return (
+    <>
+      <LoginForm />
+    </>
+  );
+};
+export default Login;
