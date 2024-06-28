@@ -36,16 +36,16 @@ const ContactPage = () => {
       <div className="container mx-auto px-4 w-9/12 mt-9">
         <div className="flex items-center justify-between">
           <div className="hidden md:flex">
-            <a href="#" className="text-white hover:text-gray-300 px-3 py-2 rounded-md">Europass</a>
-            <a href="#" className="text-white hover:text-gray-300 px-3 py-2 rounded-md">Europass tools</a>
-            <a href="#" className="text-white hover:text-gray-300 px-3 py-2 rounded-md">Learn in Europe</a>
-            <a href="#" className="text-white hover:text-gray-300 px-3 py-2 rounded-md">Work in Europe</a>
-            <a href="#" className="text-white hover:text-gray-300 px-3 py-2 rounded-md">About Europass</a>
+            <a href="#" className="text-white hover:text-gray-300 px-3 py-2 rounded-md">RSR</a>
+            <a href="#" className="text-white hover:text-gray-300 px-3 py-2 rounded-md">RSR tools</a>
+            <a href="#" className="text-white hover:text-gray-300 px-3 py-2 rounded-md">Learn in UK</a>
+            <a href="#" className="text-white hover:text-gray-300 px-3 py-2 rounded-md">Work in UK</a>
+            <a href="#" className="text-white hover:text-gray-300 px-3 py-2 rounded-md">About RSR</a>
             <a href="#" className="text-white hover:text-gray-300 px-3 py-2 rounded-md">Stakeholders</a>
           </div>
 
           <button className="text-white bg-gradient-to-r from-indigo-500 to-indigo-800 p-3 rounded-full" type="submit">
-                  Login to Europass
+                  Login to RSR
                 </button>
 
           <div className="md:hidden">
@@ -81,19 +81,19 @@ const ContactPage = () => {
           href="#"
           className="border-2 border-blue-700 text-blue-700 hover:bg-blue-800 hover:text-white font-bold py-2 px-4 rounded-full w-80 text-center"
         >
-          Contact europass helpdesk
+          Contact RSR helpdesk
         </Link>
         <Link
           href="#"
           className="border-2 border-blue-700 text-blue-700 hover:bg-blue-800 hover:text-white font-bold py-2 px-4 rounded-full w-80 text-center"
         >
-          Contact national europass centres
+          Contact national RSR centres
         </Link>
         <Link
           href="#"
           className="border-2 border-blue-700 text-blue-700 hover:bg-blue-800 hover:text-white font-bold py-2 px-4 rounded-full w-80 text-center"
         >
-          See how your data is used by europass
+          See how your data is used by RSR
         </Link>
       </div>
 

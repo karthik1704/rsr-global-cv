@@ -8,7 +8,7 @@ const Navbar = () => {
     <>
       <nav className="w-full grid items-center h-24 shadow-inner">
         <div className="w-full flex items-center justify-around">
-          <Link href={"/"}>
+          <Link href={"./stepper"}>
             <div className="flex gap-2">
               <div className="w-20">
                 <img
@@ -18,13 +18,13 @@ const Navbar = () => {
                 />
               </div>
               <h3>
-                RSR <br /> Global
+                CV Creation
               </h3>
             </div>
           </Link>
 
           <ul className="flex items-center justify-evenly font-bold text-lg gap-7 p-5">
-            <li>RSR</li>
+            <li >RSR</li>
             <li>RSR Device</li>
             <li>Learn in Uk</li>
             <li>Work in Uk</li>

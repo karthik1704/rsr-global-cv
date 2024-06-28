@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import React from "react";
+import React, { useState } from "react";
 // import { Stepper } from "react-form-stepper";
 import {
   FormControl,
@@ -19,7 +19,10 @@ import {
 } from "@/components/ui/form";
 
 
-const Form = () => {
+
+
+
+const Form = (formData, handleChange) => {
   return (
     <div>
         <div className="w-9/12 p-8 shadow-2xl  border-gray-300 text-justify mx-auto my-7">
@@ -43,17 +46,22 @@ const Form = () => {
                 <input
                   type="text"
                   className="border border-gray-300 bg-gray-100 rounded-md py-2 mt-1 block w-full"
-                  
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
                 />
               </div>
 
               <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
                 <label className="block text-gray-700 font-bold text-sm head">
-                  Last Name<span className="text-red-700">*</span>
+                  Last Name<span className="text-gray-700">(optional)</span>
                 </label>
                 <input
                   type="text"
                   className="border  border-gray-300 bg-gray-100 rounded-md py-2 mt-1 block w-full"
+                  onChange={handleChange}
+                  name="lastName"
+                   value={formData.lastName}
                 />
               </div>
             </div>
@@ -159,6 +167,7 @@ const Form = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
+                    {/* <SelectLabel>Phone-code</SelectLabel> */}
                     <SelectItem value="apple">+91</SelectItem>
                     <SelectItem value="banana">+44</SelectItem>
                     <SelectItem value="blueberry">+92</SelectItem>
@@ -258,7 +267,9 @@ const Form = () => {
 
           </form>
         </div>
-     
+      {/* </div> */}
+
+      {/* <Stepper steps={[{ label: 'Step 1' }, { label: 'Step 2' }]} activeStep={1} /> */}
     </div>
   );
 };

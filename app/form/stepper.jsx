@@ -16,19 +16,6 @@ const Stepper = () => {
   const [complete, setComplete] = useState(false);
   const [ activeStep, setActiveStep ] = useState(0);
 
-  // const steps = [
-  //   { title: 'Personal information' },
-  //   { title: 'Work Experience' },
-  //   { title: 'Personal Skills' },
-  // ];
-
-  // const handleNext = () => {
-  //   if (currentStep === steps.length) {
-  //     setComplete(true);
-  //   } else {
-  //     setCurrentStep((prev) => prev + 1);
-  //   }
-  // };
 
   const renderForm = () => {
     switch (currentStep) {
