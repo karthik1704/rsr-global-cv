@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "@/components/navbar";
 import Header from "@/components/header";
 import {
   ChevronRight,
@@ -13,12 +12,11 @@ import {
   Newspaper,
   Timer,
 } from "lucide-react";
-import Footer from "@/components/footer";
 
 export default function Home() {
   return (
     <main className="flex min-h-screen  items-center flex-col">
-      <Navbar />
+     
       <Header/>
      
       {/* <section className="w-3/5 flex flex-col justify-center gap-10 my-7">
@@ -260,7 +258,6 @@ export default function Home() {
         </div>
       </section>
 
-      <Footer/>
     </main>
   );
 }
