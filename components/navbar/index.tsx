@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LockKeyhole } from "lucide-react";
-import { UserRound } from "lucide-react";
+// import { UserRound } from "lucide-react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
@@ -18,9 +18,9 @@ const Navbar = ({ user }: { user: User | null }) => {
     <>
       <nav className="w-full grid items-center h-24 shadow-inner ">
         <div className="w-full flex items-center justify-around">
-          <Link href={"./stepper"}>
+          <Link href={"/"}>
             <div className="flex gap-2">
-              <div className="w-32 relative">
+              <div className="w-32 h-20 relative">
                 <Image
                   className="w-full h-full"
                   src="/images/training academy logo.png"
@@ -28,9 +28,6 @@ const Navbar = ({ user }: { user: User | null }) => {
                   fill={true}
                 />
               </div>
-              <h3>
-                CV Creation
-              </h3>
             </div>
           </Link>
 
@@ -57,6 +54,9 @@ const Navbar = ({ user }: { user: User | null }) => {
                 <DropdownMenuSeparator /> */}
                   <DropdownMenuItem>
                     <Link href="/">Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/cv">Create Cv</Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>

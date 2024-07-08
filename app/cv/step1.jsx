@@ -34,7 +34,7 @@ const PersonalInformation = ({ formData, handleChange, onNext,exit,toggleModal }
     <hr />
 
     <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-      <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px] text-blue-500">
+      <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
         <label className="block text-gray-700 font-bold text-sm head">
           First Name<span className="text-red-700">*</span>
         </label>
@@ -110,7 +110,7 @@ const PersonalInformation = ({ formData, handleChange, onNext,exit,toggleModal }
              name="nat"
              value={formData.nat}
              onChange={handleChange}
-        className=" w-1/2 border border-gray-300 bg-gray-100 rounded-md py-2 mt-1 block pl-4">
+        className="w-1/2 border border-gray-300 bg-gray-100 rounded-md py-2 mt-1 block pl-4">
           <option value="">Select an Nationality</option>
         <option value="india">India</option>
         <option value="srilanka">SriLanka</option>
@@ -282,6 +282,21 @@ const PersonalInformation = ({ formData, handleChange, onNext,exit,toggleModal }
       />
       </div>
 </div>
+
+<div className="mb-4  w-full px-6">
+            <label className="block text-gray-700 font-bold text-sm head">
+              Main activities and responsibilities
+            </label>
+            <textarea
+              placeholder={`-about\n-about\n-about`}
+              className="border border-gray-300 bg-gray-100 rounded-md py-2 mt-1 block w-full resize-none pl-4"
+              rows={5}
+              name="about"
+                  value={formData.about}
+                onChange={handleChange}
+                required
+            ></textarea>
+          </div>
 
   </form>
 </div>

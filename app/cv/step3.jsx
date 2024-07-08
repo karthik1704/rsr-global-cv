@@ -65,8 +65,8 @@ const Skills = ({ formData, handleChange, onPrevious, onNext }) => {
                 type="date"
                 placeholder='e.g: Paris'
                 className="border border-gray-300 bg-gray-100 rounded-md py-2 mt-1 block w-full pl-4"
-                name="from"
-                  value={formData.from}
+                name="edfrom"
+                  value={formData.edfrom}
                 onChange={handleChange}
                 required
               />
@@ -80,8 +80,8 @@ const Skills = ({ formData, handleChange, onPrevious, onNext }) => {
                 type="date"
                 placeholder='Select'
                 className="border border-gray-300 bg-gray-100 rounded-md py-2 mt-1 block w-full pl-4"
-                name="to"
-                  value={formData.to}
+                name="edto"
+                  value={formData.edto}
                 onChange={handleChange}
                 required
               />

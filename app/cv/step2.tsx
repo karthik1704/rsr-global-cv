@@ -414,7 +414,7 @@ const TestParamsForm = ({
                   />
                 </td>
                 <td className="border-b border-[#eee] px-2 py-5 pl-6 dark:border-strokedark xl:pl-6">
-                  <button type="button" onClick={() => remove(idx)}>
+                  <button type="button" onClick={() => remove(idx)}>delete
                   </button>
                 </td>
               </tr>

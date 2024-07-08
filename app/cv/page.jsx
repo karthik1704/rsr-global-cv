@@ -5,6 +5,7 @@ import PersonalInformation from './step1';
 import ExperienceEducation from './step2';
 import Skills from './step3';
 import Preview from './preview';
+import PreviewPdf from './preview-pdf';
 import "./stepper.css";
 import { TiTick } from "react-icons/ti";
 
@@ -50,7 +51,9 @@ const Cv =()=>{
             case 3:
                 return <Skills formData={formData} handleChange={handleChange} onNext={handleNext} onPrevious={handlePrevious} />;
             case 4:
-                return <Preview formData={formData} onPrevious={handlePrevious} onSubmit={handleSubmit} />;
+                return <Preview formData={formData} onNext={handleNext} onPrevious={handlePrevious} onSubmit={handleSubmit} />;
+            case 5:
+                  return <PreviewPdf formdata={formData}/>
             default:
                 return null;
         }
