@@ -249,7 +249,7 @@ interface PDFProps {
   // privateInformation?: PrivateField[];
 }
 
-const fullName = "karthik";
+const fullName = "Catherin";
 const personal = {
   givenName: "Stacy",
   familyName: "Fakename",
@@ -310,8 +310,10 @@ const sortedProfessionalExperiences = [
   },
 ];
 
-const PDF = ({}) => {
+const PDF = ({data}) => {
   const year = new Date().getFullYear();
+
+  console.log(data)
 
   return (
     // @ts-ignore
@@ -320,16 +322,17 @@ const PDF = ({}) => {
       <Page size="LETTER" style={styles.page}>
         <View style={styles.sidebar}>
           <View style={styles.header}>
-            <Text style={styles.headerTitle}>{fullName}</Text>
-            <Text style={styles.headerSubtitle}>{personal.title}</Text>
+            <Text style={styles.headerTitle}>{data?.firstName} {data?.lastName}</Text>
+            {/* <Text style={styles.headerSubtitle}>{data?.position}</Text> */}
           </View>
           <View style={styles.sidebarContent}>
-            <View style={styles.section}>
+            <View style={styles.section}> 
               <View style={styles.sectionHeadingNonHTML}>
                 <CircleUser size={fontSizes.m} />
                 <Text>About Me</Text>
               </View>
-              <Html {...htmlProps}>{personal.body.html}</Html>
+              {/* <Html {...htmlProps}>{data?.responsibilities}</Html> */}
+              <Text>{data?.about}</Text>
             </View>
             <View style={styles.section}>
               <View style={styles.sectionHeadingNonHTML}>
@@ -337,8 +340,10 @@ const PDF = ({}) => {
                 <Text>Contact Information</Text>
               </View>
               <View style={styles.flexRow}>
-                <Text style={styles.bold}>Location:</Text>
-                <Text>&nbsp;{personal.location}</Text>
+                <Text style={styles.bold}>Location:{data.location}</Text>
+                {/* <Text>&nbsp;{personal.location}</Text> */}
+                {/* <Text>&nbsp;{data.city}</Text> */}
+                {/* <Html {...htmlProps}>{data?.country}</Html> */}
               </View>
               {privateInformation?.map((privateField, idx) => (
                 <View key={idx}>
