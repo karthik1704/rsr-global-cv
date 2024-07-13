@@ -310,10 +310,10 @@ const sortedProfessionalExperiences = [
   },
 ];
 
-const PDF = ({data}) => {
+const PDF = ({ data }) => {
   const year = new Date().getFullYear();
 
-  console.log(data)
+  console.log(data);
 
   return (
     // @ts-ignore
@@ -322,14 +322,22 @@ const PDF = ({data}) => {
       <Page size="LETTER" style={styles.page}>
         <View style={styles.sidebar}>
           <View style={styles.header}>
-            <Text style={styles.headerTitle}>{data?.firstName} {data?.lastName}</Text>
+            <Text style={styles.headerTitle}>
+              {data?.firstName} {data?.lastName}
+            </Text>
             {/* <Text style={styles.headerSubtitle}>{data?.position}</Text> */}
           </View>
           <View style={styles.sidebarContent}>
-            <View style={styles.section}> 
+            <View style={styles.section}>
               <View style={styles.sectionHeadingNonHTML}>
                 <CircleUser size={fontSizes.m} />
-                <Text>About Me</Text>
+                {/* <View style={styles.pdf}> */}
+                <Text>Date of birth</Text>
+
+                {/* <Text>Address</Text>
+
+                  <Text>About Me</Text> */}
+                {/* </View> */}
               </View>
               {/* <Html {...htmlProps}>{data?.responsibilities}</Html> */}
               <Text>{data?.about}</Text>
@@ -340,7 +348,7 @@ const PDF = ({data}) => {
                 <Text>Contact Information</Text>
               </View>
               <View style={styles.flexRow}>
-                <Text style={styles.bold}>Location:{data.location}</Text>
+                {/* <Text style={styles.bold}>Location:{data.location}</Text> */}
                 {/* <Text>&nbsp;{personal.location}</Text> */}
                 {/* <Text>&nbsp;{data.city}</Text> */}
                 {/* <Html {...htmlProps}>{data?.country}</Html> */}
