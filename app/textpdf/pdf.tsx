@@ -325,7 +325,7 @@ const PDF = ({}) => {
           <View style={styles.photoContainer}>
             {/* <Text>CHEF DE PARTIE</Text>
             <Text>QATAR AIRWAYS GROUP</Text> */}
-            <Image src="www.react-pdf.org/test.jpg" />
+            <Image src="/images/training academy logo.png" />
           </View>
 
           <View style={{ width: "55%", paddingTop: 10 }}>
