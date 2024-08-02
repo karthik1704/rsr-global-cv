@@ -12,7 +12,7 @@ import ImageCarousel from '@/components/resume/index'
       ];
 
   return<>
-<header className="h-[600px] w-full bg-[url('')] bg-cover bg-center bg-no-repeat relative">
+<header className="h-[600px] w-full  bg-cover bg-center bg-no-repeat relative">
 <Image src={img} alt="" />
 
 <ImageCarousel images={images} interval={2000} />

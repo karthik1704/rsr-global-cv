@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { logout } from "@/app/actions";
+import { logout } from "@/app/(root)/actions";
 
 const Navbar = ({ user }: { user: User | null }) => {
   return (

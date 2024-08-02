@@ -6,7 +6,7 @@ import Preview from './preview'
 import PreviewPdf from './preview-pdf-new';
 import { Stepper,Step } from 'react-form-stepper';
 import Steppers from '@/components/stepper/status-stepper';
-import ImageUploader from '../../components/image/image_uploader'
+import ImageUploader from '@/components/image/image_uploader'
 import StepperComponent from '@/components/stepper/dynamic'
 
 type FormValues = {

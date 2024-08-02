@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const DEFAULT_IMAGE_URL = 'https://via.placeholder.com/256?text=Profile+Image';
+const DEFAULT_IMAGE_URL = "https://via.placeholder.com/256?text=Profile+Image";
 
 const ImageUploader = () => {
   const [image, setImage] = useState(DEFAULT_IMAGE_URL);
@@ -18,17 +18,21 @@ const ImageUploader = () => {
 
   return (
     <div className="flex justify-start items-center">
-      <img
-        src={image}
-        alt="Profile Preview"
-        className="w-24 h-24 object-cover rounded-full border-2 border-gray-300"
-      />
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange}
-        className="mb-4 border-gray-300 p-2 rounded"
-      />
+      <div className="">
+        <img
+          src={image}
+          alt="Profile Preview"
+          className=" ml-7 w-24 h-24 object-cover rounded-full border-2 border-gray-300"
+        />
+      </div>
+      <div className="">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="mb-4  border-gray-300 p-2 rounded"
+        />
+      </div>
     </div>
   );
 };
