@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
+import { Poppins } from 'next/font/google';
 import Link from "next/link";
 import { signinJwt } from "./actions";
 import { useFormState } from "react-dom";
+import img from '@/public/images/rsr_logo-1.png'
 
 const initalState = {
   message: null,
@@ -12,53 +14,86 @@ const initalState = {
   },
 };
 
+const poppins = Poppins({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-poppins',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+});
+
 const LoginForm = () => {
   const [state, action] = useFormState(signinJwt, initalState);
   return (
-    <div className=" min-h-screen flex flex-col justify-center items-center bg-slate-100">
-      <h1 className="text-4xl font-bold mb-4 text-center ">
-        Sign in to continue
+    // <html className={`${poppins.variable}`}>
+    <div className= " min-h-screen flex flex-col justify-center items-center bg-slate-100">
+      <div className=" w-full flex justify-center">
+      
+      <div className="bg-[url('/sign-bg.webp')] bg-cover bg-center w-4/12 p-8 bg-white shadow-lg text-justify">
+      <h1 className="text-4xl text-gray-100 font-bold mb-4 text-center ">
+        Sign In
       </h1>
-      <div className="max-w-xl w-full p-8 bg-white shadow-lg text-justify">
         <form action={action}>
           <div className="mb-4 mx-12">
-            <label className="block text-gray-700 font-bold">
+            <label className="block text-gray-100 font-bold">
               Enter your e-mail address
             </label>
             <input
               type="text"
               name="username"
-              className="border border-black px-3 py-2 mt-1 block w-full"
+              className="border border-black px-3 py-2 mt-1 block w-full rounded-3xl"
             />
           </div>
           <div className="mb-4 mx-12">
-            <label className="block text-gray-700 font-bold">
+            <label className="block text-gray-100 font-bold">
               Enter your password
             </label>
             <input
               type="password"
               name="password"
-              className="border border-black px-3 py-2 mt-1 block w-full"
+              className="border border-black px-3 py-2 mt-1 block w-full rounded-3xl"
             />
           </div>
           <div className="flex justify-between">
-          <Link
+          {/* <Link
             href="/signup"
-            className="text-blue-800 hover:text-blue-950 underline text-sm mx-12 mb-6"
+            className="text-green-600 hover:text-green-500 underline text-sm mx-12 mb-6 font-bold"
           >
             Create an account
-          </Link>
+          </Link> */}
           <button
             type="submit"
-            className="bg-blue-700 text-white py-2 px-4 hover:bg-blue-950 mx-12 mb-6"
+            className="bg-green-200 rounded-3xl text-black py-2 px-4 hover:bg-green-300 mx-12 mb-6 font-bold w-full"
           >
             Login
           </button>
-        </div>
-        </form>
+          </div>
 
-       
-      </div>
+        <div className="flex ml-64">
+          {/* <label>
+        <input
+          type="checkbox"
+        />
+        Remember Me
+      </label> */}
+            <h1>forgot Password?</h1>
+          </div>
+        </form>
+</div>
+
+<div className=" w-4/12 bg-slate-200">
+
+<div className="flex justify-end">
+<Image src={img} alt="logo"></Image>
+</div>
+
+<div className="flex flex-col justify-center items-center mt-10">
+  <h1 className="text-black text-4xl font-bold my-2">Welcome to Login</h1>
+  <p className="text-black my-2">Don't have an account?</p>
+  <button className="text-white rounded-3xl bg-green-600 hover:bg-green-500 my-2 outline-1 outline outline-offset-0 outline-white font-bold p-3">Sign Up</button>
+</div>
+</div>
+
+</div>
 
       <p className="text-left m-6">
         Easy, fast and secure: download the{" "}
@@ -78,6 +113,7 @@ const LoginForm = () => {
         </li>
       </ul>
     </div>
+      // </html> 
   );
 };
 

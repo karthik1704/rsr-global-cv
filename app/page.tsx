@@ -15,7 +15,7 @@ import {
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen  items-center flex-col">
+    <main>
      
       <Header/>
      
@@ -72,7 +72,7 @@ export default function Home() {
         </div>
       </section> */}
 
-      <section className="w-full h-[800px]  flex flex-col items-center justify-center  mt-8 clipy_path_two">
+      {/* <section className="w-full h-[800px]  flex flex-col items-center justify-center  mt-8 clipy_path_two">
         <div className="w-3/5">
           <div className="flex flex-col gap-14 justify-center">
             <h2 className="w-full text-5xl text-center font-bold">
@@ -100,9 +100,9 @@ export default function Home() {
             Test your digital skill now
           </button>
         </div>
-      </section>
+      </section> */}
 
-      <section className="w-3/5 flex flex-col gap-6 my-5">
+      {/* <section className="w-3/5 flex flex-col gap-6 my-5">
         <h3 className="text-3xl text-blue-800 text-center">Information</h3>
         <div className="w-full flex items-center justify-evenly gap-5">
           <div className="h-96 w-4/12 bg-gray-100 flex flex-col justify-between">
@@ -256,7 +256,7 @@ export default function Home() {
           </div>
 
         </div>
-      </section>
+      </section> */}
 
     </main>
   );

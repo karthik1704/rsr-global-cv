@@ -81,5 +81,5 @@ export async function signinJwt(prevState: any, formData: any) {
     console.log(e);
   }
 
-  redirect("/");
+  redirect("/resume");
 }
