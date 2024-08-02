@@ -23,6 +23,12 @@ const config = {
 
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
+      transitionProperty: {
+        'transform': 'transform',
+      },
+      transitionTimingFunction: {
+        'ease-in-out': 'ease-in-out',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

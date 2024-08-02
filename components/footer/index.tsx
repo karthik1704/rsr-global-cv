@@ -7,12 +7,12 @@ const Footer = () => {
   return (
     <>
       <section className="w-full  bg-slate-50 py-8 px-10">
-        <div className="flex justify-between items-start border-b-2 border-gray-200 py-5">
-          <div className="flex flex-col items-start gap-5">
+        <div className=''>
+          <div className="flex flex-col items-center gap-5">
             <div>
               <Image
                 className="w-full h-full"
-                src="/images/training academy logo.png"
+                src="/images/rsr_logo-1.png"
                 alt="logo"
                 width={200}
                 height={70}
@@ -69,7 +69,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="flex flex-col items-start gap-5">
+          {/* <div className="flex flex-col items-start gap-5">
             <h6 className="font-bold">Solutions</h6>
             <ul className="flex flex-col items-start gap-3">
               <li>Marketing</li>
@@ -104,10 +104,10 @@ const Footer = () => {
               <li>Privacy</li>
               <li>Terms</li>
             </ul>
-          </div>
+          </div> */}
         </div>
 
-        <div className="my-10">
+        <div className="my-10 flex flex-col items-center">
           <span>© 2024 Your Company, Inc. All rights reserved.</span>
         </div>
       </section>
