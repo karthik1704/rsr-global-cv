@@ -196,14 +196,11 @@ const styles = StyleSheet.create({
   },
   photoContainer1: {
     // display:'flex',
-    width: "20%",
-    paddingTop: 10,
+    width: "22%",
+    height:'100%',
+    // paddingTop: 10,
     // justifyContent:'flex-end',
     // paddingRight: 10,
-  },
-  logo:{
-    display:'flex',
-    alignItems:'flex-end',
   },
 
   sidebar: {
@@ -213,9 +210,16 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 
+  log:{
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'space-between',
+  },
+
   heading: {
     marginBottom: 1,
   },
+
   heading1: {
     flexDirection: "column",
     justifyContent: "space-between",
@@ -376,11 +380,7 @@ const PDF = ({ data }: data) => {
     <Document author={fullName} title={`Résume for ${fullName}, ${year}`}>
       {/* @ts-ignore */}
       <Page size="LETTER" style={styles.page}>
-        <View style={styles.logo}>
-      <View style={styles.photoContainer1}>
-            <Image src="/images/rsr_logo-1.png"/>
-          </View>
-          </View>
+
         <View style={styles.sidebar}>
           <View style={styles.photoContainer}>
             {/* <Text>CHEF DE PARTIE</Text>
@@ -388,11 +388,18 @@ const PDF = ({ data }: data) => {
             <Image src="/images/cand-5.jpeg" />
           </View>
 
-          <View style={{ width: "55%", paddingTop: 10 }}>
+          <View style={{ width: "82%", paddingTop: 10 }}>
             <View style={styles.heading}>
+
+              <View style={styles.log}>
               <Text style={styles.text}>
                 {data.firstName} {data.lastName}
               </Text>
+              <View style={styles.photoContainer1}>
+            <Image src="/images/rsr_logo-1.png"/>
+          </View>
+          </View>
+
               <View style={styles.line} />
             </View>
 

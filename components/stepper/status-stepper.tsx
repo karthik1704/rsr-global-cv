@@ -12,12 +12,12 @@ const Steppers = ({ step }: { step: number }) => {
         completedColor: "#14532d",
       }}
     >
-      <Step label="Personal Information" />
-      <Step label="Work Experience" />
-      <Step label="Education" />
-      <Step label="Additional Information" />
-      <Step label="Preview" />
-      <Step label="PDF" />
+        <Step label="Personal Information" />
+        <Step label="Work Experience" />
+        <Step label="Education" />
+        <Step label="Additional Information" />
+        <Step label="Preview" />
+        <Step label="PDF" />
     </Stepper>
   );
 };
