@@ -10,6 +10,7 @@ const Steppers = ({ step }: { step: number }) => {
         completedBgColor: "#166534",
         activeColor: "#4ade80",
         completedColor: "#14532d",
+        fontWeight:'500'
       }}
     >
         <Step label="Personal Information" />

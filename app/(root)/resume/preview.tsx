@@ -27,6 +27,8 @@ type PreviewProps = {
     workaddress: string;
     qualification: string;
     organisation: String;
+    educationfrom:string;
+    educationto:string;
     educationcity: String;
     educationcountry:string;
     Hobbies:string;
@@ -166,20 +168,20 @@ const Preview = ({ data, handleNext }: PreviewProps) => {
                 </p>
 
                 <div className="flex justify-start w-5/6 py-2">
-                  <p className="text-black font-semibold text-base">
+                  {/* <p className="text-black font-semibold text-base">
                     {" "}
                     Department :
                     <span className="text-gray-700 text-sm">
                       {data.experience}
                     </span>
-                  </p>
-                  <p className="text-black font-semibold text-base mx-10">
+                  </p> */}
+                  <p className="text-black font-semibold text-base ">
                     Address :
                     <span className="text-gray-700 text-sm">
                       {exp.position}
                     </span>
                   </p>
-                  <p className="text-black font-semibold text-base">
+                  <p className="text-black font-semibold text-base mx-10">
                     Website :
                     <span className="text-gray-700 text-sm">
                       {exp.companyName}
@@ -191,24 +193,12 @@ const Preview = ({ data, handleNext }: PreviewProps) => {
           </>
         )}
 
-        <p className="block text-black font-extrabold text-lg ">
+        <p className="block text-black font-extrabold text-lg mt-6">
           Education and Training
         </p>
         <hr className="border-b-2 border-slate-500" />
-        <div>
-          <div className="flex justify-start w-3/5 py-2">
-            <p className="text-black font-semibold text-base">
-              From :<span className="text-gray-700 text-sm"></span>
-            </p>
-            <p className="text-black font-semibold text-base mx-10">
-              To : <span className="text-gray-700 text-sm"></span>
-            </p>
-            <p className="text-black font-semibold text-base">
-              Location : <span className="text-gray-700 text-sm"></span>
-            </p>
-          </div>
 
-          <div className="flex">
+        <div className="flex my-2">
             <p className="text-black font-semibold text-base">
               {" "}
               Title of qualification :
@@ -221,9 +211,24 @@ const Preview = ({ data, handleNext }: PreviewProps) => {
               </span>
             </p>
           </div>
-          <hr className="border-b-1 border-slate-500" />
 
-          <div className="flex my-2">
+        <div>
+          <div className="flex justify-start w-3/5 py-2">
+            <p className="text-black font-semibold text-base">
+              From :<span className="text-gray-700 text-sm">{data.educationfrom}</span>
+            </p>
+            <p className="text-black font-semibold text-base mx-10">
+              To : <span className="text-gray-700 text-sm">{data.educationto}</span>
+            </p>
+            <p className="text-black font-semibold text-base">
+              Location : <span className="text-gray-700 text-sm">{data.educationcountry}</span>
+            </p>
+          </div>
+
+          
+          {/* <hr className="border-b-1 border-slate-500" /> */}
+
+          {/* <div className="flex my-2">
             <p className="text-black font-semibold text-base">
               {" "}
               City :
@@ -236,10 +241,10 @@ const Preview = ({ data, handleNext }: PreviewProps) => {
                 {data.educationcountry}
               </span>
             </p>
-          </div>
+          </div> */}
         </div>
 
-        <p className="block text-black font-bold text-lg">
+        <p className="block text-black font-bold text-lg mt-6">
           Additional information
         </p>
         <hr className="border-b-2 border-slate-500" />
@@ -250,7 +255,7 @@ const Preview = ({ data, handleNext }: PreviewProps) => {
             Hobbies and Interest :
             <span className="text-gray-700 text-sm">{data.Hobbies}</span>
           </p>
-          <div className="flex justify-start w-3/5">
+          <div className="flex justify-start w-3/5 pb-2">
             <p className="text-black font-semibold text-base">
               From :<span className="text-gray-700 text-sm">{data.trainingfrom}</span>
             </p>
@@ -258,7 +263,7 @@ const Preview = ({ data, handleNext }: PreviewProps) => {
               To : <span className="text-gray-700 text-sm">{data.trainingto}</span>
             </p>
           </div>
-          <div className="flex">
+          <div className="flex mb-5">
           <p className="text-black font-semibold text-base ">
               Skills : <span className="text-gray-700 text-sm">{data.trainingskills}</span>
             </p> 
@@ -266,7 +271,7 @@ const Preview = ({ data, handleNext }: PreviewProps) => {
               Location : <span className="text-gray-700 text-sm">{data.traininglocation}</span>
             </p>
             </div>
-          <hr className="border-b-1 border-slate-500" />
+          <hr className="border-b-1 border-slate-500 mb-6" />
         </div>
 
 
