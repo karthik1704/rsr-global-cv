@@ -70,13 +70,13 @@ const Navbar = ({ user }: { user: User | null }) => {
               <>
                 <Link
                   href="/signup"
-                  className="py-1 mx-5 px-4 rounded-3xl outline-1 outline outline-offset-0 outline-black text-black bg-white text-md font-bold hover:bg-green-600 hover:text-slate-100 transition-colors hover:ease-in-out gap-1"
+                  className="py-1 mx-5 px-4 rounded-md outline-1 outline outline-offset-0 outline-black text-black bg-white text-md font-bold hover:bg-green-600 hover:outline-none hover:text-slate-100 transition-colors hover:ease-in-out gap-1"
                 >
                    <span>Register</span>
                 </Link>
                 <Link
                   href="/login"
-                  className="py-1 mr-14 px-4 rounded-3xl outline-1 outline outline-offset-0 outline-white text-white bg-green-600 text-md font-bold hover:bg-green-500 hover:text-slate-100 transition-colors hover:ease-in-out gap-1"
+                  className="py-1 mr-14 px-4 rounded-md outline-1 outline outline-offset-0 outline-white text-white bg-green-600 text-md font-bold hover:bg-green-500 hover:text-slate-100 transition-colors hover:ease-in-out gap-1"
                 >
                   Login
                 </Link>

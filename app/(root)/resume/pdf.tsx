@@ -195,15 +195,8 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   photoContainer1: {
-    // display:'flex',
-    width: "20%",
-    paddingTop: 10,
-    // justifyContent:'flex-end',
-    // paddingRight: 10,
-  },
-  logo:{
-    display:'flex',
-    alignItems:'flex-end',
+    width: "22%",
+    height:'100%',
   },
 
   sidebar: {
@@ -213,9 +206,16 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 
+  log:{
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'space-between',
+  },
+
   heading: {
     marginBottom: 1,
   },
+
   heading1: {
     flexDirection: "column",
     justifyContent: "space-between",
@@ -373,14 +373,10 @@ const PDF = ({ data }: data) => {
   // console.log(data.experiences[0].workfrom ? "-" : "");
   return (
     // @ts-ignore
-    <Document author={fullName} title={`Résume for ${fullName}, ${year}`}>
+    <Document author={fullName} title={`Résume for ${data.firstName}, ${year}`}>
       {/* @ts-ignore */}
       <Page size="LETTER" style={styles.page}>
-        <View style={styles.logo}>
-      <View style={styles.photoContainer1}>
-            <Image src="/images/rsr_logo-1.png"/>
-          </View>
-          </View>
+
         <View style={styles.sidebar}>
           <View style={styles.photoContainer}>
             {/* <Text>CHEF DE PARTIE</Text>
@@ -388,11 +384,18 @@ const PDF = ({ data }: data) => {
             <Image src="/images/cand-5.jpeg" />
           </View>
 
-          <View style={{ width: "55%", paddingTop: 10 }}>
+          <View style={{ width: "82%" }}>
             <View style={styles.heading}>
+
+              <View style={styles.log}>
               <Text style={styles.text}>
                 {data.firstName} {data.lastName}
               </Text>
+              <View style={styles.photoContainer1}>
+            <Image src="/images/rsr_logo-1.png"/>
+          </View>
+          </View>
+
               <View style={styles.line} />
             </View>
 
@@ -529,7 +532,7 @@ const PDF = ({ data }: data) => {
 
           {console.log(data.experiences)}
 
-          <View style={styles.job1}>
+          {/* <View style={styles.job1}>
             <Text style={styles.dates}>07/2020 - 07/2022 Siliguri, India</Text>
             <View
               style={{
@@ -566,7 +569,7 @@ const PDF = ({ data }: data) => {
                 Department: Culinary | Address: India
               </Text>
             </View>
-          </View>
+          </View> */}
           <Text
             style={{ fontSize: 12, fontWeight: "extrabold", paddingTop: 10 }}
           >
@@ -575,7 +578,7 @@ const PDF = ({ data }: data) => {
           <View style={styles.line1} />
           <View style={styles.job}>
             <Text style={styles.dates}>
-              01/07/2018 - 10/04/2021 Maharashtra, India
+              {data.educationfrom} - {data.educationto} {data.educationcity}, {data.educationcountry}
             </Text>
 
             <View
@@ -586,10 +589,10 @@ const PDF = ({ data }: data) => {
               }}
             >
               <Text style={styles.jobTitle}>
-                BACHELOR OF SCIENCE IN CULINARY ARTS{" "}
+              {data.organisation} {" "}
               </Text>
               <Text style={styles.company}>
-                Symbiosis International University
+                {/* Symbiosis International University */}
               </Text>
             </View>
             <View
@@ -610,7 +613,7 @@ const PDF = ({ data }: data) => {
               Address :
             </Text>
             <Text style={{ fontSize: 10, marginTop: 10 }}>
-              Pune, Maharashtra, India
+            {data.educationcity}, {data.educationcountry}
             </Text>
           </View>
           <Text
@@ -657,9 +660,9 @@ const PDF = ({ data }: data) => {
               HOBBIES AND INTERESTS
             </Text>
             <Text style={{ marginTop: 10, fontSize: 12 }}>
-              Time Utilisation
+            {data.Hobbies}
             </Text>
-            <View style={styles.listItem}>
+            {/* <View style={styles.listItem}>
               <Text style={styles.bulletPoint}>•</Text>
               <Text style={styles.listItemText}>Home Decor</Text>
             </View>
@@ -670,7 +673,7 @@ const PDF = ({ data }: data) => {
             <View style={styles.listItem}>
               <Text style={styles.bulletPoint}>•</Text>
               <Text style={styles.listItemText}>Traveling</Text>
-            </View>
+            </View> */}
           </View>
           <Text
             style={{ marginTop: 10, fontSize: 12, fontWeight: "extrabold" }}
@@ -723,16 +726,16 @@ const PDF = ({ data }: data) => {
           <View style={{ height: 2, backgroundColor: "grey", marginTop: 2 }} />
           <View style={styles.listsItems}>
             <Text style={styles.bulletPoint}>•</Text>
-            <Text style={styles.listItemText}>Grilling</Text>
+            <Text style={styles.listItemText}>{data.trainingskills}</Text>
           </View>
-          <View style={styles.listsItems}>
+          {/* <View style={styles.listsItems}>
             <Text style={styles.bulletPoints}>•</Text>
             <Text style={styles.listItemText}>Sandwiches</Text>
           </View>
           <View style={styles.listsItems}>
             <Text style={styles.bulletPoint}>•</Text>
             <Text style={styles.listItemText}>Customer Interaction</Text>
-          </View>
+          </View> */}
 
           <Text style={styles.headings}>FOOD SAFETY CERTIFICATION</Text>
           <Text style={styles.date}>2020</Text>

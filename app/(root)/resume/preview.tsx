@@ -27,8 +27,16 @@ type PreviewProps = {
     workaddress: string;
     qualification: string;
     organisation: String;
-    educationwebsite: String;
-    educationlocation: String;
+    educationfrom:string;
+    educationto:string;
+    educationcity: String;
+    educationcountry:string;
+    Hobbies:string;
+    institute :string;
+    trainingfrom:string;
+    trainingto:string;
+    traininglocation:string;
+    trainingskills:string;
     experiences: {
       workfrom: string;
       workto: String;
@@ -160,20 +168,20 @@ const Preview = ({ data, handleNext }: PreviewProps) => {
                 </p>
 
                 <div className="flex justify-start w-5/6 py-2">
-                  <p className="text-black font-semibold text-base">
+                  {/* <p className="text-black font-semibold text-base">
                     {" "}
                     Department :
                     <span className="text-gray-700 text-sm">
                       {data.experience}
                     </span>
-                  </p>
-                  <p className="text-black font-semibold text-base mx-10">
+                  </p> */}
+                  <p className="text-black font-semibold text-base ">
                     Address :
                     <span className="text-gray-700 text-sm">
                       {exp.position}
                     </span>
                   </p>
-                  <p className="text-black font-semibold text-base">
+                  <p className="text-black font-semibold text-base mx-10">
                     Website :
                     <span className="text-gray-700 text-sm">
                       {exp.companyName}
@@ -185,55 +193,58 @@ const Preview = ({ data, handleNext }: PreviewProps) => {
           </>
         )}
 
-        <p className="block text-black font-extrabold text-lg ">
+        <p className="block text-black font-extrabold text-lg mt-6">
           Education and Training
         </p>
         <hr className="border-b-2 border-slate-500" />
-        <div>
-          <div className="flex justify-start w-3/5 py-2">
-            <p className="text-black font-semibold text-base">
-              From :<span className="text-gray-700 text-sm"></span>
-            </p>
-            <p className="text-black font-semibold text-base mx-10">
-              To : <span className="text-gray-700 text-sm"></span>
-            </p>
-            <p className="text-black font-semibold text-base">
-              Location : <span className="text-gray-700 text-sm"></span>
-            </p>
-          </div>
 
-          <div className="flex">
+        <div className="flex my-2">
             <p className="text-black font-semibold text-base">
               {" "}
               Title of qualification :
-              <span className="text-gray-700 text-sm">{data.organisation}</span>
+              <span className="text-gray-700 text-sm">{data.qualification}</span>
             </p>
             <p className="text-black font-semibold text-base mx-10">
               Education Organisation :
               <span className="text-gray-700 text-sm">
-                {data.educationlocation}
+                {data.organisation}
               </span>
             </p>
           </div>
-          <hr className="border-b-1 border-slate-500" />
 
-          <div className="flex my-2">
+        <div>
+          <div className="flex justify-start w-3/5 py-2">
+            <p className="text-black font-semibold text-base">
+              From :<span className="text-gray-700 text-sm">{data.educationfrom}</span>
+            </p>
+            <p className="text-black font-semibold text-base mx-10">
+              To : <span className="text-gray-700 text-sm">{data.educationto}</span>
+            </p>
+            <p className="text-black font-semibold text-base">
+              Location : <span className="text-gray-700 text-sm">{data.educationcountry}</span>
+            </p>
+          </div>
+
+          
+          {/* <hr className="border-b-1 border-slate-500" /> */}
+
+          {/* <div className="flex my-2">
             <p className="text-black font-semibold text-base">
               {" "}
-              Address :
-              <span className="text-gray-700 text-sm">{data.organisation}</span>
+              City :
+              <span className="text-gray-700 text-sm">{data.educationcity}</span>
             </p>
             <p className="text-black font-semibold text-base mx-10">
               {" "}
               Country :
               <span className="text-gray-700 text-sm">
-                {data.educationlocation}
+                {data.educationcountry}
               </span>
             </p>
-          </div>
+          </div> */}
         </div>
 
-        <p className="block text-black font-bold text-lg">
+        <p className="block text-black font-bold text-lg mt-6">
           Additional information
         </p>
         <hr className="border-b-2 border-slate-500" />
@@ -242,34 +253,27 @@ const Preview = ({ data, handleNext }: PreviewProps) => {
           <p className="text-black font-semibold text-base py-2">
             {" "}
             Hobbies and Interest :
-            <span className="text-gray-700 text-sm">{data.qualification}</span>
+            <span className="text-gray-700 text-sm">{data.Hobbies}</span>
           </p>
-          <div className="flex justify-start w-3/5">
+          <div className="flex justify-start w-3/5 pb-2">
             <p className="text-black font-semibold text-base">
-              From :<span className="text-gray-700 text-sm"></span>
+              From :<span className="text-gray-700 text-sm">{data.trainingfrom}</span>
             </p>
             <p className="text-black font-semibold text-base mx-10">
-              To : <span className="text-gray-700 text-sm"></span>
+              To : <span className="text-gray-700 text-sm">{data.trainingto}</span>
             </p>
           </div>
-          <div className="flex">
-            <p className="text-black font-semibold text-base">
-              {" "}
-              Position held :
-              <span className="text-gray-700 text-sm">{data.organisation}</span>
-            </p>
+          <div className="flex mb-5">
+          <p className="text-black font-semibold text-base ">
+              Skills : <span className="text-gray-700 text-sm">{data.trainingskills}</span>
+            </p> 
             <p className="text-black font-semibold text-base mx-10">
-              Location : <span className="text-gray-700 text-sm"></span>
+              Location : <span className="text-gray-700 text-sm">{data.traininglocation}</span>
             </p>
-          </div>
-          <hr className="border-b-1 border-slate-500" />
+            </div>
+          <hr className="border-b-1 border-slate-500 mb-6" />
         </div>
 
-        <p className="text-black font-semibold text-base py-2">
-          {" "}
-          Specialisation :
-          <span className="text-gray-700 text-sm">{data.educationwebsite}</span>
-        </p>
 
         {data.training.map((train, index) => (
           <div key={index}>
@@ -277,24 +281,24 @@ const Preview = ({ data, handleNext }: PreviewProps) => {
               {" "}
               Hobbies and Interest :
               <span className="text-gray-700 text-sm">
-                {data.qualification}
+                {data.Hobbies}
               </span>
-            </p>
-            <p className="text-black font-semibold text-base py-2">
-              {" "}
-              Position held :
-              <span className="text-gray-700 text-sm">{data.organisation}</span>
             </p>
             <div className="flex justify-start w-3/5 py-2">
               <p className="text-black font-semibold text-base">
-                From :<span className="text-gray-700 text-sm"></span>
+                From :<span className="text-gray-700 text-sm">{data.trainingfrom}</span>
               </p>
               <p className="text-black font-semibold text-base mx-10">
-                To : <span className="text-gray-700 text-sm"></span>
+                To : <span className="text-gray-700 text-sm">{data.trainingto}</span>
               </p>
-              <p className="text-black font-semibold text-base">
-                Location : <span className="text-gray-700 text-sm"></span>
-              </p>
+              <div className="flex">
+          <p className="text-black font-semibold text-base ">
+              Skills : <span className="text-gray-700 text-sm">{data.trainingskills}</span>
+            </p> 
+            <p className="text-black font-semibold text-base mx-10">
+              Location : <span className="text-gray-700 text-sm">{data.traininglocation}</span>
+            </p>
+            </div>
             </div>
           </div>
         ))}

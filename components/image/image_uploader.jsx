@@ -25,12 +25,12 @@ const ImageUploader = () => {
           className=" ml-7 w-24 h-24 object-cover rounded-full border-2 border-gray-300"
         />
       </div>
-      <div className="">
+      <div>
         <input
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          className="mb-4  border-gray-300 p-2 rounded"
+          className=" border-gray-300 p-2 rounded file-input"
         />
       </div>
     </div>

@@ -28,7 +28,7 @@ const LoginForm = () => {
     <div className= " min-h-screen flex flex-col justify-center items-center bg-slate-100">
       <div className=" w-full flex justify-center">
       
-      <div className="bg-[url('/sign-bg.webp')] bg-cover bg-center w-4/12 p-8 bg-white shadow-lg text-justify">
+      <div className="bg-[url('/sign-bg-1.jpg')] bg-cover bg-center w-4/12 p-8 bg-white shadow-lg text-justify">
       <h1 className="text-4xl text-gray-100 font-bold mb-4 text-center ">
         Sign In
       </h1>
@@ -40,7 +40,7 @@ const LoginForm = () => {
             <input
               type="text"
               name="username"
-              className="border border-black px-3 py-2 mt-1 block w-full rounded-3xl"
+              className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
             />
           </div>
           <div className="mb-4 mx-12">
@@ -50,10 +50,10 @@ const LoginForm = () => {
             <input
               type="password"
               name="password"
-              className="border border-black px-3 py-2 mt-1 block w-full rounded-3xl"
+              className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
             />
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-center">
           {/* <Link
             href="/signup"
             className="text-green-600 hover:text-green-500 underline text-sm mx-12 mb-6 font-bold"
@@ -62,7 +62,7 @@ const LoginForm = () => {
           </Link> */}
           <button
             type="submit"
-            className="bg-green-200 rounded-3xl text-black py-2 px-4 hover:bg-green-300 mx-12 mb-6 font-bold w-full"
+           className="flex justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Login
           </button>
@@ -82,14 +82,11 @@ const LoginForm = () => {
 
 <div className=" w-4/12 bg-slate-200">
 
-<div className="flex justify-end">
-<Image src={img} alt="logo"></Image>
-</div>
-
 <div className="flex flex-col justify-center items-center mt-10">
+<Image src={img} alt="logo"></Image>
   <h1 className="text-black text-4xl font-bold my-2">Welcome to Login</h1>
   <p className="text-black my-2">Don't have an account?</p>
-  <button className="text-white rounded-3xl bg-green-600 hover:bg-green-500 my-2 outline-1 outline outline-offset-0 outline-white font-bold p-3">Sign Up</button>
+  <Link href="/signup" className="flex w-24 justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign Up</Link>
 </div>
 </div>
 
