@@ -32,8 +32,16 @@ type FormValues = {
     workaddress:string;
     qualification:string;
     organisation:string;
-    educationwebsite:string;
-    educationlocation:string;
+    educationfrom:string;
+    educationto:string;
+    educationcity:string;
+    educationcountry:string;
+    Hobbies:string;
+    institute :string;
+    trainingfrom:string;
+    trainingto:string;
+    traininglocation:string;
+    trainingskills:string;
   experiences: {
     years: number;
     description: string;
@@ -54,7 +62,7 @@ type FormValues = {
   }
   
   const Resume = () => {
-    const { register, handleSubmit, formState: { errors }, getValues, control } = useForm<FormValues>({
+    const { register, handleSubmit, formState: { errors }, getValues, trigger, control } = useForm<FormValues>({
       defaultValues: {
         firstName: '',
         lastName: '',
@@ -100,9 +108,12 @@ type FormValues = {
 
       const [showFields, setShowFields] = useState(true);
 
-      const handleNext = () => {
-        setShow(show + 1)
-      }
+      const handleNext = async () => {
+        const isValid = await trigger();
+        if(isValid){
+          setShow(show + 1)
+        }
+        }
   
       const handlePrevious = () =>{
         setShow(show - 1)
@@ -156,7 +167,7 @@ type FormValues = {
               message: 'First Name is required'
             }
           })} placeholder='Type name same as in the passport' />
-
+{errors.firstName && <p className="text-red-700 text-sm">{errors.firstName.message}</p>}
                 </div>
 
           <br />
@@ -168,11 +179,12 @@ type FormValues = {
           <input
            className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           {...register('lastName', {
-            maxLength: {
-              value: 5,
+            required: {
+              value: true,
               message: 'Last Name is required'
             }
           })} placeholder='Last Name' />
+          {errors.lastName && <p className="text-red-700 text-sm">{errors.lastName.message}</p>}
           </div>
 </div>
 
@@ -189,6 +201,7 @@ type FormValues = {
               message:'Date of birth required'
             }
            })} placeholder='dob' />
+           {errors.dob && <p className="text-red-700 text-sm">{errors.dob.message}</p>}
           </div>
 
 <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
@@ -205,6 +218,7 @@ type FormValues = {
               message: 'Nationality is required'
             }
           })} placeholder='Nationality' />
+          {errors.nationality && <p className="text-red-700 text-sm">{errors.nationality.message}</p>}
 </div>
 
 
@@ -220,11 +234,12 @@ type FormValues = {
           <input
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none" 
            {...register('add1', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'Address is required'
+            }
           })} placeholder="eg:Street Name, P.O, Box" />
+          {errors.add1 && <p className="text-red-700 text-sm">{errors.add1.message}</p>}
                 </div>
 
                 <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px] ">
@@ -234,11 +249,12 @@ type FormValues = {
           <input
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none" 
            {...register('add2', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'Address is required'
+            }
           })} placeholder='Apartment, suite, unit, building, floor, etc' />
+          {errors.add2 && <p className="text-red-700 text-sm">{errors.add2.message}</p>}
                 </div>
 
                 <div className="flex flex-col gap-3 md:flex-row">
@@ -250,11 +266,12 @@ type FormValues = {
           <input
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none" 
            {...register('code', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'postal code is required'
+            }
           })} placeholder='eg:6000 01' />
+          {errors.code && <p className="text-red-700 text-sm">{errors.code.message}</p>}
                 </div>
 
                 <div className="mb-4 w-full md:w-2/6 px-6">
@@ -266,9 +283,10 @@ type FormValues = {
            {...register('city', {
             required: {
               value: true,
-              message: 'First Name is required'
+              message: 'City is required'
             }
           })} placeholder='eg: chennai' />
+          {errors.city && <p className="text-red-700 text-sm">{errors.city.message}</p>}
                 </div>
 
                 <div className="mb-4 w-full md:w-2/6 px-6">
@@ -278,11 +296,12 @@ type FormValues = {
           <input
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none" 
            {...register('country', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'Country is required'
+            }
           })} placeholder='eg: India' />
+          {errors.country && <p className="text-red-700 text-sm">{errors.country.message}</p>}
                 </div>
 
                 </div>
@@ -297,11 +316,12 @@ type FormValues = {
           <input
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none" 
            {...register('email', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'Email Id is required'
+            }
           })} placeholder='Enter Your E-mail' />
+          {errors.email && <p className="text-red-700 text-sm">{errors.email.message}</p>}
                 </div>
 
                 <div className="mb-4  w-full px-6">
@@ -311,10 +331,10 @@ type FormValues = {
           <textarea
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none" 
            {...register('about', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'First Name is required'
+            }
           })} placeholder='About us'rows={5}
            />
                 </div>
@@ -330,7 +350,6 @@ type FormValues = {
           <div key={item.id}>
 
 <div className="mb-4  w-2/4 px-6">
-{/* <div className='flex'> */}
 <div className='flex justify-between items-center	'>
           <p className='text-black font-bold text-3xl mb-4'>Work experience</p>
           <button type='button' className='w-10 capitalize bg-green-600 hover:bg-green-500 text-white rounded-full font-bold p-2' onClick={() => removeExperience(index)}>
@@ -340,14 +359,15 @@ type FormValues = {
             <label className="block text-black font-bold text-sm head mb-2">
               Occupation or position held<span className="text-red-700">*</span>
             </label>
-          <input {...register('experience', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+          <input {...register(`experiences.${index}.position`, {
+            required: {
+              value: true,
+              message: 'Experience is required'
+            }
           })} placeholder='experience' 
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           />
+          {errors.position && <p className="text-red-700 text-sm">{errors.position.message}</p>}
           </div>
 
 <div className="mb-4  w-2/4 px-6  ">
@@ -355,13 +375,14 @@ type FormValues = {
               Employer<span className="text-red-700">*</span>
             </label>
           <input {...register(`experiences.${index}.companyName`, {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'Employer name is required'
+            }
           })} placeholder='companyName'
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
            />
+           {errors.companyName && <p className="text-red-700 text-sm">{errors.companyName.message}</p>}
           </div>
 
           <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
@@ -370,13 +391,14 @@ type FormValues = {
               From<span className="text-red-700">*</span>
             </label>
           <input {...register(`experiences.${index}.workfrom`, {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'Date is required'
+            }
           })} 
          className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           type="Date" />
+          {errors.workfrom && <p className="text-red-700 text-sm">{errors.workfrom.message}</p>}
           </div>
 
           <div className="mb-4  w-2/4 px-6  ">
@@ -384,13 +406,14 @@ type FormValues = {
               To<span className="text-red-700">*</span>
             </label>
           <input {...register(`experiences.${index}.workto`, {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'Date is required'
+            }
           })} 
           className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           type="Date" />
+          {errors.workto && <p className="text-red-700 text-sm">{errors.workto.message}</p>}
           </div>
           </div>
 
@@ -400,13 +423,14 @@ type FormValues = {
               Website<span className="text-red-700">*</span>
             </label>
           <input {...register(`experiences.${index}.companyName`, {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'Website is required'
+            }
           })} placeholder='Website Name'
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
            />
+           {errors.workwebsite && <p className="text-red-700 text-sm">{errors.workwebsite.message}</p>}
           </div>
 
           <div className="mb-4  w-2/4 px-6  ">
@@ -485,13 +509,14 @@ type FormValues = {
              Title of qualification/credential awarded<span className="text-red-700">*</span>
             </label>
           <input {...register('qualification', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'Qualification is required'
+            }
           })} placeholder='Title of Qualification' 
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           />
+          {errors.qualification && <p className="text-red-700 text-sm">{errors.qualification.message}</p>}
           </div>
 
 <div className="mb-4  w-2/4 px-6  ">
@@ -499,13 +524,14 @@ type FormValues = {
              Organisation providing education and training<span className="text-red-700">*</span>
             </label>
           <input {...register('organisation', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'organisation Name is required'
+            }
           })} placeholder='Name of the organisation'
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
            />
+           {errors.organisation && <p className="text-red-700 text-sm">{errors.organisation.message}</p>}
           </div>
 
           <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
@@ -513,28 +539,30 @@ type FormValues = {
             <label className="block text-black font-bold text-sm head mb-2">
               From<span className="text-red-700">*</span>
             </label>
-          <input {...register('experience', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+          <input {...register('educationfrom', {
+            required: {
+              value: true,
+              message: 'Date is required'
+            }
           })} 
           className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           type="Date" />
+          {errors.educationfrom && <p className="text-red-700 text-sm">{errors.educationfrom.message}</p>}
           </div>
 
           <div className="mb-4  w-2/4 px-6">
             <label className="block text-black font-bold text-sm head mb-2">
               To<span className="text-red-700">*</span>
             </label>
-          <input {...register('experience', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+          <input {...register('educationto', {
+            required: {
+              value: true,
+              message: 'Date is required'
+            }
           })} 
          className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           type="Date" />
+          {errors.educationto && <p className="text-red-700 text-sm">{errors.educationto.message}</p>}
           </div>
           </div>
 
@@ -543,28 +571,30 @@ type FormValues = {
             <label className="block text-black font-bold text-sm head mb-2">
               City<span className="text-red-700">*</span>
             </label>
-          <input {...register('educationwebsite', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+          <input {...register('educationcity', {
+            required: {
+              value: true,
+              message: 'City is required'
+            }
           })} placeholder='City'
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
            />
+           {errors.educationcity && <p className="text-red-700 text-sm">{errors.educationcity.message}</p>}
           </div>
 
           <div className="mb-4  w-2/4 px-6  ">
             <label className="block text-black font-bold text-sm head mb-2">
               Country<span className="text-red-700">*</span>
             </label>
-          <input {...register('educationlocation', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+          <input {...register('educationcountry', {
+            required: {
+              value: true,
+              message: 'Country is required'
+            }
           })} placeholder='country'
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
            />
+           {errors.educationcountry && <p className="text-red-700 text-sm">{errors.educationcountry.message}</p>}
           </div>
           </div>
 
@@ -593,13 +623,14 @@ type FormValues = {
  Title of qualification/credential awarded<span className="text-red-700">*</span>
 </label>
 <input {...register('qualification', {
-// required: {
-//   value: true,
-//   message: 'First Name is required'
-// }
+required: {
+  value: true,
+  message: 'Qualification is required'
+}
 })} placeholder='Title of Qualification' 
 className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
 />
+{errors.qualification && <p className="text-red-700 text-sm">{errors.qualification.message}</p>}
 </div>
 
 <div className="mb-4  w-2/4 px-6  ">
@@ -607,13 +638,14 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
  Organisation providing education and training<span className="text-red-700">*</span>
 </label>
 <input {...register('organisation', {
-// required: {
-//   value: true,
-//   message: 'First Name is required'
-// }
+required: {
+  value: true,
+  message: 'Organisation is required'
+}
 })} placeholder='Name of the organisation'
 className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
 />
+{errors.organisation && <p className="text-red-700 text-sm">{errors.organisation.message}</p>}
 </div>
 
 <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
@@ -621,28 +653,31 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
 <label className="block text-black font-bold text-sm head mb-2">
   From<span className="text-red-700">*</span>
 </label>
-<input {...register('experience', {
-// required: {
-//   value: true,
-//   message: 'First Name is required'
-// }
+<input {...register('educationfrom', {
+required: {
+  value: true,
+  message: 'Date is required'
+}
 })} 
 className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
 type="Date" />
+{errors.educationfrom && <p className="text-red-700 text-sm">{errors.educationfrom.message}</p>}
+
 </div>
 
 <div className="mb-4  w-2/4 px-6">
 <label className="block text-black font-bold text-sm head mb-2">
   To<span className="text-red-700">*</span>
 </label>
-<input {...register('experience', {
-// required: {
-//   value: true,
-//   message: 'First Name is required'
-// }
+<input {...register('educationto', {
+required: {
+  value: true,
+  message: 'Date is required'
+}
 })} 
 className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
 type="Date" />
+{errors.educationto && <p className="text-red-700 text-sm">{errors.educationto.message}</p>}
 </div>
 </div>
 
@@ -651,28 +686,30 @@ type="Date" />
 <label className="block text-black font-bold text-sm head mb-2">
   City<span className="text-red-700">*</span>
 </label>
-<input {...register('educationwebsite', {
-// required: {
-//   value: true,
-//   message: 'First Name is required'
-// }
+<input {...register('educationcity', {
+required: {
+  value: true,
+  message: 'City is required'
+}
 })} placeholder='City'
 className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
 />
+{errors.educationcity && <p className="text-red-700 text-sm">{errors.educationcity.message}</p>}
 </div>
 
 <div className="mb-4  w-2/4 px-6  ">
 <label className="block text-black font-bold text-sm head mb-2">
   Country<span className="text-red-700">*</span>
 </label>
-<input {...register('educationlocation', {
-// required: {
-//   value: true,
-//   message: 'First Name is required'
-// }
+<input {...register('educationcountry', {
+required: {
+  value: true,
+  message: 'Country is required'
+}
 })} placeholder='country'
 className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
 />
+{errors.educationcountry && <p className="text-red-700 text-sm">{errors.educationcountry.message}</p>}
 </div>
 </div>
 
@@ -695,7 +732,7 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
 <label className="block text-black font-bold text-sm head mb-2">
  Hobbies and interests<span className="text-red-700">*</span>
 </label>
-<input {...register('qualification', {
+<input {...register('Hobbies', {
 // required: {
 //   value: true,
 //   message: 'First Name is required'
@@ -714,16 +751,17 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
 
             </div>
             <label className="block text-black font-bold text-sm head my-2">
-              position held<span className="text-red-700">*</span>
+            Institute <span className="text-red-700">*</span>
             </label>
-          <input {...register('experience', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
-          })} placeholder='experience' 
+          <input {...register('institute', {
+            required: {
+              value: true,
+              message: 'institute is required'
+            }
+          })} placeholder='Name of institute' 
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           />
+          {errors.institute && <p className="text-red-700 text-sm">{errors.institute.message}</p>}
           </div>
 
           <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
@@ -731,28 +769,30 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
             <label className="block text-black font-bold text-sm head mb-2">
               From<span className="text-red-700">*</span>
             </label>
-          <input {...register('experience', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+          <input {...register('trainingfrom', {
+            required: {
+              value: true,
+              message: 'Date is required'
+            }
           })} 
           className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           type="Date" />
+          {errors.trainingfrom && <p className="text-red-700 text-sm">{errors.trainingfrom.message}</p>}
           </div>
 
           <div className="mb-4  w-2/4 px-6  ">
             <label className="block text-black font-bold text-sm head mb-2">
               To<span className="text-red-700">*</span>
             </label>
-          <input {...register('experience', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+          <input {...register('trainingto', {
+            required: {
+              value: true,
+              message: 'Date is required'
+            }
           })} 
          className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           type="Date" />
+          {errors.trainingto && <p className="text-red-700 text-sm">{errors.trainingto.message}</p>}
           </div>
           </div>
 
@@ -760,13 +800,15 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
             <label className="block text-black font-bold text-sm head mb-2">
               Location<span className="text-red-700">*</span>
             </label>
-          <input {...register('educationlocation', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+          <input {...register('traininglocation', {
+            required: {
+              value: true,
+              message: 'Location is required'
+            }
           })} placeholder='Location Name'
-          className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none" />
+          className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none" 
+          />
+          {errors.traininglocation && <p className="text-red-700 text-sm">{errors.traininglocation.message}</p>}
           </div>
 
             </div>
@@ -788,13 +830,13 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
             </button>
             </div>
             <label className="block text-black font-bold text-sm head my-2">
-              position held<span className="text-red-700">*</span>
+            Institute <span className="text-red-700">*</span>
             </label>
           <input {...register(`training.${index}.position`, {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'Institute is required'
+            }
           })} placeholder='experience' 
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           />
@@ -806,13 +848,14 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
               From<span className="text-red-700">*</span>
             </label>
           <input {...register('experience', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'Date is required'
+            }
           })} 
           className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           type="Date" />
+          {errors.traininglocation && <p className="text-red-700 text-sm">{errors.traininglocation.message}</p>}
           </div>
 
           <div className="mb-4  w-2/4 px-6  ">
@@ -820,13 +863,14 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
               To<span className="text-red-700">*</span>
             </label>
           <input {...register('experience', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+            required: {
+              value: true,
+              message: 'Date is required'
+            }
           })} 
           className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           type="Date" />
+          {errors.traininglocation && <p className="text-red-700 text-sm">{errors.traininglocation.message}</p>}
           </div>
           </div>
 
@@ -834,14 +878,15 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
             <label className="block text-black font-bold text-sm head mb-2">
               Location<span className="text-red-700">*</span>
             </label>
-          <input {...register('educationlocation', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+          <input {...register('educationcountry', {
+            required: {
+              value: true,
+              message: 'Location is required'
+            }
           })} placeholder='Location Name'
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
            />
+           {errors.traininglocation && <p className="text-red-700 text-sm">{errors.traininglocation.message}</p>}
           </div>
 
             </div>
@@ -856,14 +901,15 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
   </label>
   <input
     className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-    {...register('nationality', {
-            // required: {
-            //   value: true,
-            //   message: 'First Name is required'
-            // }
+    {...register('trainingskills', {
+            required: {
+              value: true,
+              message: 'skills is required'
+            }
           })} 
           // placeholder='Nationality' 
           />
+          {errors.trainingskills && <p className="text-red-700 text-sm">{errors.trainingskills.message}</p>}
 </div>
 
                <div className='flex mx-6'>  
