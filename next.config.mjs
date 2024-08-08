@@ -21,10 +21,12 @@ const nextConfig = {
         // !! WARN !!
         ignoreBuildErrors: true,
       },
+     experimental: {
+      serverActions: {
+        serverActions: { allowedOrigins: ["3.110.169.239:3002",], }
 
-     serverActions: { allowedOrigins: ["3.110.169.239:3002",], }
-
-
+      },
+    },
 };
 
 export default nextConfig;
