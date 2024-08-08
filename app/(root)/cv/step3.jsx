@@ -1,7 +1,7 @@
 import React from 'react';
 import { Label } from "@/components/ui/label"
-    import { Switch } from "@/components/ui/switch"
-    import "./stepper.css";
+import { Switch } from "@/components/ui/switch"
+import "./stepper.css";
 
 const Skills = ({ formData, handleChange, onPrevious, onNext }) => {
     return (

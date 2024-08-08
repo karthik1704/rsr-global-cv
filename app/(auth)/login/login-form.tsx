@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { Poppins } from 'next/font/google';
 import Link from "next/link";
 import { signinJwt } from "./actions";
 import { useFormState } from "react-dom";
@@ -14,12 +13,7 @@ const initalState = {
   },
 };
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-poppins',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
-});
+
 
 const LoginForm = () => {
   const [state, action] = useFormState(signinJwt, initalState);
