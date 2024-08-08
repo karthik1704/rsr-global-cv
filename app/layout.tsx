@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter , Roboto,Poppins} from "next/font/google";
+import { Poppins} from "next/font/google";
 import "./globals.css";
 
 // import { SERVER_API_URL } from "./constants";
