@@ -23,7 +23,7 @@ const nextConfig = {
       },
      experimental: {
       serverActions: {
-        serverActions: { allowedOrigins: ["3.110.169.239:3002",], }
+        serverActions: { allowedOrigins: ["3.110.169.239",], }
 
       },
     },
@@ -35,12 +35,12 @@ const nextConfig = {
         headers: [
           {
             key: 'Access-Control-Allow-Origin',
-            value: "3.110.169.239:3002",
+            value: "3.110.169.239",
           },
           
           {
             key: 'X-Forwarded-Host',
-            value: `3.110.169.239:3002`,
+            value: `3.110.169.239`,
           },
           
         ],
