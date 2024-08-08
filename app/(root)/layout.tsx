@@ -3,6 +3,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { SERVER_API_URL } from "../constants";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 
 export const metadata: Metadata = {
@@ -14,9 +15,9 @@ export async function getData() {
   const cookiesStore = cookies();
   const access = cookiesStore.get("access");
 
-  console.log(access);
+  // console.log(access);
   if (!access) {
-    return null;
+    redirect('/')
   }
   const res = await fetch(`${SERVER_API_URL}/users/me`, {
     headers: {
@@ -33,11 +34,14 @@ export async function getData() {
   }
 
   if (res.status === 401) {
-    return null;
+   redirect('/login')
+  }
+  if (res.status !== 200) {
+   redirect('/login')
   }
 
   const user = await res.json();
-  console.log(user);
+  // console.log(user);
 
   return user;
 }

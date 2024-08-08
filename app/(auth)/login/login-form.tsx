@@ -26,7 +26,7 @@ const LoginForm = () => {
       <h1 className="text-4xl text-gray-100 font-bold mb-4 text-center ">
         Sign In
       </h1>
-        <form action={action}>
+        <form action={signinJwt}>
           <div className="mb-4 mx-12">
             <label className="block text-gray-100 font-bold">
               Enter your e-mail address
