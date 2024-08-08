@@ -23,30 +23,12 @@ const nextConfig = {
       },
      experimental: {
       serverActions: {
-        serverActions: { allowedOrigins: ["3.110.169.239",], }
+        serverActions: { allowedOrigins: ["3.110.169.239","3.110.169.239:3000", "3.110.169.239:3002"], }
 
       },
     },
    
-  async headers() {
-    return [
-      {
-       source:"/login",
-        headers: [
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: "3.110.169.239",
-          },
-          
-          {
-            key: 'X-Forwarded-Host',
-            value: `3.110.169.239`,
-          },
-          
-        ],
-      },
-    ]
-  },
+ 
 };
 
 export default nextConfig;
