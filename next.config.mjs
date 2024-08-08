@@ -33,6 +33,23 @@ const nextConfig = {
         value: process.env.NEXT_PUBLIC_APP_URL,
       },
   ],
+  async headers() {
+    return [
+      {
+       
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: process.env.NEXT_PUBLIC_APP_URL,
+          },
+          {
+            key: 'x-forwarded-host',
+            value: process.env.NEXT_PUBLIC_APP_URL,
+          },
+        ],
+      },
+    ]
+  },
 };
 
 export default nextConfig;
