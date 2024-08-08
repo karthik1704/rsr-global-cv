@@ -17,7 +17,7 @@ export async function getData() {
 
   // console.log(access);
   if (!access) {
-    redirect('/')
+    return null;
   }
   const res = await fetch(`${SERVER_API_URL}/users/me`, {
     headers: {
@@ -34,10 +34,10 @@ export async function getData() {
   }
 
   if (res.status === 401) {
-   redirect('/login')
+    return null;
   }
   if (res.status !== 200) {
-   redirect('/login')
+    return null;
   }
 
   const user = await res.json();
