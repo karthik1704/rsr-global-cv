@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 
 
 
-const poppins = Poppins({
+export const poppins = Poppins({
   style:['normal'],
   display: 'swap', 
   adjustFontFallback: false,
