@@ -18,8 +18,7 @@ const schema = z
   })
   .required({ username: true, password: true });
 
-
-export async function signinJwt(prevState: any, formData: any) {
+export async function signinJwt(formData: any) {
   const username = formData.get("username");
   const password = formData.get("password");
 
@@ -47,39 +46,36 @@ export async function signinJwt(prevState: any, formData: any) {
   params.append("client_id", "");
   params.append("client_secret", "");
 
-  try {
-    const res = await fetch(`${SERVER_API_URL}/auth/`, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      // mode: "cors", // no-cors, *cors, same-origin
-      headers: {
-        // "Content-Type": "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
+  const res = await fetch(`${SERVER_API_URL}/auth/`, {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    // mode: "cors", // no-cors, *cors, same-origin
+    headers: {
+      // "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: params.toString(),
+  });
+
+  if (res.status === 401) {
+    const error = await res.json();
+    console.log(error);
+
+    return {
+      // ...prevState,
+      message: error?.detail,
+      fieldErrors: {
+        username: null,
+        password: null,
       },
-      body: params.toString(),
-    });
-
-    if( res.status===401){
-      const error = await res.json();
-      console.log(error);
-
-      return{
-        ...prevState,
-        message: error?.detail,
-        fieldErrors: {
-          username: null,
-          password: null,
-        },
-      }
-    }
-
-    if(res.status ===200){
-    const resJson = await res.json();
-    console.log(resJson);
-    cookies().set("access", resJson.access_token);
-    }
-  } catch (e) {
-    console.log(e);
+    };
   }
 
-  redirect("/resume");
+  if (res.status === 200) {
+    const resJson = await res.json();
+    cookies().set("access", resJson.access_token);
+  }
+
+  if (res.status === 200) {
+    redirect("/resume");
+  }
 }

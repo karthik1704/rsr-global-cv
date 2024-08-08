@@ -3,6 +3,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { SERVER_API_URL } from "../constants";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export async function getData() {
   const cookiesStore = cookies();
   const access = cookiesStore.get("access");
 
-  console.log(access);
+  // console.log(access);
   if (!access) {
     return null;
   }
@@ -35,9 +36,12 @@ export async function getData() {
   if (res.status === 401) {
     return null;
   }
+  if (res.status !== 200) {
+    return null;
+  }
 
   const user = await res.json();
-  console.log(user);
+  // console.log(user);
 
   return user;
 }

@@ -2,7 +2,7 @@
 
 import { PDFViewer } from "@react-pdf/renderer";
 // import PDFDownloadButton from "./pfddwld";
-import PDF from '@/app/Pdf/pdf'
+import PDF from '@/app/(root)/Pdf/pdf'
 
 
 

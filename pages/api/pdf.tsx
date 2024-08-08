@@ -1,7 +1,7 @@
 // import { allPrivateFields } from "@content";
 import ReactPDF from "@react-pdf/renderer";
 import { NextApiHandler } from "next";
-import PDF from "@/app/Pdf/pdf";
+import PDF from "@/app/(root)/Pdf/pdf";
 
 const privateKey = process.env.PRIVATE_KEY;
 

@@ -10,16 +10,16 @@ import {
   View,
   Image,
 } from "@react-pdf/renderer";
-import Profile from "../../image/pexels-photo-704748.webp";
-import { HtmlProps } from "node_modules/react-pdf-html/dist/types/Html";
+// import Profile from "../../image/pexels-photo-704748.webp";
+// import { HtmlProps } from "node_modules/react-pdf-html/dist/types/Html";
 import React from "react";
-import Html from "react-pdf-html";
-import { htmlRenderers } from "./pdfhtml";
+// import Html from "react-pdf-html";
+// import { htmlRenderers } from "./pdfhtml";
 import resumeConfig from "../edit-me/resume-config";
-import Theme from "../edit-me/resume-config";
-import { contrastColor } from "../helpers/colorcontrast";
-import { getAccentColor, getNeutralColor } from "../helpers/colors";
-import { Bold } from "lucide-react";
+// import Theme from "../edit-me/resume-config";
+// import { contrastColor } from "../helpers/colorcontrast";
+// import { getAccentColor, getNeutralColor } from "../helpers/colors";
+// import { Bold } from "lucide-react";
 // import {
 //   fullName,
 //   sortedAchievements,
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
 
   jobTitle: {
     fontSize: 12,
-    fontWeight: "extrabold",
+    fontWeight: "bold",
   },
   company: {
     fontSize: 12,

@@ -1,14 +1,14 @@
-'use client'
+import Resume from "./resume-form";
 
-import React from 'react'
-import Resume from './resume'
-
-const page = () => {
+const Page = () => {
   return (
     <>
-    <Resume/>
-    </>
-    )
-}
+    <div>
 
-export default page
+      <Resume />
+    </div>
+    </>
+  );
+};
+
+export default Page;

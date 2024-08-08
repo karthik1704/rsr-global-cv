@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { Poppins } from 'next/font/google';
 import Link from "next/link";
 import { signinJwt } from "./actions";
 import { useFormState } from "react-dom";
@@ -14,12 +13,7 @@ const initalState = {
   },
 };
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-poppins',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
-});
+
 
 const LoginForm = () => {
   const [state, action] = useFormState(signinJwt, initalState);
@@ -32,7 +26,7 @@ const LoginForm = () => {
       <h1 className="text-4xl text-gray-100 font-bold mb-4 text-center ">
         Sign In
       </h1>
-        <form action={action}>
+        <form action={signinJwt}>
           <div className="mb-4 mx-12">
             <label className="block text-gray-100 font-bold">
               Enter your e-mail address
