@@ -109,10 +109,10 @@ type FormValues = {
       const [showFields, setShowFields] = useState(true);
 
       const handleNext = async () => {
-        // const isValid = await trigger();
-        // if(isValid){
+        const isValid = await trigger();
+        if(isValid){
           setShow(show + 1)
-        // }
+        }
         }
   
       const handlePrevious = () =>{
