@@ -69,7 +69,7 @@ const Preview = ({ data, handleNext }: PreviewProps) => {
         </h1>
         <div className="bg1 flex col">
           <div className="mx-10 my-5">
-            <Image src={"/public/cand-3.png"} height={150} width={150} alt="" />
+            <Image src={"/cand-3.png"} height={150} width={150} alt="" />
           </div>
           <div className=" flex-col w-full">
             <div className="flex w-full justify-between">
