@@ -30,18 +30,15 @@ type FormValues = {
     workwebsite:string;
     workdepartment:String;
     workaddress:string;
+    education:{
     qualification:string;
     organisation:string;
     educationfrom:string;
     educationto:string;
     educationcity:string;
     educationcountry:string;
-    Hobbies:string;
-    institute :string;
-    trainingfrom:string;
-    trainingto:string;
-    traininglocation:string;
-    trainingskills:string;
+    }[]
+
   experiences: {
     years: number;
     description: string;
@@ -57,7 +54,13 @@ type FormValues = {
     workaddress:string;
   }[]
   training:{
-    position:string;
+    // position:string;
+    Hobbies:string;
+    institute :string;
+    trainingfrom:string;
+    trainingto:string;
+    traininglocation:string;
+    trainingskills:string;
   }[];
   }
   
@@ -83,7 +86,26 @@ type FormValues = {
     workaddress:undefined,
         }
       ],
-      training:[],
+      education:[
+        {
+        qualification:undefined,
+        organisation:undefined,
+        educationfrom:undefined,
+        educationto:undefined,
+        educationcity:undefined,
+        educationcountry:undefined,
+      }
+        ],
+      training:[
+        {
+          Hobbies:undefined,
+          institute :undefined,
+          trainingfrom:undefined,
+          trainingto:undefined,
+          traininglocation:undefined,
+          trainingskills:undefined,  
+        }
+      ],
       }
     });
 
@@ -97,7 +119,7 @@ type FormValues = {
     name: 'training',  
     })
 
-    const {fields:educationFields, append:appendeducation, remove:removeeducation} = useFieldArray({
+    const {fields:educationFields, append:appendeEducation, remove:removeEducation} = useFieldArray({
       control,
       name: 'education',
     })
@@ -367,7 +389,9 @@ type FormValues = {
           })} placeholder='Position' 
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           />
-          {errors.position && <p className="text-red-700 text-sm">{errors.position.message}</p>}
+                   {errors.experiences?.[index]?.position && (
+  <p className="text-red-700 text-sm">{errors.experiences[index].position.message}</p>
+)}
           </div>
 
 <div className="mb-4  w-2/4 px-6  ">
@@ -382,7 +406,9 @@ type FormValues = {
           })} placeholder='companyName'
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
            />
-           {errors.companyName && <p className="text-red-700 text-sm">{errors.companyName.message}</p>}
+          {errors.experiences?.[index]?.companyName && (
+  <p className="text-red-700 text-sm">{errors.experiences[index].companyName.message}</p>
+)}
           </div>
 
           <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
@@ -398,7 +424,9 @@ type FormValues = {
           })} 
          className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           type="Date" />
-          {errors.workfrom && <p className="text-red-700 text-sm">{errors.workfrom.message}</p>}
+           {errors.experiences?.[index]?.workfrom && (
+  <p className="text-red-700 text-sm">{errors.experiences[index].workfrom.message}</p>
+)}
           </div>
 
           <div className="mb-4  w-2/4 px-6  ">
@@ -413,7 +441,9 @@ type FormValues = {
           })} 
           className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           type="Date" />
-          {errors.workto && <p className="text-red-700 text-sm">{errors.workto.message}</p>}
+         {errors.experiences?.[index]?.workto && (
+  <p className="text-red-700 text-sm">{errors.experiences[index].workto.message}</p>
+)}
           </div>
           </div>
 
@@ -430,7 +460,9 @@ type FormValues = {
           })} placeholder='Website Name'
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
            />
-           {errors.workwebsite && <p className="text-red-700 text-sm">{errors.workwebsite.message}</p>}
+           {errors.experiences?.[index]?.companyName && (
+  <p className="text-red-700 text-sm">{errors.experiences[index].companyName.message}</p>
+)}
           </div>
 
           <div className="mb-4  w-2/4 px-6  ">
@@ -498,223 +530,147 @@ type FormValues = {
 
           </div>
           )}
-          {show==2 && (
-            <div>
-                        <h1 className="mb-4 px-6  text-black font-bold text-3xl">Education</h1>
-                        <hr className='mb-2' />
+          {show === 2 && (
+  <div>
 
-           <div className="mb-4  w-2/4 px-6">
+    {educationFields?.map((item, index) => {
+     return <div key={item.id}>
+        <div className='flex justify-between items-center	mb-4  w-2/4 px-6'>
+          <p className='text-black font-bold text-3xl mb-4'>Education</p>
+          {index > 0 && (
+          <button type='button' className='w-10 capitalize bg-green-600 hover:bg-green-500 text-white rounded-full font-bold p-2' onClick={() => removeEducation(index)}>
+              X
+            </button>
+            )}
+            </div>
 
-            <label className="block text-black font-bold text-sm head mb-2">
-             Title of qualification/credential awarded<span className="text-red-700">*</span>
-            </label>
-          <input {...register('qualification', {
-            required: {
-              value: true,
-              message: 'Qualification is required'
-            }
-          })} placeholder='Title of Qualification' 
-          className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+        <div className="mb-4 w-2/4 px-6">
+          <label className="block text-black font-bold text-sm head mb-2">
+            Title of qualification/credential awarded<span className="text-red-700">*</span>
+          </label>
+          <input
+            {...register(`education.${index}.qualification`, {
+              required: {
+                value: true,
+                message: 'Qualification is required'
+              }
+            })}
+            placeholder='Title of Qualification'
+            className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           />
-          {errors.qualification && <p className="text-red-700 text-sm">{errors.qualification.message}</p>}
-          </div>
+          {errors.education?.[index]?.qualification && (
+            <p className="text-red-700 text-sm">{errors.education[index].qualification.message}</p>
+          )}
+        </div>
 
-<div className="mb-4  w-2/4 px-6  ">
-            <label className="block text-black font-bold text-sm head mb-2">
-             Organisation providing education and training<span className="text-red-700">*</span>
-            </label>
-          <input {...register('organisation', {
-            required: {
-              value: true,
-              message: 'organisation Name is required'
-            }
-          })} placeholder='Name of the organisation'
-          className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-           />
-           {errors.organisation && <p className="text-red-700 text-sm">{errors.organisation.message}</p>}
-          </div>
+        <div className="mb-4 w-2/4 px-6">
+          <label className="block text-black font-bold text-sm head mb-2">
+            Organisation providing education and training<span className="text-red-700">*</span>
+          </label>
+          <input
+            {...register(`education.${index}.organisation`, {
+              required: {
+                value: true,
+                message: 'Organisation Name is required'
+              }
+            })}
+            placeholder='Name of the organisation'
+            className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+          />
+          {errors.education?.[index]?.organisation && (
+            <p className="text-red-700 text-sm">{errors.education[index].organisation.message}</p>
+          )}
+        </div>
 
-          <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-          <div className="mb-4  w-2/4 px-6  ">
+        <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
+          <div className="mb-4 w-2/4 px-6">
             <label className="block text-black font-bold text-sm head mb-2">
               From<span className="text-red-700">*</span>
             </label>
-          <input {...register('educationfrom', {
-            required: {
-              value: true,
-              message: 'Date is required'
-            }
-          })} 
-          className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-          type="Date" />
-          {errors.educationfrom && <p className="text-red-700 text-sm">{errors.educationfrom.message}</p>}
+            <input
+              {...register(`education.${index}.educationfrom`, {
+                required: {
+                  value: true,
+                  message: 'Date is required'
+                }
+              })}
+              className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+              type="Date"
+            />
+            {errors.education?.[index]?.educationfrom && (
+              <p className="text-red-700 text-sm">{errors.education[index].educationfrom.message}</p>
+            )}
           </div>
 
-          <div className="mb-4  w-2/4 px-6">
+          <div className="mb-4 w-2/4 px-6">
             <label className="block text-black font-bold text-sm head mb-2">
               To<span className="text-red-700">*</span>
             </label>
-          <input {...register('educationto', {
-            required: {
-              value: true,
-              message: 'Date is required'
-            }
-          })} 
-         className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-          type="Date" />
-          {errors.educationto && <p className="text-red-700 text-sm">{errors.educationto.message}</p>}
+            <input
+              {...register(`education.${index}.educationto`, {
+                required: {
+                  value: true,
+                  message: 'Date is required'
+                }
+              })}
+              className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+              type="Date"
+            />
+            {errors.education?.[index]?.educationto && (
+              <p className="text-red-700 text-sm">{errors.education[index].educationto.message}</p>
+            )}
           </div>
-          </div>
+        </div>
 
-          <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-          <div className="mb-4  w-2/4 px-6  ">
+        <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
+          <div className="mb-4 w-2/4 px-6">
             <label className="block text-black font-bold text-sm head mb-2">
               City<span className="text-red-700">*</span>
             </label>
-          <input {...register('educationcity', {
-            required: {
-              value: true,
-              message: 'City is required'
-            }
-          })} placeholder='City'
-          className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-           />
-           {errors.educationcity && <p className="text-red-700 text-sm">{errors.educationcity.message}</p>}
+            <input
+              {...register(`education.${index}.educationcity`, {
+                required: {
+                  value: true,
+                  message: 'City is required'
+                }
+              })}
+              placeholder='City'
+              className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+            />
+            {errors.education?.[index]?.educationcity && (
+              <p className="text-red-700 text-sm">{errors.education[index].educationcity.message}</p>
+            )}
           </div>
 
-          <div className="mb-4  w-2/4 px-6  ">
+          <div className="mb-4 w-2/4 px-6">
             <label className="block text-black font-bold text-sm head mb-2">
               Country<span className="text-red-700">*</span>
             </label>
-          <input {...register('educationcountry', {
-            required: {
-              value: true,
-              message: 'Country is required'
-            }
-          })} placeholder='country'
-          className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-           />
-           {errors.educationcountry && <p className="text-red-700 text-sm">{errors.educationcountry.message}</p>}
+            <input
+              {...register(`education.${index}.educationcountry`, {
+                required: {
+                  value: true,
+                  message: 'Country is required'
+                }
+              })}
+              placeholder='Country'
+              className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+            />
+            {errors.education?.[index]?.educationcountry && (
+              <p className="text-red-700 text-sm">{errors.education[index].educationcountry.message}</p>
+            )}
           </div>
-          </div>
+        </div>
+      </div>
+    })}
 
           <div className='flex items-center mx-6 my-3'>
   <p className='text-gray-700 font-extrabold text-base head'>Education</p>
-<button type='button' className='w-14 rounded-md items-center capitalize bg-slate-300 hover:bg-slate-200 text-black  mx-5 text-2xl font-bold' onClick={() => appendeducation({ years: 0, description: '' })}>
+<button type='button' className='w-14 rounded-md items-center capitalize bg-slate-300 hover:bg-slate-200 text-black  mx-5 text-2xl font-bold' onClick={() => appendeEducation({ years: 0, description: '' })}>
               +
             </button>
             </div>
 
-            {educationFields.map((education, index)=>(
-              <div key={education.id}>
-
-<div className="mb-4 w-2/4 px-6">
-
-<div className='flex justify-between items-center	'>
-          <p className='text-black font-bold text-3xl my-4'>Education</p>
-          <button type='button' className='w-10 capitalize bg-green-600 hover:bg-green-500 text-white rounded-full font-bold p-2' onClick={() => removeeducation(index)}>
-              X
-            </button>
-            </div>
-
-
-
-<label className="block text-black font-bold text-sm head mb-2">
- Title of qualification/credential awarded<span className="text-red-700">*</span>
-</label>
-<input {...register('qualification', {
-required: {
-  value: true,
-  message: 'Qualification is required'
-}
-})} placeholder='Title of Qualification' 
-className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-/>
-{errors.qualification && <p className="text-red-700 text-sm">{errors.qualification.message}</p>}
-</div>
-
-<div className="mb-4  w-2/4 px-6  ">
-<label className="block text-black font-bold text-sm head mb-2">
- Organisation providing education and training<span className="text-red-700">*</span>
-</label>
-<input {...register('organisation', {
-required: {
-  value: true,
-  message: 'Organisation is required'
-}
-})} placeholder='Name of the organisation'
-className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-/>
-{errors.organisation && <p className="text-red-700 text-sm">{errors.organisation.message}</p>}
-</div>
-
-<div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-<div className="mb-4  w-2/4 px-6  ">
-<label className="block text-black font-bold text-sm head mb-2">
-  From<span className="text-red-700">*</span>
-</label>
-<input {...register('educationfrom', {
-required: {
-  value: true,
-  message: 'Date is required'
-}
-})} 
-className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-type="Date" />
-{errors.educationfrom && <p className="text-red-700 text-sm">{errors.educationfrom.message}</p>}
-
-</div>
-
-<div className="mb-4  w-2/4 px-6">
-<label className="block text-black font-bold text-sm head mb-2">
-  To<span className="text-red-700">*</span>
-</label>
-<input {...register('educationto', {
-required: {
-  value: true,
-  message: 'Date is required'
-}
-})} 
-className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-type="Date" />
-{errors.educationto && <p className="text-red-700 text-sm">{errors.educationto.message}</p>}
-</div>
-</div>
-
-<div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-<div className="mb-4  w-2/4 px-6  ">
-<label className="block text-black font-bold text-sm head mb-2">
-  City<span className="text-red-700">*</span>
-</label>
-<input {...register('educationcity', {
-required: {
-  value: true,
-  message: 'City is required'
-}
-})} placeholder='City'
-className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-/>
-{errors.educationcity && <p className="text-red-700 text-sm">{errors.educationcity.message}</p>}
-</div>
-
-<div className="mb-4  w-2/4 px-6  ">
-<label className="block text-black font-bold text-sm head mb-2">
-  Country<span className="text-red-700">*</span>
-</label>
-<input {...register('educationcountry', {
-required: {
-  value: true,
-  message: 'Country is required'
-}
-})} placeholder='country'
-className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-/>
-{errors.educationcountry && <p className="text-red-700 text-sm">{errors.educationcountry.message}</p>}
-</div>
-</div>
-
-              </div>
-            ))} 
    <div className='flex mx-6'>
     
     <button type='button' className='w-24 items-center capitalize bg-white text-black hover:bg-green-600 hover:text-slate-100 p-2 font-bold rounded-md' onClick={handlePrevious}>Previous</button>
@@ -725,14 +681,22 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
 
 {show === 3 && (
         <div>
-            <h1 className="mb-4 px-6  text-gray-900 font-bold text-3xl">Additional Information</h1>
+              {trainingFields?.map((item, index) => {
+     return <div key={item.id}>
+        <div className='flex justify-between items-center	mb-4  w-2/4 px-6'>
+          <p className='text-black font-bold text-3xl mb-4'>Additional Information</p>
+          {index > 0 && (
+          <button type='button' className='w-10 capitalize bg-green-600 hover:bg-green-500 text-white rounded-full font-bold p-2' onClick={() => removeTraining(index)}>
+              X
+            </button>)}
+            </div>
 
             <div className="mb-4  w-2/4 px-6">
 
 <label className="block text-black font-bold text-sm head mb-2">
  Hobbies and interests<span className="text-red-700">*</span>
 </label>
-<input {...register('Hobbies', {
+<input {...register(`training.${index}.Hobbies`, {
 // required: {
 //   value: true,
 //   message: 'First Name is required'
@@ -753,7 +717,7 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
             <label className="block text-black font-bold text-sm head my-2">
             Institute <span className="text-red-700">*</span>
             </label>
-          <input {...register('institute', {
+          <input {...register(`training.${index}.institute`, {
             required: {
               value: true,
               message: 'institute is required'
@@ -761,7 +725,9 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
           })} placeholder='Name of institute' 
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           />
-          {errors.institute && <p className="text-red-700 text-sm">{errors.institute.message}</p>}
+          
+          {errors.training?.[index]?.institute && (
+            <p className="text-red-700 text-sm">{errors.training[index].institute.message}</p>)}
           </div>
 
           <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
@@ -769,7 +735,7 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
             <label className="block text-black font-bold text-sm head mb-2">
               From<span className="text-red-700">*</span>
             </label>
-          <input {...register('trainingfrom', {
+          <input {...register(`training.${index}.trainingfrom`, {
             required: {
               value: true,
               message: 'Date is required'
@@ -777,14 +743,16 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
           })} 
           className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           type="Date" />
-          {errors.trainingfrom && <p className="text-red-700 text-sm">{errors.trainingfrom.message}</p>}
+                    {errors.training?.[index]?.trainingfrom && (
+            <p className="text-red-700 text-sm">{errors.training[index].trainingfrom.message}</p>)}
+          </div>
           </div>
 
           <div className="mb-4  w-2/4 px-6  ">
             <label className="block text-black font-bold text-sm head mb-2">
               To<span className="text-red-700">*</span>
             </label>
-          <input {...register('trainingto', {
+          <input {...register(`training.${index}.trainingto`, {
             required: {
               value: true,
               message: 'Date is required'
@@ -792,7 +760,8 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
           })} 
          className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
           type="Date" />
-          {errors.trainingto && <p className="text-red-700 text-sm">{errors.trainingto.message}</p>}
+          {errors.training?.[index]?.trainingto && (
+            <p className="text-red-700 text-sm">{errors.training[index].trainingto.message}</p>)}
           </div>
           </div>
 
@@ -800,7 +769,7 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
             <label className="block text-black font-bold text-sm head mb-2">
               Location<span className="text-red-700">*</span>
             </label>
-          <input {...register('traininglocation', {
+          <input {...register(`training.${index}.traininglocation`, {
             required: {
               value: true,
               message: 'Location is required'
@@ -808,109 +777,18 @@ className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ri
           })} placeholder='Location Name'
           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none" 
           />
-          {errors.traininglocation && <p className="text-red-700 text-sm">{errors.traininglocation.message}</p>}
+          {errors.training?.[index]?.traininglocation && (
+            <p className="text-red-700 text-sm">{errors.training[index].traininglocation.message}</p>)}
           </div>
-
-            </div>
+</div>
+              })}
+            
 <div className='flex items-center mx-6'>
   <p className='text-gray-700 font-extrabold text-base head'>New Training & Awards</p>
 <button type='button' className='w-14 rounded-md items-center capitalize bg-slate-300 hover:bg-slate-200 text-black  mx-5 text-2xl font-bold' onClick={() => appendTraining({ years: 0, description: '' })}>
               +
             </button>
             </div>
-
-{trainingFields.map((training, index) => (
-          <div key={training.id}>
-
-<div className="mb-4  w-2/4 px-6">
-<div className='flex justify-between items-center	'>
-          <p className='text-gray-700 font-extrabold text-sm my-2'>Training and awards</p>
-          <button type='button' className='w-10 capitalize bg-green-600 hover:bg-green-500 text-white font-bold p-2  my-2 rounded-3xl' onClick={() => removeTraining(index)}>
-              X
-            </button>
-            </div>
-            <label className="block text-black font-bold text-sm head my-2">
-            Institute <span className="text-red-700">*</span>
-            </label>
-          <input {...register(`training.${index}.position`, {
-            required: {
-              value: true,
-              message: 'Institute is required'
-            }
-          })} placeholder='experience' 
-          className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-          />
-          </div>
-
-          <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-          <div className="mb-4  w-2/4 px-6  ">
-            <label className="block text-black font-bold text-sm head mb-2">
-              From<span className="text-red-700">*</span>
-            </label>
-          <input {...register('experience', {
-            required: {
-              value: true,
-              message: 'Date is required'
-            }
-          })} 
-          className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-          type="Date" />
-          {errors.traininglocation && <p className="text-red-700 text-sm">{errors.traininglocation.message}</p>}
-          </div>
-
-          <div className="mb-4  w-2/4 px-6  ">
-            <label className="block text-black font-bold text-sm head mb-2">
-              To<span className="text-red-700">*</span>
-            </label>
-          <input {...register('experience', {
-            required: {
-              value: true,
-              message: 'Date is required'
-            }
-          })} 
-          className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-          type="Date" />
-          {errors.traininglocation && <p className="text-red-700 text-sm">{errors.traininglocation.message}</p>}
-          </div>
-          </div>
-
-          <div className="mb-4  w-2/4 px-6">
-            <label className="block text-black font-bold text-sm head mb-2">
-              Location<span className="text-red-700">*</span>
-            </label>
-          <input {...register('educationcountry', {
-            required: {
-              value: true,
-              message: 'Location is required'
-            }
-          })} placeholder='Location Name'
-          className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-           />
-           {errors.traininglocation && <p className="text-red-700 text-sm">{errors.traininglocation.message}</p>}
-          </div>
-
-            </div>
-            ))}
-
-<p className='text-gray-700 font-extrabold text-sm mx-6 my-2'>Specialisation</p>
-
-<div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
-  <label className="block text-black font-bold text-sm head my-2">
-  Primary Skills
-  <span className="text-red-700">*</span>
-  </label>
-  <input
-    className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-    {...register('trainingskills', {
-            required: {
-              value: true,
-              message: 'skills is required'
-            }
-          })} 
-          // placeholder='Nationality' 
-          />
-          {errors.trainingskills && <p className="text-red-700 text-sm">{errors.trainingskills.message}</p>}
-</div>
 
                <div className='flex mx-6'>  
                <button type='button' className='w-24 items-center capitalize bg-white hover:bg-green-600 text-black p-2 hover:text-slate-100 font-bold rounded-md' onClick={handlePrevious}>Previous</button>  
