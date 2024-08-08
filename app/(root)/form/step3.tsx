@@ -1,11 +1,5 @@
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Inter } from 'next/font/google'
-import React from 'react'
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-})
 
 const Personal = () => {
   return (
@@ -13,7 +7,7 @@ const Personal = () => {
             <div className="w-9/12 p-8  shadow-2xl border-gray-300 text-justify my-7 mx-auto">
               <form>
               <h1 className="mb-4 px-6  text-gray-700 font-bold text-3xl">Personal Skills</h1>
-              <p className={`mb-4 px-6 text-gray-700 font-bold text-sm ${inter.variable} latin`}>
+              <p className={`mb-4 px-6 text-gray-700 font-bold text-sm latin`}>
               Describe your personal skills, such as language skills and digital skills, etc. 
             </p>
 
