@@ -76,6 +76,6 @@ export async function signinJwt(formData: any) {
   }
 
   if (res.status === 200) {
-    redirect("/");
+    redirect("/resume");
   }
 }

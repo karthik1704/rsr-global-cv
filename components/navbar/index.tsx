@@ -56,7 +56,7 @@ const Navbar = ({ user }: { user: User | null }) => {
                     <Link href="/">Profile</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <Link href="/cv">Create Cv</Link>
+                    <Link href="/resume">Create Cv</Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
