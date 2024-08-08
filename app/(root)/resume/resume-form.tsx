@@ -1,4 +1,4 @@
-'use cilent';
+'use client';
 import { useState } from 'react';
 import {SubmitHandler, useForm,  useFieldArray, FieldValues} from 'react-hook-form';
 import Preview from './preview'

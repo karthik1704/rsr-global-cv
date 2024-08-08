@@ -47,7 +47,7 @@ export async function signinJwt(prevState: any, formData: any) {
   params.append("client_id", "");
   params.append("client_secret", "");
 
-  try {
+
     const res = await fetch(`${SERVER_API_URL}/auth/`, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       // mode: "cors", // no-cors, *cors, same-origin
@@ -74,12 +74,9 @@ export async function signinJwt(prevState: any, formData: any) {
 
     if(res.status ===200){
     const resJson = await res.json();
-    console.log(resJson);
     cookies().set("access", resJson.access_token);
     }
-  } catch (e) {
-    console.log(e);
-  }
+  
 
   redirect("/resume");
 }
