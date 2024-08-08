@@ -42,10 +42,7 @@ const nextConfig = {
             key: 'Access-Control-Allow-Origin',
             value: process.env.NEXT_PUBLIC_APP_URL,
           },
-          {
-            key: 'x-forwarded-host',
-            value: process.env.NEXT_PUBLIC_APP_URL,
-          },
+          
         ],
       },
     ]
