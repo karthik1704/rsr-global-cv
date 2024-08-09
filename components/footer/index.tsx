@@ -108,7 +108,7 @@ const Footer = () => {
         </div>
 
         <div className="my-10 flex flex-col items-center">
-          <span>© 2024 RSR Global, Inc. All rights reserved.</span>
+          <span>© 2024 <Link href={'https://vimkes.com/'} target="unblank"> Vimkes Technologies</Link>, Inc. All rights reserved.</span>
         </div>
       </section>
     </>
