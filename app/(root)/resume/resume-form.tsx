@@ -197,10 +197,10 @@ const Resume = () => {
   //--validation for input field--
 
   const handleNext = async () => {
-    // const isValid = await trigger();
-    // if(isValid){
+    const isValid = await trigger();
+    if(isValid){
     setShow(show + 1);
-    // }
+    }
   };
 
   const handlePrevious = () => {
