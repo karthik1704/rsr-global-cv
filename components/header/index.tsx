@@ -14,8 +14,9 @@ import ImageCarousel from '@/components/resume/index'
   return<>
 <header className="h-[600px] w-full  bg-cover bg-center bg-no-repeat relative">
 <Image src={img} alt="" />
-
+<div className='absolute top-3/4 right-1/4 left-1/3'>
 <ImageCarousel images={images} interval={2000} />
+</div>
     <div className='absolute top-1/3 left-10 text-black w-3/5 flex flex-col gap-4 justify-start items-start'>
         <h2 className='text-4xl font-bold '>
             The CV that gets the job... Done

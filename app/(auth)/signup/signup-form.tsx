@@ -34,8 +34,8 @@ const SignUp = () => {
 
 <div className="h-3/4 bg-cover content-center basis-2/5 ">
 
-<div className="grid grid-rows-2 gap-2 ">
-<h1 className=" w-96 text-4xl font-bold mb-6 text-justify">Create a standout resume effortlessly with our intuitive CV builder.</h1>
+<div className="grid grid-rows-1 gap-20 ">
+<h1 className=" w-4/5 text-3xl font-bold mb-6 text-justify">Create a standout resume effortlessly with our intuitive CV builder.</h1>
 <ul className="list-disc text-lg font-light list-inside mb-6 space-y-6">
   <li>Build a professional CV in minutes with our easy-to-use tool.</li>
   <li>Access customizable templates tailored to your industry.</li>
@@ -129,7 +129,7 @@ const SignUp = () => {
               Cancel
             </Link>
           </div>
-          <h1 className="m-4 mx-12 gap-4">already having an account? {' '}
+          <h1 className="m-4 mx-12 gap-4">Already having an account? {' '}
   <a href="/login" className=" font-medium text-blue-500 hover:text-blue-700">Login</a>
 </h1>
         </form>

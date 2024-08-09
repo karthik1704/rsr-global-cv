@@ -48,6 +48,22 @@ type data = {
     workdepartment: String;
     workaddress: string;
   }[];
+  education:{
+    qualification:string;
+      organisation:string;
+      educationfrom:string;
+      educationto:string;
+      educationcity:string;
+      educationcountry:string;
+  }[]
+  training: {
+    Hobbies:string;
+        institute :string;
+        trainingfrom:string;
+        trainingto:string;
+        traininglocation:string;
+        trainingskills:string;  
+  }[]
 };
 
 Font.register({
@@ -570,6 +586,8 @@ const PDF = ({ data }: data) => {
               </Text>
             </View>
           </View> */}
+          {data.education.map((educ, index)=>(
+            <div key={index}>
           <Text
             style={{ fontSize: 12, fontWeight: "extrabold", paddingTop: 10 }}
           >
@@ -578,7 +596,7 @@ const PDF = ({ data }: data) => {
           <View style={styles.line1} />
           <View style={styles.job}>
             <Text style={styles.dates}>
-              {data.educationfrom} - {data.educationto} {data.educationcity}, {data.educationcountry}
+              {educ.educationfrom} - {educ.educationto} {educ.educationcity}, {educ.educationcountry}
             </Text>
 
             <View
@@ -613,9 +631,11 @@ const PDF = ({ data }: data) => {
               Address :
             </Text>
             <Text style={{ fontSize: 10, marginTop: 10 }}>
-            {data.educationcity}, {data.educationcountry}
+            {educ.educationcity}, {educ.educationcountry}
             </Text>
           </View>
+          </div>
+          ))}
           <Text
             style={{ fontSize: 12, fontWeight: "extrabold", paddingTop: 10 }}
           >
