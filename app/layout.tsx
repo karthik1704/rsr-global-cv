@@ -17,24 +17,24 @@ import { cookies } from "next/headers";
   
 // })
 
-const poppins = localFont({
-  src: [
-    {
-      path: 'fonts/Poppins/Poppins-Regular.ttf',
-      weight: '400',
-      style: 'normal',
+// const poppins = localFont({
+//   src: [
+//     {
+//       path: 'fonts/Poppins/Poppins-Regular.ttf',
+//       weight: '400',
+//       style: 'normal',
     
-    },
-    {
-      path: 'fonts/Poppins/Poppins-Bold.ttf',
-      weight: '700',
-      style: 'normal',
-    },
+//     },
+//     {
+//       path: 'fonts/Poppins/Poppins-Bold.ttf',
+//       weight: '700',
+//       style: 'normal',
+//     },
    
-  ],
-  variable:'--font-poppins',
+//   ],
+//   variable:'--font-poppins',
 
-})
+// })
 
 
 export default async function RootLayout({
@@ -44,7 +44,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} font-sans`}>
+      <body className={`font-sans`}>
         {children}
       </body>
     </html>
