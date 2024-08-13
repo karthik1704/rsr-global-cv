@@ -206,7 +206,8 @@ const styles = StyleSheet.create({
   },
 
   photoContainer: {
-    width: "15%",
+    width: "18%",
+    borderRadius:50,
     paddingTop: 10,
     paddingRight: 10,
   },
@@ -397,8 +398,11 @@ const PDF = ({ data }: data) => {
           <View style={styles.photoContainer}>
             {/* <Text>CHEF DE PARTIE</Text>
             <Text>QATAR AIRWAYS GROUP</Text> */}
-            <Image src="/images/cand-5.jpeg" />
-          </View>
+            <Image src={data.profileImage || "/images/cand-5.jpeg"} 
+            style={{
+              borderRadius:50
+            }}/>
+            </View>
 
           <View style={{ width: "82%" }}>
             <View style={styles.heading}>

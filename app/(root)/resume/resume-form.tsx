@@ -160,6 +160,12 @@ const Resume = () => {
 
   const [isSwitchOn, setIsSwitchOn] = useState(false);
 
+  const [uploadedImage, setUploadedImage]= useState('');
+
+  const handleImageChange = (imageurl) =>{
+    setUploadedImage(imageurl);
+  }
+
   //--date Switch--
 
   const handleSwitchChange = (checked) => {
@@ -197,11 +203,11 @@ const Resume = () => {
   //--validation for input field--
 
   const handleNext = async () => {
-    const isValid = await trigger();
-    if(isValid){
+    // const isValid = await trigger();
+    // if(isValid){
     setShow(show + 1);
     }
-  };
+  // };
 
   const handlePrevious = () => {
     setShow(show - 1);
@@ -216,7 +222,7 @@ const Resume = () => {
   };
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    setData(data);
+    setData({...data,profileImage:uploadedImage});
     handleNext();
     await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log(data);
@@ -239,7 +245,7 @@ const Resume = () => {
 
             <hr className="mb-2" />
 
-            <ImageUploader />
+            <ImageUploader onImageChange={handleImageChange}/>
 
             <div className="mb-4.5 flex flex-col gap-3 lg:flex-row mt-2">
               <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
@@ -502,6 +508,68 @@ const Resume = () => {
                       X
                     </button>
                   </div>
+
+                  
+                  <label className="block text-black font-bold text-sm head mb-2">
+                    Employer<span className="text-red-700">*</span>
+                  </label>
+                  <input
+                    {...register(`experiences.${index}.companyName`, {
+                      required: {
+                        value: true,
+                        message: "Employer name is required",
+                      },
+                    })}
+                    placeholder="companyName"
+                    className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                  />
+                  {errors.experiences?.[index]?.companyName && (
+                    <p className="text-red-700 text-sm">
+                      {errors.experiences[index].companyName.message}
+                    </p>
+                  )}                  
+                </div>
+
+                <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
+                  <div className="mb-4  w-2/4 px-6  ">
+                    <label className="block text-black font-bold text-sm head mb-2">
+                      Website<span className="text-red-700">*</span>
+                    </label>
+                    <input
+                      {...register(`experiences.${index}.companyName`, {
+                        required: {
+                          value: true,
+                          message: "Website is required",
+                        },
+                      })}
+                      placeholder="Website Name"
+                      className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                    />
+                    {errors.experiences?.[index]?.companyName && (
+                      <p className="text-red-700 text-sm">
+                        {errors.experiences[index].companyName.message}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="mb-4  w-2/4 px-6  ">
+                    <label className="block text-black font-bold text-sm head mb-2">
+                      Location
+                    </label>
+                    <input
+                      {...register(`experiences.${index}.location`, {
+                        // required: {
+                        //   value: true,
+                        //   message: 'First Name is required'
+                        // }
+                      })}
+                      placeholder="Location Name"
+                      className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="mb-4  w-2/4 px-6  ">
                   <label className="block text-black font-bold text-sm head mb-2">
                     Occupation or position held
                     <span className="text-red-700">*</span>
@@ -521,28 +589,9 @@ const Resume = () => {
                       {errors.experiences[index].position.message}
                     </p>
                   )}
-                </div>
+                  </div>
 
-                <div className="mb-4  w-2/4 px-6  ">
-                  <label className="block text-black font-bold text-sm head mb-2">
-                    Employer<span className="text-red-700">*</span>
-                  </label>
-                  <input
-                    {...register(`experiences.${index}.companyName`, {
-                      required: {
-                        value: true,
-                        message: "Employer name is required",
-                      },
-                    })}
-                    placeholder="companyName"
-                    className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                  />
-                  {errors.experiences?.[index]?.companyName && (
-                    <p className="text-red-700 text-sm">
-                      {errors.experiences[index].companyName.message}
-                    </p>
-                  )}
-                </div>
+
 
                 <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
                   <div className="mb-4  w-2/6 px-6  ">
@@ -608,44 +657,7 @@ const Resume = () => {
                   </div>
                 </div>
 
-                <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-                  <div className="mb-4  w-2/4 px-6  ">
-                    <label className="block text-black font-bold text-sm head mb-2">
-                      Website<span className="text-red-700">*</span>
-                    </label>
-                    <input
-                      {...register(`experiences.${index}.companyName`, {
-                        required: {
-                          value: true,
-                          message: "Website is required",
-                        },
-                      })}
-                      placeholder="Website Name"
-                      className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                    />
-                    {errors.experiences?.[index]?.companyName && (
-                      <p className="text-red-700 text-sm">
-                        {errors.experiences[index].companyName.message}
-                      </p>
-                    )}
-                  </div>
 
-                  <div className="mb-4  w-2/4 px-6  ">
-                    <label className="block text-black font-bold text-sm head mb-2">
-                      Location
-                    </label>
-                    <input
-                      {...register(`experiences.${index}.location`, {
-                        // required: {
-                        //   value: true,
-                        //   message: 'First Name is required'
-                        // }
-                      })}
-                      placeholder="Location Name"
-                      className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                    />
-                  </div>
-                </div>
 
                 <div className="mb-4  w-full px-6">
                   <label className="block text-black font-bold text-sm head mb-2">
@@ -1060,7 +1072,7 @@ const Resume = () => {
               </button>
             </div>
 
-            <div className="flex mx-6">
+            <div className="flex mx-6 my-2">
               <button
                 type="button"
                 className="w-24 items-center capitalize bg-white hover:bg-green-600 text-black p-2 hover:text-slate-100 font-bold rounded-md"
@@ -1079,7 +1091,7 @@ const Resume = () => {
       </form>
       {show === 4 && (
         <div>
-          <Preview data={data} handleNext={handleNext} />
+          <Preview data={data} handleNext={handleNext} image={uploadedImage}/>
           {/* <button className='w-20 flex items-center capitalize bg-blue-600 text-white p-2' onClick={handleNext}>Next</button> */}
           <div className="flex">
             <button
