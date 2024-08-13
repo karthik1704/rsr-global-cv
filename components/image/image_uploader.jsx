@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const DEFAULT_IMAGE_URL = "https://via.placeholder.com/256?text=Profile+Image";
 
-const ImageUploader = () => {
+const ImageUploader = ({onImageChange}) => {
   const [image, setImage] = useState(DEFAULT_IMAGE_URL);
 
   const handleImageChange = (e) => {
@@ -11,6 +11,7 @@ const ImageUploader = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
+        onImageChange(reader.result)
       };
       reader.readAsDataURL(file);
     }

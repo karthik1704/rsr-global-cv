@@ -22,7 +22,10 @@ const config = {
       fontFamily: {
 
         // sans: ["var(--font-sans)", ...fontFamily.sans],
-        sans: ['var(--font-poppins)'],
+        // sans: ['var(--font-poppins)'],
+        // sans: ['var(--font-OpenSans)'],
+        sans: ['Calibri', 'sans-serif'],
+        'sans-bold': ['Calibri Bold', 'sans-serif'],
       },
       transitionProperty: {
         'transform': 'transform',
