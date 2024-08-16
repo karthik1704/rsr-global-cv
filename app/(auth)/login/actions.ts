@@ -18,7 +18,32 @@ const schema = z
   })
   .required({ username: true, password: true });
 
-export async function signinJwt(formData: any) {
+  export async function signin(formData: any) {
+    console.log("HI");
+    const username = formData.get("username");
+    const password = formData.get("password");
+  
+    const res = await fetch(`${SERVER_API_URL}/auth/login/`, {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      // mode: "cors", // no-cors, *cors, same-origin
+      headers: {
+        "Content-Type": "application/json",
+        //   "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    });
+  
+    const resJson = await res.json();
+  
+    console.log(resJson);
+    cookies().set("access", resJson.access_token);
+    redirect("/");
+  }
+
+export async function signinJwt(prevState: any, formData: any) {
   const username = formData.get("username");
   const password = formData.get("password");
 
@@ -46,6 +71,7 @@ export async function signinJwt(formData: any) {
   params.append("client_id", "");
   params.append("client_secret", "");
 
+  try{
   const res = await fetch(`${SERVER_API_URL}/auth/`, {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     // mode: "cors", // no-cors, *cors, same-origin
@@ -61,7 +87,7 @@ export async function signinJwt(formData: any) {
     console.log(error);
 
     return {
-      // ...prevState,
+      ...prevState,
       message: error?.detail,
       fieldErrors: {
         username: null,
@@ -74,8 +100,11 @@ export async function signinJwt(formData: any) {
     const resJson = await res.json();
     cookies().set("access", resJson.access_token);
   }
+} catch (e) {
+  console.log(e);
+}
 
-  if (res.status === 200) {
+  // if (res.status === 200) {
     redirect("/resume");
   }
-}
+

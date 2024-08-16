@@ -36,6 +36,7 @@ type PreviewProps = {
     trainingto:string;
     traininglocation:string;
     trainingskills:string;
+    jobappliedfor:string;
     experiences: {
       workfrom: string;
       workto: String;
@@ -125,6 +126,17 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
             </div>
           </div>
         </div>
+
+{data.jobappliedfor && (
+        <div className="flex my-2 justify-start items-center">
+        <p className="text-black font-semibold text-base ">
+                    Job applied for :
+                  </p>
+                  <span className=" px-2 block font-semibold text-gray-700 text-sm">
+                  {data.jobappliedfor}
+                </span>
+        </div>
+)}
 
         {!!data.experiences.length && (
           <>
