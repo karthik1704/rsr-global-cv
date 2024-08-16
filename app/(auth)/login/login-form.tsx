@@ -1,7 +1,9 @@
 "use client";
 import Image from "next/image";
+import {toast} from 'sonner';
 import Link from "next/link";
 import { signinJwt } from "./actions";
+import { useEffect } from "react";
 import { useFormState } from "react-dom";
 import img from '@/public/images/rsr_logo-1.png'
 
@@ -16,7 +18,16 @@ const initalState = {
 
 
 const LoginForm = () => {
-  const [state, action] = useFormState(signinJwt, initalState);
+  const [state, formAction] = useFormState(signinJwt, initalState);
+
+  useEffect(() => {
+    if (state?.message)
+      toast.error(state?.message, {
+        duration: 10000,
+        closeButton: true,
+      });
+  }, [state?.message, state]);
+
   return (
     // <html className={`${poppins.variable}`}>
     <div className= " min-h-screen flex flex-col justify-center items-center bg-slate-100">
@@ -26,26 +37,41 @@ const LoginForm = () => {
       <h1 className="text-4xl text-gray-100 font-bold mb-4 text-center ">
         Sign In
       </h1>
-        <form action={signinJwt}>
+        <form action={formAction}>
           <div className="mb-4 mx-12">
             <label className="block text-gray-100 font-bold">
               Enter your e-mail address
             </label>
+            <div className="relative">
             <input
               type="text"
               name="username"
               className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
             />
+           
+            </div>
+            {state?.fieldErrors?.username && (
+          <p className="text-red-500">{state?.fieldErrors?.username}</p>
+        )}
+
           </div>
           <div className="mb-4 mx-12">
             <label className="block text-gray-100 font-bold">
               Enter your password
             </label>
+            <div className="relative">
             <input
               type="password"
               name="password"
               className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
             />
+            
+
+            </div>
+            {state?.fieldErrors?.password && (
+          <p className="text-red-500">{state?.fieldErrors?.password}</p>
+        )}
+
           </div>
           <div className="flex justify-center">
           {/* <Link
@@ -109,3 +135,4 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+

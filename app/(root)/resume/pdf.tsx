@@ -322,6 +322,11 @@ const styles = StyleSheet.create({
     fontSize: 10,
     marginBottom: 2,
   },
+  jobappliedfor:{
+    alignItems:'center',
+    fontSize: 11,
+    paddingLeft: 3,
+  },
 
   link: {
     fontSize: 10,
@@ -463,6 +468,22 @@ const PDF = ({ data }: data) => {
         <View style={styles.work}>
           {/* <Text style={styles.work1}>{exp.workfrom ? WORK EXPERIENCE: null}</Text> */}
           {/* <View style={styles.line1} /> */}
+
+
+{data.jobappliedfor &&(<div
+style={{
+  flexDirection: "row",
+  justifyContent: "flex-start",
+  alignItems:'center',
+  marginBottom: 10,
+}}>
+<Text style={styles.work1}>Job applied for:</Text>
+<Text style={styles.jobappliedfor}>
+                     
+                      {data.jobappliedfor}
+                    </Text>
+</div>
+)}
 
           {data.experiences.length ? (
             <div>

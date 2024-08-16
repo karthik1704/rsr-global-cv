@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 // import { Poppins} from "next/font/google";
 import localFont  from 'next/font/local'
 import "./globals.css";
-
+import { Toaster } from "sonner";
 import { cookies } from "next/headers";
 
 
@@ -46,6 +46,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`font-sans`}>
         {children}
+        <Toaster position="top-right" richColors  />
       </body>
     </html>
   );

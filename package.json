@@ -27,6 +27,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
+    "dayjs": "^1.11.12",
     "heroicons-react": "^1.4.1",
     "html-react-parser": "^5.1.12",
     "lucide-react": "^0.424.0",
@@ -42,6 +43,7 @@
     "react-pdf-html": "^2.0.5",
     "react-stepper-horizontal": "^1.0.11",
     "sharp": "^0.33.4",
+    "sonner": "^1.5.0",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8"
