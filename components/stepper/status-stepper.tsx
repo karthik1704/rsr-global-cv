@@ -13,12 +13,11 @@ const Steppers = ({ step }: { step: number }) => {
         fontWeight:'700'
       }}
     >
-        <Step label="Personal Information" />
-        <Step label="Work Experience" />
-        <Step label="Education" />
-        <Step label="Additional Information" />
-        <Step label="Preview" />
-        <Step label="PDF" />
+        <Step label="Edit" />
+        <Step label="Select template" />
+        <Step label="save" />
+        {/* <Step label="Preview" />
+        <Step label="PDF" /> */}
     </Stepper>
   );
 };
