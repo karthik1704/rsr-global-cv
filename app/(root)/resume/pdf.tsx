@@ -389,13 +389,13 @@ const styles = StyleSheet.create({
 const PDF = ({ data }: data) => {
   const year = new Date().getFullYear();
 
-  console.log(data.experiences.length);
+  // console.log(data.experiences.length);
     console.log(data);
   // console.log(data.experiences[0].workfrom);
   // console.log(data.experiences[0].workfrom ? "-" : "");
   return (
     // @ts-ignore
-    <Document author={fullName} title={`Résume for ${data.firstName}, ${year}`}>
+    <Document author={fullName} title={`Résume for ${data.personalInformation.firstName}, ${year}`}>
       {/* @ts-ignore */}
       <Page size="LETTER" style={styles.page}>
 
@@ -414,7 +414,7 @@ const PDF = ({ data }: data) => {
 
               <View style={styles.log}>
               <Text style={styles.text}>
-                {data.firstName} {data.lastName}
+                {data.personalInformation.firstName} {data.personalInformation.lastName}
               </Text>
               <View style={styles.photoContainer1}>
             <Image src="/images/rsr_logo-1.png"/>
@@ -438,20 +438,20 @@ const PDF = ({ data }: data) => {
                   <Text style={{...styles.text1,fontFamily: 'Helvetica-Bold' }}>Date of birth:</Text>
                   <Text style={styles.text2}>
                     {/* {new Date(data.dob).toLocaleDateString("en-GB")} | */}
-                    {data.dob ? new Date(data.dob).toLocaleDateString("en-GB") : null}
+                    {data.personalInformation.dob ? new Date(data.personalInformation.dob).toLocaleDateString("en-GB") : null}
                   </Text>
                 </View>
                 <View
                   style={{ flexDirection: "row", justifyContent: "flex-start" }}
                 >
                   <Text style={styles.text3}>Nationality:</Text>
-                  <Text style={styles.text4}>{data.nationality} |</Text>
+                  <Text style={styles.text4}>{data.personalInformation.nationality} |</Text>
                 </View>
               </View>
               <View style={{ flexDirection: "row", gap: "7" }}>
                 <Text style={styles.text5}>Address:</Text>
                 <Text style={styles.text6}>
-                  {data.add1 && data.add2 && data.city && data.code && data.country ? `${data.add1}, ${data.add2} ${data.city}, ${data.code}, ${data.country}`:null}
+                  {data.personalInformation.add1 && data.personalInformation.add2 && data.personalInformation.city && data.personalInformation.code && data.personalInformation.country ? `${data.personalInformation.add1}, ${data.personalInformation.add2} ${data.personalInformation.city}, ${data.personalInformation.code}, ${data.personalInformation.country}`:null}
                   {/* F-72, Mangal Bazar, Subhash Chowk, Laxmi Nagar, 110092, Delhi,
                   India (Home) */}
                 </Text>
@@ -460,7 +460,7 @@ const PDF = ({ data }: data) => {
 
             <View>
               <Text style={styles.text7}>About me:</Text>
-              <Text style={styles.text8}>{data.about}</Text>
+              <Text style={styles.text8}>{data.personalInformation.about}</Text>
             </View>
           </View>
         </View>
@@ -485,9 +485,9 @@ style={{
 </div>
 )}
 
-          {data.experiences.length ? (
+          {data.workExperience.length ? (
             <div>
-              {data.experiences.map((exp, index) => (
+              {data.workExperience.map((exp, index) => (
                 <div key={index}>
                   <Text style={styles.work1}>Work Experience</Text>
                   <View style={styles.line1} />
