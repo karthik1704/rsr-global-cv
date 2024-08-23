@@ -67,7 +67,7 @@ const Training = ({setData,training,setShowPreview}) =>{
             <div>
               {training.map((train,index)=>(
                 <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md" key={index}>
-<p className="text-lg font-semibold text-gray-800">Hobbies : <span className="font-light">{train.Hobbies}</span></p>
+{/* <p className="text-lg font-semibold text-gray-800">Hobbies : <span className="font-light">{train.Hobbies}</span></p> */}
 <p className="text-lg font-semibold text-gray-800">Institute: <span className="font-light">{train.institute}</span></p>
 <p className="text-lg font-semibold text-gray-800">From : <span className="font-light">{dateFormatter(train.trainingfrom)}</span></p>
 <p className="text-lg font-semibold text-gray-800">To : <span className="font-light">{dateFormatter(train.trainingto)}</span></p>
@@ -114,7 +114,7 @@ const Training = ({setData,training,setShowPreview}) =>{
                       )}
                     </div>
 
-                    <div className="mb-4  w-2/4 px-6">
+                    {/* <div className="mb-4  w-2/4 px-6">
                       <label className="block text-black font-bold text-sm head mb-2">
                         Hobbies and interests
                         <span className="text-red-700">*</span>
@@ -129,7 +129,7 @@ const Training = ({setData,training,setShowPreview}) =>{
                         // placeholder='Title of Qualification'
                         className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                       />
-                    </div>
+                    </div> */}
 
                     <div>
                       <div className="mb-4  w-2/4 px-6">

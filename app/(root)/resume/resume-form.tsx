@@ -16,6 +16,7 @@ import Education from "./forms/education";
 import Training from "./forms/additional";
 import { Award } from "lucide-react";
 import AddSection from "./add-section";
+import {toast} from 'sonner';
 
 type FormValues = {
   firstName: string;
@@ -145,6 +146,7 @@ const handleSection = () =>{
   const [data, setData] = useState({
     personalInformation:null,
     workExperience:[],
+    jobappliedfor:undefined,
     education:[],
     training:[]
   });
@@ -167,7 +169,7 @@ const handleSection = () =>{
 
   const formComponents = {
     // "personal":<PersonalInformation setData={setData} personalInformation={data.personalInformation}/>,
-  "work": <WorkExperience setData={setData} setShowPreview={setShowPreview} workExperience={data.workExperience} />, 
+  "work": <WorkExperience setData={setData} setShowPreview={setShowPreview} workExperience={data.workExperience} data={data} />, 
  "education":<Education setData={setData} setShowPreview={setShowPreview} education={data.education}/>, 
   "additional":<Training setData={setData} setShowPreview={setShowPreview} training={data.training}/>,
 }
@@ -207,6 +209,10 @@ const handleSection = () =>{
     // const isValid = await trigger();
     // if(isValid){
     if(data.personalInformation===null){
+      toast.error('Please Enter Personal Information', {
+        duration: 10000,
+        closeButton: true,
+      });
       return
     }
     setShow(show + 1);
@@ -310,11 +316,11 @@ const handleSection = () =>{
                 image={uploadedImage}
               />
               {/* <button className='w-20 flex items-center capitalize bg-blue-600 text-white p-2' onClick={handleNext}>Next</button> */}
-              <div className="flex">
+              <div className="flex mt-10">
                 <button
                   type="button"
                   className="w-16 items-center capitalize bg-white hover:bg-green-600 text-black hover:text-slate-100 p-2 font-bold rounded-md"
-                  onClick={handleReset}
+                  onClick={handlePrevious}
                 >
                   Edit
                 </button>

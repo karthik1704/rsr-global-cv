@@ -84,9 +84,10 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
           CV Preview
         </h1>
         <div className="bg1 flex col">
+          {!!data.personalInformation.profileImage &&
           <div className="mx-10 my-5">
-            <Image src={image ||"/cand-3.png"} height={150} width={150} alt="" className="rounded-full" />
-          </div>
+            <Image src={data.personalInformation.profileImage} height={150} width={150} alt="" className="rounded-full" />
+          </div>}
           <div className=" flex-col w-full">
             <div className="flex w-full justify-between">
               <p className="block font-semibold text-base head">
@@ -221,6 +222,8 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
           </>
         )}
 
+{!!data.education.length && 
+<div>
         <p className="block text-black font-extrabold text-lg mt-6">
           Education and Training
         </p>
@@ -258,22 +261,28 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
 
         </div>
         ))}
+        </div>
+      }
+
+{!!data.training.length &&
+<div>
 
         <p className="block text-black font-bold text-lg mt-6">
           Additional information
         </p>
         <hr className="border-b-2 border-slate-500" />
+        <p>Training and Awards :</p>
 
         {data.training.map((train, index) => (
           <div key={index}>
-            <p className="text-black font-semibold text-base py-2">
+            {/* <p className="text-black font-semibold text-base py-2">
               {" "}
               Hobbies and Interest :
               <span className="text-gray-700 text-sm">
                 {train.Hobbies}
               </span>
-            </p>
-            <div className="flex justify-start w-3/5 py-2">
+            </p> */}
+            <div className="flex justify-start w-4/5 py-2">
               <p className="text-black font-semibold text-base">
                 From :<span className="text-gray-700 text-sm">{dateFormatter(train.trainingfrom)}</span>
               </p>
@@ -282,7 +291,7 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
               </p>
               <div className="flex">
           <p className="text-black font-semibold text-base ">
-              Skills : <span className="text-gray-700 text-sm">{train.trainingskills}</span>
+              Institute : <span className="text-gray-700 text-sm">{train.institute}</span>
             </p> 
             <p className="text-black font-semibold text-base mx-10">
               Location : <span className="text-gray-700 text-sm">{train.traininglocation}</span>
@@ -291,6 +300,8 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
             </div>
           </div>
         ))}
+        </div>
+}
       </div>
     </>
   );
