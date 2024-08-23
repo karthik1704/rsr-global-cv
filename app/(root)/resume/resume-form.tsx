@@ -206,6 +206,9 @@ const handleSection = () =>{
   const handleNext = async () => {
     // const isValid = await trigger();
     // if(isValid){
+    if(data.personalInformation===null){
+      return
+    }
     setShow(show + 1);
     setSection(true);
   };

@@ -90,19 +90,19 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
           <div className=" flex-col w-full">
             <div className="flex w-full justify-between">
               <p className="block font-semibold text-base head">
-                Name: {data.personalInformation.firstName} {data.personalInformation.lastName}
+                Name: <span className="text-sm text-gray-700 cont">{data.personalInformation.firstName} {data.personalInformation.lastName}</span>
               </p>
               <p className="block text-black font-semibold text-base head px-28">
-                Email Address: {data.email}
+                Email Address: <span className="text-sm text-gray-700 cont">{data.personalInformation.email}</span>
               </p>
             </div>
             <hr className="border-b-2 border-slate-500" />
             <div className=" w-5/6 flex my-2">
               <p className="text-black font-semibold text-base head ">
-                Date of birth :{new Date(data.personalInformation.dob).toLocaleDateString("en-GB")}
+                Date of birth :<span className="text-sm text-gray-700 cont">{new Date(data.personalInformation.dob).toLocaleDateString("en-GB")}</span>
               </p>
               <p className="text-black font-semibold text-base head mx-5">
-                | Nationality : {data.personalInformation.nationality}
+                | Nationality :<span className="text-sm text-gray-700 cont">{data.personalInformation.nationality}</span>
               </p>
             </div>
 
@@ -112,7 +112,7 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
                 <span className="text-sm text-gray-700 cont">
                   {data.personalInformation.add1}, {data.personalInformation.add2}
                 </span>{" "}
-                <span className=" block text-gray-700 cont">
+                <span className=" text-sm text-gray-700 cont">
                   {data.personalInformation.city}, {data.personalInformation.code}, {data.personalInformation.country}
                 </span>
               </p>
