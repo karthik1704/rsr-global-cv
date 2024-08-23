@@ -32,7 +32,6 @@ const jetbrainsSrc = "https://fonts.gstatic.com/s/jetbrainsmono/v18";
 // const robot =
 //   "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap";
 
-
 type data = {
   experiences: {
     workfrom: string;
@@ -48,22 +47,22 @@ type data = {
     workdepartment: String;
     workaddress: string;
   }[];
-  education:{
-    qualification:string;
-      organisation:string;
-      educationfrom:string;
-      educationto:string;
-      educationcity:string;
-      educationcountry:string;
-  }[]
+  education: {
+    qualification: string;
+    organisation: string;
+    educationfrom: string;
+    educationto: string;
+    educationcity: string;
+    educationcountry: string;
+  }[];
   training: {
-    Hobbies:string;
-        institute :string;
-        trainingfrom:string;
-        trainingto:string;
-        traininglocation:string;
-        trainingskills:string;  
-  }[]
+    Hobbies: string;
+    institute: string;
+    trainingfrom: string;
+    trainingto: string;
+    traininglocation: string;
+    trainingskills: string;
+  }[];
 };
 
 Font.register({
@@ -104,12 +103,17 @@ Font.register({
 // });
 
 Font.register({
-  family: 'Open Sans',
+  family: "Open Sans",
   fonts: [
-  { src: 'https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-regular.ttf' },
-  { src: 'https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-600.ttf', fontWeight: 600 }
-  ]
-  });
+    {
+      src: "https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-regular.ttf",
+    },
+    {
+      src: "https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-600.ttf",
+      fontWeight: 600,
+    },
+  ],
+});
 
 Font.register({
   family: "JetBrains Mono",
@@ -202,18 +206,18 @@ const sortedProfessionalExperiences = [
 const styles = StyleSheet.create({
   page: {
     // flexDirection: "row",
-    fontWeight:'extrabold'
+    fontWeight: "extrabold",
   },
 
   photoContainer: {
     width: "18%",
-    borderRadius:50,
+    borderRadius: 50,
     paddingTop: 10,
     paddingRight: 10,
   },
   photoContainer1: {
     width: "22%",
-    height:'100%',
+    height: "100%",
   },
 
   sidebar: {
@@ -223,10 +227,10 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 
-  log:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-between',
+  log: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 
   heading: {
@@ -322,8 +326,8 @@ const styles = StyleSheet.create({
     fontSize: 10,
     marginBottom: 2,
   },
-  jobappliedfor:{
-    alignItems:'center',
+  jobappliedfor: {
+    alignItems: "center",
     fontSize: 11,
     paddingLeft: 3,
   },
@@ -390,36 +394,44 @@ const PDF = ({ data }: data) => {
   const year = new Date().getFullYear();
 
   // console.log(data.experiences.length);
-    console.log(data);
+  console.log(data);
   // console.log(data.experiences[0].workfrom);
   // console.log(data.experiences[0].workfrom ? "-" : "");
   return (
     // @ts-ignore
-    <Document author={fullName} title={`Résume for ${data.personalInformation.firstName}, ${year}`}>
+    <Document
+      author={fullName}
+      title={`Résume for ${data.personalInformation.firstName}, ${year}`}
+    >
       {/* @ts-ignore */}
       <Page size="LETTER" style={styles.page}>
-
         <View style={styles.sidebar}>
+         
           <View style={styles.photoContainer}>
             {/* <Text>CHEF DE PARTIE</Text>
             <Text>QATAR AIRWAYS GROUP</Text> */}
-            <Image src={data.profileImage || "/images/cand-5.jpeg"} 
-            style={{
-              borderRadius:50
-            }}/>
-            </View>
+             {!!data.personalInformation.profileImage &&
+            <Image
+              src={data.personalInformation.profileImage}
+              style={{
+                borderRadius: 50,
+              }}
+            />
+          }
+          </View>
+
 
           <View style={{ width: "82%" }}>
             <View style={styles.heading}>
-
               <View style={styles.log}>
-              <Text style={styles.text}>
-                {data.personalInformation.firstName} {data.personalInformation.lastName}
-              </Text>
-              <View style={styles.photoContainer1}>
-            <Image src="/images/rsr_logo-1.png"/>
-          </View>
-          </View>
+                <Text style={styles.text}>
+                  {data.personalInformation.firstName}{" "}
+                  {data.personalInformation.lastName}
+                </Text>
+                <View style={styles.photoContainer1}>
+                  <Image src="/images/rsr_logo-1.png" />
+                </View>
+              </View>
 
               <View style={styles.line} />
             </View>
@@ -435,23 +447,39 @@ const PDF = ({ data }: data) => {
                 <View
                   style={{ flexDirection: "row", justifyContent: "flex-start" }}
                 >
-                  <Text style={{...styles.text1,fontFamily: 'Helvetica-Bold' }}>Date of birth:</Text>
+                  <Text
+                    style={{ ...styles.text1, fontFamily: "Helvetica-Bold" }}
+                  >
+                    Date of birth:
+                  </Text>
                   <Text style={styles.text2}>
                     {/* {new Date(data.dob).toLocaleDateString("en-GB")} | */}
-                    {data.personalInformation.dob ? new Date(data.personalInformation.dob).toLocaleDateString("en-GB") : null}
+                    {data.personalInformation.dob
+                      ? new Date(
+                          data.personalInformation.dob
+                        ).toLocaleDateString("en-GB")
+                      : null}
                   </Text>
                 </View>
                 <View
                   style={{ flexDirection: "row", justifyContent: "flex-start" }}
                 >
                   <Text style={styles.text3}>Nationality:</Text>
-                  <Text style={styles.text4}>{data.personalInformation.nationality} |</Text>
+                  <Text style={styles.text4}>
+                    {data.personalInformation.nationality} |
+                  </Text>
                 </View>
               </View>
               <View style={{ flexDirection: "row", gap: "7" }}>
                 <Text style={styles.text5}>Address:</Text>
                 <Text style={styles.text6}>
-                  {data.personalInformation.add1 && data.personalInformation.add2 && data.personalInformation.city && data.personalInformation.code && data.personalInformation.country ? `${data.personalInformation.add1}, ${data.personalInformation.add2} ${data.personalInformation.city}, ${data.personalInformation.code}, ${data.personalInformation.country}`:null}
+                  {data.personalInformation.add1 &&
+                  data.personalInformation.add2 &&
+                  data.personalInformation.city &&
+                  data.personalInformation.code &&
+                  data.personalInformation.country
+                    ? `${data.personalInformation.add1}, ${data.personalInformation.add2} ${data.personalInformation.city}, ${data.personalInformation.code}, ${data.personalInformation.country}`
+                    : null}
                   {/* F-72, Mangal Bazar, Subhash Chowk, Laxmi Nagar, 110092, Delhi,
                   India (Home) */}
                 </Text>
@@ -469,21 +497,19 @@ const PDF = ({ data }: data) => {
           {/* <Text style={styles.work1}>{exp.workfrom ? WORK EXPERIENCE: null}</Text> */}
           {/* <View style={styles.line1} /> */}
 
-
-{data.jobappliedfor &&(<div
-style={{
-  flexDirection: "row",
-  justifyContent: "flex-start",
-  alignItems:'center',
-  marginBottom: 10,
-}}>
-<Text style={styles.work1}>Job applied for:</Text>
-<Text style={styles.jobappliedfor}>
-                     
-                      {data.jobappliedfor}
-                    </Text>
-</div>
-)}
+          {data.jobappliedfor && (
+            <div
+              style={{
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                marginBottom: 10,
+              }}
+            >
+              <Text style={styles.work1}>Job applied for:</Text>
+              <Text style={styles.jobappliedfor}>{data.jobappliedfor}</Text>
+            </div>
+          )}
 
           {data.workExperience.length ? (
             <div>
@@ -611,56 +637,65 @@ style={{
               </Text>
             </View>
           </View> */}
-          {data.education.map((educ, index)=>(
+          {data.education.map((educ, index) => (
             <div key={index}>
-          <Text
-            style={{ fontSize: 12, fontWeight: "extrabold", paddingTop: 10 }}
-          >
-            EDUCATION AND TRAINING
-          </Text>
-          <View style={styles.line1} />
-          <View style={styles.job}>
-            <Text style={styles.dates}>
-              {educ.educationfrom} - {educ.educationto} {educ.educationcity}, {educ.educationcountry}
-            </Text>
+              <Text
+                style={{
+                  fontSize: 12,
+                  fontWeight: "extrabold",
+                  paddingTop: 10,
+                }}
+              >
+                EDUCATION AND TRAINING
+              </Text>
+              <View style={styles.line1} />
+              <View style={styles.job}>
+                <Text style={styles.dates}>
+                  {educ.educationfrom} - {educ.educationto} {educ.educationcity}
+                  , {educ.educationcountry}
+                </Text>
 
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "flex-start",
-                gap: "5",
-              }}
-            >
-              <Text style={styles.jobTitle}>
-              {data.organisation} {" "}
-              </Text>
-              <Text style={styles.company}>
-                {/* Symbiosis International University */}
-              </Text>
-            </View>
-            <View
-              style={{ height: 1, backgroundColor: "grey", marginTop: 5 }}
-            />
-          </View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              gap: 5,
-            }}
-          >
-            <Text
-              style={{ marginTop: 10, fontSize: 10, fontWeight: "extrabold" }}
-            >
-              Address :
-            </Text>
-            <Text style={{ fontSize: 10, marginTop: 10 }}>
-            {educ.educationcity}, {educ.educationcountry}
-            </Text>
-          </View>
-          </div>
+                <View
+                  style={{
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    gap: "5",
+                  }}
+                >
+                  <Text style={styles.jobTitle}>{educ.qualification} </Text>
+                  <Text style={styles.jobTitle}>{educ.organisation} </Text>
+                  <Text style={styles.company}>
+                    {/* Symbiosis International University */}
+                  </Text>
+                </View>
+                <View
+                  style={{ height: 1, backgroundColor: "grey", marginTop: 5 }}
+                />
+              </View>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "flex-start",
+                  gap: 5,
+                }}
+              >
+                <Text
+                  style={{
+                    marginTop: 10,
+                    fontSize: 10,
+                    fontWeight: "extrabold",
+                  }}
+                >
+                  Address :
+                </Text>
+                <Text style={{ fontSize: 10, marginTop: 10 }}>
+                  {educ.educationcity}, {educ.educationcountry}
+                </Text>
+              </View>
+            </div>
           ))}
+          {/* <View>
           <Text
             style={{ fontSize: 12, fontWeight: "extrabold", paddingTop: 10 }}
           >
@@ -681,7 +716,8 @@ style={{
               HINDI | ENGLISH
             </Text>
           </View>
-          <View>
+          </View> */}
+          {/* <View>
             <Text
               style={{
                 fontSize: 12,
@@ -689,6 +725,7 @@ style={{
                 marginTop: 25,
               }}
             >
+              
               ADDITIONAL INFORMATION
             </Text>
 
@@ -707,7 +744,7 @@ style={{
             <Text style={{ marginTop: 10, fontSize: 12 }}>
             {data.Hobbies}
             </Text>
-            {/* <View style={styles.listItem}>
+            <View style={styles.listItem}>
               <Text style={styles.bulletPoint}>•</Text>
               <Text style={styles.listItemText}>Home Decor</Text>
             </View>
@@ -719,94 +756,93 @@ style={{
               <Text style={styles.bulletPoint}>•</Text>
               <Text style={styles.listItemText}>Traveling</Text>
             </View> */}
-          </View>
+          {/* </View> */}
+          {!!data.training.length &&
+          <View>
+            <Text
+              style={{
+                fontSize: 12,
+                fontWeight: "extrabold",
+                marginTop: 25,
+              }}
+            >
+              
+              ADDITIONAL INFORMATION
+            </Text>
           <Text
             style={{ marginTop: 10, fontSize: 12, fontWeight: "extrabold" }}
           >
             TRAININGS AND AWARDS
           </Text>
+{data.training.map((train,index)=>(
+  <View key={index}>
 
           <View style={styles.listItems}>
-            <Text style={styles.listItemDate}>12/2019 - 05/2020</Text>
-            <Text style={styles.listItemTitle}>Intern, Trident, Gurgaon</Text>
+            <Text style={styles.listItemDate}>{train.trainingfrom} - {train.trainingto}</Text>
+            <Text style={styles.listItemTitle}>{train.institute}, {train.traininglocation}</Text>
           </View>
-          <View style={{ height: 1, backgroundColor: "grey" }} />
 
-          <View style={styles.listItems}>
-            <Text style={styles.listItemDate}>03/2020</Text>
-            <Text style={styles.listItemTitle}>
-              S.O.R.E. Letter for OCLD from Trident Gurgaon
-            </Text>
+          </View>))}
           </View>
-          <View style={{ height: 1, backgroundColor: "grey" }} />
+}
+          {/* <View style={{ height: 1, backgroundColor: "grey" }} /> */}
 
-          <View style={styles.listItems}>
-            <Text style={styles.listItemDate}>04/2019 - 06/2019</Text>
-            <Text style={styles.listItemTitle}>
-              Intern, Indigo Deli, Mumbai
-            </Text>
-          </View>
-          <View style={{ height: 1, backgroundColor: "grey" }} />
+          {/* <View>
+            <View style={styles.listItems}>
+              <Text style={styles.listItemDate}>01/2019</Text>
+              <Text style={styles.listItemTitle}>
+                Participated in Liquid Flavours at National Budding Chef’s
+                Competition, Auro University
+              </Text>
+            </View>
+            <View style={{ height: 1, backgroundColor: "grey" }} />
 
-          <View style={styles.listItems}>
-            <Text style={styles.listItemDate}>01/2019</Text>
-            <Text style={styles.listItemTitle}>
-              2nd position for Ayurvedic Cuisine at the National Budding Chef’s
-              Competition, Auro University
-            </Text>
-          </View>
-          <View style={{ height: 1, backgroundColor: "grey" }} />
+            <Text style={styles.headings}>SPECIALISATION</Text>
+            <Text style={styles.subheadings}>Primary Skills</Text>
+            <View
+              style={{ height: 2, backgroundColor: "grey", marginTop: 2 }}
+            />
+            <View style={styles.listsItems}>
+              <Text style={styles.bulletPoint}>•</Text>
+              <Text style={styles.listItemText}>{data.trainingskills}</Text>
+            </View>
+            <View style={styles.listsItems}>
+              <Text style={styles.bulletPoints}>•</Text>
+              <Text style={styles.listItemText}>Sandwiches</Text>
+            </View>
+            <View style={styles.listsItems}>
+              <Text style={styles.bulletPoint}>•</Text>
+              <Text style={styles.listItemText}>Customer Interaction</Text>
+            </View>
 
-          <View style={styles.listItems}>
-            <Text style={styles.listItemDate}>01/2019</Text>
-            <Text style={styles.listItemTitle}>
-              Participated in Liquid Flavours at National Budding Chef’s
-              Competition, Auro University
-            </Text>
-          </View>
-          <View style={{ height: 1, backgroundColor: "grey" }} />
+            <Text style={styles.headings}>FOOD SAFETY CERTIFICATION</Text>
+            <Text style={styles.date}>2020</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 10 }}>Under BSI</Text>
+            <View
+              style={{ height: 1, backgroundColor: "grey", marginTop: 1 }}
+            />
 
-          <Text style={styles.headings}>SPECIALISATION</Text>
-          <Text style={styles.subheadings}>Primary Skills</Text>
-          <View style={{ height: 2, backgroundColor: "grey", marginTop: 2 }} />
-          <View style={styles.listsItems}>
-            <Text style={styles.bulletPoint}>•</Text>
-            <Text style={styles.listItemText}>{data.trainingskills}</Text>
-          </View>
-          {/* <View style={styles.listsItems}>
-            <Text style={styles.bulletPoints}>•</Text>
-            <Text style={styles.listItemText}>Sandwiches</Text>
-          </View>
-          <View style={styles.listsItems}>
-            <Text style={styles.bulletPoint}>•</Text>
-            <Text style={styles.listItemText}>Customer Interaction</Text>
+            <View style={styles.listsItems}>
+              <Text style={styles.bulletPoint}>•</Text>
+              <Text style={styles.listItemText}>
+                HACCP Awareness Training Course
+              </Text>
+            </View>
+            <View style={styles.listsItems}>
+              <Text style={styles.bulletPoint}>•</Text>
+              <Text style={styles.listItemText}>
+                Contagious Disease Prevention & Control in Kitchens Training
+                Course
+              </Text>
+            </View>
+            <View style={styles.listsItems}>
+              <Text style={styles.bulletPoint}>•</Text>
+              <Text style={styles.listItemText}>
+                Food Safety Management System (FSMS) Internal Auditor Training
+                Course (ISO22000)
+              </Text>
+            </View>
           </View> */}
-
-          <Text style={styles.headings}>FOOD SAFETY CERTIFICATION</Text>
-          <Text style={styles.date}>2020</Text>
-          <Text style={{ fontWeight: "bold", fontSize: 10 }}>Under BSI</Text>
-          <View style={{ height: 1, backgroundColor: "grey", marginTop: 1 }} />
-
-          <View style={styles.listsItems}>
-            <Text style={styles.bulletPoint}>•</Text>
-            <Text style={styles.listItemText}>
-              HACCP Awareness Training Course
-            </Text>
-          </View>
-          <View style={styles.listsItems}>
-            <Text style={styles.bulletPoint}>•</Text>
-            <Text style={styles.listItemText}>
-              Contagious Disease Prevention & Control in Kitchens Training
-              Course
-            </Text>
-          </View>
-          <View style={styles.listsItems}>
-            <Text style={styles.bulletPoint}>•</Text>
-            <Text style={styles.listItemText}>
-              Food Safety Management System (FSMS) Internal Auditor Training
-              Course (ISO22000)
-            </Text>
-          </View>
         </View>
       </Page>
     </Document>

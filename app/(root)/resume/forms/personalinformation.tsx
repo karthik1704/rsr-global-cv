@@ -40,9 +40,9 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
 
   const handleForm = (personalData) => {
     console.log(personalData);
-    setData((prevState, profileImage: uploadedImage ) => ({
+    setData((prevState,) => ({
       ...prevState,
-      personalInformation: personalData,
+      personalInformation: {...personalData,profileImage: uploadedImage }
 
     }));
     setShowForm(false);
@@ -54,9 +54,11 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
         {!show && personalInformation && 
 
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
+          {!!uploadedImage &&
           <div>
-            <Image src={uploadedImage ||"/cand-3.png"} height={150} width={150} alt="" className="rounded-full"/>
-          </div>
+            
+            <Image src={uploadedImage} height={150} width={150} alt="" className="rounded-full"/>
+          </div>}
     <p className="text-lg font-semibold text-gray-800">
         Name: <span className="font-light">{personalInformation.firstName} {personalInformation.lastName}</span>
     </p>
