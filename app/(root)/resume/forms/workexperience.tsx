@@ -140,7 +140,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data}) =>{
             <div>
               <div className="ml-7 my-2 w-1/4">
                 <label className="block text-black font-bold text-sm head mb-2">
-                  Job applied for<span className="text-red-700">*</span>
+                  Job applied for
                 </label>
                 <input
                   type="text"
