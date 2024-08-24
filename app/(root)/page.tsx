@@ -12,12 +12,56 @@ import {
   Newspaper,
   Timer,
 } from "lucide-react";
+import { cookies } from "next/headers";
+import { SERVER_API_URL } from "../constants";
 
-export default function Home() {
+export async function getData() {
+  const cookiesStore = cookies();
+  const access = cookiesStore.get("access");
+
+  // console.log(access);
+  if (!access) {
+    return null;
+  }
+  const res = await fetch(`${SERVER_API_URL}/users/me`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access?.value}`,
+    },
+    next:{
+      tags:['User']
+    }
+  });
+
+  if (!res.ok) {
+    console.log("error");
+  }
+
+  if (res.status === 401) {
+    return null;
+  }
+  if (res.status !== 200) {
+    return null;
+  }
+
+  const user = await res.json();
+  // console.log(user);
+
+  return user;
+}
+
+type Data = User | null;
+
+
+
+export default async function Home() {
+
+  const user:Data = await getData();
+
   return (
     <main>
      
-      <Header/>
+      <Header user={user}/>
      
       {/* <section className="w-3/5 flex flex-col justify-center gap-10 my-7">
         <div className="w-full flex flex-col items-center gap-6 text-blue-900">

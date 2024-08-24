@@ -72,7 +72,7 @@ const Education = ({setData,education,setShowPreview,sectionDeleted}) =>{
 <p className="text-lg font-semibold text-gray-800">From : <span className="font-light">{dateFormatter(edu.educationfrom)}</span></p>
 <p className="text-lg font-semibold text-gray-800">To : <span className="font-light">{dateFormatter(edu.educationto)}</span></p>
 <p className="text-lg font-semibold text-gray-800">City : <span className="font-light">{edu.educationcity}</span></p>
-<p className="text-lg font-semibold text-gray-800">Country: <span className="font-light">{edu.educationcountry}</span></p>
+<p className="text-lg font-semibold text-gray-800">Country : <span className="font-light">{edu.educationcountry}</span></p>
 <div className="flex mx-6">
               <button
               onClick={()=>setShowForm(true)}

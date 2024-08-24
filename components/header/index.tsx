@@ -3,8 +3,9 @@ import React from 'react'
 import Image from "next/image";
 import img from '@/public/home-1.png'
 import ImageCarousel from '@/components/resume/index'
+import Link from 'next/link';
 
- const Header = () => {
+ const Header = ({user}) => {
     const images = [
         '/resume/resume-1.jpg',
         '/resume/resume-2.jpg',
@@ -24,12 +25,12 @@ import ImageCarousel from '@/components/resume/index'
         <p className='text-lg'> Perfect Your CV Effortlessly, Much More than a CV generator</p>
 
         <div>
-        <button className='text-xl	py-2 px-5 rounded-md outline-1 outline outline-offset-0 outline-white text-white bg-green-600 text-md font-bold hover:bg-green-500 hover:text-slate-100 transition-colors hover:ease-in-out'>
+        <Link href={user? '/resume':'/login' } className='text-xl	py-2 px-5 rounded-md outline-1 outline outline-offset-0 outline-white text-white bg-green-600 text-md font-bold hover:bg-green-500 hover:text-slate-100 transition-colors hover:ease-in-out'>
             Create your CV
-        </button>
-        <button className=' text-xl mx-5 py-2 px-5 rounded-md outline-1 outline outline-offset-0 outline-black text-black bg-white text-md font-bold hover:bg-green-600 hover:outline-none hover:text-slate-100 transition-colors hover:ease-in-out'>
+        </Link>
+        {/* <button className=' text-xl mx-5 py-2 px-5 rounded-md outline-1 outline outline-offset-0 outline-black text-black bg-white text-md font-bold hover:bg-green-600 hover:outline-none hover:text-slate-100 transition-colors hover:ease-in-out'>
            Upgrade a CV
-        </button>
+        </button> */}
         </div>
 
     </div>

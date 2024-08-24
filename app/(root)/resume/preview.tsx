@@ -91,25 +91,25 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
           <div className=" flex-col w-full">
             <div className="flex w-full justify-between">
               <p className="block font-semibold text-base head">
-                Name: <span className="text-sm text-gray-700 cont">{data.personalInformation.firstName} {data.personalInformation.lastName}</span>
+                Name : <span className="text-sm text-gray-700 cont">{data.personalInformation.firstName} {data.personalInformation.lastName}</span>
               </p>
               <p className="block text-black font-semibold text-base head px-28">
-                Email Address: <span className="text-sm text-gray-700 cont">{data.personalInformation.email}</span>
+                Email Address : <span className="text-sm text-gray-700 cont">{data.personalInformation.email}</span>
               </p>
             </div>
             <hr className="border-b-2 border-slate-500" />
             <div className=" w-5/6 flex my-2">
               <p className="text-black font-semibold text-base head ">
-                Date of birth :<span className="text-sm text-gray-700 cont">{new Date(data.personalInformation.dob).toLocaleDateString("en-GB")}</span>
+                Date of birth : <span className="text-sm text-gray-700 cont">{new Date(data.personalInformation.dob).toLocaleDateString("en-GB")}</span>
               </p>
               <p className="text-black font-semibold text-base head mx-5">
-                | Nationality :<span className="text-sm text-gray-700 cont">{data.personalInformation.nationality}</span>
+                | Nationality : <span className="text-sm text-gray-700 cont">{data.personalInformation.nationality}</span>
               </p>
             </div>
 
             <div className="w-5/6">
               <p className="text-black font-semibold text-base">
-                Address :{" "}
+                Address : {" "}
                 <span className="text-sm text-gray-700 cont">
                   {data.personalInformation.add1}, {data.personalInformation.add2}
                 </span>{" "}
@@ -119,7 +119,7 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
               </p>
               <div className="flex flex-col py-2">
                 <p className="block text-black font-semibold text-base head flex-shrink-0 w-full">
-                  About me:
+                  About me :
                 </p>
                 <span className="block text-gray-700 text-base flex-grow cont">
                   {data.personalInformation.about}
@@ -157,13 +157,13 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
                     </span>
                   </p>
                   <p className="text-black font-semibold text-base mx-10">
-                    To :{" "}
+                    To : {" "}
                     <span className="text-gray-700 text-sm">
                       {dateFormatter(exp.workto)? exp.workto: 'Currently Working'}
                       </span>
                   </p>
                   <p className="text-black font-semibold text-base">
-                    Location :{" "}
+                    Location : {" "}
                     <span className="text-gray-700 text-sm">
                       {exp.location}
                     </span>
@@ -171,13 +171,13 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
                 </div>
                 <div className="flex justify-start w-4/5 py-2">
                   <p className="text-black font-semibold text-base">
-                    Position :{" "}
+                    Position : {" "}
                     <span className="text-gray-700 text-sm">
                       {exp.position}
                     </span>
                   </p>
                   <p className="text-black font-semibold text-base mx-10">
-                    companyName :{" "}
+                    companyName : {" "}
                     <span className="text-gray-700 text-sm">
                       {exp.companyName}
                     </span>
@@ -248,7 +248,7 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
         <div>
           <div className="flex justify-start w-3/5 py-2">
             <p className="text-black font-semibold text-base">
-              From :<span className="text-gray-700 text-sm">{dateFormatter(educ.educationfrom)}</span>
+              From : <span className="text-gray-700 text-sm">{dateFormatter(educ.educationfrom)}</span>
             </p>
             <p className="text-black font-semibold text-base mx-10">
               To : <span className="text-gray-700 text-sm">{dateFormatter(educ.educationto)}</span>
@@ -271,7 +271,7 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
           Additional information
         </p>
         <hr className="border-b-2 border-slate-500" />
-        <p>Training and Awards :</p>
+        <p>Training and Awards : </p>
 
         {data.training.map((train, index) => (
           <div key={index}>
@@ -284,7 +284,7 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
             </p> */}
             <div className="flex justify-start w-4/5 py-2">
               <p className="text-black font-semibold text-base">
-                From :<span className="text-gray-700 text-sm">{dateFormatter(train.trainingfrom)}</span>
+                From : <span className="text-gray-700 text-sm">{dateFormatter(train.trainingfrom)}</span>
               </p>
               <p className="text-black font-semibold text-base mx-10">
                 To : <span className="text-gray-700 text-sm">{dateFormatter(train.trainingto)}</span>
