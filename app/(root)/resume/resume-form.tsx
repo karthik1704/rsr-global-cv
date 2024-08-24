@@ -286,7 +286,8 @@ const handleSection = () =>{
 
               </div>
             ))}
-          </div><div>
+          </div>
+          <div className="my-3">
               {showPreview ? <AddSection addSections={addSections} setShowPreview={setShowPreview} showPreview={showPreview} selectedSection={selectedSection} /> : null}
 
             </div><div className="flex mx-6 my-10">
