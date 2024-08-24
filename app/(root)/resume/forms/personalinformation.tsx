@@ -60,22 +60,22 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
             <Image src={uploadedImage} height={150} width={150} alt="" className="rounded-full"/>
           </div>}
     <p className="text-lg font-semibold text-gray-800">
-        Name: <span className="font-light">{personalInformation.firstName} {personalInformation.lastName}</span>
+        Name : <span className="font-light">{personalInformation.firstName} {personalInformation.lastName}</span>
     </p>
     <p className="text-lg font-semibold text-gray-800">
-        Date of birth: <span className="font-light">{dateFormatter(personalInformation.dob)}</span>
+        Date of birth : <span className="font-light">{dateFormatter(personalInformation.dob)}</span>
     </p>
     <p className="text-lg font-semibold text-gray-800">
-        Nationality: <span className="font-light">{personalInformation.nationality}</span> 
+        Nationality : <span className="font-light">{personalInformation.nationality}</span> 
     </p>
     <p className="text-lg font-semibold text-gray-800">
-        Address: <span className="font-light">{personalInformation.add1} {personalInformation.add2} {personalInformation.code} {personalInformation.city} {personalInformation.country}</span>
+        Address : <span className="font-light">{personalInformation.add1} {personalInformation.add2} {personalInformation.code} {personalInformation.city} {personalInformation.country}</span>
     </p>
     <p className="text-lg font-semibold text-gray-800">
-        Email Address: <span className="font-light">{personalInformation.email}</span> 
+        Email Address : <span className="font-light">{personalInformation.email}</span> 
     </p>
     <p className="text-lg font-semibold text-gray-800">
-        Main activities and responsibilities: <span className="font-light">{personalInformation.about}</span> 
+        Main activities and responsibilities : <span className="font-light">{personalInformation.about}</span> 
     </p>
     <div className="flex gap-4">
         <button

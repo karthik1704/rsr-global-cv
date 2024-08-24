@@ -112,7 +112,7 @@ const LoginForm = () => {
 
 </div>
 
-      <p className="text-left m-6">
+      {/* <p className="text-left m-6">
         Easy, fast and secure: download the{" "}
         <span className="font-bold">RSR Login app</span>
       </p>
@@ -128,7 +128,7 @@ const LoginForm = () => {
             <Image src='/images/app-store-img-1.png' height={150} width={100} alt="" />
           </a>
         </li>
-      </ul>
+      </ul> */}
     </div>
       // </html> 
   );

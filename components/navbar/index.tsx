@@ -44,7 +44,7 @@ const Navbar = ({ user }: { user: User | null }) => {
               <DropdownMenu>
                 <DropdownMenuTrigger>
                   {" "}
-                  <Avatar>
+                  <Avatar className="mr-5">
                     <AvatarImage src="null" alt="@shadcn" />
                     <AvatarFallback>{`${user.first_name[0].toUpperCase()}${user.last_name[0].toUpperCase()}`}</AvatarFallback>
                   </Avatar>

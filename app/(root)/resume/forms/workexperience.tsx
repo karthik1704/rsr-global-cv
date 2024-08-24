@@ -102,17 +102,17 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data}) =>{
         <div className="my-8">
             {isVisible && !show && workExperience.length &&
             <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
-              <p className="text-lg font-semibold text-gray-800">Job Applied : <span className="font-light">{data.jobappliedfor}</span></p>
+             {!!data.jobappliedfor && <p className="text-lg font-semibold text-gray-800">Job Applied : <span className="font-light">{data.jobappliedfor}</span></p>}
               {workExperience.map((exp,index)=>(
                 <div className="space-y-4" key={index}>
 <p className="text-lg font-semibold text-gray-800">Employer : <span className="font-light">{exp.companyName}</span></p>
-<p className="text-lg font-semibold text-gray-800">Website: <span className="font-light">{exp.workwebsite}</span></p>
+<p className="text-lg font-semibold text-gray-800">Website : <span className="font-light">{exp.workwebsite}</span></p>
 <p className="text-lg font-semibold text-gray-800">Location : <span className="font-light">{exp.location}</span></p>
 <p className="text-lg font-semibold text-gray-800">Occupation: <span className="font-light">{exp.position}</span></p>
 <p className="text-lg font-semibold text-gray-800">From : <span className="font-light">{dateFormatter(exp.workfrom)}</span></p>
 <p className="text-lg font-semibold text-gray-800">To : <span className="font-light">{dateFormatter(exp.workto)}</span></p>
 <p className="text-lg font-semibold text-gray-800">About Company : <span className="font-light">{exp.aboutcompany}</span></p>
-<p className="text-lg font-semibold text-gray-800">work Responsibilities: <span className="font-light">{exp.about2}</span></p>
+<p className="text-lg font-semibold text-gray-800">work Responsibilities : <span className="font-light">{exp.about2}</span></p>
 <div className="flex mx-6">
               <button
               onClick={()=>setShowForm(true)}
@@ -147,15 +147,15 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data}) =>{
                   placeholder="eg : Software Engineer"
                   className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   {...register("jobappliedfor", {
-                    required: {
-                      value: true,
-                      message: "job applied is required",
-                    },
+                    // required: {
+                    //   value: true,
+                    //   message: "job applied is required",
+                    // },
                   })}
                 />
-                {errors.jobappliedfor && (
+                {/* {errors.jobappliedfor && (
                 <p className="text-red-700 text-sm">{errors.jobappliedfor.message}</p>
-              )}
+              )} */}
               </div>
 
               {experienceFields.map((item, index) => (

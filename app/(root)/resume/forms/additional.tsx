@@ -68,7 +68,7 @@ const Training = ({setData,training,setShowPreview}) =>{
               {training.map((train,index)=>(
                 <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md" key={index}>
 {/* <p className="text-lg font-semibold text-gray-800">Hobbies : <span className="font-light">{train.Hobbies}</span></p> */}
-<p className="text-lg font-semibold text-gray-800">Institute: <span className="font-light">{train.institute}</span></p>
+<p className="text-lg font-semibold text-gray-800">Institute : <span className="font-light">{train.institute}</span></p>
 <p className="text-lg font-semibold text-gray-800">From : <span className="font-light">{dateFormatter(train.trainingfrom)}</span></p>
 <p className="text-lg font-semibold text-gray-800">To : <span className="font-light">{dateFormatter(train.trainingto)}</span></p>
 <p className="text-lg font-semibold text-gray-800">Location : <span className="font-light">{train.traininglocation}</span></p>
