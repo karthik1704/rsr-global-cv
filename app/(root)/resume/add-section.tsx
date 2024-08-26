@@ -68,6 +68,7 @@ setShowPreview(false)
                     <div className="flex justify-center mx-auto my-2">
                         <button
                         className="w-28 items-center capitalize bg-white hover:bg-green-600 text-black p-2 hover:text-slate-100 font-bold rounded-md"
+                        onClick={()=>setIsPopupVisible(false)}
                         >
                           Cancel
                         </button>

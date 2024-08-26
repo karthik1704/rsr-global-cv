@@ -2,7 +2,7 @@ import { useState } from "react";
 import ImageUploader from "@/components/image/image_uploader";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-import {dateFormatter} from '@/lib/utils';
+import {dateFormatter,getCurrentDate} from '@/lib/utils';
 
 const PersonalInformation = ({ setData, personalInformation, image,setShowPreview }) => {
   const {
@@ -71,9 +71,9 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
     <p className="text-lg font-semibold text-gray-800">
         Address : <span className="font-light">{personalInformation.add1} {personalInformation.add2} {personalInformation.code} {personalInformation.city} {personalInformation.country}</span>
     </p>
-    <p className="text-lg font-semibold text-gray-800">
+    {/* <p className="text-lg font-semibold text-gray-800">
         Email Address : <span className="font-light">{personalInformation.email}</span> 
-    </p>
+    </p> */}
     <p className="text-lg font-semibold text-gray-800">
         Main activities and responsibilities : <span className="font-light">{personalInformation.about}</span> 
     </p>
@@ -169,8 +169,8 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                 validate: validateDateRange,
               })}
               placeholder="dob"
-              min="1950-01-01"
-              max="2100-12-31"
+              min="1970-01-01"
+              max={getCurrentDate()}
             />
             {errors.dob && (
               <p className="text-red-700 text-sm">{errors.dob.message}</p>
@@ -301,7 +301,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
             </div>
           </div>
 
-          <h1 className="px-6 text-black font-bold">Contact</h1>
+          {/* <h1 className="px-6 text-black font-bold">Contact</h1>
           <hr className="my-2" />
 
           <div className="mb-4 w-full md:w-2/6 px-6">
@@ -321,7 +321,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
             {errors.email && (
               <p className="text-red-700 text-sm">{errors.email.message}</p>
             )}
-          </div>
+          </div> */}
 
           <div className="mb-4  w-full px-6">
             <label className="block text-black font-bold text-sm head mb-2">

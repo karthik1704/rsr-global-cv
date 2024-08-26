@@ -1,8 +1,8 @@
 import { useState } from "react";
 import {useForm,useFieldArray} from 'react-hook-form';
-import {dateFormatter} from '@/lib/utils'
+import {dateFormatter,getCurrentDate} from '@/lib/utils'
 
-const Training = ({setData,training,setShowPreview}) =>{
+const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSection}) =>{
     const {
         register,
         handleSubmit,
@@ -47,6 +47,12 @@ const Training = ({setData,training,setShowPreview}) =>{
           setShowPreview(true);
         };
 
+        const cancel =() =>{
+          const newSelectoptions = selectedSection.filter(selected=>selected!=='additional');
+          setSelectedSection(newSelectoptions);
+                  setShowPreview(true);
+        }
+
         //--validation function for date year range--
 
   const validateDateRange = (value) => {
@@ -67,6 +73,7 @@ const Training = ({setData,training,setShowPreview}) =>{
             <div>
               {training.map((train,index)=>(
                 <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md" key={index}>
+                  <p className="text-black text-2xl font-bold uppercase">Trainings and Awards</p>
 {/* <p className="text-lg font-semibold text-gray-800">Hobbies : <span className="font-light">{train.Hobbies}</span></p> */}
 <p className="text-lg font-semibold text-gray-800">Institute : <span className="font-light">{train.institute}</span></p>
 <p className="text-lg font-semibold text-gray-800">From : <span className="font-light">{dateFormatter(train.trainingfrom)}</span></p>
@@ -172,8 +179,8 @@ const Training = ({setData,training,setShowPreview}) =>{
                               },
                               validate: validateDateRange,
                             })}
-                            min="1950-01-01"
-                            max="2100-12-31"
+                            min="1980-01-01"
+                            max={getCurrentDate()}
                             className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                             type="Date"
                           />
@@ -197,8 +204,8 @@ const Training = ({setData,training,setShowPreview}) =>{
                             },
                             validate: validateDateRange,
                           })}
-                          min="1950-01-01"
-                          max="2100-12-31"
+                          min="1980-01-01"
+                          max={getCurrentDate()}
                           className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                           type="Date"
                         />
@@ -251,6 +258,7 @@ const Training = ({setData,training,setShowPreview}) =>{
               <button
                 type="button"
                 className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
+                onClick={cancel}
               >
                 Cancel
               </button>
