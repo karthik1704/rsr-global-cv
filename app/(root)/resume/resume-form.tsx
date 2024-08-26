@@ -154,29 +154,12 @@ const handleSection = () =>{
 
   const [showFields, setShowFields] = useState(true);
 
-  //select options
-  // const options = [
-  //   { value: "", label: "Select an option" },
-  //   // { value: "personal", label: "Personal information" },
-  //   { value: "work", label: "Work Experience" },
-  //   { value: "education", label: "Education and Training" },
-  //   {label:'Language Skills'},
-  //   {label:'Driving License'},
-  //   { value: "additional", label: "Hobbies and Interests" },
-  //   {label: 'Honors and Awards'},
-  //   {label:'Others'},
-  // ];
-
   const formComponents = {
     // "personal":<PersonalInformation setData={setData} personalInformation={data.personalInformation}/>,
-  "work": <WorkExperience setData={setData} setShowPreview={setShowPreview} workExperience={data.workExperience} data={data} />, 
- "education":<Education setData={setData} setShowPreview={setShowPreview} education={data.education}/>, 
-  "additional":<Training setData={setData} setShowPreview={setShowPreview} training={data.training}/>,
+  "work": <WorkExperience selectedSection={selectedSection} setSelectedSection={setSelectedSection} setData={setData} setShowPreview={setShowPreview} workExperience={data.workExperience} data={data} />, 
+ "education":<Education selectedSection={selectedSection} setSelectedSection={setSelectedSection}  setData={setData} setShowPreview={setShowPreview} education={data.education}/>, 
+  "additional":<Training selectedSection={selectedSection} setSelectedSection={setSelectedSection}  setData={setData} setShowPreview={setShowPreview} training={data.training}/>,
 }
-
-// const handleButtonClick = () => {
-//   setShowPreview(!showPreview)
-// }
 
  //home page
 
@@ -250,11 +233,11 @@ const handleSection = () =>{
 
 
   return (
-    <div className="w-9/12 p-8 shadow-2xl  border-gray-300 text-justify mx-auto my-7">
+    <div className="w-9/12 shadow-2xl  border-gray-300 text-justify mx-auto my-7">
       <StepperComponent step={show} />
 
   {show === 0 && (
-        <div>
+        <div className="p-8">
           <div>
             {/* <form onSubmit={handleSubmit(onSubmit)}> */}
             <div>
@@ -262,23 +245,6 @@ const handleSection = () =>{
               <hr className="mb-2" />
               <PersonalInformation setData={setData} personalInformation={data.personalInformation} setShowPreview={setShowPreview} />
             </div>
-
-            {/* {selectedSection === "work" && (
-      <div>
-        <WorkExperience setData={setData} workExperience={data.workExperience} />
-      </div>
-    )}
-    {selectedSection === "education" && (
-      <div>
-        <Education setData={setData} education={data.education}/>
-      </div>
-    )}
-
-    {selectedSection === "additional" && (
-      <div>
-        <Training setData={setData} training={data.training}/>
-      </div>
-    )} */}
 
             {selectedSection.map((selected) => (
               <div key={selected}>
@@ -317,7 +283,7 @@ const handleSection = () =>{
                 image={uploadedImage}
               />
               {/* <button className='w-20 flex items-center capitalize bg-blue-600 text-white p-2' onClick={handleNext}>Next</button> */}
-              <div className="flex mt-10">
+              <div className="flex py-4 px-8">
                 <button
                   type="button"
                   className="w-16 items-center capitalize bg-white hover:bg-green-600 text-black hover:text-slate-100 p-2 font-bold rounded-md"

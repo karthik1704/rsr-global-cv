@@ -2,9 +2,9 @@ import { useState } from "react";
 import {useForm,useFieldArray} from 'react-hook-form';
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import {dateFormatter} from '@/lib/utils';
+import {dateFormatter,getCurrentDate} from '@/lib/utils';
 
-const WorkExperience = ({setData,workExperience,setShowPreview,data}) =>{
+const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,setSelectedSection,selectedSection}) =>{
     const {
         register,
         handleSubmit,
@@ -73,8 +73,8 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data}) =>{
 
 
       const validateDateRange = (value) => {
-        const minDate = new Date("1950-01-01");
-        const maxDate = new Date("2100-12-31");
+        const minDate = new Date("1980-01-01");
+        const maxDate = new Date("2024-12-31");
         const selectedDate = new Date(value);
     
         if (selectedDate < minDate || selectedDate > maxDate) {
@@ -83,6 +83,11 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data}) =>{
         return true;
       };
 
+      const cancel =() =>{
+        const newSelectoptions = selectedSection.filter(selected=>selected!=='work');
+        setSelectedSection(newSelectoptions);
+                setShowPreview(true);
+      }
       
 
     const [show, setShowForm] = useState(true);
@@ -102,6 +107,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data}) =>{
         <div className="my-8">
             {isVisible && !show && workExperience.length &&
             <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
+              <p className="text-black text-2xl font-bold uppercase">Work Experience</p>
              {!!data.jobappliedfor && <p className="text-lg font-semibold text-gray-800">Job Applied : <span className="font-light">{data.jobappliedfor}</span></p>}
               {workExperience.map((exp,index)=>(
                 <div className="space-y-4" key={index}>
@@ -122,13 +128,13 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data}) =>{
               >
                 Edit
               </button>
-              <button
+              {/* <button
                 type="button"
                 className="w-24 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10	font-bold rounded-md"
                 onClick={sectionDeleted}
               >
                 Delete
-              </button>
+              </button> */}
             </div>
                 </div>
               ))}
@@ -268,8 +274,8 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data}) =>{
                           },
                           validate: validateDateRange,
                         })}
-                        min="1950-01-01"
-                        max="2100-12-31"
+                        min="1980-01-01"
+                        max={getCurrentDate()}
                         className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
                       />
@@ -294,8 +300,8 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data}) =>{
                           validate: (value) =>
                             workexpto(value, getValues(`experiences.${index}`)),
                         })}
-                        min="1950-01-01"
-                        max="2100-12-31"
+                        min="1980-01-01"
+                        max={getCurrentDate()}
                         className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
                         disabled={isSwitchOn}
@@ -374,7 +380,8 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data}) =>{
               <button
                 type="button"
                 className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
-                // onClick={handlePrevious}
+                // onClick={()=> setShowPreview(true)}
+                onClick={cancel}
               >
                 Cancel
               </button>

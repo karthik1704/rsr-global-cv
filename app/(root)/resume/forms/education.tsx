@@ -1,8 +1,8 @@
 import { useState } from "react";
 import {useForm,useFieldArray} from 'react-hook-form';
-import {dateFormatter} from '@/lib/utils';
+import {dateFormatter,getCurrentDate} from '@/lib/utils';
 
-const Education = ({setData,education,setShowPreview,sectionDeleted}) =>{
+const Education = ({setData,education,setShowPreview,sectionDeleted,setSelectedSection,selectedSection}) =>{
     const {
         register,
         handleSubmit,
@@ -48,11 +48,17 @@ const Education = ({setData,education,setShowPreview,sectionDeleted}) =>{
           setShowPreview(true);
         };
 
+        const cancel =() =>{
+          const newSelectoptions = selectedSection.filter(selected=>selected!=='education');
+          setSelectedSection(newSelectoptions);
+                  setShowPreview(true);
+        }
+
           //--validation function for date year range--
 
   const validateDateRange = (value) => {
-    const minDate = new Date("1950-01-01");
-    const maxDate = new Date("2100-12-31");
+    const minDate = new Date("1980-01-01");
+    const maxDate = new Date("2024-12-31");
     const selectedDate = new Date(value);
 
     if (selectedDate < minDate || selectedDate > maxDate) {
@@ -67,6 +73,7 @@ const Education = ({setData,education,setShowPreview,sectionDeleted}) =>{
             <div>
               {education.map((edu,index)=>(
                 <div  className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md" key={index}>
+                  <p className="text-black text-2xl font-bold uppercase">Education and Training</p>
 <p className="text-lg font-semibold text-gray-800">Qualification : <span className="font-light">{edu.qualification}</span></p>
 <p className="text-lg font-semibold text-gray-800">Organisation : <span className="font-light">{edu.organisation}</span></p>
 <p className="text-lg font-semibold text-gray-800">From : <span className="font-light">{dateFormatter(edu.educationfrom)}</span></p>
@@ -81,13 +88,13 @@ const Education = ({setData,education,setShowPreview,sectionDeleted}) =>{
               >
                 Edit
               </button>
-              <button
+              {/* <button
                 type="button"
                 className="w-24 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10	font-bold rounded-md"
                 onClick={sectionDeleted}
               >
                 Delete
-              </button>
+              </button> */}
             </div>
                 </div>
               ))}
@@ -172,8 +179,8 @@ const Education = ({setData,education,setShowPreview,sectionDeleted}) =>{
                             },
                             validate: validateDateRange,
                           })}
-                          min="1950-01-01"
-                          max="2100-12-31"
+                          min="1980-01-01"
+                          max={getCurrentDate()}
                           className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                           type="Date"
                         />
@@ -196,8 +203,8 @@ const Education = ({setData,education,setShowPreview,sectionDeleted}) =>{
                             },
                             validate: validateDateRange,
                           })}
-                          min="1950-01-01"
-                          max="2100-12-31"
+                          min="1980-01-01"
+                          max={getCurrentDate()}
                           className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                           type="Date"
                         />
@@ -275,6 +282,7 @@ const Education = ({setData,education,setShowPreview,sectionDeleted}) =>{
               <button
                 type="button"
                 className="w-24 items-center capitalize bg-white text-black hover:bg-green-600 hover:text-slate-100 p-2 font-bold rounded-md"
+                onClick={cancel}
               >
                 Cancel
               </button>
