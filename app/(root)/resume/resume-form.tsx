@@ -29,6 +29,7 @@ type FormValues = {
   add2: string;
   about: string;
   email: string;
+  contact: number;
   workemail: string;
   code: string;
   city: string;
@@ -67,6 +68,7 @@ type FormValues = {
     workaddress: string;
   }[];
   training: {
+    title: string;
     Hobbies: string;
     institute: string;
     trainingfrom: string;

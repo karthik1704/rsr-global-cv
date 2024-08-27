@@ -54,6 +54,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
         {!show && personalInformation && 
 
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
+           <p className="text-black text-2xl font-bold uppercase">Personal Information</p>
           {!!uploadedImage &&
           <div>
             
@@ -71,12 +72,19 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
     <p className="text-lg font-semibold text-gray-800">
         Address : <span className="font-light">{personalInformation.add1} {personalInformation.add2} {personalInformation.code} {personalInformation.city} {personalInformation.country}</span>
     </p>
-    {/* <p className="text-lg font-semibold text-gray-800">
+
+    {personalInformation.email && (<p className="text-lg font-semibold text-gray-800">
         Email Address : <span className="font-light">{personalInformation.email}</span> 
-    </p> */}
+    </p>)}
+
+    {personalInformation.contact && (
     <p className="text-lg font-semibold text-gray-800">
-        Main activities and responsibilities : <span className="font-light">{personalInformation.about}</span> 
+        Contact Number: <span className="font-light">{personalInformation.contact}</span>
     </p>
+)}
+    {personalInformation.about && (<p className="text-lg font-semibold text-gray-800">
+        Main activities and responsibilities : <span className="font-light">{personalInformation.about}</span> 
+    </p>)}
     <div className="flex gap-4">
         <button
         onClick={()=>setShowForm(true)}
@@ -139,18 +147,18 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
               <input
                 className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                 {...register("lastName", {
-                  required: {
-                    value: true,
-                    message: "Last Name is required",
-                  },
+                  // required: {
+                  //   value: true,
+                  //   message: "Last Name is required",
+                  // },
                 })}
                 placeholder="Last Name"
               />
-              {errors.lastName && (
+              {/* {errors.lastName && (
                 <p className="text-red-700 text-sm">
                   {errors.lastName.message}
                 </p>
-              )}
+              )} */}
             </div>
           </div>
 
@@ -168,9 +176,10 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                 },
                 validate: validateDateRange,
               })}
-              placeholder="dob"
+              placeholder="DD-MM-YY"
+              // placeholder="dob"
               min="1970-01-01"
-              max={getCurrentDate()}
+              max="2004-12-31"
             />
             {errors.dob && (
               <p className="text-red-700 text-sm">{errors.dob.message}</p>
@@ -255,7 +264,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                     message: "postal code is required",
                   },
                 })}
-                placeholder="eg:6000 01"
+                placeholder="Eg: 6000 01"
               />
               {errors.code && (
                 <p className="text-red-700 text-sm">{errors.code.message}</p>
@@ -274,7 +283,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                     message: "City is required",
                   },
                 })}
-                placeholder="eg: chennai"
+                placeholder="Eg: Chennai"
               />
               {errors.city && (
                 <p className="text-red-700 text-sm">{errors.city.message}</p>
@@ -301,27 +310,48 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
             </div>
           </div>
 
-          {/* <h1 className="px-6 text-black font-bold">Contact</h1>
+          <h1 className="px-6 text-black font-bold">Contact</h1>
           <hr className="my-2" />
-
+          <div className="flex flex-col gap-3 md:flex-row">
           <div className="mb-4 w-full md:w-2/6 px-6">
             <label className="block text-black font-bold text-sm head mb-2">
-              Email Address<span className="text-red-700">*</span>
+              Email Address
             </label>
             <input
               className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
               {...register("email", {
-                required: {
-                  value: true,
-                  message: "Email Id is required",
-                },
+                // required: {
+                //   value: true,
+                //   message: "Email Id is required",
+                // },
               })}
               placeholder="Enter Your E-mail"
             />
-            {errors.email && (
+            {/* {errors.email && (
               <p className="text-red-700 text-sm">{errors.email.message}</p>
-            )}
-          </div> */}
+            )} */}
+          </div>
+
+          <div className="mb-4 w-full md:w-2/6 px-6">
+            <label className="block text-black font-bold text-sm head mb-2">
+              Contact Number
+            </label>
+            <input
+              className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+              {...register("contact", {
+                // required: {
+                //   value: true,
+                //   message: "Email Id is required",
+                // },
+              })}
+              placeholder="Enter Your Number"
+            />
+            {/* {errors.email && (
+              <p className="text-red-700 text-sm">{errors.email.message}</p>
+            )} */}
+          </div>
+
+          </div>
 
           <div className="mb-4  w-full px-6">
             <label className="block text-black font-bold text-sm head mb-2">

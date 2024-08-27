@@ -12,10 +12,12 @@ import {
 } from "@react-pdf/renderer";
 // import Profile from "../../image/pexels-photo-704748.webp";
 // import { HtmlProps } from "node_modules/react-pdf-html/dist/types/Html";
+import {dateFormatter} from '@/lib/utils'
 import React from "react";
 // import Html from "react-pdf-html";
 // import { htmlRenderers } from "./pdfhtml";
 import resumeConfig from "../edit-me/resume-config";
+import PersonalInformation from "./forms/personalinformation";
 // import Theme from "../edit-me/resume-config";
 // import { contrastColor } from "../helpers/colorcontrast";
 // import { getAccentColor, getNeutralColor } from "../helpers/colors";
@@ -56,7 +58,7 @@ type data = {
     educationcountry: string;
   }[];
   training: {
-    Hobbies: string;
+    title: string;
     institute: string;
     trainingfrom: string;
     trainingto: string;
@@ -450,7 +452,7 @@ const PDF = ({ data }: data) => {
                   <Text
                     style={{ ...styles.text1, fontFamily: "Helvetica-Bold" }}
                   >
-                    Date of birth:
+                    Date of birth :
                   </Text>
                   <Text style={styles.text2}>
                     {/* {new Date(data.dob).toLocaleDateString("en-GB")} | */}
@@ -458,18 +460,55 @@ const PDF = ({ data }: data) => {
                       ? new Date(
                           data.personalInformation.dob
                         ).toLocaleDateString("en-GB")
-                      : null}
+                      : null} |
                   </Text>
                 </View>
+                {data.personalInformation.contact ? (
                 <View
                   style={{ flexDirection: "row", justifyContent: "flex-start" }}
                 >
-                  <Text style={styles.text3}>Nationality:</Text>
+                  <Text style={styles.text3}>Contact Number :</Text>
                   <Text style={styles.text4}>
+                    {data.personalInformation.contact} |
+                  </Text>
+                </View>
+                ) : null }
+              </View>
+
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "flex-start",
+                  gap: "10",
+                  marginBottom:'5',
+                  marginTop:'5',
+                }}
+              >
+                <View
+                  style={{ flexDirection: "row", justifyContent: "flex-start" }}
+                >
+                  <Text
+                    style={{ ...styles.text1, fontFamily: "Helvetica-Bold" }}
+                  >
+                    Nationality :
+                  </Text>
+                  <Text style={styles.text2}>
+                    {/* {new Date(data.dob).toLocaleDateString("en-GB")} | */}
                     {data.personalInformation.nationality} |
                   </Text>
                 </View>
+                {data.personalInformation.email ? (
+                <View
+                  style={{ flexDirection: "row", justifyContent: "flex-start" }}
+                >
+                  <Text style={styles.text3}>Email ID:</Text>
+                  <Text style={styles.text4}>
+                    {data.personalInformation.email} |
+                  </Text>
+                </View>
+                ) : null}
               </View>
+
               <View style={{ flexDirection: "row", gap: "7" }}>
                 <Text style={styles.text5}>Address:</Text>
                 <Text style={styles.text6}>
@@ -486,10 +525,12 @@ const PDF = ({ data }: data) => {
               </View>
             </View>
 
+{data.personalInformation.about? (
             <View>
               <Text style={styles.text7}>About me:</Text>
               <Text style={styles.text8}>{data.personalInformation.about}</Text>
             </View>
+):null}
           </View>
         </View>
 
@@ -521,9 +562,8 @@ const PDF = ({ data }: data) => {
                   <View style={styles.job}>
                     {/* <Text style={styles.dates}>05/08/2022 - CURRENT Doha, Qatar</Text> */}
                     <Text style={styles.dates}>
-                      {exp.workfrom && exp.workto && exp.location
-                        ? `${exp.workfrom} - ${exp.workto}, ${exp.location}`
-                        : null}
+                      {dateFormatter(exp.workfrom)} - {dateFormatter(exp.workto) ?(exp.workto):('currently working')}, {exp.location}
+                        
                     </Text>
 
                     <View
@@ -651,7 +691,7 @@ const PDF = ({ data }: data) => {
               <View style={styles.line1} />
               <View style={styles.job}>
                 <Text style={styles.dates}>
-                  {educ.educationfrom} - {educ.educationto} {educ.educationcity}
+                  {dateFormatter(educ.educationfrom)} - {dateFormatter(educ.educationto)} {educ.educationcity}
                   , {educ.educationcountry}
                 </Text>
 
@@ -772,14 +812,14 @@ const PDF = ({ data }: data) => {
           <Text
             style={{ marginTop: 10, fontSize: 12, fontWeight: "extrabold" }}
           >
-            TRAININGS AND AWARDS
+            HONORS AND AWARDS
           </Text>
 {data.training.map((train,index)=>(
   <View key={index}>
 
           <View style={styles.listItems}>
-            <Text style={styles.listItemDate}>{train.trainingfrom} - {train.trainingto}</Text>
-            <Text style={styles.listItemTitle}>{train.institute}, {train.traininglocation}</Text>
+            <Text style={styles.listItemDate}>{dateFormatter(train.trainingfrom)} - {dateFormatter(train.trainingto)}</Text>
+            <Text style={styles.listItemTitle}>{train.title}, {train.institute}, {train.traininglocation}</Text>
           </View>
 
           </View>))}

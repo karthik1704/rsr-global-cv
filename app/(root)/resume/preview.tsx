@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {dateFormatter} from '@/lib/utils'
+import PersonalInformation from "./forms/personalinformation";
 
 type PreviewProps = {
   data: {
@@ -62,7 +63,7 @@ type PreviewProps = {
     }[]
     training: {
       position: string;
-      Hobbies:string;
+      title:string;
           institute :string;
           trainingfrom:string;
           trainingto:string;
@@ -88,23 +89,36 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
           <div className="mx-10 my-5">
             <Image src={data.personalInformation.profileImage} height={150} width={150} alt="" className="rounded-full border-2 border-gray-700" />
           </div>}
-          <div className=" flex-col w-full">
+          <div className=" flex-col pl-10 w-full">
             {/* <div className="flex"> */}
               <p className="block font-semibold text-base my-3">
              <span className="text-2xl font-bold text-gray-700 cont">{data.personalInformation.firstName} {data.personalInformation.lastName}</span>
               </p>
-              {/* <p className="block text-black font-semibold text-base head px-28">
+             {/* {PersonalInformation.email ? (<p className="block text-black font-semibold text-base head px-28">
                 Email Address : <span className="text-sm text-gray-700 cont">{data.personalInformation.email}</span>
-              </p> */}
+              </p>):null} */}
             {/* </div> */}
             <hr className="border-b-2 border-slate-500 w-9/12" />
             <div className=" w-5/6 flex my-2">
               <p className="text-black font-semibold text-base head ">
                 Date of birth : <span className="text-base cont font-medium">{new Date(data.personalInformation.dob).toLocaleDateString("en-GB")}</span>
               </p>
+              {data.personalInformation.contact ? (
               <p className="text-black font-semibold text-base head mx-5">
-                | Nationality : <span className="text-base font-medium cont">{data.personalInformation.nationality}</span>
+                | Contact Number : <span className="text-base font-medium cont">{data.personalInformation.contact}</span>
               </p>
+              ): null}
+            </div>
+
+            <div className=" w-5/6 flex my-2">
+              <p className="text-black font-semibold text-base head ">
+              Nationality : <span className="text-base cont font-medium">{data.personalInformation.nationality}</span>
+              </p>
+              {data.personalInformation.email ? (
+              <p className="text-black font-semibold text-base head mx-5">
+                | Email - Id : <span className="text-base font-medium cont">{data.personalInformation.email}</span>
+              </p>
+              ) : null}
             </div>
 
             <div className="w-5/6">
@@ -117,14 +131,16 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
                   {data.personalInformation.city}, {data.personalInformation.code}, {data.personalInformation.country}
                 </span>
               </p>
-              <div className="flex flex-col py-2">
-                <p className="block text-black font-semibold text-base head flex-shrink-0 w-full">
-                  About me :
-                </p>
-                <span className="block font-medium text-black text-base flex-grow cont">
-                  {data.personalInformation.about}
-                </span>
-              </div>
+              {data.personalInformation.about ? (
+  <div className="flex flex-col py-2">
+    <p className="block text-black font-semibold text-base head flex-shrink-0 w-full">
+      About me :
+    </p>
+    <span className="block font-medium text-black text-base flex-grow cont">
+      {data.personalInformation.about}
+    </span>
+  </div>
+) : null}
             </div>
           </div>
         </div>
@@ -154,7 +170,11 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
                   {dateFormatter(exp.workfrom)} {'-'}
                   </p>
                   <p className="text-gray-700 font-medium text-base">
-                   {dateFormatter(exp.workto)? exp.workto: 'Currently Working'} 
+                  {exp.workto ? (
+  dateFormatter(exp.workto)
+) : (
+  'Currently Working'
+)}
                   </p>
                   <p className="text-gray-700 font-medium text-base">,{' '}
                 {exp.location}
@@ -256,16 +276,13 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
           Additional information
         </p>
         <hr className="border-b-2 border-slate-500" />
-        <p className="block text-black font-bold text-2xl py-4">Training and Awards </p>
+        <p className="block text-black font-bold text-2xl py-4">Honors & Awards</p>
 
         {data.training.map((train, index) => (
           <div key={index}>
-            {/* <p className="text-black font-semibold text-base py-2">
+            {/* <p className="text-gray-700 font-semibold text-base py-2">
               {" "}
-              Hobbies and Interest :
-              <span className="text-gray-700 text-sm">
-                {train.Hobbies}
-              </span>
+                {train.title}
             </p> */}
             <div className="flex justify-start w-4/5">
               <p className="text-gray-700 text-base">
@@ -276,7 +293,11 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
               </p>
                </div>
                <div className="flex">
-          <p className="text-gray-700 font-semibold text-base ">
+               <p className="text-gray-700 font-semibold text-base">
+              {" "}
+                {train.title}{','}
+            </p>
+          <p className="text-gray-700 font-semibold text-base ">{' '}
           {train.institute} {','}
             </p> 
             <p className="text-gray-700 font-semibold text-base">
