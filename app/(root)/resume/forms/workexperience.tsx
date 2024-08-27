@@ -116,7 +116,8 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
 <p className="text-lg font-semibold text-gray-800">Location : <span className="font-light">{exp.location}</span></p>
 <p className="text-lg font-semibold text-gray-800">Occupation: <span className="font-light">{exp.position}</span></p>
 <p className="text-lg font-semibold text-gray-800">From : <span className="font-light">{dateFormatter(exp.workfrom)}</span></p>
-<p className="text-lg font-semibold text-gray-800">To : <span className="font-light">{dateFormatter(exp.workto)}</span></p>
+<p className="text-lg font-semibold text-gray-800">To : {exp.workto?(<span className="font-light">{dateFormatter(exp.workto)}</span>
+):( 'currently working')}</p>
 <p className="text-lg font-semibold text-gray-800">About Company : <span className="font-light">{exp.aboutcompany}</span></p>
 <p className="text-lg font-semibold text-gray-800">work Responsibilities : <span className="font-light">{exp.about2}</span></p>
 <div className="flex mx-6">
@@ -190,7 +191,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                           message: "Employer name is required",
                         },
                       })}
-                      placeholder="companyName"
+                      placeholder="Company name"
                       className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                     />
                     {errors.experiences?.[index]?.companyName && (
@@ -209,10 +210,10 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                         {...register(`experiences.${index}.workwebsite`, {
                           required: {
                             value: true,
-                            message: "Website is required",
+                            message: "Company’s Website is required",
                           },
                         })}
-                        placeholder="Website Name"
+                        placeholder="Company’s website"
                         className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                       />
                       {errors.experiences?.[index]?.workwebsite && (
@@ -233,7 +234,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                           //   message: 'First Name is required'
                           // }
                         })}
-                        placeholder="Location Name"
+                        placeholder="Working location"
                         className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                       />
                     </div>
@@ -337,7 +338,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                         //   message: 'First Name is required'
                         // }
                       })}
-                      placeholder="about Company"
+                      placeholder="About company"
                       rows={5}
                     />
                   </div>
@@ -354,7 +355,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                         //   message: 'First Name is required'
                         // }
                       })}
-                      placeholder="about work responsibilities"
+                      placeholder="About work responsibilities"
                       rows={5}
                     />
                   </div>
