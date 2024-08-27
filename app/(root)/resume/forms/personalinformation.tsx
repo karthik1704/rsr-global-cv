@@ -179,7 +179,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
               placeholder="DD-MM-YY"
               // placeholder="dob"
               min="1970-01-01"
-              max={getCurrentDate()}
+              max="2004-12-31"
             />
             {errors.dob && (
               <p className="text-red-700 text-sm">{errors.dob.message}</p>
