@@ -18,7 +18,7 @@ const Footer = () => {
                 height={70}
               />
             </div>
-            <p>
+            <p className="text-black">
               Making the world a better place through constructing elegant
               hierarchies.
             </p>
@@ -107,7 +107,7 @@ const Footer = () => {
           </div> */}
         </div>
 
-        <div className="my-10 flex flex-col items-center">
+        <div className="my-10 flex flex-col items-center text-black">
           <span>© 2024 <Link href={'https://vimkes.com/'} target="unblank"> Vimkes Technologies</Link>, Inc. All rights reserved.</span>
         </div>
       </section>

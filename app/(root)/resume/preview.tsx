@@ -128,7 +128,7 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
                   {data.personalInformation.add1}, {data.personalInformation.add2}
                 </span>{" "}
                 <span className=" text-base font-medium cont">
-                  {data.personalInformation.city}, {data.personalInformation.code}, {data.personalInformation.country}
+                  {data.personalInformation.city}, {data.personalInformation.code} {' '} {data.personalInformation.country}
                 </span>
               </p>
               {data.personalInformation.about ? (

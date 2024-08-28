@@ -17,6 +17,9 @@ import Training from "./forms/additional";
 import { Award } from "lucide-react";
 import AddSection from "./add-section";
 import {toast} from 'sonner';
+import Language from "./forms/language";
+import DrivingLicense from "./forms/drivinglicense";
+import Others from "./forms/others";
 
 type FormValues = {
   firstName: string;
@@ -161,6 +164,9 @@ const handleSection = () =>{
   "work": <WorkExperience selectedSection={selectedSection} setSelectedSection={setSelectedSection} setData={setData} setShowPreview={setShowPreview} workExperience={data.workExperience} data={data} />, 
  "education":<Education selectedSection={selectedSection} setSelectedSection={setSelectedSection}  setData={setData} setShowPreview={setShowPreview} education={data.education}/>, 
   "additional":<Training selectedSection={selectedSection} setSelectedSection={setSelectedSection}  setData={setData} setShowPreview={setShowPreview} training={data.training}/>,
+  "language": <Language selectedSection={selectedSection} setSelectedSection={setSelectedSection} setShowPreview={setShowPreview}/>,
+  'drivinglicense':<DrivingLicense selectedSection={selectedSection} setSelectedSection={setSelectedSection} setShowPreview={setShowPreview}/>,
+  'others':<Others selectedSection={selectedSection} setSelectedSection={setSelectedSection} setShowPreview={setShowPreview}/>
 }
 
  //home page

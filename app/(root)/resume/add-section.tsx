@@ -5,11 +5,11 @@ const options = [
     // { value: "personal", label: "Personal information" },
     { value: "work", label: "Work Experience" },
     { value: "education", label: "Education and Training" },
-    {label:'Language Skills'},
-    {label:'Driving License'},
+    {value : 'language', label:'Language Skills'},
+    {value : 'drivinglicense', label:'Driving License'},
     { value: "additional", label: "Honors and Awards" },
     // {label: 'Honors and Awards'},
-    {label:'Others'},
+    { value: "others",label:'Others'},
   ];
 
   

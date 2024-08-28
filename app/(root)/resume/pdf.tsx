@@ -515,9 +515,8 @@ const PDF = ({ data }: data) => {
                   {data.personalInformation.add1 &&
                   data.personalInformation.add2 &&
                   data.personalInformation.city &&
-                  data.personalInformation.code &&
                   data.personalInformation.country
-                    ? `${data.personalInformation.add1}, ${data.personalInformation.add2} ${data.personalInformation.city}, ${data.personalInformation.code}, ${data.personalInformation.country}`
+                    ? `${data.personalInformation.add1}, ${data.personalInformation.add2} ${data.personalInformation.city}, ${data.personalInformation.code} ${data.personalInformation.country}`
                     : null}
                   {/* F-72, Mangal Bazar, Subhash Chowk, Laxmi Nagar, 110092, Delhi,
                   India (Home) */}
