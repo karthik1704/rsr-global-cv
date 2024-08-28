@@ -95,7 +95,7 @@ const LoginForm = () => {
         />
         Remember Me
       </label> */}
-            <h1>forgot Password?</h1>
+            {/* <h1>forgot Password?</h1> */}
           </div>
         </form>
 </div>

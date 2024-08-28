@@ -28,23 +28,23 @@ const DrivingLicense = ({selectedSection,setSelectedSection,setShowPreview,selec
         {show && (
         <div>
             <p className="text-2xl text-black text-center font-bold py-3 uppercase">Driving License</p>
-            <p className="text-2xl text-black text-center">Page is a work in progress.</p>
+            <p className="text-2xl text-black text-center">Be patient we are working on it.</p>
 <form>
 
 <div className="flex mx-6 my-4">
               <button
                 type="button"
-                className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
+                className="w-24 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 font-bold rounded-md"
                 onClick={cancel}
               >
                 Cancel
               </button>
-              <button
+              {/* <button
                 type="submit"
                 className="w-16 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10	font-bold rounded-md"
               >
                 Save
-              </button>
+              </button> */}
             </div>
 
     </form>
