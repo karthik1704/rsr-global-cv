@@ -34,7 +34,7 @@ const SignUp = () => {
 
 <div className="h-3/4 bg-cover content-center basis-2/5 ">
 
-<div className="grid grid-rows-1 gap-20 ">
+<div className="grid grid-rows-1 gap-20 text-black">
 <h1 className=" w-4/5 text-3xl font-bold mb-6 text-justify">Create a standout resume effortlessly with our intuitive CV builder.</h1>
 <ul className="list-disc text-lg font-light list-inside mb-6 space-y-6">
   <li>Build a professional CV in minutes with our easy-to-use tool.</li>
@@ -49,7 +49,7 @@ const SignUp = () => {
       <div className="w-1/3">
 
       <div className="w-full py-7 bg-slate-100 shadow-lg rounded-3xl">
-      <h1 className="text-3xl font-bold mb-2 text-center">
+      <h1 className="text-3xl font-bold mb-2 text-center text-black">
       Sign up now to craft a professional CV
       </h1>
         <form action={action}>

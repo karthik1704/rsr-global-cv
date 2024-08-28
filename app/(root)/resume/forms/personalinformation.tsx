@@ -176,7 +176,9 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                 },
                 validate: validateDateRange,
               })}
-              placeholder="DD-MM-YY"
+              placeholder="DD-MM-YYYY"
+              alt="DD-MM-YYYY"
+              // autoCapitalize='true'
               // placeholder="dob"
               min="1970-01-01"
               max="2004-12-31"
@@ -185,6 +187,11 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
               <p className="text-red-700 text-sm">{errors.dob.message}</p>
             )}
           </div>
+
+          {/* <div>
+      <h1>Custom Date Input</h1>
+      <DateInput />
+    </div> */}
 
           <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
             <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
@@ -225,7 +232,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                   message: "Address is required",
                 },
               })}
-              placeholder="eg:Street Name, P.O, Box"
+              placeholder="Eg:Street Name, P.O, Box"
             />
             {errors.add1 && (
               <p className="text-red-700 text-sm">{errors.add1.message}</p>
@@ -254,21 +261,21 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
           <div className="flex flex-col gap-3 md:flex-row">
             <div className="mb-4 w-full md:w-2/6 px-6">
               <label className="block text-black font-bold text-sm head mb-2">
-                Postal code<span className="text-red-700">*</span>
+                Postal code
               </label>
               <input
                 className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                 {...register("code", {
-                  required: {
-                    value: true,
-                    message: "postal code is required",
-                  },
+                  // required: {
+                  //   value: true,
+                  //   message: "postal code is required",
+                  // },
                 })}
                 placeholder="Eg: 6000 01"
               />
-              {errors.code && (
+              {/* {errors.code && (
                 <p className="text-red-700 text-sm">{errors.code.message}</p>
-              )}
+              )} */}
             </div>
 
             <div className="mb-4 w-full md:w-2/6 px-6">
@@ -302,7 +309,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                     message: "Country is required",
                   },
                 })}
-                placeholder="eg: India"
+                placeholder="Eg: India"
               />
               {errors.country && (
                 <p className="text-red-700 text-sm">{errors.country.message}</p>
