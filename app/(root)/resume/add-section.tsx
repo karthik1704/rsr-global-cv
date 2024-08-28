@@ -7,7 +7,7 @@ const options = [
     { value: "education", label: "Education and Training" },
     {value : 'language', label:'Language Skills'},
     {value : 'drivinglicense', label:'Driving License'},
-    { value: "additional", label: "Honors and Awards" },
+    { value: "additional", label: "Training and Awards" },
     // {label: 'Honors and Awards'},
     { value: "others",label:'Others'},
   ];

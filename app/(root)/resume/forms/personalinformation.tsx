@@ -119,7 +119,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
           <div className="mb-4.5 flex flex-col gap-3 lg:flex-row mt-2">
             <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
               <label className="block text-black font-bold text-sm head mb-2">
-                First Name<span className="text-red-700">*</span>
+                First name<span className="text-red-700">*</span>
               </label>
               <input
                 className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
@@ -142,7 +142,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
 
             <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
               <label className="block text-black font-bold text-sm head mb-2">
-                Last Name<span className="text-gray-700"></span>
+                Last name<span className="text-gray-700"></span>
               </label>
               <input
                 className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
@@ -152,7 +152,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                   //   message: "Last Name is required",
                   // },
                 })}
-                placeholder="Last Name"
+                placeholder="Last name"
               />
               {/* {errors.lastName && (
                 <p className="text-red-700 text-sm">
@@ -222,7 +222,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
 
           <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px] ">
             <label className="block text-black font-bold text-sm head mb-2">
-              Address Line 1<span className="text-red-700">*</span>
+              Address line 1<span className="text-red-700">*</span>
             </label>
             <input
               className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
@@ -232,7 +232,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                   message: "Address is required",
                 },
               })}
-              placeholder="Eg:Street Name, P.O, Box"
+              placeholder="Street name, P.O, box"
             />
             {errors.add1 && (
               <p className="text-red-700 text-sm">{errors.add1.message}</p>
@@ -241,7 +241,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
 
           <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px] ">
             <label className="block text-black font-bold text-sm head mb-2">
-              Address Line 2<span className="text-red-700">*</span>
+              Address line 2<span className="text-red-700">*</span>
             </label>
             <input
               className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
@@ -271,7 +271,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                   //   message: "postal code is required",
                   // },
                 })}
-                placeholder="Eg: 6000 01"
+                placeholder="6000 01"
               />
               {/* {errors.code && (
                 <p className="text-red-700 text-sm">{errors.code.message}</p>
@@ -290,7 +290,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                     message: "City is required",
                   },
                 })}
-                placeholder="Eg: Chennai"
+                placeholder="Chennai"
               />
               {errors.city && (
                 <p className="text-red-700 text-sm">{errors.city.message}</p>
@@ -309,7 +309,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                     message: "Country is required",
                   },
                 })}
-                placeholder="Eg: India"
+                placeholder="India"
               />
               {errors.country && (
                 <p className="text-red-700 text-sm">{errors.country.message}</p>
@@ -332,7 +332,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                 //   message: "Email Id is required",
                 // },
               })}
-              placeholder="Enter Your E-mail"
+              placeholder="Enter e-mail"
             />
             {/* {errors.email && (
               <p className="text-red-700 text-sm">{errors.email.message}</p>
@@ -351,7 +351,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                 //   message: "Email Id is required",
                 // },
               })}
-              placeholder="Enter Your Number"
+              placeholder="Enter number"
             />
             {/* {errors.email && (
               <p className="text-red-700 text-sm">{errors.email.message}</p>

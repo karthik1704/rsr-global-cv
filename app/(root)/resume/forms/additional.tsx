@@ -74,7 +74,7 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
             <div>
               {training.map((train,index)=>(
                 <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md" key={index}>
-                  <p className="text-black text-2xl font-bold uppercase">Honors & Awards</p>
+                  <p className="text-black text-2xl font-bold uppercase">Training & Awards</p>
 {/* <p className="text-lg font-semibold text-gray-800">Hobbies : <span className="font-light">{train.Hobbies}</span></p> */}
 <p className="text-lg font-semibold text-gray-800">Title of Award : <span className="font-light">{train.title}</span></p>
 <p className="text-lg font-semibold text-gray-800">Awarding Institution : <span className="font-light">{train.institute}</span></p>
@@ -110,7 +110,7 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                   <div key={item.id}>
                     <div className="flex justify-between items-center	mb-4  w-2/4 px-6">
                       <p className="text-black font-bold text-3xl mb-4">
-                      Honors & Awards
+                      Training & Awards
                       </p>
                       {index > 0 && (
                         <button
