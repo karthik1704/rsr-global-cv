@@ -175,3 +175,8 @@ body {
 .react-stepper .step-label {
   font-weight: 500; /* Tailwind's font-medium */
 }
+
+.custom-checkbox {
+  width: 24px;
+  height: 24px;
+}

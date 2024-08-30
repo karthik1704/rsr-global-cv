@@ -65,6 +65,18 @@ type data = {
     traininglocation: string;
     trainingskills: string;
   }[];
+  others:{
+    othertitle: string;
+  otherdesc: string;
+  mainTitle: string;
+    }[];
+    lic:{
+      license: string,
+      daterange: {
+        datefrom: string;
+        dateto: string;
+      }
+    }[];
 };
 
 Font.register({
@@ -734,7 +746,8 @@ const PDF = ({ data }: data) => {
               </View>
             </div>
           ))}
-          {/* <View>
+         {data.language && ( 
+          <View>
           <Text
             style={{ fontSize: 12, fontWeight: "extrabold", paddingTop: 10 }}
           >
@@ -750,12 +763,28 @@ const PDF = ({ data }: data) => {
               paddingTop: 10,
             }}
           >
-            <Text style={{ fontSize: 10 }}>Mother tongue(s):</Text>
+            <Text style={{ fontSize: 10 }}>Mother tongue :</Text>
             <Text style={{ fontSize: 10, fontWeight: "extrabold" }}>
-              HINDI | ENGLISH
+            {data.language.mothertongue}
             </Text>
           </View>
-          </View> */}
+
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              gap: "5",
+              paddingTop: 10,
+            }}
+          >
+            <Text style={{ fontSize: 10 }}>Other language :</Text>
+            <Text style={{ fontSize: 10, fontWeight: "extrabold" }}>
+            {data.language.otherlanguage}
+            </Text>
+          </View>
+
+          </View>
+)}
           {/* <View>
             <Text
               style={{
@@ -808,6 +837,8 @@ const PDF = ({ data }: data) => {
               
               ADDITIONAL INFORMATION
             </Text>
+            <View style={styles.line1} />
+            
           <Text
             style={{ marginTop: 10, fontSize: 12, fontWeight: "extrabold" }}
           >
@@ -822,6 +853,68 @@ const PDF = ({ data }: data) => {
           </View>
 
           </View>))}
+          </View>
+}
+
+{/* <Text
+            style={{ marginTop: 10, fontSize: 12, fontWeight: "extrabold" }}
+          >
+           Others
+          </Text> */}
+          {data.others.length &&
+          <View>
+          <Text
+              style={{
+                fontSize: 12,
+                fontWeight: "extrabold",
+                marginTop: 10,
+              }}
+            >
+              
+              Others
+            </Text>
+            <View style={styles.line1} />
+          {data.others.map((oth,index)=>(
+            <View key={index}>
+              <View style={styles.listItems}>
+              <Text
+            style={{ marginTop: 10, fontSize: 12, fontWeight: "extrabold" }}
+          >{oth.mainTitle}
+           {/* <Text style={styles.listItemDate}>{oth.mainTitle}</Text> */}
+          </Text>
+            <Text style={styles.listItemDate}>{oth.othertitle}</Text>
+            <Text style={styles.listItemTitle}>{oth.otherdesc}</Text>
+          </View>
+              </View>
+          ))}
+          </View>
+}
+
+{data.license.length &&
+          <View>
+          <Text
+              style={{
+                fontSize: 12,
+                fontWeight: "extrabold",
+                marginTop: 10,
+              }}
+            >
+              
+              License
+            </Text>
+            <View style={styles.line1} />
+          {data.license.map((li,index)=>(
+            <View key={index}>
+              <View style={styles.listItems}>
+              <Text
+            style={{ marginTop: 10, fontSize: 12, fontWeight: "extrabold" }}
+          >{li.license}
+           {/* <Text style={styles.listItemDate}>{oth.mainTitle}</Text> */}
+          </Text>
+            <Text style={styles.listItemDate}>{li.daterange.datefrom} - {li.daterange.dateto}</Text>
+          </View>
+              </View>
+          ))}
           </View>
 }
           {/* <View style={{ height: 1, backgroundColor: "grey" }} /> */}

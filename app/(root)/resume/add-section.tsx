@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Others from "./forms/others";
 
 const options = [
     { value: "", label: "Select an option" },
@@ -9,12 +10,18 @@ const options = [
     {value : 'drivinglicense', label:'Driving License'},
     { value: "additional", label: "Training and Awards" },
     // {label: 'Honors and Awards'},
-    { value: "others",label:'Others'},
+    // { value: "others",label:'Others'},
   ];
 
-  
+ 
 
-const AddSection =({addSections,setShowPreview,showPreview,selectedSection}) =>{
+const AddSection =({addSections,setShowPreview,showPreview,selectedSection,additionalTitle,handleInputChange}) =>{
+
+  // const [additionalTitle, setAdditionalTitle] = useState('');
+
+  // const handleInputChange = (event) => {
+  //   setAdditionalTitle(event.target.value);
+  // };
 
     const [isPopupVisible, setIsPopupVisible] = useState(false);
 
@@ -63,7 +70,27 @@ setShowPreview(false)
                               {option.label}
                             </option>
                           ))}
+                           <option value='others'>
+                              others
+                            </option>
                       </select>
+                      {
+                       selected === 'others' ? 
+                        <div>
+                        <label className="block text-black font-bold text-sm head my-2">
+                        Section Title
+                      </label>
+                        <input
+                        type="text"
+                        placeholder="Section Title"
+                        id="additional-title"
+                        value={additionalTitle}
+                        onChange={handleInputChange}
+                        className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                      />
+                      </div>: null
+                      }
+                     {/* <Others title={additionalTitle} /> */}
                     </div>
                     <div className="flex justify-center mx-auto my-2">
                         <button
@@ -78,6 +105,7 @@ setShowPreview(false)
                         >
                           Add Section
                         </button>
+                        {/* <Others title={additionalTitle} /> */}
                        </div>
                     </div>
                     </div>

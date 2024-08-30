@@ -1,6 +1,6 @@
 import Image from "next/image";
 import {dateFormatter} from '@/lib/utils'
-import PersonalInformation from "./forms/personalinformation";
+import Others from "./forms/others";
 
 type PreviewProps = {
   data: {
@@ -39,6 +39,20 @@ type PreviewProps = {
     traininglocation:string;
     trainingskills:string;
     jobappliedfor:string;
+    mothertongue: string;
+    otherlanguage: string;
+    othertitle: string;
+  otherdesc: string;
+  mainTitle: string;
+    others:{
+    othertitle: string;
+  otherdesc: string;
+  mainTitle: string;
+    };
+    language:{
+      mothertongue: string;
+    otherlanguage: string;
+    }
     experiences: {
       workfrom: string;
       workto: String;
@@ -70,10 +84,18 @@ type PreviewProps = {
           traininglocation:string;
           trainingskills:string;  
     }[];
+    lic:{
+      license: string,
+      daterange: {
+        datefrom: string;
+        dateto: string;
+      }
+    }[];
   };
 };
 
-const Preview = ({ data, handleNext,image }: PreviewProps) => {
+const Preview = ({ data, handleNext,image,}: PreviewProps) => {
+  console.log(data)
   const handleClick = () => {
     handleNext();
   };
@@ -90,14 +112,10 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
             <Image src={data.personalInformation.profileImage} height={150} width={150} alt="" className="rounded-full border-2 border-gray-700" />
           </div>}
           <div className=" flex-col pl-10 w-full">
-            {/* <div className="flex"> */}
               <p className="block font-semibold text-base my-3">
              <span className="text-2xl font-bold text-gray-700 cont">{data.personalInformation.firstName} {data.personalInformation.lastName}</span>
               </p>
-             {/* {PersonalInformation.email ? (<p className="block text-black font-semibold text-base head px-28">
-                Email Address : <span className="text-sm text-gray-700 cont">{data.personalInformation.email}</span>
-              </p>):null} */}
-            {/* </div> */}
+
             <hr className="border-b-2 border-slate-500 w-9/12" />
             <div className=" w-5/6 flex my-2">
               <p className="text-black font-semibold text-base head ">
@@ -203,13 +221,7 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
                 </p>
 
                 <div className="flex justify-start w-5/6 py-2">
-                  {/* <p className="text-black font-semibold text-base">
-                    {" "}
-                    Department :
-                    <span className="text-gray-700 text-sm">
-                      {data.experience}
-                    </span>
-                  </p> */}
+
                   <p className="text-black font-semibold text-base ">
                     Address : {' '}
                     <span className="font-medium text-base">
@@ -269,6 +281,22 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
         </div>
       }
 
+{!!data.language &&
+          <div className="className pl-8 pr-28">
+          <p className="block text-black font-bold text-2xl mt-6">
+          Language Skills
+        </p>
+        <hr className="border-b-2 border-slate-500" />
+        
+              <p className="block text-base text-black my-3">
+              Mother tongue : <span className="text-lg font-bold text-black cont">{data.language.mothertongue}</span>
+              </p>
+              <p className="block text-base text-black my-3">
+              Other language : <span className="text-lg font-bold text-black cont">{data.language.otherlanguage}</span>
+              </p>
+          </div>
+}
+
 {!!data.training.length &&
 <div className="pl-8 pr-28">
 
@@ -309,6 +337,42 @@ const Preview = ({ data, handleNext,image }: PreviewProps) => {
         <hr className="border-b-1 border-slate-500" />
         </div>
 }
+
+{data.others.map((newItem, index) => (
+  <div key={index} className="pl-8 pr-28">
+    <p className="block text-black font-bold text-2xl mt-6">
+      Others
+    </p>
+
+    <hr className="border-b-2 border-slate-500" />
+
+    <p className="block text-base text-black my-3">
+      Title : <span className="text-lg font-bold text-black">{newItem.othertitle}</span>
+    </p>
+    <p className="block text-base text-black my-3">
+      Description : <span className="text-lg font-bold text-black">{newItem.otherdesc}</span>
+    </p>
+  </div>
+))}
+
+<div className="pl-8 pr-28">
+ <p className="block text-black font-bold text-2xl mt-6 ">Driving License</p>
+ <hr className="border-b-2 border-slate-500" />
+ </div>
+{data.license.map((lice, index)=>(
+  <div key={index} className="pl-8 pr-28">
+   
+   
+
+    <p className="block text-lg font-bold text-black my-3">
+      Vehicle Type : <span className="text-black text-base font-normal">{lice.license}</span>
+    </p>
+    <p className="block text-lg font-bold text-black my-3">
+      License Validation : <span className="text-black text-base font-normal">{lice.daterange.datefrom} to {lice.daterange.dateto}</span>
+    </p>
+  </div>
+))}
+
 
       </div>
     </>
