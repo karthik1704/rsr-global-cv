@@ -20,6 +20,7 @@ import {toast} from 'sonner';
 import Language from "./forms/language";
 import DrivingLicense from "./forms/drivinglicense";
 import Others from "./forms/others";
+import License from "./forms/license";
 
 type FormValues = {
   firstName: string;
@@ -47,6 +48,20 @@ type FormValues = {
   workdepartment: String;
   workaddress: string;
   jobappliedfor: string;
+  mothertongue: string;
+  otherlanguage: string;
+  othertitle: string;
+  otherdesc: string;
+  mainTitle: string;
+  language:{
+    mothertongue: string;
+    otherlanguage: string;
+  }
+  others:{
+    othertitle: string;
+  otherdesc: string;
+  mainTitle: string;
+    };
   education: {
     qualification: string;
     organisation: string;
@@ -78,6 +93,13 @@ type FormValues = {
     trainingto: string;
     traininglocation: string;
     trainingskills: string;
+  }[];
+  lic:{
+    license: string,
+      daterange: {
+        datefrom: string;
+        dateto: string;
+      }
   }[];
 };
 
@@ -133,6 +155,20 @@ const Resume = () => {
           trainingskills: undefined,
         },
       ],
+      lic:[
+        {
+          license: undefined,
+          daterange: {
+            datefrom: undefined,
+            dateto: undefined,
+          }
+      }],
+      // other :[
+      //   {
+      //   othertitle: undefined,
+      // otherdesc: undefined,
+      //   }
+      // ]
     },
   });
 
@@ -153,8 +189,17 @@ const handleSection = () =>{
     workExperience:[],
     jobappliedfor:undefined,
     education:[],
-    training:[]
+    training:[],
+    language:undefined,
+    others: [],
+    lic:[],
   });
+
+  const [additionalTitle, setAdditionalTitle] = useState('');
+
+  const handleInputChange = (event) => {
+    setAdditionalTitle(event.target.value);
+  };
 
 
   const [showFields, setShowFields] = useState(true);
@@ -164,9 +209,9 @@ const handleSection = () =>{
   "work": <WorkExperience selectedSection={selectedSection} setSelectedSection={setSelectedSection} setData={setData} setShowPreview={setShowPreview} workExperience={data.workExperience} data={data} />, 
  "education":<Education selectedSection={selectedSection} setSelectedSection={setSelectedSection}  setData={setData} setShowPreview={setShowPreview} education={data.education}/>, 
   "additional":<Training selectedSection={selectedSection} setSelectedSection={setSelectedSection}  setData={setData} setShowPreview={setShowPreview} training={data.training}/>,
-  "language": <Language selectedSection={selectedSection} setSelectedSection={setSelectedSection} setShowPreview={setShowPreview}/>,
-  'drivinglicense':<DrivingLicense selectedSection={selectedSection} setSelectedSection={setSelectedSection} setShowPreview={setShowPreview}/>,
-  'others':<Others selectedSection={selectedSection} setSelectedSection={setSelectedSection} setShowPreview={setShowPreview}/>
+  "language": <Language selectedSection={selectedSection} setSelectedSection={setSelectedSection} setShowPreview={setShowPreview} setData={setData} language={data.language}/>,
+  'drivinglicense':<License selectedSection={selectedSection} setSelectedSection={setSelectedSection} setShowPreview={setShowPreview}  setData={setData} lic= {data.lic}/>,
+  'others':<Others selectedSection={selectedSection} setSelectedSection={setSelectedSection} setShowPreview={setShowPreview} setData={setData} others={data.others} additionalTitle={additionalTitle} />
 }
 
  //home page
@@ -230,6 +275,7 @@ const handleSection = () =>{
   };
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    console.log(data)
     setData({ ...data, profileImage: uploadedImage });
     handleNext();
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -260,9 +306,37 @@ const handleSection = () =>{
 
               </div>
             ))}
+            {selectedSection.includes('others') && data.others.length &&
+                    data.others.map((other) => (
+                      <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
+                        <p className="text-black text-2xl font-bold uppercase">
+                          {other.mainTitle}
+                        </p>
+            
+                        <p className="text-lg font-semibold text-gray-800">
+                          Title : <span className="font-light">{other.othertitle}</span>
+                        </p>
+            
+                        <p className="text-lg font-semibold text-gray-800">
+                          Description :{" "}
+                          <span className="font-light">{other.otherdesc}</span>
+                        </p>
+            
+                        <div className="flex gap-4">
+                          {/* <button
+                            onClick={() => setShowForm(true)}
+                            type="button"
+                            className="w-24 bg-white text-black hover:text-white hover:bg-green-600 p-2 font-bold rounded-md border border-gray-300"
+                          >
+                            Edit
+                          </button> */}
+                        </div>
+                      </div>
+                    ))}
+            
           </div>
           <div className="my-3">
-              {showPreview ? <AddSection addSections={addSections} setShowPreview={setShowPreview} showPreview={showPreview} selectedSection={selectedSection} /> : null}
+              {showPreview ? <AddSection addSections={addSections} setShowPreview={setShowPreview} showPreview={showPreview} selectedSection={selectedSection} handleInputChange={handleInputChange} additionalTitle={additionalTitle} /> : null}
 
             </div><div className="flex mx-6 my-10">
               <button
