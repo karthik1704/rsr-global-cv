@@ -109,7 +109,7 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
         <div className=" flex col bg-slate-100">
           {!!data.personalInformation.profileImage &&
           <div className="mx-10 my-5">
-            <Image src={data.personalInformation.profileImage} height={150} width={150} alt="" className="rounded-full border-2 border-gray-700" />
+            <Image src={data.personalInformation.profileImage} height={150} width={150} alt="" className="h-32 w-40 rounded-full border-2 border-gray-700" />
           </div>}
           <div className=" flex-col pl-10 w-full">
               <p className="block font-semibold text-base my-3">
@@ -338,6 +338,7 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
         </div>
 }
 
+
 {data.others.map((newItem, index) => (
   <div key={index} className="pl-8 pr-28">
     <p className="block text-black font-bold text-2xl mt-6">
@@ -355,6 +356,8 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
   </div>
 ))}
 
+{!!data.training.length &&
+<>
 <div className="pl-8 pr-28">
  <p className="block text-black font-bold text-2xl mt-6 ">Driving License</p>
  <hr className="border-b-2 border-slate-500" />
@@ -372,6 +375,8 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
     </p>
   </div>
 ))}
+</>
+}
 
 
       </div>
