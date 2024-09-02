@@ -428,7 +428,9 @@ const PDF = ({ data }: data) => {
             <Image
               src={data.personalInformation.profileImage}
               style={{
-                borderRadius: 50,
+                borderRadius: '50',
+                width : '100%',
+                height: '35%',
               }}
             />
           }
@@ -890,7 +892,7 @@ const PDF = ({ data }: data) => {
           </View>
 }
 
-{data.license.length &&
+{!!data.license && data.license.length > 0 && (
           <View>
           <Text
               style={{
@@ -916,7 +918,7 @@ const PDF = ({ data }: data) => {
               </View>
           ))}
           </View>
-}
+)}
           {/* <View style={{ height: 1, backgroundColor: "grey" }} /> */}
 
           {/* <View>
