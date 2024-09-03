@@ -432,7 +432,7 @@ const PDF = ({ data }: data) => {
                 style={{
                   borderRadius: "50",
                   width: "100%",
-                  height: "35%",
+                  // height: "35%",
                 }}
               />
             )}
