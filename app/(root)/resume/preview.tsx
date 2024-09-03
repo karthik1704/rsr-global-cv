@@ -113,7 +113,7 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
           </div>}
           <div className=" flex-col pl-10 w-full">
               <p className="block font-semibold text-base my-3">
-             <span className="text-2xl font-bold text-gray-700 cont">{data.personalInformation.firstName} {data.personalInformation.lastName}</span>
+             <span className="text-2xl font-bold text-gray-700 cont capitalize">{data.personalInformation.firstName} {data.personalInformation.lastName}</span>
               </p>
 
             <hr className="border-b-2 border-slate-500 w-9/12" />
@@ -130,7 +130,7 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
 
             <div className=" w-5/6 flex my-2">
               <p className="text-black font-semibold text-base head ">
-              Nationality : <span className="text-base cont font-medium">{data.personalInformation.nationality}</span>
+              Nationality : <span className="text-base cont font-medium capitalize">{data.personalInformation.nationality}</span>
               </p>
               {data.personalInformation.email ? (
               <p className="text-black font-semibold text-base head mx-5">
@@ -142,10 +142,10 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
             <div className="w-5/6">
               <p className="text-black font-semibold text-base">
                 Address : {" "}
-                <span className="text-base font-medium cont">
+                <span className="text-base font-medium cont capitalize">
                   {data.personalInformation.add1}, {data.personalInformation.add2}
                 </span>{" "}
-                <span className=" text-base font-medium cont">
+                <span className=" text-base font-medium cont capitalize">
                   {data.personalInformation.city}, {data.personalInformation.code} {' '} {data.personalInformation.country}
                 </span>
               </p>
@@ -168,7 +168,7 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
         <p className="text-black font-semibold text-base ">
                     Job applied for :
                   </p>
-                  <span className=" px-2 block font-medium text-black text-base">
+                  <span className=" px-2 block font-medium text-black text-base capitalize">
                   {data.jobappliedfor}
                 </span>
         </div>
@@ -201,7 +201,7 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
                 <div className="w-4/5">
                   <p className="text-gray-700 font-semibold text-2xl uppercase">
                   {exp.position} {' '}
-                  <span className="text-gray-700 font-medium">{exp.companyName}</span>
+                  <span className="text-gray-700 font-medium capitalize">{exp.companyName}</span>
                 
                  
                   </p>
@@ -211,7 +211,7 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
                 <p className="text-black font-semibold text-base py-2">
                   {" "}
                   {exp.companyName} :{' '}
-                  <span className="block font-medium text-base">{exp.aboutcompany}</span>
+                  <span className="block font-medium text-base capitalize">{exp.aboutcompany}</span>
                 </p>
 
                 <p className="text-black font-semibold text-base py-2">
@@ -224,7 +224,7 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
 
                   <p className="text-black font-semibold text-base ">
                     Address : {' '}
-                    <span className="font-medium text-base">
+                    <span className="font-medium text-base capitalize">
                       {exp.position}
                     </span>
                   </p>
@@ -260,7 +260,7 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
             <p className="text-gray-700 font-medium text-base "> {' '} - {' '} 
             {dateFormatter(educ.educationto)}
             </p>
-            <p className="text-gray-700 font-medium text-base">,{' '}  
+            <p className="text-gray-700 font-medium text-base capitalize">,{' '}  
             {educ.educationcountry}
             </p>
           </div>
@@ -269,7 +269,7 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
             <p className="text-gray-700 font-semibold text-2xl uppercase">
               {" "}
               {educ.qualification} 
-              <span className="text-gray-700 font-medium text-lg ml-2">
+              <span className="text-gray-700 font-medium text-lg ml-2 capitalize">
             {educ.organisation}
             </span>
             </p>
@@ -289,10 +289,10 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
         <hr className="border-b-2 border-slate-500" />
         
               <p className="block text-base text-black my-3">
-              Mother tongue : <span className="text-lg font-bold text-black cont">{data.language.mothertongue}</span>
+              Mother tongue : <span className="text-lg font-bold text-black cont capitalize">{data.language.mothertongue}</span>
               </p>
               <p className="block text-base text-black my-3">
-              Other language : <span className="text-lg font-bold text-black cont">{data.language.otherlanguage}</span>
+              Other language : <span className="text-lg font-bold text-black cont capitalize">{data.language.otherlanguage}</span>
               </p>
           </div>
 }
@@ -321,14 +321,14 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
               </p>
                </div>
                <div className="flex">
-               <p className="text-gray-700 font-semibold text-base">
+               <p className="text-gray-700 font-semibold text-base capitalize">
               {" "}
                 {train.title}{','}
             </p>
-          <p className="text-gray-700 font-semibold text-base ">{' '}
+          <p className="text-gray-700 font-semibold text-base capitalize">{' '}
           {train.institute} {','}
             </p> 
-            <p className="text-gray-700 font-semibold text-base">
+            <p className="text-gray-700 font-semibold text-base capitalize">
             {train.traininglocation}
             </p>
             </div>
@@ -348,10 +348,10 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
     <hr className="border-b-2 border-slate-500" />
 
     <p className="block text-base text-black my-3">
-      Title : <span className="text-lg font-bold text-black">{newItem.othertitle}</span>
+      Title : <span className="text-lg font-bold text-black capitalize">{newItem.othertitle}</span>
     </p>
     <p className="block text-base text-black my-3">
-      Description : <span className="text-lg font-bold text-black">{newItem.otherdesc}</span>
+      Description : <span className="text-lg font-bold text-black capitalize">{newItem.otherdesc}</span>
     </p>
   </div>
 ))}

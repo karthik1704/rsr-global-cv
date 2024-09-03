@@ -12,7 +12,7 @@ import {
 } from "@react-pdf/renderer";
 // import Profile from "../../image/pexels-photo-704748.webp";
 // import { HtmlProps } from "node_modules/react-pdf-html/dist/types/Html";
-import {dateFormatter} from '@/lib/utils'
+import { dateFormatter } from "@/lib/utils";
 import React from "react";
 // import Html from "react-pdf-html";
 // import { htmlRenderers } from "./pdfhtml";
@@ -65,18 +65,18 @@ type data = {
     traininglocation: string;
     trainingskills: string;
   }[];
-  others:{
+  others: {
     othertitle: string;
-  otherdesc: string;
-  mainTitle: string;
-    }[];
-    lic:{
-      license: string,
-      daterange: {
-        datefrom: string;
-        dateto: string;
-      }
-    }[];
+    otherdesc: string;
+    mainTitle: string;
+  }[];
+  lic: {
+    license: string;
+    daterange: {
+      datefrom: string;
+      dateto: string;
+    };
+  }[];
 };
 
 Font.register({
@@ -258,6 +258,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 15,
     fontWeight: "bold",
+    textTransform: "capitalize",
   },
   line: {
     height: 2,
@@ -283,10 +284,12 @@ const styles = StyleSheet.create({
   text5: {
     fontSize: 12,
     fontWeight: "extrabold",
+    textTransform: "capitalize",
   },
   text6: {
     fontSize: 10,
     margin: 1,
+    textTransform: "capitalize",
   },
   text7: {
     fontSize: 12,
@@ -420,22 +423,20 @@ const PDF = ({ data }: data) => {
       {/* @ts-ignore */}
       <Page size="LETTER" style={styles.page}>
         <View style={styles.sidebar}>
-         
           <View style={styles.photoContainer}>
             {/* <Text>CHEF DE PARTIE</Text>
             <Text>QATAR AIRWAYS GROUP</Text> */}
-             {!!data.personalInformation.profileImage &&
-            <Image
-              src={data.personalInformation.profileImage}
-              style={{
-                borderRadius: '50',
-                width : '100%',
-                height: '35%',
-              }}
-            />
-          }
+            {!!data.personalInformation.profileImage && (
+              <Image
+                src={data.personalInformation.profileImage}
+                style={{
+                  borderRadius: "50",
+                  width: "100%",
+                  height: "35%",
+                }}
+              />
+            )}
           </View>
-
 
           <View style={{ width: "82%" }}>
             <View style={styles.heading}>
@@ -474,19 +475,23 @@ const PDF = ({ data }: data) => {
                       ? new Date(
                           data.personalInformation.dob
                         ).toLocaleDateString("en-GB")
-                      : null} |
+                      : null}{" "}
+                    |
                   </Text>
                 </View>
                 {data.personalInformation.contact ? (
-                <View
-                  style={{ flexDirection: "row", justifyContent: "flex-start" }}
-                >
-                  <Text style={styles.text3}>Contact Number :</Text>
-                  <Text style={styles.text4}>
-                    {data.personalInformation.contact} |
-                  </Text>
-                </View>
-                ) : null }
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "flex-start",
+                    }}
+                  >
+                    <Text style={styles.text3}>Contact Number :</Text>
+                    <Text style={styles.text4}>
+                      {data.personalInformation.contact} |
+                    </Text>
+                  </View>
+                ) : null}
               </View>
 
               <View
@@ -494,8 +499,8 @@ const PDF = ({ data }: data) => {
                   flexDirection: "row",
                   justifyContent: "flex-start",
                   gap: "10",
-                  marginBottom:'5',
-                  marginTop:'5',
+                  marginBottom: "5",
+                  marginTop: "5",
                 }}
               >
                 <View
@@ -512,14 +517,17 @@ const PDF = ({ data }: data) => {
                   </Text>
                 </View>
                 {data.personalInformation.email ? (
-                <View
-                  style={{ flexDirection: "row", justifyContent: "flex-start" }}
-                >
-                  <Text style={styles.text3}>Email ID:</Text>
-                  <Text style={styles.text4}>
-                    {data.personalInformation.email} |
-                  </Text>
-                </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "flex-start",
+                    }}
+                  >
+                    <Text style={styles.text3}>Email ID:</Text>
+                    <Text style={styles.text4}>
+                      {data.personalInformation.email} |
+                    </Text>
+                  </View>
                 ) : null}
               </View>
 
@@ -538,12 +546,14 @@ const PDF = ({ data }: data) => {
               </View>
             </View>
 
-{data.personalInformation.about? (
-            <View>
-              <Text style={styles.text7}>About me:</Text>
-              <Text style={styles.text8}>{data.personalInformation.about}</Text>
-            </View>
-):null}
+            {data.personalInformation.about ? (
+              <View>
+                <Text style={styles.text7}>About me:</Text>
+                <Text style={styles.text8}>
+                  {data.personalInformation.about}
+                </Text>
+              </View>
+            ) : null}
           </View>
         </View>
 
@@ -575,8 +585,11 @@ const PDF = ({ data }: data) => {
                   <View style={styles.job}>
                     {/* <Text style={styles.dates}>05/08/2022 - CURRENT Doha, Qatar</Text> */}
                     <Text style={styles.dates}>
-                      {dateFormatter(exp.workfrom)} - {dateFormatter(exp.workto) ?(exp.workto):('currently working')}, {exp.location}
-                        
+                      {dateFormatter(exp.workfrom)} -
+                      {exp.workto
+                        ? dateFormatter(exp.workto)
+                        : "Currently Working"}
+                      ,{exp.location}
                     </Text>
 
                     <View
@@ -601,6 +614,7 @@ const PDF = ({ data }: data) => {
                           fontSize: 12,
                           fontWeight: "bold",
                           marginTop: 5,
+                          textTransform: "capitalize",
                         }}
                       >
                         {exp.companyName}
@@ -704,8 +718,9 @@ const PDF = ({ data }: data) => {
               <View style={styles.line1} />
               <View style={styles.job}>
                 <Text style={styles.dates}>
-                  {dateFormatter(educ.educationfrom)} - {dateFormatter(educ.educationto)} {educ.educationcity}
-                  , {educ.educationcountry}
+                  {dateFormatter(educ.educationfrom)} -{" "}
+                  {dateFormatter(educ.educationto)} {educ.educationcity},{" "}
+                  {educ.educationcountry}
                 </Text>
 
                 <View
@@ -748,45 +763,48 @@ const PDF = ({ data }: data) => {
               </View>
             </div>
           ))}
-         {data.language && ( 
-          <View>
-          <Text
-            style={{ fontSize: 12, fontWeight: "extrabold", paddingTop: 10 }}
-          >
-            LANGUAGE SKILLS
-          </Text>
-          <View style={styles.line1} />
+          {data.language && (
+            <View>
+              <Text
+                style={{
+                  fontSize: 12,
+                  fontWeight: "extrabold",
+                  paddingTop: 10,
+                }}
+              >
+                LANGUAGE SKILLS
+              </Text>
+              <View style={styles.line1} />
 
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              gap: "5",
-              paddingTop: 10,
-            }}
-          >
-            <Text style={{ fontSize: 10 }}>Mother tongue :</Text>
-            <Text style={{ fontSize: 10, fontWeight: "extrabold" }}>
-            {data.language.mothertongue}
-            </Text>
-          </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "flex-start",
+                  gap: "5",
+                  paddingTop: 10,
+                }}
+              >
+                <Text style={{ fontSize: 10 }}>Mother tongue :</Text>
+                <Text style={{ fontSize: 10, fontWeight: "extrabold" }}>
+                  {data.language.mothertongue}
+                </Text>
+              </View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              gap: "5",
-              paddingTop: 10,
-            }}
-          >
-            <Text style={{ fontSize: 10 }}>Other language :</Text>
-            <Text style={{ fontSize: 10, fontWeight: "extrabold" }}>
-            {data.language.otherlanguage}
-            </Text>
-          </View>
-
-          </View>
-)}
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "flex-start",
+                  gap: "5",
+                  paddingTop: 10,
+                }}
+              >
+                <Text style={{ fontSize: 10 }}>Other language :</Text>
+                <Text style={{ fontSize: 10, fontWeight: "extrabold" }}>
+                  {data.language.otherlanguage}
+                </Text>
+              </View>
+            </View>
+          )}
           {/* <View>
             <Text
               style={{
@@ -827,98 +845,111 @@ const PDF = ({ data }: data) => {
               <Text style={styles.listItemText}>Traveling</Text>
             </View> */}
           {/* </View> */}
-          {!!data.training.length &&
-          <View>
-            <Text
-              style={{
-                fontSize: 12,
-                fontWeight: "extrabold",
-                marginTop: 25,
-              }}
-            >
-              
-              ADDITIONAL INFORMATION
-            </Text>
-            <View style={styles.line1} />
-            
-          <Text
-            style={{ marginTop: 10, fontSize: 12, fontWeight: "extrabold" }}
-          >
-            HONORS AND AWARDS
-          </Text>
-{data.training.map((train,index)=>(
-  <View key={index}>
+          {!!data.training.length && (
+            <View>
+              <Text
+                style={{
+                  fontSize: 12,
+                  fontWeight: "extrabold",
+                  marginTop: 25,
+                }}
+              >
+                ADDITIONAL INFORMATION
+              </Text>
+              <View style={styles.line1} />
 
-          <View style={styles.listItems}>
-            <Text style={styles.listItemDate}>{dateFormatter(train.trainingfrom)} - {dateFormatter(train.trainingto)}</Text>
-            <Text style={styles.listItemTitle}>{train.title}, {train.institute}, {train.traininglocation}</Text>
-          </View>
+              <Text
+                style={{ marginTop: 10, fontSize: 12, fontWeight: "extrabold" }}
+              >
+                HONORS AND AWARDS
+              </Text>
+              {data.training.map((train, index) => (
+                <View key={index}>
+                  <View style={styles.listItems}>
+                    <Text style={styles.listItemDate}>
+                      {dateFormatter(train.trainingfrom)} -{" "}
+                      {dateFormatter(train.trainingto)}
+                    </Text>
+                    <Text style={styles.listItemTitle}>
+                      {train.title}, {train.institute}, {train.traininglocation}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+          )}
 
-          </View>))}
-          </View>
-}
-
-{/* <Text
+          {/* <Text
             style={{ marginTop: 10, fontSize: 12, fontWeight: "extrabold" }}
           >
            Others
           </Text> */}
-          {data.others.length &&
-          <View>
-          <Text
-              style={{
-                fontSize: 12,
-                fontWeight: "extrabold",
-                marginTop: 10,
-              }}
-            >
-              
-              Others
-            </Text>
-            <View style={styles.line1} />
-          {data.others.map((oth,index)=>(
-            <View key={index}>
-              <View style={styles.listItems}>
+          {data.others.length && (
+            <View>
               <Text
-            style={{ marginTop: 10, fontSize: 12, fontWeight: "extrabold" }}
-          >{oth.mainTitle}
-           {/* <Text style={styles.listItemDate}>{oth.mainTitle}</Text> */}
-          </Text>
-            <Text style={styles.listItemDate}>{oth.othertitle}</Text>
-            <Text style={styles.listItemTitle}>{oth.otherdesc}</Text>
-          </View>
-              </View>
-          ))}
-          </View>
-}
+                style={{
+                  fontSize: 12,
+                  fontWeight: "extrabold",
+                  marginTop: 10,
+                }}
+              >
+                Others
+              </Text>
+              <View style={styles.line1} />
+              {data.others.map((oth, index) => (
+                <View key={index}>
+                  <View style={styles.listItems}>
+                    <Text
+                      style={{
+                        marginTop: 10,
+                        fontSize: 12,
+                        fontWeight: "extrabold",
+                      }}
+                    >
+                      {oth.mainTitle}
+                      {/* <Text style={styles.listItemDate}>{oth.mainTitle}</Text> */}
+                    </Text>
+                    <Text style={styles.listItemDate}>{oth.othertitle}</Text>
+                    <Text style={styles.listItemTitle}>{oth.otherdesc}</Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+          )}
 
-{!!data.license && data.license.length > 0 && (
-          <View>
-          <Text
-              style={{
-                fontSize: 12,
-                fontWeight: "extrabold",
-                marginTop: 10,
-              }}
-            >
-              
-              License
-            </Text>
-            <View style={styles.line1} />
-          {data.license.map((li,index)=>(
-            <View key={index}>
-              <View style={styles.listItems}>
+          {!!data.license && data.license.length > 0 && (
+            <View>
               <Text
-            style={{ marginTop: 10, fontSize: 12, fontWeight: "extrabold" }}
-          >{li.license}
-           {/* <Text style={styles.listItemDate}>{oth.mainTitle}</Text> */}
-          </Text>
-            <Text style={styles.listItemDate}>{li.daterange.datefrom} - {li.daterange.dateto}</Text>
-          </View>
-              </View>
-          ))}
-          </View>
-)}
+                style={{
+                  fontSize: 12,
+                  fontWeight: "extrabold",
+                  marginTop: 10,
+                }}
+              >
+                License
+              </Text>
+              <View style={styles.line1} />
+              {data.license.map((li, index) => (
+                <View key={index}>
+                  <View style={styles.listItems}>
+                    <Text
+                      style={{
+                        marginTop: 10,
+                        fontSize: 12,
+                        fontWeight: "extrabold",
+                      }}
+                    >
+                      {li.license}
+                      {/* <Text style={styles.listItemDate}>{oth.mainTitle}</Text> */}
+                    </Text>
+                    <Text style={styles.listItemDate}>
+                      {li.daterange.datefrom} - {li.daterange.dateto}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+          )}
           {/* <View style={{ height: 1, backgroundColor: "grey" }} /> */}
 
           {/* <View>

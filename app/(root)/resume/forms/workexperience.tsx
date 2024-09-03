@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import {dateFormatter,getCurrentDate} from '@/lib/utils';
 
-const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,setSelectedSection,selectedSection}) =>{
+const WorkExperience = ({setData,workExperience,workExperience1,setShowPreview,data,showPreview,setSelectedSection,selectedSection}) =>{
     const {
         register,
         handleSubmit,
@@ -17,6 +17,16 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
       } = useForm({
         defaultValues: {
           jobappliedfor:undefined,
+          workfrom1: undefined,
+    workto1: undefined,
+    companyName1: undefined,
+    aboutcompany1: undefined,
+    about1: undefined,
+    position1: undefined,
+    location1: undefined,
+    workwebsite1: undefined,
+    workdepartment1: undefined,
+    workaddress1: undefined,
             experiences: 
             [
                 {
@@ -50,25 +60,42 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
         setIsVisible(false)
       }
 
-      const [isSwitchOn, setIsSwitchOn] = useState(false);
+      // const [isSwitchOn, setIsSwitchOn] = useState(false);
 
-      const handleSwitchChange = (checked) => {
-        setIsSwitchOn(checked);
-        if (checked) {
-          clearErrors("experiences.0.workto");
-          setValue("experiences.0.workto", "");
-        }
-      };
+      // const handleSwitchChange = (checked) => {
+      //   setIsSwitchOn(checked);
+      //   if (checked) {
+      //     clearErrors("experiences.0.workto");
+      //     setValue("experiences.0.workto", "");
+      //   }
+      // };
     
       //work exp To Date disable
     
       const workexpto = (value, { workto }) => {
-        if (!value || isSwitchOn) {
+        if (!value || switchStates) {
           return true;
         }
         return (
           new Date(value) >= new Date(workto) || "End date must be after start date"
         );
+      };
+
+      const [switchStates, setSwitchStates] = useState(
+        experienceFields.reduce((acc, _, index) => ({ ...acc, [index]: false }), {})
+      );
+
+      const handleSwitchChange = (index) => {
+        setSwitchStates((prevStates) => {
+          const newSwitchState = !prevStates[index];
+          if(newSwitchState){
+            setValue(`experiences.${index}.workto`,null);
+          }
+          return{
+          ...prevStates,
+          [index]: newSwitchState,
+          }
+        });
       };
 
 
@@ -105,16 +132,17 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
 // console.log(workExperience)
     return(
         <div className="my-8">
+
             {isVisible && !show && workExperience.length &&
             <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
               <p className="text-black text-2xl font-bold uppercase">Work Experience</p>
              {!!data.jobappliedfor && <p className="text-lg font-semibold text-gray-800">Job Applied : <span className="font-light">{data.jobappliedfor}</span></p>}
               {workExperience.map((exp,index)=>(
                 <div className="space-y-4" key={index}>
-<p className="text-lg font-semibold text-gray-800">Employer : <span className="font-light">{exp.companyName}</span></p>
-<p className="text-lg font-semibold text-gray-800">Website : <span className="font-light">{exp.workwebsite}</span></p>
-<p className="text-lg font-semibold text-gray-800">Location : <span className="font-light">{exp.location}</span></p>
-<p className="text-lg font-semibold text-gray-800">Occupation: <span className="font-light">{exp.position}</span></p>
+<p className="text-lg font-semibold text-gray-800">Employer : <span className="font-light capitalize">{exp.companyName}</span></p>
+<p className="text-lg font-semibold text-gray-800">Website : <span className="font-light capitalize">{exp.workwebsite}</span></p>
+<p className="text-lg font-semibold text-gray-800">Location : <span className="font-light capitalize">{exp.location}</span></p>
+<p className="text-lg font-semibold text-gray-800">Occupation: <span className="font-light capitalize">{exp.position}</span></p>
 <p className="text-lg font-semibold text-gray-800">From : <span className="font-light">{dateFormatter(exp.workfrom)}</span></p>
 <p className="text-lg font-semibold text-gray-800">To : {exp.workto?(<span className="font-light">{dateFormatter(exp.workto)}</span>
 ):( 'currently working')}</p>
@@ -136,6 +164,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
               >
                 Delete
               </button> */}
+
             </div>
                 </div>
               ))}
@@ -152,7 +181,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                 <input
                   type="text"
                   placeholder="Software engineer"
-                  className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                  className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   {...register("jobappliedfor", {
                     // required: {
                     //   value: true,
@@ -164,6 +193,8 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                 <p className="text-red-700 text-sm">{errors.jobappliedfor.message}</p>
               )} */}
               </div>
+
+              
 
               {experienceFields.map((item, index) => (
                 <div key={item.id}>
@@ -192,7 +223,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                         },
                       })}
                       placeholder="Company name"
-                      className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                      className="pl-4 block w-full rounded-md border-0 capitalize py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                     />
                     {errors.experiences?.[index]?.companyName && (
                       <p className="text-red-700 text-sm">
@@ -235,7 +266,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                           // }
                         })}
                         placeholder="Working location"
-                        className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                       />
                     </div>
                   </div>
@@ -253,7 +284,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                         },
                       })}
                       placeholder="Position"
-                      className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                      className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                     />
                     {errors.experiences?.[index]?.position && (
                       <p className="text-red-700 text-sm">
@@ -293,19 +324,17 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                       </label>
                       <input
                         {...register(`experiences.${index}.workto`, {
-                          required: {
-                            value: !isSwitchOn,
+                          required: !switchStates[index] ? {
+                            value: true,
                             message: "Date is required",
-                          },
-                          // validate: validateDateRange
-                          validate: (value) =>
-                            workexpto(value, getValues(`experiences.${index}`)),
+                          } : false,
+                          validate: (value) => !switchStates[index] ? workexpto(value, getValues(`experiences.${index}`)) : true,
                         })}
                         min="1980-01-01"
                         max={getCurrentDate()}
                         className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
-                        disabled={isSwitchOn}
+                        disabled={switchStates[index]}
                       />
                       {errors.experiences?.[index]?.workto && (
                         <p className="text-red-700 text-sm">
@@ -313,18 +342,26 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                         </p>
                       )}
                     </div>
+                   
 
+                    <>
+                   {index ===0 &&(
                     <div className="mb-4  w-2/6  px-6  ">
                       <Label className="block text-black font-bold text-sm head mb-2">
                         Working On
                       </Label>
                       <Switch
-                        id="airplane-mode"
-                        checked={isSwitchOn}
-                        onCheckedChange={handleSwitchChange}
+                        id={`switch-${index}`}
+                        checked={switchStates[index]}
+                        onCheckedChange={() => handleSwitchChange(index)}
+                        // checked={isSwitchOn}
+                        // onCheckedChange={handleSwitchChange}
                       />
                     </div>
+                  )}
+                    </>
                   </div>
+                  
 
                   <div className="mb-4  w-full px-6">
                     <label className="block text-black font-bold text-sm head mb-2">
