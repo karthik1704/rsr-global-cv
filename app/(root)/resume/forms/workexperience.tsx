@@ -371,7 +371,7 @@ const WorkExperience = ({setData,workExperience,workExperience1,setShowPreview,d
                    {index ===0 &&(
                     <div className="mb-4  w-2/6  px-6  ">
                       <Label className="block text-black font-bold text-sm head mb-2">
-                        Ongoing
+                        Working as
                       </Label>
                       <Switch
                         id={`switch-${index}`}
