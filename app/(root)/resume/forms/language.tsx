@@ -43,12 +43,12 @@ const Language = ({setData,language,selectedSection,setSelectedSection,setShowPr
            <p className="text-black text-2xl font-bold uppercase">Language Information</p>
 
     {language.mothertongue && (<p className="text-lg font-semibold text-gray-800">
-        Mother language : <span className="font-light">{language.mothertongue}</span> 
+        Mother language : <span className="font-light capitalize">{language.mothertongue}</span> 
     </p>)}
 
     {language.otherlanguage && (
     <p className="text-lg font-semibold text-gray-800">
-        Other language : <span className="font-light">{language.otherlanguage}</span>
+        Other language : <span className="font-light capitalize">{language.otherlanguage}</span>
     </p>
 )}
     <div className="flex gap-4">
@@ -84,7 +84,7 @@ const Language = ({setData,language,selectedSection,setSelectedSection,setShowPr
                 <span className="text-red-700">*</span>
               </label>
               <input
-                className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                 {...register("mothertongue", {
                   required: {
                     value: true,
@@ -108,7 +108,7 @@ const Language = ({setData,language,selectedSection,setSelectedSection,setShowPr
                 <span className="text-red-700">*</span>
               </label>
               <input
-                className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                 {...register("otherlanguage", {
                   required: {
                     value: true,

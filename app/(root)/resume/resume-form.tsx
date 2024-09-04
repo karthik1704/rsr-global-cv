@@ -48,6 +48,17 @@ type FormValues = {
   workdepartment: String;
   workaddress: string;
   jobappliedfor: string;
+  workfrom1: string;
+  workto1: string;
+  companyName1: string;
+  aboutcompany1: string;
+  about1: string;
+  position1: string;
+  location1: string;
+  workwebsite1: string;
+  workdepartment1: string;
+  workaddress1: string;
+
   mothertongue: string;
   otherlanguage: string;
   othertitle: string;
@@ -70,6 +81,18 @@ type FormValues = {
     educationcity: string;
     educationcountry: string;
   }[];
+  workExperience1:{
+    workfrom1: string;
+    workto1: string;
+    companyName1: string;
+    aboutcompany1: string;
+    about1: string;
+    position1: string;
+    location1: string;
+    workwebsite1: string;
+    workdepartment1: string;
+    workaddress1: string;
+  }[]
 
   experiences: {
     years: number;
@@ -121,6 +144,18 @@ const Resume = () => {
       // dob: '',
       experience: 0,
       companyName: "",
+      workExperience1: [{
+        workfrom1: undefined,
+        workto1: undefined,
+        companyName1: undefined,
+        aboutcompany1: undefined,
+        about1: undefined,
+        position1: undefined,
+        location1: undefined,
+        workwebsite1: undefined,
+        workdepartment1: undefined,
+        workaddress1: undefined,
+      }],
       experiences: [
         {
           workfrom: undefined,
@@ -187,13 +222,45 @@ const handleSection = () =>{
   const [data, setData] = useState({
     personalInformation:null,
     workExperience:[],
+      workExperience1: [],
     jobappliedfor:undefined,
+
     education:[],
     training:[],
     language:undefined,
     others: [],
     lic:[],
   });
+
+  //first letter capital
+  const [text, setText]=useState({
+    a:'',
+    b:{
+      field1:'',
+      field2:'',
+    },
+  });
+
+  const handleChange = (event,key,subkey) => {
+const value = event.target.value;
+const updatedValue = value.charAt(0).toUpperCase()+value.slice(1);
+setText(prevValues =>{
+  if(subkey){
+    return{
+      ...prevValues,
+      b:{
+        ...prevValues.b,
+        [subkey]: updatedValue,
+      },
+    };
+  }else{
+    return{
+  ...prevValues,
+  [key]: updatedValue,
+    }
+  }
+});
+  };
 
   const [additionalTitle, setAdditionalTitle] = useState('');
 
@@ -206,7 +273,7 @@ const handleSection = () =>{
 
   const formComponents = {
     // "personal":<PersonalInformation setData={setData} personalInformation={data.personalInformation}/>,
-  "work": <WorkExperience selectedSection={selectedSection} setSelectedSection={setSelectedSection} setData={setData} setShowPreview={setShowPreview} workExperience={data.workExperience} data={data} />, 
+  "work": <WorkExperience selectedSection={selectedSection} setSelectedSection={setSelectedSection} setData={setData} setShowPreview={setShowPreview} workExperience={data.workExperience} data={data}/>, 
  "education":<Education selectedSection={selectedSection} setSelectedSection={setSelectedSection}  setData={setData} setShowPreview={setShowPreview} education={data.education}/>, 
   "additional":<Training selectedSection={selectedSection} setSelectedSection={setSelectedSection}  setData={setData} setShowPreview={setShowPreview} training={data.training}/>,
   "language": <Language selectedSection={selectedSection} setSelectedSection={setSelectedSection} setShowPreview={setShowPreview} setData={setData} language={data.language}/>,
@@ -297,7 +364,7 @@ const handleSection = () =>{
             <div>
 
               <hr className="mb-2" />
-              <PersonalInformation setData={setData} personalInformation={data.personalInformation} setShowPreview={setShowPreview} />
+              <PersonalInformation setData={setData} personalInformation={data.personalInformation} setShowPreview={setShowPreview} text={text.a} handleChange={(event)=>handleChange(event,'a')}/>
             </div>
 
             {selectedSection.map((selected) => (
@@ -314,12 +381,12 @@ const handleSection = () =>{
                         </p>
             
                         <p className="text-lg font-semibold text-gray-800">
-                          Title : <span className="font-light">{other.othertitle}</span>
+                          Title : <span className="font-light capitalize">{other.othertitle}</span>
                         </p>
             
                         <p className="text-lg font-semibold text-gray-800">
                           Description :{" "}
-                          <span className="font-light">{other.otherdesc}</span>
+                          <span className="font-light capitalize">{other.otherdesc}</span>
                         </p>
             
                         <div className="flex gap-4">

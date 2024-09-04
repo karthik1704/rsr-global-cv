@@ -76,11 +76,11 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                 <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md" key={index}>
                   <p className="text-black text-2xl font-bold uppercase">Training & Awards</p>
 {/* <p className="text-lg font-semibold text-gray-800">Hobbies : <span className="font-light">{train.Hobbies}</span></p> */}
-<p className="text-lg font-semibold text-gray-800">Title of Award : <span className="font-light">{train.title}</span></p>
-<p className="text-lg font-semibold text-gray-800">Awarding Institution : <span className="font-light">{train.institute}</span></p>
+<p className="text-lg font-semibold text-gray-800">Title of Award : <span className="font-light capitalize">{train.title}</span></p>
+<p className="text-lg font-semibold text-gray-800">Awarding Institution : <span className="font-light capitalize">{train.institute}</span></p>
 <p className="text-lg font-semibold text-gray-800">From : <span className="font-light">{dateFormatter(train.trainingfrom)}</span></p>
 <p className="text-lg font-semibold text-gray-800">To : <span className="font-light">{dateFormatter(train.trainingto)}</span></p>
-<p className="text-lg font-semibold text-gray-800">Location : <span className="font-light">{train.traininglocation}</span></p>
+<p className="text-lg font-semibold text-gray-800">Location : <span className="font-light capitalize">{train.traininglocation}</span></p>
 <div className="flex mx-6">
               <button
               onClick={()=>setShowForm(true)}
@@ -158,7 +158,7 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                             },
                           })}
                           placeholder="Title of the award"
-                          className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                          className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         />
 
                         {errors.training?.[index]?.institute && (
@@ -182,7 +182,7 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                             },
                           })}
                           placeholder="Name of institute"
-                          className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                          className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         />
 
                         {errors.training?.[index]?.institute && (
@@ -255,7 +255,7 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                           },
                         })}
                         placeholder="Location name"
-                        className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                       />
                       {errors.training?.[index]?.traininglocation && (
                         <p className="text-red-700 text-sm">
