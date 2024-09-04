@@ -1,8 +1,20 @@
 import { useState } from "react";
-import {useForm,useFieldArray} from 'react-hook-form';
+import {useForm,useFieldArray,useFormContext,FormProvider} from 'react-hook-form';
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import {dateFormatter,getCurrentDate} from '@/lib/utils';
+
+      //capitalize letter
+
+      const capitalizeFirstLetter = (text) => {
+        if (!text) return text;
+        const words = text.split(' ');
+        if (words.length === 0) return text;
+      
+        words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+      
+        return words.join(' ');
+      };
 
 const WorkExperience = ({setData,workExperience,workExperience1,setShowPreview,data,showPreview,setSelectedSection,selectedSection}) =>{
     const {
@@ -59,6 +71,17 @@ const WorkExperience = ({setData,workExperience,workExperience1,setShowPreview,d
       const sectionDeleted = () =>{
         setIsVisible(false)
       }
+
+       //capitalize letter
+
+      const handleChange = (event, index, field) => {
+        const { value } = event.target;
+        const formattedValue = capitalizeFirstLetter(value);
+        
+      
+        setValue(`experiences.${index}.${field}`, formattedValue);
+      };
+
 
       // const [isSwitchOn, setIsSwitchOn] = useState(false);
 
@@ -140,7 +163,7 @@ const WorkExperience = ({setData,workExperience,workExperience1,setShowPreview,d
               {workExperience.map((exp,index)=>(
                 <div className="space-y-4" key={index}>
 <p className="text-lg font-semibold text-gray-800">Employer : <span className="font-light capitalize">{exp.companyName}</span></p>
-<p className="text-lg font-semibold text-gray-800">Website : <span className="font-light capitalize">{exp.workwebsite}</span></p>
+<p className="text-lg font-semibold text-gray-800">Website : <span className="font-light">{exp.workwebsite}</span></p>
 <p className="text-lg font-semibold text-gray-800">Location : <span className="font-light capitalize">{exp.location}</span></p>
 <p className="text-lg font-semibold text-gray-800">Occupation: <span className="font-light capitalize">{exp.position}</span></p>
 <p className="text-lg font-semibold text-gray-800">From : <span className="font-light">{dateFormatter(exp.workfrom)}</span></p>
@@ -348,7 +371,7 @@ const WorkExperience = ({setData,workExperience,workExperience1,setShowPreview,d
                    {index ===0 &&(
                     <div className="mb-4  w-2/6  px-6  ">
                       <Label className="block text-black font-bold text-sm head mb-2">
-                        Working On
+                        Ongoing
                       </Label>
                       <Switch
                         id={`switch-${index}`}
@@ -375,6 +398,8 @@ const WorkExperience = ({setData,workExperience,workExperience1,setShowPreview,d
                         //   message: 'First Name is required'
                         // }
                       })}
+                      value={item.aboutcompany}
+              onChange={(event) => handleChange(event, index, 'aboutcompany')}
                       placeholder="About company"
                       rows={5}
                     />
@@ -392,6 +417,8 @@ const WorkExperience = ({setData,workExperience,workExperience1,setShowPreview,d
                         //   message: 'First Name is required'
                         // }
                       })}
+                      value={item.about2}
+                      onChange={(event) => handleChange(event, index, 'about2')}
                       placeholder="About work responsibilities"
                       rows={5}
                     />

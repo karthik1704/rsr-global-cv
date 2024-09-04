@@ -379,6 +379,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     // marginLeft: 10,
     fontWeight: "bold",
+    textTransform:'capitalize',
   },
   headings: {
     fontSize: 12,
@@ -597,6 +598,7 @@ const PDF = ({ data }: data) => {
                         flexDirection: "row",
                         justifyContent: "flex-start",
                         gap: "5",
+                        textTransform:'capitalize',
                       }}
                     >
                       <Text style={styles.jobTitle}>{exp.position}</Text>
@@ -785,7 +787,7 @@ const PDF = ({ data }: data) => {
                 }}
               >
                 <Text style={{ fontSize: 10 }}>Mother tongue :</Text>
-                <Text style={{ fontSize: 10, fontWeight: "extrabold" }}>
+                <Text style={{ fontSize: 10, fontWeight: "extrabold",textTransform:'capitalize' }}>
                   {data.language.mothertongue}
                 </Text>
               </View>
@@ -799,7 +801,7 @@ const PDF = ({ data }: data) => {
                 }}
               >
                 <Text style={{ fontSize: 10 }}>Other language :</Text>
-                <Text style={{ fontSize: 10, fontWeight: "extrabold" }}>
+                <Text style={{ fontSize: 10, fontWeight: "extrabold",textTransform:'capitalize' }}>
                   {data.language.otherlanguage}
                 </Text>
               </View>

@@ -2,9 +2,17 @@ import { useState } from "react";
 import ImageUploader from "@/components/image/image_uploader";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-import {dateFormatter,getCurrentDate} from '@/lib/utils';
+import {cn, dateFormatter,getCurrentDate} from '@/lib/utils';
+// import { CalendarIcon } from "lucide-react";
+// import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+// import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+// import { Button } from "@/components/ui/button";
+// import { Calendar } from "@/components/ui/calendar";
+// import { format } from "date-fns";
+// import { z } from "zod"
+// import { zodResolver } from "@hookform/resolvers/zod"
 
-const PersonalInformation = ({ setData, personalInformation, image,setShowPreview }) => {
+const PersonalInformation = ({ setData, personalInformation, image,setShowPreview,text,handleChange }) => {
   const {
     register,
     handleSubmit,
@@ -17,6 +25,9 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
   } = useForm({
     defaultValues: {},
   });
+
+  const [date, setDate] = useState<Date | undefined>(undefined);
+
 
   const validateDateRange = (value) => {
     const minDate = new Date("1950-01-01");
@@ -38,6 +49,17 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
     setUploadedImage(imageurl);
   };
 
+  // const FormSchema = z.object({
+  //   dob: z.date({
+  //     required_error: "A date of birth is required.",
+  //   }),
+  // })
+
+ 
+  //   const form = useForm<z.infer<typeof FormSchema>>({
+  //     resolver: zodResolver(FormSchema),
+  //   })
+
   const handleForm = (personalData) => {
     console.log(personalData);
     setData((prevState,) => ({
@@ -58,19 +80,19 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
           {!!uploadedImage &&
           <div>
             
-            <Image src={uploadedImage} height={150} width={150} alt="" className="rounded-full"/>
+            <Image src={uploadedImage} height={150} width={150} alt="" className=" h-36 w-36 rounded-full"/>
           </div>}
     <p className="text-lg font-semibold text-gray-800">
-        Name : <span className="font-light">{personalInformation.firstName} {personalInformation.lastName}</span>
+        Name : <span className="font-light capitalize">{personalInformation.firstName} {personalInformation.lastName}</span>
     </p>
     <p className="text-lg font-semibold text-gray-800">
         Date of birth : <span className="font-light">{dateFormatter(personalInformation.dob)}</span>
     </p>
     <p className="text-lg font-semibold text-gray-800">
-        Nationality : <span className="font-light">{personalInformation.nationality}</span> 
+        Nationality : <span className="font-light capitalize">{personalInformation.nationality}</span> 
     </p>
     <p className="text-lg font-semibold text-gray-800">
-        Address : <span className="font-light">{personalInformation.add1} {personalInformation.add2} {personalInformation.code} {personalInformation.city} {personalInformation.country}</span>
+        Address : <span className="font-light capitalize">{personalInformation.add1} {personalInformation.add2} {personalInformation.code} {personalInformation.city} {personalInformation.country}</span>
     </p>
 
     {personalInformation.email && (<p className="text-lg font-semibold text-gray-800">
@@ -122,7 +144,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                 First Name<span className="text-red-700">*</span>
               </label>
               <input
-                className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                className="pl-4 block w-full rounded-md border-0 py-2 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                 {...register("firstName", {
                   required: {
                     value: true,
@@ -145,7 +167,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                 Last Name<span className="text-gray-700"></span>
               </label>
               <input
-                className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                className="pl-4 block w-full rounded-md border-0 py-2 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                 {...register("lastName", {
                   // required: {
                   //   value: true,
@@ -161,6 +183,39 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
               )} */}
             </div>
           </div>
+
+          
+{/* <div className="mb-4 w-full lg:w-1/2 px-6  md:w-[664px]">
+<label className="block text-black font-bold text-sm head">
+              Date of birth<span className="text-red-700">*</span>
+            </label>
+<Popover>
+      <PopoverTrigger asChild>
+        
+        <Button
+          variant={"outline"}
+          className={cn(
+            "w-[280px] justify-start text-left font-normal text-black",
+            !date && "text-muted-foreground"
+          )}
+        >
+          <CalendarIcon className="mr-2 h-4 w-4" />
+          {date ? date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : <span>DD-MM-YYYY</span>}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0">
+        <Calendar
+        captionLayout="dropdown"
+         view="year"
+          mode="default"
+          selected={date}
+          onSelect={setDate}
+          calendarType="US"
+          initialFocus
+        />
+      </PopoverContent>
+    </Popover>
+    </div> */}
 
           <div className="mb-4 w-full lg:w-1/2 px-6  md:w-[664px]">
             <label className="block text-black font-bold text-sm head">
@@ -178,8 +233,6 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
               })}
               placeholder="DD-MM-YYYY"
               alt="DD-MM-YYYY"
-              // autoCapitalize='true'
-              // placeholder="dob"
               min="1970-01-01"
               max="2004-12-31"
             />
@@ -200,7 +253,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                 <span className="text-red-700">*</span>
               </label>
               <input
-                className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                className="pl-4 block w-full rounded-md border-0 py-2 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                 {...register("nationality", {
                   required: {
                     value: true,
@@ -225,7 +278,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
               Address Line 1<span className="text-red-700">*</span>
             </label>
             <input
-              className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+              className="pl-4 block w-full rounded-md border-0 py-2 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
               {...register("add1", {
                 required: {
                   value: true,
@@ -244,7 +297,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
               Address Line 2<span className="text-red-700">*</span>
             </label>
             <input
-              className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+              className="pl-4 block w-full rounded-md border-0 py-2 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
               {...register("add2", {
                 required: {
                   value: true,
@@ -283,7 +336,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                 City<span className="text-red-700">*</span>
               </label>
               <input
-                className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                className="pl-4 block w-full rounded-md border-0 py-2 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                 {...register("city", {
                   required: {
                     value: true,
@@ -302,7 +355,7 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                 Country<span className="text-red-700">*</span>
               </label>
               <input
-                className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                className="pl-4 block w-full rounded-md border-0 py-2 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                 {...register("country", {
                   required: {
                     value: true,
@@ -372,10 +425,37 @@ const PersonalInformation = ({ setData, personalInformation, image,setShowPrevie
                 //   message: 'First Name is required'
                 // }
               })}
+              value={text}
+              onChange={handleChange}
               placeholder="About us"
               rows={5}
             />
           </div>
+
+          <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
+            <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
+              <label className="block text-black font-bold text-sm head mb-2">
+                Referred By
+                <span className="text-red-700">*</span>
+              </label>
+              <input
+                className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                {...register("nationality", {
+                  required: {
+                    value: true,
+                    message: "Referred is required",
+                  },
+                })}
+                placeholder="if not referred, specify as RSR Global"
+              />
+              {errors.nationality && (
+                <p className="text-red-700 text-sm">
+                  {errors.nationality.message}
+                </p>
+              )}
+            </div>
+          </div>
+
 <div className="flex mx-6">
 {/* <button
                 type="button"

@@ -356,7 +356,7 @@ const Preview = ({ data, handleNext,image,}: PreviewProps) => {
   </div>
 ))}
 
-{!!data.training.length &&
+{!!data.license &&
 <>
 <div className="pl-8 pr-28">
  <p className="block text-black font-bold text-2xl mt-6 ">Driving License</p>
