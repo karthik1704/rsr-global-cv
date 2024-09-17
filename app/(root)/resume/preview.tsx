@@ -94,10 +94,11 @@ type PreviewProps = {
   };
 };
 
-const Preview = ({ data, handleNext,image,}: PreviewProps) => {
+const Preview = ({ data, handleNext,image,handleEdit}: PreviewProps) => {
   console.log(data)
   const handleClick = () => {
     handleNext();
+    handleEdit();
   };
   return (
     <>

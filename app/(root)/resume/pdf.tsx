@@ -249,6 +249,7 @@ const styles = StyleSheet.create({
 
   heading: {
     marginBottom: 1,
+    fontWeight:'medium',
   },
 
   heading1: {
@@ -267,7 +268,7 @@ const styles = StyleSheet.create({
   },
   text1: {
     fontSize: 12,
-    fontWeight: "bold",
+    fontWeight:'medium',
   },
   text2: {
     fontSize: 10,
@@ -424,10 +425,11 @@ const PDF = ({ data }: data) => {
       {/* @ts-ignore */}
       <Page size="LETTER" style={styles.page}>
         <View style={styles.sidebar}>
+        {!!data.personalInformation.profileImage && (
           <View style={styles.photoContainer}>
             {/* <Text>CHEF DE PARTIE</Text>
             <Text>QATAR AIRWAYS GROUP</Text> */}
-            {!!data.personalInformation.profileImage && (
+            
               <Image
                 src={data.personalInformation.profileImage}
                 style={{
@@ -436,8 +438,8 @@ const PDF = ({ data }: data) => {
                   // height: "35%",
                 }}
               />
-            )}
           </View>
+           )}
 
           <View style={{ width: "82%" }}>
             <View style={styles.heading}>
