@@ -21,6 +21,8 @@ import Language from "./forms/language";
 import DrivingLicense from "./forms/drivinglicense";
 import Others from "./forms/others";
 import License from "./forms/license";
+import CheckoutPage from "./checkout/checkout";
+import Link from "next/link";
 
 type FormValues = {
   firstName: string;
@@ -351,6 +353,16 @@ setText(prevValues =>{
     setShowPreview(true);
   };
 
+  const handleEdit = async () => {
+    console.log('Going back with data:', data);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  
+    console.log('Previous data state:', data);
+  
+    setShow(0); 
+    setShowPreview(false);
+  };
+
 
 
   return (
@@ -405,7 +417,8 @@ setText(prevValues =>{
           <div className="my-3">
               {showPreview ? <AddSection addSections={addSections} setShowPreview={setShowPreview} showPreview={showPreview} selectedSection={selectedSection} handleInputChange={handleInputChange} additionalTitle={additionalTitle} /> : null}
 
-            </div><div className="flex mx-6 my-10">
+            </div>
+            <div className="flex mx-6 my-10">
               <button
                 type="button"
                 className="w-24 items-center capitalize bg-white hover:bg-green-600 text-black p-2 hover:text-slate-100 font-bold rounded-md"
@@ -436,7 +449,8 @@ setText(prevValues =>{
                 <button
                   type="button"
                   className="w-16 items-center capitalize bg-white hover:bg-green-600 text-black hover:text-slate-100 p-2 font-bold rounded-md"
-                  onClick={handlePrevious}
+                  onClick={handleEdit}
+                  // onClick={() => setShowForm(true)}
                 >
                   Edit
                 </button>
@@ -452,10 +466,55 @@ setText(prevValues =>{
           )}
         </div>
 
+        {show ===2 && (
+          <div>
+            <CheckoutPage handleNext={handleNext}/>
 
-      {show === 2 && (
+            <div className="flex py-4 px-8">
+                <button
+                  type="button"
+                  className="w-16 items-center capitalize bg-white hover:bg-green-600 text-black hover:text-slate-100 p-2 font-bold rounded-md"
+                  onClick={handlePrevious}
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  className="w-16 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10 font-bold rounded-md"
+                  onClick={handleNext}
+                >
+                  next
+                </button>
+              </div>
+
+            </div>
+        )}
+
+
+      {show === 3 && (
         <div>
           <PreviewPdf data={data} handleNext={handleNext} />
+
+          <div className="flex py-4 px-8">
+                {/* <button
+                  type="button"
+                  className="w-16 items-center capitalize bg-white hover:bg-green-600 text-black hover:text-slate-100 p-2 font-bold rounded-md"
+                  onClick={handlePrevious}
+                >
+                  Edit
+                </button> */}
+                {/* <button
+                  type="button"
+                  className="w-16 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10 font-bold rounded-md"
+                  onClick={handleNext}
+                >
+                  next
+                </button> */}
+                <Link href='/profile'
+                 className="w-24 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10 font-bold rounded-md inline-flex justify-center"
+                >Go To Profile</Link>
+              </div>
+
         </div>
       )}
     </div>
