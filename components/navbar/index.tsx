@@ -68,18 +68,20 @@ const Navbar = ({ user }: { user: User | null }) => {
               </DropdownMenu>
             ) : (
               <>
-                <Link
-                  href="/signup"
-                  className="py-1 mx-5 px-4 rounded-md outline-1 outline outline-offset-0 outline-black text-black bg-white text-md font-bold hover:bg-green-600 hover:outline-none hover:text-slate-100 transition-colors hover:ease-in-out gap-1"
-                >
-                   <span>Register</span>
-                </Link>
-                <Link
-                  href="/login"
-                  className="py-1 mr-14 px-4 rounded-md outline-1 outline outline-offset-0 outline-white text-white bg-green-600 text-md font-bold hover:bg-green-500 hover:text-slate-100 transition-colors hover:ease-in-out gap-1"
-                >
-                  Login
-                </Link>
+                <div className="flex flex-col sm:flex-row justify-center items-center p-2 gap-2 sm:gap-6">
+                  <Link
+                    href="/signup"
+                    className="py-2 px-6 rounded-md outline-1 outline outline-offset-0 outline-black text-black bg-white text-md font-bold hover:bg-green-600 hover:outline-none hover:text-slate-100 transition-colors hover:ease-in-out"
+                  >
+                    <span>Register</span>
+                  </Link>
+                  <Link
+                    href="/login"
+                    className="py-2 px-6 rounded-md outline-1 outline outline-offset-0 outline-white text-white bg-green-600 text-md font-bold hover:bg-green-500 hover:text-slate-100 transition-colors hover:ease-in-out"
+                  >
+                    Login
+                  </Link>
+                </div>
               </>
             )}
           </div>
