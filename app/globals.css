@@ -4,6 +4,7 @@
 @tailwind utilities;
 
 
+
   /* .horizontal-stepper {
     display: flex;
     flex-direction: row;
@@ -44,6 +45,7 @@
       --ring: 222.2 84% 4.9%;
 
       --radius: 0.5rem;
+
     }
 
     .dark {
@@ -95,7 +97,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
+    --foreground-rgb: 0, 0, 0;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
@@ -180,3 +182,7 @@ body {
   width: 24px;
   height: 24px;
 }
+
+/* .rdp-root {
+  --rdp-weekday-padding
+} */

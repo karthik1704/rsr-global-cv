@@ -12,6 +12,7 @@ const Header = ({ user }) => {
     "/resume/resume-3.jpg",
   ];
 
+
   return (
     <>
       <header className="h-[600px] w-full bg-cover bg-center bg-no-repeat relative">

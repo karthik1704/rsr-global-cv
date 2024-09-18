@@ -12,13 +12,15 @@ const Steppers = ({ step }: { step: number }) => {
         completedColor: "#14532d",
         fontWeight:'700',
         inactiveTextColor:'#000',
+        // activeTextColor:'#000',
+        // completedTextColor: '#000',
       }}
     >
         <Step label="Edit" />
-        <Step label="Select template" />
-        <Step label="save" />
-        {/* <Step label="Preview" />
-        <Step label="PDF" /> */}
+        <Step label="Preview" />
+        <Step label="Payment" />
+        <Step label="Save" />
+        {/* <Step label="PDF" /> */}
     </Stepper>
   );
 };
