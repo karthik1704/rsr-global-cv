@@ -104,7 +104,7 @@ const Footer = () => {
           </div> */}
         </div>
 
-        <div className="my-10 flex flex-col items-center">
+        <div className="my-10 flex flex-col text-center items-center">
           <span>
             © 2024{" "}
             <Link href={"https://vimkes.com/"} target="unblank">
