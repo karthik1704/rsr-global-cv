@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 export async function POST(request: Request) {
     // const { amount } = await request.json();
-    const access_token = cookies().get("access_token");
+    const access_token = cookies().get("access");
     const response = await fetch(`${SERVER_API_URL}/stripe-payments/`, {
         method: 'POST',
         headers: {
@@ -12,7 +12,7 @@ export async function POST(request: Request) {
             Authorization: `Bearer ${access_token?.value}`,
         },
         body: JSON.stringify({
-            amount: 30000,
+            amount: 2000,
             currency: 'gbp'
           })
     });
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
    
 
     const data = await response.json();
-console.log(data)
+    console.log(data)
     if (response.ok) {
         return NextResponse.json(data);
     } else {
