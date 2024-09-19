@@ -68,10 +68,10 @@ const Navbar = ({ user }: { user: User | null }) => {
               </DropdownMenu>
             ) : (
               <>
-                <div className="flex flex-col sm:flex-row justify-center items-center p-2 gap-2 sm:gap-6">
+                <div className="flex flex-row justify-center items-center p-6 gap-2 sm:gap-6">
                   <Link
                     href="/signup"
-                    className="py-2 px-6 rounded-md outline-1 outline outline-offset-0 outline-black text-black bg-white text-md font-bold hover:bg-green-600 hover:outline-none hover:text-slate-100 transition-colors hover:ease-in-out"
+                    className="py-2 px-6 rounded-md outline-1 outline outline-offset-0 outline-black text-black bg-white text-md font-bold hover:bg-green-600 hover:outline-none hover:text-slate-100 transition-colors hover:ease-in-out hidden sm:inline-block"
                   >
                     <span>Register</span>
                   </Link>
