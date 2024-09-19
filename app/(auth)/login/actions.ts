@@ -5,6 +5,7 @@ import { URLSearchParams } from "url";
 import { SERVER_API_URL } from "@/app/constants";
 
 import { z } from "zod";
+import { lessThanExpiryDate } from "@/lib/utils";
 
 const schema = z
   .object({
@@ -18,30 +19,30 @@ const schema = z
   })
   .required({ username: true, password: true });
 
-  export async function signin(formData: any) {
-    console.log("HI");
-    const username = formData.get("username");
-    const password = formData.get("password");
-  
-    const res = await fetch(`${SERVER_API_URL}/auth/login/`, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      // mode: "cors", // no-cors, *cors, same-origin
-      headers: {
-        "Content-Type": "application/json",
-        //   "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    });
-  
-    const resJson = await res.json();
-  
-    console.log(resJson);
-    cookies().set("access", resJson.access_token);
-    redirect("/");
-  }
+export async function signin(formData: any) {
+  console.log("HI");
+  const username = formData.get("username");
+  const password = formData.get("password");
+
+  const res = await fetch(`${SERVER_API_URL}/auth/login/`, {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    // mode: "cors", // no-cors, *cors, same-origin
+    headers: {
+      "Content-Type": "application/json",
+      //   "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  });
+
+  const resJson = await res.json();
+
+  console.log(resJson);
+  cookies().set("access", resJson.access_token);
+  redirect("/");
+}
 
 export async function signinJwt(prevState: any, formData: any) {
   const username = formData.get("username");
@@ -71,7 +72,6 @@ export async function signinJwt(prevState: any, formData: any) {
   params.append("client_id", "");
   params.append("client_secret", "");
 
-  try{
   const res = await fetch(`${SERVER_API_URL}/auth/`, {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     // mode: "cors", // no-cors, *cors, same-origin
@@ -96,15 +96,30 @@ export async function signinJwt(prevState: any, formData: any) {
     };
   }
 
-  if (res.status === 200) {
-    const resJson = await res.json();
-    cookies().set("access", resJson.access_token);
+  if (res.status !== 200) {
+    const error = await res.json();
+    console.log(error);
+    return {
+      message: "Something went wrong",
+      fieldErrors: {
+        username: null,
+        password: null,
+      },
+    };
   }
-} catch (e) {
-  console.log(e);
-}
 
+  const resJson = await res.json();
+  cookies().set("access", resJson.access_token);
+  console.log(resJson);
+  const { expiry_date } = resJson;
   // if (res.status === 200) {
-    redirect("/resume");
+  if (!expiry_date) {
+    redirect("/payment");
   }
 
+  if (lessThanExpiryDate(expiry_date)) {
+    redirect("/resume");
+  } else {
+    redirect("/payment/renew");
+  }
+}

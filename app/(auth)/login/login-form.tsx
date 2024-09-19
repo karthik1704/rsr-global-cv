@@ -27,7 +27,6 @@ const LoginForm = () => {
   }, [state?.message, state]);
 
   return (
-    // <html className={`${poppins.variable}`}>
     <div className=" min-h-screen flex flex-col justify-center items-center py-10 bg-slate-100">
       <div className=" w-full flex flex-col lg:flex-row items-center justify-center">
         <div className="bg-[url('/sign-bg-1.jpg')] bg-cover bg-center w-4/5 sm:w-3/5 md:w-7/12 lg:w-4/12 p-8 bg-white shadow-lg text-justify mb-6 lg:mb-0">
@@ -98,7 +97,7 @@ const LoginForm = () => {
             <h1 className="text-black text-4xl font-bold my-2">
               Welcome to Login
             </h1>
-            <p className="text-black my-2">Don't have an account?</p>
+            <p className="text-black my-2">Don&apos;t have an account?</p>
             <Link
               href="/signup"
               className="flex w-24 justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -127,7 +126,6 @@ const LoginForm = () => {
         </li>
       </ul> */}
     </div>
-    // </html>
   );
 };
 
