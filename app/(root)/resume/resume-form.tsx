@@ -466,7 +466,7 @@ setText(prevValues =>{
           )}
         </div>
 
-        {show ===2 && (
+        {/* {show ===2 && (
           <div>
             <CheckoutPage handleNext={handleNext}/>
 
@@ -488,10 +488,10 @@ setText(prevValues =>{
               </div>
 
             </div>
-        )}
+        )} */}
 
 
-      {show === 3 && (
+      {show === 2 && (
         <div>
           <PreviewPdf data={data} handleNext={handleNext} />
 
@@ -511,7 +511,7 @@ setText(prevValues =>{
                   next
                 </button> */}
                 <Link href='/profile'
-                 className="w-24 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10 font-bold rounded-md inline-flex justify-center"
+                 className="w-28 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10 font-bold rounded-md inline-flex justify-center"
                 >Go To Profile</Link>
               </div>
 

@@ -14,9 +14,11 @@ import { useFormState } from "react-dom";
 import { createUser } from "./actions";
 import Image from "next/image";
 import logo from "@/public/images/rsr_logo.webp";
+import { useState } from "react";
 
 const SignUp = () => {
   const [state, action] = useFormState(createUser, []);
+
   return (
     <>
       <div className="flex justify-between items-center pt-3 px-10 bg-green-100">
@@ -120,6 +122,7 @@ const SignUp = () => {
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
                 </div>
+                
               </div>
 
               <div className="flex justify-center">

@@ -18,7 +18,7 @@ const Steppers = ({ step }: { step: number }) => {
     >
         <Step label="Edit" />
         <Step label="Preview" />
-        <Step label="Payment" />
+        {/* <Step label="Payment" /> */}
         <Step label="Save" />
         {/* <Step label="PDF" /> */}
     </Stepper>

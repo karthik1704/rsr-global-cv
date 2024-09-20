@@ -228,6 +228,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     paddingTop: 10,
     paddingRight: 10,
+    overflow:'hidden',
   },
   photoContainer1: {
     width: "22%",
@@ -434,8 +435,9 @@ const PDF = ({ data }: data) => {
                 src={data.personalInformation.profileImage}
                 style={{
                   borderRadius: "50",
-                  width: "100%",
-                  // height: "35%",
+                  width: "auto",
+                  height: 'auto',
+                  maxHeight: 100,
                 }}
               />
           </View>
