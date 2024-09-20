@@ -12,7 +12,7 @@ export async function POST(request: Request) {
             Authorization: `Bearer ${access_token?.value}`,
         },
         body: JSON.stringify({
-            amount: 2000,
+            amount: 100,
             currency: 'gbp'
           })
     });
