@@ -22,8 +22,9 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DayPicker } from "react-day-picker";
+import { DayPicker} from "react-day-picker";
 import DatePicker from "../datepicker";
+// import "react-day-picker/style.css";
 // import '../global.css'
 
 const PersonalInformation = ({
@@ -51,7 +52,7 @@ const PersonalInformation = ({
 
   const handleDateChange = (newDate) => {
     setDate(newDate);
-    setValue('dob', newDate);
+    setValue("dob", newDate);
   };
 
   const validateDateRange = (value) => {
@@ -84,7 +85,7 @@ const PersonalInformation = ({
   };
 
   return (
-    <div>
+    <div className="md:w-1/2 lg:w-full">
       {!show && personalInformation && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
           <p className="text-black text-2xl font-bold uppercase">
@@ -155,12 +156,6 @@ const PersonalInformation = ({
             >
               Edit
             </button>
-            {/* <button
-            type="button"
-            className="w-24 bg-green-600 hover:bg-green-500 text-white p-2 font-bold rounded-md"
-        >
-            Delete
-        </button> */}
           </div>
         </div>
       )}
@@ -176,8 +171,8 @@ const PersonalInformation = ({
 
           <ImageUploader onImageChange={handleImageChange} />
 
-          <div className="mb-4.5 flex flex-col gap-3 lg:flex-row mt-2">
-            <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
+          <div className="mb-4.5 flex flex-col lg:flex-row mt-2">
+            <div className="w-full lg:w-1/2 px-6 md:w-[504px]">
               <label className="block text-black font-bold text-sm head mb-2">
                 First Name<span className="text-red-700">*</span>
               </label>
@@ -222,82 +217,24 @@ const PersonalInformation = ({
             </div>
           </div>
 
-          <div className="mb-4 w-full lg:w-1/2 px-6  md:w-[664px]">
+          <div className="mb-4 w-full lg:w-1/2 md:w-[554px] px-6 sm:px-6">
             <label className="block text-black font-bold text-sm head">
               Date of birth<span className="text-red-700">*</span>
             </label>
-            <DatePicker selectedDate={date} onDateChange={handleDateChange}
-           
-                            {...register("dob", {
-                              required: {
-                                value: true,
-                                message: "Date is required",
-                              },
-                            })}
-                            />
-            {errors.dob && (
-        <p className="text-red-700 text-sm">
-          {errors.dob.message}
-        </p>
-      )}
-            {/* <p>selected date:{date ? date.toLocaleDateString(): 'None'}</p> */}
-            {/* <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className={`w-[280px] justify-start text-left font-normal text-black `}
-        >
-          <CalendarIcon className="mr-2 h-4 w-4" />
-          {personalDate ? 
-            new Date(personalDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) 
-            : 
-            <span>DD-MM-YYYY</span>}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
-        <Calendar
-          captionLayout="dropdown"
-          fromYear={2000}
-          toYear={new Date().getFullYear()}
-          mode="default"
-          selected={personalDate}
-          onSelect={handleDateSelect} 
-          calendarType="US"
-          initialFocus
-          showNavigation
-        />
-      </PopoverContent>
-    </Popover> */}
-          </div>
-
-          {/* <div className="mb-4 w-full lg:w-1/2 px-6  md:w-[664px]">
-            <label className="block text-black font-bold text-sm head">
-              Date of birth<span className="text-red-700">*</span>
-            </label>
-            <input
-              className="px-4 block w-1/2 rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-              type="date"
+            <DatePicker
+              selectedDate={date}
+              onDateChange={handleDateChange}
               {...register("dob", {
                 required: {
                   value: true,
-                  message: "Date of birth required",
+                  message: "Date is required",
                 },
-                validate: validateDateRange,
               })}
-              placeholder="DD-MM-YYYY"
-              alt="DD-MM-YYYY"
-              min="1970-01-01"
-              max="2004-12-31"
             />
             {errors.dob && (
               <p className="text-red-700 text-sm">{errors.dob.message}</p>
             )}
-          </div> */}
-
-          {/* <div>
-      <h1>Custom Date Input</h1>
-      <DateInput />
-    </div> */}
+          </div>
 
           <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
             <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
@@ -364,8 +301,8 @@ const PersonalInformation = ({
             )}
           </div>
 
-          <div className="flex flex-col gap-3 md:flex-row">
-            <div className="mb-4 w-full md:w-2/6 px-6">
+          <div className="flex flex-col gap-4 md:flex-row md:gap-6">
+            <div className="mb-4 w-full md:w-2/5 px-4 md:px-6">
               <label className="block text-black font-bold text-sm head mb-2">
                 Postal Code
               </label>
@@ -384,7 +321,7 @@ const PersonalInformation = ({
               )} */}
             </div>
 
-            <div className="mb-4 w-full md:w-2/6 px-6">
+            <div className="mb-4 w-full md:w-2/5 px-4 md:px-6">
               <label className="block text-black font-bold text-sm head mb-2">
                 City<span className="text-red-700">*</span>
               </label>
@@ -403,7 +340,7 @@ const PersonalInformation = ({
               )}
             </div>
 
-            <div className="mb-4 w-full md:w-2/6 px-6">
+            <div className="mb-4 w-full md:w-2/5 px-4 md:px-6">
               <label className="block text-black font-bold text-sm head mb-2">
                 Country<span className="text-red-700">*</span>
               </label>
@@ -509,12 +446,6 @@ const PersonalInformation = ({
           </div>
 
           <div className="flex mx-6">
-            {/* <button
-                type="button"
-                className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
-              >
-                Cancel
-              </button> */}
             <button
               type="submit"
               className="mx-6 w-24 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 font-bold rounded-md"

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DayPicker } from "react-day-picker";
 import { CalendarIcon } from '@heroicons/react/24/outline';
 
+
 const DatePicker = ({ selectedDate, onDateChange }) => {
   const [open, setOpen] = useState(false);
   const [selectedYear, setSelectedYear] = useState(
@@ -49,6 +50,8 @@ const DatePicker = ({ selectedDate, onDateChange }) => {
 
   const initialMonth = new Date(selectedYear, selectedMonth);
 
+  // const defaultClassNames = getDefaultClassNames();
+
   const dayPickerStyle = {
     fontFamily: 'Arial, sans-serif',
     borderRadius: '4px',
@@ -58,6 +61,11 @@ const DatePicker = ({ selectedDate, onDateChange }) => {
   const selectedStyle = {
     backgroundColor: '#4caf50',
     color: 'white',
+  };
+
+  const monthCaptionStyle = {
+    borderBottom: "1px solid currentColor",
+    paddingBottom: "0.5em"
   };
 
   return (
