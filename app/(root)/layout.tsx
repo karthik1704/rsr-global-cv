@@ -44,11 +44,9 @@ export async function getData() {
 
 
   const user = await res.json();
-  // console.log(user);
-  if(!user.expiry_date){
-    redirect ('/payment');
-  }
-  if(!lessThanExpiryDate(user.expiry_date)){
+  console.log(user);
+  
+  if(user.expiry_date && !lessThanExpiryDate(user.expiry_date)){
     redirect ('/payment/renew');
   }
 
