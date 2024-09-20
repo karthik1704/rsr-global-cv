@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { logout } from "@/app/(root)/actions";
+import { lessThanExpiryDate } from "@/lib/utils";
 
 const Navbar = ({ user }: { user: User | null }) => {
   return (
@@ -52,12 +53,16 @@ const Navbar = ({ user }: { user: User | null }) => {
                 <DropdownMenuContent>
                   {/* <DropdownMenuLabel>My Profile</DropdownMenuLabel>
                 <DropdownMenuSeparator /> */}
-                  <DropdownMenuItem>
-                    <Link href="/">Profile</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link href="/resume">Create Cv</Link>
-                  </DropdownMenuItem>
+                  {user.expiry_date && lessThanExpiryDate(user.expiry_date) && (
+                    <>
+                      <DropdownMenuItem>
+                        <Link href="/">Profile</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Link href="/resume">Create Cv</Link>
+                      </DropdownMenuItem>
+                    </>
+                  )}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <form action={logout}>

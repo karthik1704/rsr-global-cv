@@ -4,6 +4,7 @@ import Footer from "@/components/footer";
 import { SERVER_API_URL } from "../constants";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { lessThanExpiryDate } from "@/lib/utils";
 
 
 export const metadata: Metadata = {
@@ -34,19 +35,28 @@ export async function getData() {
   }
 
   if (res.status === 401) {
-    return null;
+    redirect ('/login');
   }
   if (res.status !== 200) {
     return null;
   }
 
+
+
   const user = await res.json();
   // console.log(user);
+  if(!user.expiry_date){
+    redirect ('/payment');
+  }
+  if(!lessThanExpiryDate(user.expiry_date)){
+    redirect ('/payment/renew');
+  }
 
   return user;
 }
 
 type Data = User | null;
+
 
 export default async function RootLayout({
   children,
