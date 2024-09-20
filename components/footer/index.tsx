@@ -6,26 +6,25 @@ import { Facebook, Instagram, Youtube, X } from "lucide-react";
 const Footer = () => {
   return (
     <>
-      <section className="w-full  bg-slate-50 py-8 px-10">
-        <div className=''>
-          <div className="flex flex-col items-center gap-5">
+      <section className="w-full bg-slate-50 py-8 px-6 sm:px-10">
+        <div className="">
+          <div className="flex flex-col items-center gap-4 sm:gap-5">
             <div>
               <Image
-                className="w-full h-full"
+                className="w-40 h-auto sm:w-52 sm:h-16"
                 src="/images/rsr_logo-1.png"
                 alt="logo"
                 width={200}
                 height={70}
               />
             </div>
-            <p >
+            <p className="text-center text-sm sm:text-base">
               Making the world a better place through constructing elegant
               hierarchies.
             </p>
-            <ul className="flex justify-start gap-6 ">
+            <ul className="flex justify-center gap-4 sm:gap-6">
               <Link href={"#"}>
                 <li>
-                  {" "}
                   <Image
                     src="/images/svg/facebook.svg"
                     height={24}
@@ -46,7 +45,6 @@ const Footer = () => {
               </Link>
               <Link href={"#"}>
                 <li>
-                  {" "}
                   <Image
                     src="/images/svg/youtube.svg"
                     height={24}
@@ -57,7 +55,6 @@ const Footer = () => {
               </Link>
               <Link href={"#"}>
                 <li>
-                  {" "}
                   <Image
                     src="/images/svg/x.svg"
                     height={24}
@@ -107,8 +104,15 @@ const Footer = () => {
           </div> */}
         </div>
 
-        <div className="my-10 flex flex-col items-center">
-          <span>© 2024 <Link href={'https://vimkes.com/'} target="unblank"> Vimkes Technologies</Link>, Inc. All rights reserved.</span>
+        <div className="my-10 flex flex-col text-center items-center">
+          <span>
+            © 2024{" "}
+            <Link href={"https://vimkes.com/"} target="unblank">
+              {" "}
+              Vimkes Technologies
+            </Link>
+            , Inc. All rights reserved.
+          </span>
         </div>
       </section>
     </>

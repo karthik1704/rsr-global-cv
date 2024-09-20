@@ -3,4 +3,5 @@ type User = {
   last_name: string;
   email: string;
   phone: string;
+  expiry_date: string|null;
 };

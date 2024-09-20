@@ -28,3 +28,12 @@ export function getCurrentDate() {
   const day = String(today.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 }
+
+export function lessThanExpiryDate(expiry_date:string):boolean{
+  const today = new Date();
+  const expiry = new Date(expiry_date);
+  console.log(expiry);
+  console.log(today);
+  console.log(expiry > today);
+  return expiry > today;
+}
