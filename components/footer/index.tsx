@@ -22,43 +22,45 @@ const Footer = () => {
               Making the world a better place through constructing elegant
               hierarchies.
             </p>
+            <Link href={'/terms-condition'}>Terms and condition</Link>
+            <Link href={'/privacy-policy'}>Privacy Policy</Link>
             <ul className="flex justify-center gap-4 sm:gap-6">
-              <Link href={"#"}>
+              <Link href={"https://www.facebook.com/people/RSR-Global-Training-Academy/61558372236248/"} target="unblank">
                 <li>
                   <Image
-                    src="/images/svg/facebook.svg"
-                    height={24}
-                    width={24}
+                    src="/images/icon/facebook.svg"
+                    height={34}
+                    width={34}
                     alt="facebook"
                   />
                 </li>
               </Link>
-              <Link href={"#"}>
+              <Link href={"https://www.instagram.com/rsrglobaltrainingacademy/"} target="unblank">
                 <li>
                   <Image
-                    src="/images/svg/instagram.svg"
-                    height={24}
-                    width={24}
+                    src="/images/icon/instagram.svg"
+                    height={34}
+                    width={34}
                     alt="instagram"
                   />
                 </li>
               </Link>
-              <Link href={"#"}>
+              <Link href={"https://youtube.com/@RSRGlobalTrainingAcademy?si=mtPtNkR39nu2bm4r"} target="unblank">
                 <li>
                   <Image
-                    src="/images/svg/youtube.svg"
-                    height={24}
-                    width={24}
+                    src="/images/icon/youtube.svg"
+                    height={34}
+                    width={34}
                     alt="youtube"
                   />
                 </li>
               </Link>
-              <Link href={"#"}>
+              <Link href={"https://www.linkedin.com/company/rsrtrainingacademy"} target="unblank">
                 <li>
                   <Image
-                    src="/images/svg/x.svg"
-                    height={24}
-                    width={24}
+                    src="/images/icon/linkedin.svg"
+                    height={34}
+                    width={34}
                     alt="x"
                   />
                 </li>

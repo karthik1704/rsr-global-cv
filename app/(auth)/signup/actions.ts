@@ -14,7 +14,7 @@ const schema = z
         message: "Invalid Email",
       })
       .trim(),
-    password: z.string().trim().min(1, "Password Required"),
+    password: z.string().trim().min(8, "Password Required"),
   })
   .required({ email: true, password: true });
 
