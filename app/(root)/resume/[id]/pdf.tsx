@@ -221,6 +221,7 @@ const styles = StyleSheet.create({
   page: {
     // flexDirection: "row",
     fontWeight: "extrabold",
+    fontFamily: 'Open Sans',
   },
 
   photoContainer: {
@@ -254,7 +255,7 @@ paddingTop:'10px',
 
   heading: {
     // marginBottom: 1,
-    fontWeight:'medium',
+    fontWeight:'heavy',
     paddingLeft:15,
   },
 
@@ -275,7 +276,7 @@ paddingTop:'10px',
   },
   text1: {
     fontSize: 12,
-    fontWeight:'medium',
+    fontWeight: 1000,
   },
   text2: {
     fontSize: 10,
@@ -283,7 +284,7 @@ paddingTop:'10px',
   },
   text3: {
     fontSize: 12,
-    fontWeight: "extrabold",
+    fontWeight: 1000,
   },
   text4: {
     fontSize: 10,
@@ -393,7 +394,7 @@ paddingTop:'10px',
   },
   headings: {
     fontSize: 12,
-    fontWeight: "bold",
+    fontWeight: 1000,
     marginBottom: 5,
     paddingTop: 10,
   },
@@ -457,7 +458,7 @@ const PDF = ({ data }: data) => {
               <View style={styles.log}>
                 <Text style={{
                   fontSize: 15,
-                  fontWeight: "bold",
+                  fontWeight: 1000,
                   textTransform: "capitalize",
                 }}>
                   {data.personalInformation.first_name}{" "}
@@ -484,7 +485,7 @@ const PDF = ({ data }: data) => {
                   style={{ flexDirection: "row", justifyContent: "flex-start" }}
                 >
                   <Text
-                    style={{ ...styles.text1, fontFamily: "Helvetica-Bold" }}
+                    style={{ ...styles.text1,}}
                   >
                     Date of birth :
                   </Text>
@@ -505,8 +506,8 @@ const PDF = ({ data }: data) => {
                       justifyContent: "flex-start",
                     }}
                   >
-                    <Text style={styles.text3}>Contact Number :</Text>
-                    <Text style={styles.text4}>
+                    <Text style={styles.text1}>Contact Number :</Text>
+                    <Text style={styles.text2}>
                       {data.personalInformation.contact_number} |
                     </Text>
                   </View>
@@ -526,7 +527,7 @@ const PDF = ({ data }: data) => {
                   style={{ flexDirection: "row", justifyContent: "flex-start" }}
                 >
                   <Text
-                    style={{ ...styles.text1, fontFamily: "Helvetica-Bold" }}
+                    style={{ ...styles.text1, }}
                   >
                     Nationality :
                   </Text>
@@ -542,8 +543,8 @@ const PDF = ({ data }: data) => {
                       justifyContent: "flex-start",
                     }}
                   >
-                    <Text style={styles.text3}>Email ID:</Text>
-                    <Text style={styles.text4}>
+                    <Text style={styles.text1}>Email ID:</Text>
+                    <Text style={styles.text2}>
                       {data.personalInformation.email_address} |
                     </Text>
                   </View>
@@ -551,7 +552,7 @@ const PDF = ({ data }: data) => {
               </View>
 
               <View style={{ flexDirection: "row", gap: "7" }}>
-                <Text style={styles.text5}>Address:</Text>
+                <Text style={styles.text1}>Address:</Text>
                 <Text style={styles.text6}>
                   {data.personalInformation.address_line_1 &&
                   data.personalInformation.address_line_2 &&
@@ -632,7 +633,7 @@ const PDF = ({ data }: data) => {
                       <Text
                         style={{
                           fontSize: 12,
-                          fontWeight: "bold",
+                          fontWeight: 1000,
                           marginTop: 5,
                           textTransform: "capitalize",
                         }}
@@ -655,7 +656,7 @@ const PDF = ({ data }: data) => {
                 cyclical operation. */}
                       </Text>
                     </View>
-                    <Text style={styles.subheading}>
+                    <Text style={styles.text1}>
                       Duties & Responsibilities:
                     </Text>
                     <Text style={styles.responsibility}>
@@ -676,7 +677,7 @@ const PDF = ({ data }: data) => {
                     >
                       Department : {exp.companyName} | Address : {exp.location}{" "}
                       | Website :
-                      <Text style={styles.link}>{exp.companyName}</Text>
+                      <Text style={styles.link}>{exp.workwebsite}</Text>
                     </Text>
                   </View>
                 </View>

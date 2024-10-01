@@ -19,8 +19,9 @@ const Footer = () => {
               />
             </div>
             <p className="text-center text-sm sm:text-base">
-              Making the world a better place through constructing elegant
-              hierarchies.
+            Create your CV effortlessly in seconds with <Link href="/" className="text-green-700">
+      rsrglobalresumebuilder.com
+    </Link>
             </p>
             <Link href={'/terms-condition'}>Terms and condition</Link>
             <Link href={'/privacy-policy'}>Privacy Policy</Link>
@@ -109,7 +110,7 @@ const Footer = () => {
         <div className="my-10 flex flex-col text-center items-center">
           <span>
             © 2024{" "}
-            <Link href={"https://vimkes.com/"} target="unblank">
+            <Link href={"https://vimkes.com/"} className="text-green-700" target="unblank">
               {" "}
               Vimkes Technologies
             </Link>

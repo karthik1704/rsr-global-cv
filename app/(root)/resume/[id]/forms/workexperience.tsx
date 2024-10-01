@@ -110,6 +110,17 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
       //     setValue("experiences.0.workto", "");
       //   }
       // };
+
+      //from and to date validation
+      
+      const [fromDate, setFromDate] = useState('');
+
+      const getMinToDate = () =>{
+        if(!fromDate) return undefined;
+        const minDate = new Date(fromDate);
+        minDate.setDate(minDate.getDate()+1);
+        return minDate.toISOString().split('T')[0];
+      }
     
       //work exp To Date disable
     
@@ -188,7 +199,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
 <p className="text-lg font-semibold text-gray-800">Occupation: <span className="font-light capitalize">{exp.position}</span></p>
 <p className="text-lg font-semibold text-gray-800">From : <span className="font-light">{dateFormatter(exp.workfrom)}</span></p>
 <p className="text-lg font-semibold text-gray-800">To : {exp.workto?(<span className="font-light">{dateFormatter(exp.workto)}</span>
-):( 'currently working')}</p>
+):( 'Currently working')}</p>
 <p className="text-lg font-semibold text-gray-800">About Company : <span className="font-light">{exp.aboutcompany}</span></p>
 <p className="text-lg font-semibold text-gray-800">work Responsibilities : <span className="font-light">{exp.about2}</span></p>
 <div className="flex mx-6">
@@ -286,6 +297,10 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                             value: true,
                             message: "Company’s Website is required",
                           },
+                          pattern: {
+                            value: /^(https?:\/\/)?(www\.)?[a-z0-9-]+\.[a-z0-9]+\.(com|org|in|net|co.in|co|biz|edu|io|gov)$/,
+                            message: "Please enter a valid website (e.g. www.rsrglobal.org)",
+                          },
                         })}
                         placeholder="Company’s website"
                         className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
@@ -351,6 +366,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                         })}
                         min="1980-01-01"
                         max={getCurrentDate()}
+                        onChange={(e)=>setFromDate(e.target.value)}
                         className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
                       />
@@ -373,7 +389,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                           } : false,
                           validate: (value) => !switchStates[index] ? workexpto(value, getValues(`experiences.${index}`)) : true,
                         })}
-                        min="1980-01-01"
+                        min={getMinToDate()}
                         max={getCurrentDate()}
                         className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
