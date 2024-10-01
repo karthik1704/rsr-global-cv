@@ -53,7 +53,6 @@ export async function getData() {
 type Data = User | null;
 
 
-
 export default async function Home() {
 
   const user:Data = await getData();
@@ -62,6 +61,7 @@ export default async function Home() {
     <main>
      
       <Header user={user}/>
+
      
       {/* <section className="w-3/5 flex flex-col justify-center gap-10 my-7">
         <div className="w-full flex flex-col items-center gap-6 text-blue-900">

@@ -56,7 +56,7 @@ const Navbar = ({ user }: { user: User | null }) => {
                   {user.expiry_date && lessThanExpiryDate(user.expiry_date) && (
                     <>
                       <DropdownMenuItem>
-                        <Link href="/">Profile</Link>
+                        <Link href="/profile">Profile</Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem>
                         <Link href="/resume">Create Cv</Link>

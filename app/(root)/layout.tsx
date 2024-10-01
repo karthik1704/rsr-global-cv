@@ -17,9 +17,9 @@ export async function getData() {
   const access = cookiesStore.get("access");
 
   // console.log(access);
-  if (!access) {
-    return null;
-  }
+  // if (!access) {
+  //   return null;
+  // }
   const res = await fetch(`${SERVER_API_URL}/users/me`, {
     headers: {
       "Content-Type": "application/json",

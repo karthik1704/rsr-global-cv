@@ -24,13 +24,10 @@ const SignUp = () => {
       <div className="flex justify-between items-center pt-3 px-10 bg-green-100">
         <Image src={logo} alt="logo" />
         <div>
-          {/* <h1>already having an account? {' '}
-  <a href="/login" className="text-blue-500 hover:text-blue-700">Login</a>
-</h1> */}
+
         </div>
       </div>
       <div className=" min-h-screen flex flex-col-reverse md:flex-row p-5 md:p-0 justify-center items-center bg-green-100">
-        {/* <div className="h-screen bg-[url('/signup-bg2.png')] bg-cover content-center relative"></div> */}
 
         <div className="md:h-3/4 bg-cover md:pr-10 lg:content-center basis-2/5 ">
           <div className="grid grid-rows-1 p-5 md:p-0 gap-5 lg:gap-16 text-black">
