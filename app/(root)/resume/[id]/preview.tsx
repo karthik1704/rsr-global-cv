@@ -218,7 +218,7 @@ const Preview = ({ data, handleNext,image,handleEdit}: PreviewProps) => {
                 <p className="text-black font-semibold text-base py-2">
                   {" "}
                   Duties & Responsibilities : {' '}
-                  <span className="block font-medium text-base">{exp.about2}</span>
+                  <span className="block font-medium text-base capitalize">{exp.about2}</span>
                 </p>
 
                 <div className="flex justify-start w-5/6 py-2">
@@ -232,7 +232,7 @@ const Preview = ({ data, handleNext,image,handleEdit}: PreviewProps) => {
                   <p className="text-black font-semibold text-base mx-5">
                    | Website : {' '}
                     <span className="font-medium text-base">
-                      {exp.companyName}
+                      {exp.workwebsite}
                     </span>
                   </p>
                 </div>
@@ -302,7 +302,7 @@ const Preview = ({ data, handleNext,image,handleEdit}: PreviewProps) => {
 <div className="pl-8 pr-28">
 
         <p className="block text-black font-bold text-2xl mt-6">
-          Additional information
+          Additional Information
         </p>
         <hr className="border-b-2 border-slate-500" />
         <p className="block text-black font-bold text-2xl py-4">Honors & Awards</p>

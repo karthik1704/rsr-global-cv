@@ -73,6 +73,24 @@ const Education = ({setData,education,setShowPreview,sectionDeleted,setSelectedS
                   setShowPreview(true);
         }
 
+        //validation function on date
+
+        const [fromDate, setFromDate]= useState('');
+
+        const validateToDate = (value) =>{
+          if(!fromDate) return 'select a from date first';
+
+          const from = new Date(fromDate);
+          const to = new Date(value);
+        }
+
+        const getMinToDate = () =>{
+          if(!fromDate) return undefined;
+          const minDate = new Date(fromDate);
+          minDate.setDate(minDate.getDate()+1);
+          return minDate.toISOString().split('T')[0];
+        };
+
           //--validation function for date year range--
 
   const validateDateRange = (value) => {
@@ -202,6 +220,7 @@ const Education = ({setData,education,setShowPreview,sectionDeleted,setSelectedS
                           max={getCurrentDate()}
                           className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                           type="Date"
+                          onChange={(e)=>setFromDate(e.target.value)}
                         />
                         {errors.education?.[index]?.educationfrom && (
                           <p className="text-red-700 text-sm">
@@ -222,10 +241,11 @@ const Education = ({setData,education,setShowPreview,sectionDeleted,setSelectedS
                             },
                             validate: validateDateRange,
                           })}
-                          min="1980-01-01"
+                          min={getMinToDate()}
                           max={getCurrentDate()}
                           className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                           type="Date"
+                          disabled={!fromDate}
                         />
                         {errors.education?.[index]?.educationto && (
                           <p className="text-red-700 text-sm">

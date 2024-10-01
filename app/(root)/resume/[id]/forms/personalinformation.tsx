@@ -200,10 +200,10 @@ const PersonalInformation = ({
           <h1 className="mb-4 w-full px-6 lg:m-0 md:mx-36 md:text-xl md:w-full text-black font-bold lg:text-3xl lg:w-1/2">
             Personal Information
           </h1>
-          <p className="mb-4 px-6 lg:w-full lg:m-0 w-full md:mx-36 md:w-[350px] text-gray-700 font-bold text-sm">
+          {/* <p className="mb-4 px-6 lg:w-full lg:m-0 w-full md:mx-36 md:w-[350px] text-gray-700 font-bold text-sm">
             Before you start, select the language you want to use in your
             profile
-          </p>
+          </p> */}
 
           <ImageUploader onImageChange={handleImageChange} />
 
