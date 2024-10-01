@@ -27,7 +27,8 @@ const Header = ({ user }) => {
             The CV that gets the job... Done
           </h2>
           <p className="text-base sm:text-lg md:text-xl">
-            Perfect Your CV Effortlessly, Much More than a CV generator
+            {/* Perfect Your CV Effortlessly, Much More than a CV generator */}
+            Create your CV effortlessly in seconds
           </p>
 
           <div>

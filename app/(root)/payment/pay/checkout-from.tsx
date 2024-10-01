@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import {
-  
   PaymentElement,
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
 import { PAYMENT_SUCCESS_URL } from "@/app/constants";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 if (!process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY) {
   throw new Error("NEXT_PUBLIC_STRIPE_PUBLIC_KEY is not set");
@@ -86,18 +86,31 @@ const CheckoutForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-     <PaymentElement />
-      <button 
-        type="submit" 
-        disabled={!stripe} 
-        className={`w-full mt-4 py-2 px-4 text-white font-semibold rounded-md transition duration-300 ${
-          !stripe 
-            ? 'bg-gray-400 cursor-not-allowed' 
-            : 'bg-blue-500 hover:bg-blue-600'
-        }`}
-      >
-        Pay £20
-      </button>
+      <div className="bg-gray-100 p-12 rounded-md space-y-2 w-full">
+  <p className="w-full mt-4 py-2 px-4 text-xl text-center text-white font-semibold rounded-md transition duration-300 bg-blue-500">
+    Payment Information
+  </p>
+  <p className="w-full mt-4 py-2 px-4 text-2xl text-center font-semibold rounded-md transition duration-300">Amount Total: 10 £</p>
+  <PaymentElement />
+  <div className="flex space-x-4 mt-4">
+    <Link href={'/'}
+      className={'w-full py-2 px-4 text-center text-white font-semibold rounded-md transition duration-300 bg-gray-600 hover:bg-blue-600'}
+    >
+     Close
+    </Link>
+    <button 
+      type="submit" 
+      disabled={!stripe} 
+      className={`w-full py-2 px-4 text-white font-semibold rounded-md transition duration-300 ${
+        !stripe 
+          ? 'bg-gray-400 cursor-not-allowed' 
+          : 'bg-blue-500 hover:bg-blue-600'
+      }`}
+    >
+      Pay Now
+    </button>
+  </div>
+</div>
       {errorMessage && <div>{errorMessage}</div>}
     </form>
   );
