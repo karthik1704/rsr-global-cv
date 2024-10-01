@@ -1,19 +1,22 @@
 import { lessThanExpiryDate } from "@/lib/utils";
-import Resume from "./resume-form";
 import { SERVER_API_URL } from "@/app/constants";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import AddResumeForm from "./addresumeform";
+import ResumeList from "./resumelist";
+
 export async function getData() {
   const cookiesStore = cookies();
   const access = cookiesStore.get("access");
 
-  const res = await fetch(`${SERVER_API_URL}/users/me`, {
+  console.log(access);
+  const res = await fetch(`${SERVER_API_URL}/resumes/`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${access?.value}`,
     },
     next: {
-      tags: ["User"],
+      tags: ["Resume"],
     },
   });
 
@@ -22,32 +25,29 @@ export async function getData() {
   }
 
   if (res.status === 401) {
-    redirect("/login");
+    // redirect("/resume/[id]");
+    // redirect('/resume')
   }
   if (res.status !== 200) {
-    redirect("/login");
+    // redirect("/resume/[id]");
+    // redirect('/login')
+    console.log(res);
   }
 
-  const user = await res.json();
-  console.log(user);
-  if (!user.expiry_date) {
-    redirect("/payment");
-  }
-  if (user.expiry_date && !lessThanExpiryDate(user.expiry_date)) {
-    redirect("/payment/renew");
-  }
+  const resumes = await res.json();
+  console.log(resumes);
 
-  return user;
+  return resumes;
 }
 
-type Data = User;
+type Data = [];
 
 const Page = async () => {
-  const user: Data = await getData();
+  const resumes: Data = await getData();
   return (
     <>
-      <div>
-        <Resume />
+      <div className="w-9/12 shadow-2xl border-gray-300 text-justify mx-auto my-7">
+        {resumes.length ?  <ResumeList resumes={resumes}/> : <AddResumeForm /> }
       </div>
     </>
   );

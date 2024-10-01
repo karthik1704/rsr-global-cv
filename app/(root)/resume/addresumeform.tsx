@@ -30,7 +30,7 @@ const AddResumeForm = () => {
   }, [state?.message, state]);
   return (
 <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-    <h1 className="text-3xl font-bold text-black mb-6">Resume</h1>
+    <h1 className="text-3xl font-bold text-green-700 mb-6">Resume</h1>
     <form action={actionFn} className="bg-white shadow-md rounded-lg p-6 max-w-sm w-full">
         <label for="resume_title" class="block text-gray-700 text-sm font-semibold mb-2">Resume Title</label>
         <input type="text" name="resume_title" id="resume_title" 

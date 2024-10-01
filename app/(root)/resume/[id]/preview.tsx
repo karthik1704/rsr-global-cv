@@ -114,17 +114,17 @@ const Preview = ({ data, handleNext,image,handleEdit}: PreviewProps) => {
           </div>}
           <div className=" flex-col pl-10 w-full">
               <p className="block font-semibold text-base my-3">
-             <span className="text-2xl font-bold text-gray-700 cont capitalize">{data.personalInformation.firstName} {data.personalInformation.lastName}</span>
+             <span className="text-2xl font-bold text-gray-700 cont capitalize">{data.personalInformation.first_name} {data.personalInformation.last_name}</span>
               </p>
 
             <hr className="border-b-2 border-slate-500" />
             <div className=" w-5/6 flex my-2">
               <p className="text-black font-semibold text-base head ">
-                Date of birth : <span className="text-base cont font-medium">{new Date(data.personalInformation.dob).toLocaleDateString("en-GB")}</span>
+                Date of birth : <span className="text-base cont font-medium">{new Date(data.personalInformation.date_of_birth).toLocaleDateString("en-GB")}</span>
               </p>
-              {data.personalInformation.contact ? (
+              {data.personalInformation.contact_number ? (
               <p className="text-black font-semibold text-base head mx-5">
-                | Contact Number : <span className="text-base font-medium cont">{data.personalInformation.contact}</span>
+                | Contact Number : <span className="text-base font-medium cont">{data.personalInformation.contact_number}</span>
               </p>
               ): null}
             </div>
@@ -133,9 +133,9 @@ const Preview = ({ data, handleNext,image,handleEdit}: PreviewProps) => {
               <p className="text-black font-semibold text-base head ">
               Nationality : <span className="text-base cont font-medium capitalize">{data.personalInformation.nationality}</span>
               </p>
-              {data.personalInformation.email ? (
+              {data.personalInformation.email_address ? (
               <p className="text-black font-semibold text-base head mx-5">
-                | Email - Id : <span className="text-base font-medium cont">{data.personalInformation.email}</span>
+                | Email - Id : <span className="text-base font-medium cont">{data.personalInformation.email_address}</span>
               </p>
               ) : null}
             </div>
@@ -144,19 +144,19 @@ const Preview = ({ data, handleNext,image,handleEdit}: PreviewProps) => {
               <p className="text-black font-semibold text-base">
                 Address : {" "}
                 <span className="text-base font-medium cont capitalize">
-                  {data.personalInformation.add1}, {data.personalInformation.add2}
+                  {data.personalInformation.address_line_1}, {data.personalInformation.address_line_2}
                 </span>{" "}
                 <span className=" text-base font-medium cont capitalize">
-                  {data.personalInformation.city}, {data.personalInformation.code} {' '} {data.personalInformation.country}
+                  {data.personalInformation.city}, {data.personalInformation.postal_code} {' '} {data.personalInformation.country}
                 </span>
               </p>
-              {data.personalInformation.about ? (
+              {data.personalInformation.responsibilities ? (
   <div className="flex flex-col py-2">
     <p className="block text-black font-semibold text-base head flex-shrink-0 w-full">
       About me :
     </p>
     <span className="block font-medium text-black text-base flex-grow cont">
-      {data.personalInformation.about}
+      {data.personalInformation.responsibilities}
     </span>
   </div>
 ) : null}

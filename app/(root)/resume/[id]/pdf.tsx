@@ -460,8 +460,8 @@ const PDF = ({ data }: data) => {
                   fontWeight: "bold",
                   textTransform: "capitalize",
                 }}>
-                  {data.personalInformation.firstName}{" "}
-                  {data.personalInformation.lastName}
+                  {data.personalInformation.first_name}{" "}
+                  {data.personalInformation.last_name}
                 </Text>
                 <View style={styles.photoContainer1}>
                   <Image src="/images/rsr_logo-1.png" />
@@ -490,15 +490,15 @@ const PDF = ({ data }: data) => {
                   </Text>
                   <Text style={styles.text2}>
                     {/* {new Date(data.dob).toLocaleDateString("en-GB")} | */}
-                    {data.personalInformation.dob
+                    {data.personalInformation.date_of_birth
                       ? new Date(
-                          data.personalInformation.dob
+                          data.personalInformation.date_of_birth
                         ).toLocaleDateString("en-GB")
                       : null}{" "}
                     |
                   </Text>
                 </View>
-                {data.personalInformation.contact ? (
+                {data.personalInformation.contact_number ? (
                   <View
                     style={{
                       flexDirection: "row",
@@ -507,7 +507,7 @@ const PDF = ({ data }: data) => {
                   >
                     <Text style={styles.text3}>Contact Number :</Text>
                     <Text style={styles.text4}>
-                      {data.personalInformation.contact} |
+                      {data.personalInformation.contact_number} |
                     </Text>
                   </View>
                 ) : null}
@@ -535,7 +535,7 @@ const PDF = ({ data }: data) => {
                     {data.personalInformation.nationality} |
                   </Text>
                 </View>
-                {data.personalInformation.email ? (
+                {data.personalInformation.email_address ? (
                   <View
                     style={{
                       flexDirection: "row",
@@ -544,7 +544,7 @@ const PDF = ({ data }: data) => {
                   >
                     <Text style={styles.text3}>Email ID:</Text>
                     <Text style={styles.text4}>
-                      {data.personalInformation.email} |
+                      {data.personalInformation.email_address} |
                     </Text>
                   </View>
                 ) : null}
@@ -553,11 +553,11 @@ const PDF = ({ data }: data) => {
               <View style={{ flexDirection: "row", gap: "7" }}>
                 <Text style={styles.text5}>Address:</Text>
                 <Text style={styles.text6}>
-                  {data.personalInformation.add1 &&
-                  data.personalInformation.add2 &&
+                  {data.personalInformation.address_line_1 &&
+                  data.personalInformation.address_line_2 &&
                   data.personalInformation.city &&
                   data.personalInformation.country
-                    ? `${data.personalInformation.add1}, ${data.personalInformation.add2} ${data.personalInformation.city}, ${data.personalInformation.code} ${data.personalInformation.country}`
+                    ? `${data.personalInformation.address_line_1}, ${data.personalInformation.address_line_2} ${data.personalInformation.city}, ${data.personalInformation.postal_code} ${data.personalInformation.country}`
                     : null}
                   {/* F-72, Mangal Bazar, Subhash Chowk, Laxmi Nagar, 110092, Delhi,
                   India (Home) */}
@@ -565,11 +565,11 @@ const PDF = ({ data }: data) => {
               </View>
             </View>
 
-            {data.personalInformation.about ? (
+            {data.personalInformation.responsibilities ? (
               <View>
                 <Text style={styles.text7}>About me:</Text>
                 <Text style={styles.text8}>
-                  {data.personalInformation.about}
+                  {data.personalInformation.responsibilities}
                 </Text>
               </View>
             ) : null}

@@ -42,7 +42,7 @@ const ImageUploader = ({onImageChange}) => {
 
   return (
 
-    <div className="flex flex-col md:w-auto lg:flex-row items-center">
+    <div className="flex flex-col lg:flex-row w-full items-center md:justify-center md:mx-auto">
   <div className="mb-4 md:mb-0 md:mr-4">
     <img
       src={image}
@@ -50,15 +50,17 @@ const ImageUploader = ({onImageChange}) => {
       className="w-24 h-24 object-cover rounded-full border-2 border-gray-300"
     />
   </div>
-  <div>
+  <div className="flex flex-col w-full md:w-auto">
     <input
       type="file"
       accept="image/*"
       onChange={handleImageChange}
-      className="border border-gray-300 p-2 rounded w-full md:w-auto file-input"
+      className="border border-gray-300 p-2 rounded w-full md:w-64 file-input"
     />
-    {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
-    <p>Please upload passport image, ensuring that the file size is within 2 MB.</p>
+    {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+    <p className="mt-2 text-sm text-gray-600">
+      Please upload passport image, ensuring that the file size is within 2 MB.
+    </p>
   </div>
 </div>
   );
