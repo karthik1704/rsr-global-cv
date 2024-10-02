@@ -3,17 +3,8 @@ import {useForm,useFieldArray} from 'react-hook-form';
 import {dateFormatter,getCurrentDate} from '@/lib/utils';
 import { useParams } from "next/navigation";
 import { updateEducation } from "../../action";
-import WorkExperience from "./workexperience";
 
-// type Resume={
-//   resume_title: string;
-//     title_of_qualification: string;
-//     organization_name: string;
-//     from_date: "2024-10-01";
-//     to_date: "2024-10-01";
-//     city: string;
-//     country: string;
-// }
+
 
 const Education = ({setData,education,setShowPreview,sectionDeleted,setSelectedSection,selectedSection}) =>{
     const {

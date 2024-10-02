@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { LockKeyhole } from "lucide-react";
-// import { UserRound } from "lucide-react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
@@ -13,8 +12,54 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { logout } from "@/app/(root)/actions";
 import { lessThanExpiryDate } from "@/lib/utils";
+import { cookies } from "next/headers";
+import { SERVER_API_URL } from "@/app/constants";
+import { redirect } from "next/navigation";
 
-const Navbar = ({ user }: { user: User | null }) => {
+export async function getData() {
+  const cookiesStore = cookies();
+  const access = cookiesStore.get("access");
+
+  
+  const res = await fetch(`${SERVER_API_URL}/users/me`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access?.value}`,
+    },
+    next:{
+      tags:['User']
+    }
+  });
+
+  if (!res.ok) {
+    console.log("error");
+  }
+
+  if (res.status === 401) {
+    redirect ('/login');
+  }
+  if (res.status !== 200) {
+    return {};
+  }
+
+
+
+  const user = await res.json();
+  console.log(user);
+  
+  if(user.expiry_date && !lessThanExpiryDate(user.expiry_date)){
+    redirect ('/payment/renew');
+  }
+
+  return user;
+}
+type Data = User | null;
+
+
+const Navbar = async () => {
+  const user:Data = await getData();
+
+
   return (
     <>
       <nav className="w-full grid items-center h-24 shadow-inner ">
@@ -46,7 +91,7 @@ const Navbar = ({ user }: { user: User | null }) => {
                 <DropdownMenuTrigger>
                   {" "}
                   <Avatar className="mr-5">
-                    <AvatarImage src="null" alt="@shadcn" />
+                    {/* <AvatarImage src="" alt="@shadcn" /> */}
                     <AvatarFallback>{`${user.first_name[0].toUpperCase()}${user.last_name[0].toUpperCase()}`}</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>

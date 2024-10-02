@@ -23,7 +23,7 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
         getValues,
         trigger,
         control,
-      } = useForm<Resume>({
+      } = useForm({
         defaultValues: {
             training: [
                 {

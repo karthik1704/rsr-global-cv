@@ -1,5 +1,25 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Other } from "../typings";
+
+
+type OthersProps = {
+  setData: any;
+  others: Other[];
+  selectedSection: string[];
+  setSelectedSection: any;
+  setShowPreview: any;
+  selected: string;
+  sectionTitle: string;
+}
+
+type FormValues = {
+  sectiontitle: string;
+  title: string;
+  description: string;
+  id?: number;
+}
+
 
 const Others = ({
   setData,
@@ -8,8 +28,8 @@ const Others = ({
   setSelectedSection,
   setShowPreview,
   selected,
-  additionalTitle,
-}) => {
+  sectionTitle,
+}:OthersProps) => {
   const {
     register,
     handleSubmit,
@@ -19,21 +39,21 @@ const Others = ({
     getValues,
     trigger,
     control,
-  } = useForm({
+  } = useForm<FormValues>({
     defaultValues: {},
   });
 
   const [show, setShowForm] = useState(true);
 
-  const handleForm = (othersData) => {
+  const handleForm = (othersData:FormValues) => {
     console.log(othersData);
   
     // Perform operations
     const newothers = others.filter(
-      (other) => other.mainTitle.toLowerCase() !== additionalTitle.toLowerCase()
+      (other) => other.title.toLowerCase() !== sectionTitle.toLowerCase()
     );
     const existingother = others.find(
-      (other) => other.mainTitle.toLowerCase() === additionalTitle.toLowerCase()
+      (other) => other.title.toLowerCase() === sectionTitle.toLowerCase()
     );
   
     const updatedData = existingother
@@ -49,7 +69,7 @@ const Others = ({
           others: [
             ...newothers,
             {
-              mainTitle: additionalTitle,
+              sectionTitle,
               ...othersData,
             },
           ],
@@ -83,7 +103,7 @@ const Others = ({
         <div>
           <form onSubmit={handleSubmit(handleForm)}>
             <h1 className="my-4 px-6  text-black font-bold text-3xl">
-              {additionalTitle}
+              {sectionTitle}
             </h1>
 
             <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
@@ -94,7 +114,7 @@ const Others = ({
                 </label>
                 <input
                   className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                  {...register("othertitle", {
+                  {...register("title", {
                     required: {
                       value: true,
                       message: "Title is required",
@@ -102,9 +122,9 @@ const Others = ({
                   })}
                   placeholder=" Title"
                 />
-                {errors.othertitle && (
+                {errors.title && (
                   <p className="text-red-700 text-sm">
-                    {errors.othertitle.message}
+                    {errors.title.message}
                   </p>
                 )}
               </div>
@@ -118,7 +138,7 @@ const Others = ({
                 </label>
                 <input
                   className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                  {...register("otherdesc", {
+                  {...register("description", {
                     required: {
                       value: true,
                       message: "description is required",
@@ -126,9 +146,9 @@ const Others = ({
                   })}
                   placeholder=" Description"
                 />
-                {errors.otherdesc && (
+                {errors.description && (
                   <p className="text-red-700 text-sm">
-                    {errors.otherdesc.message}
+                    {errors.description.message}
                   </p>
                 )}
               </div>

@@ -1,33 +1,12 @@
-import React ,{ useState } from "react";
-import ImageUploader from "@/components/image/image_uploader";
-import { useForm, Controller } from "react-hook-form";
+import React, { useState } from "react";
 import Image from "next/image";
-import { cn, dateFormatter, getCurrentDate } from "@/lib/utils";
-import { CalendarIcon } from "lucide-react";
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { format } from "date-fns";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { DayPicker} from "react-day-picker";
-import DatePicker from "../datepicker";
+import { useForm } from "react-hook-form";
 import { useParams } from "next/navigation";
+
+import ImageUploader from "@/components/image/image_uploader";
+import { dateFormatter } from "@/lib/utils";
+import DatePicker from "../datepicker";
 import { updateResume } from "../../action";
-// import "react-day-picker/style.css";
-// import '../global.css'
 
 type Resume = {
   resume_title: string;
@@ -46,6 +25,14 @@ type Resume = {
   referred_by: string;
 };
 
+type PersonalInformationProps = {
+  setData: (data: any) => void;
+  personalInformation: Resume;
+  image: string;
+  setShowPreview: (showPreview: boolean) => void;
+  text: string;
+  handleChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+};
 
 const PersonalInformation = ({
   setData,
@@ -54,7 +41,7 @@ const PersonalInformation = ({
   setShowPreview,
   text,
   handleChange,
-}) => {
+}: PersonalInformationProps) => {
   const {
     register,
     handleSubmit,
@@ -67,13 +54,25 @@ const PersonalInformation = ({
   } = useForm<Resume>({
     defaultValues: {
       first_name: personalInformation?.first_name ?? "",
+      last_name: personalInformation?.last_name ?? "",
+      date_of_birth: personalInformation?.date_of_birth ?? "",
+      nationality: personalInformation?.nationality ?? "",
+      address_line_1: personalInformation?.address_line_1 ?? "",
+      address_line_2: personalInformation?.address_line_2 ?? "",
+      postal_code: personalInformation?.postal_code ?? "",
+      city: personalInformation?.city ?? "",
+      country: personalInformation?.country ?? "", 
+      email_address: personalInformation?.email_address ?? "",
+      contact_number: personalInformation?.contact_number ?? "",
+      responsibilities: personalInformation?.responsibilities ?? "",
+      referred_by: personalInformation?.referred_by ?? "",
     },
   });
 
-  const [date, setDate] = useState(null);
-  const {id} = useParams()
+  const [date, setDate] = useState<Date | undefined>(undefined);
+  const { id } = useParams();
 
-  const updateResumeWithId = updateResume.bind(null, id as string)
+  const updateResumeWithId = updateResume.bind(null, id as string);
 
   // const handleDateChange = (newDate) => {
   //   setDate(newDate);
@@ -81,14 +80,14 @@ const PersonalInformation = ({
   //   setValue("date_of_birth", newDate);
   // };
 
-  const handleDateChange = (newDate) => {
+  const handleDateChange = (newDate: Date) => {
     setDate(newDate);
-        const formattedDate = newDate.toISOString().split('T')[0];
+    const formattedDate = newDate.toISOString().split("T")[0];
     console.log(formattedDate);
     setValue("date_of_birth", formattedDate);
   };
 
-  const validateDateRange = (value) => {
+  const validateDateRange = (value: Date) => {
     const minDate = new Date("1950-01-01");
     const maxDate = new Date("2100-12-31");
     const selectedDate = new Date(value);
@@ -103,18 +102,20 @@ const PersonalInformation = ({
 
   const [uploadedImage, setUploadedImage] = useState("");
 
-  const handleImageChange = (imageurl) => {
+  const handleImageChange = (imageurl: string) => {
     setUploadedImage(imageurl);
   };
 
-  const handleForm = async (personalData:Resume) => {
+  const handleForm = async (personalData: Resume) => {
     console.log(personalData);
-    setData((prevState) => ({
-      ...prevState,
-      personalInformation: { ...personalData, profileImage: uploadedImage },
-    }));
-    // personalData.resume_title=personalInformation.resume_title;
-    // const res = await updateResumeWithId(personalData)
+    // setData((prevState) => ({
+    //   ...prevState,
+    //   personalInformation: { ...personalData, profileImage: uploadedImage },
+    // }));
+    personalData.resume_title=personalInformation.resume_title;
+    personalData.date_of_birth = new Date(personalData.date_of_birth).toISOString().split("T")[0];
+    console.log(personalData.date_of_birth)
+    const res = await updateResumeWithId(personalData)
 
     setShowForm(false);
     setShowPreview(true);
@@ -159,29 +160,36 @@ const PersonalInformation = ({
           <p className="text-lg font-semibold text-gray-800">
             Address :{" "}
             <span className="font-light capitalize">
-              {personalInformation.address_line_1} {personalInformation.address_line_2}{" "}
+              {personalInformation.address_line_1}{" "}
+              {personalInformation.address_line_2}{" "}
               {personalInformation.postal_code} {personalInformation.city}{" "}
               {personalInformation.country}
             </span>
           </p>
 
-          {personalInformation.email && (
+          {personalInformation.email_address && (
             <p className="text-lg font-semibold text-gray-800">
               Email Address :{" "}
-              <span className="font-light">{personalInformation.email_address}</span>
+              <span className="font-light">
+                {personalInformation.email_address}
+              </span>
             </p>
           )}
 
-          {personalInformation.contact && (
+          {personalInformation.contact_number && (
             <p className="text-lg font-semibold text-gray-800">
               Contact Number:{" "}
-              <span className="font-light">{personalInformation.contact_number}</span>
+              <span className="font-light">
+                {personalInformation.contact_number}
+              </span>
             </p>
           )}
           {personalInformation.responsibilities && (
             <p className="text-lg font-semibold text-gray-800">
               Main activities and responsibilities :{" "}
-              <span className="font-light">{personalInformation.responsibilities}</span>
+              <span className="font-light">
+                {personalInformation.responsibilities}
+              </span>
             </p>
           )}
           <div className="flex gap-4">
@@ -268,7 +276,9 @@ const PersonalInformation = ({
               })}
             />
             {errors.date_of_birth && (
-              <p className="text-red-700 text-sm">{errors.date_of_birth.message}</p>
+              <p className="text-red-700 text-sm">
+                {errors.date_of_birth.message}
+              </p>
             )}
           </div>
 
@@ -314,7 +324,9 @@ const PersonalInformation = ({
               placeholder="Street name, P.O, box"
             />
             {errors.address_line_1 && (
-              <p className="text-red-700 text-sm">{errors.address_line_1.message}</p>
+              <p className="text-red-700 text-sm">
+                {errors.address_line_1.message}
+              </p>
             )}
           </div>
 
@@ -333,7 +345,9 @@ const PersonalInformation = ({
               placeholder="Apartment, suite, unit, building, floor, etc"
             />
             {errors.address_line_2 && (
-              <p className="text-red-700 text-sm">{errors.address_line_2.message}</p>
+              <p className="text-red-700 text-sm">
+                {errors.address_line_2.message}
+              </p>
             )}
           </div>
 
