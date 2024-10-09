@@ -1,5 +1,6 @@
 export type ResumeType = {
     resume_title: string;
+    job_applied_for: string;
     first_name: string;
     last_name: string;
     date_of_birth: string;
@@ -18,7 +19,7 @@ export type ResumeType = {
     resume_image: string;
     experiences: Experience[];
     education: Education[];
-    language_skills: LanguageSkill[];
+    language_skills: LanguageSkill;
     driving_license: DrivingLicense[];
     training_awards: TrainingAward[];
     others: Other[];

@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { LanguageSkill } from "../typings";
+import { useParams } from "next/navigation";
+import { updateLanguage } from "../../action";
 
 type LanguageProps = {
   setData: any;
@@ -8,11 +10,11 @@ type LanguageProps = {
   selectedSection: string[];
   setSelectedSection: any;
   setShowPreview: any;
-  selected: string;
 };
 
 type FormValues = {
-  languages: string;
+  id?:number ;
+  language: string;
 };
 
 const Language = ({
@@ -21,7 +23,7 @@ const Language = ({
   selectedSection,
   setSelectedSection,
   setShowPreview,
-  selected,
+  
 }: LanguageProps) => {
   const {
     register,
@@ -33,17 +35,32 @@ const Language = ({
     trigger,
     control,
   } = useForm<FormValues>({
-    defaultValues: {},
+    defaultValues: {
+      id: language.id ?? undefined,
+      language: language?.language ?? "",
+    },
   });
 
   const [show, setShowForm] = useState(true);
 
-  const handleForm = (languageData:FormValues) => {
+  const {id} = useParams<{id:string}>();
+
+  const updateLanguageWithId = updateLanguage.bind(null, id);
+
+  useEffect(() => {
+    if(language?.language){
+      setShowForm(false);
+    }
+  }, [language.language]);
+
+  const handleForm =async (languageData:FormValues) => {
     console.log(languageData);
     // setData((prevState) => ({
     //   ...prevState,
     //   language: { ...languageData },
     // }));
+    const res = await updateLanguageWithId(languageData);
+
     setShowForm(false);
     setShowPreview(true);
   };
@@ -113,9 +130,10 @@ const Language = ({
                   Languages Known
                   <span className="text-red-700">*</span>
                 </label>
+                <input type="hidden" name="id" />
                 <input
                   className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                  {...register("languages", {
+                  {...register("language", {
                     required: {
                       value: true,
                       message: "language is required",
@@ -123,9 +141,9 @@ const Language = ({
                   })}
                   placeholder=" Enter the Languages"
                 />
-                {errors.languages && (
+                {errors.language && (
                   <p className="text-red-700 text-sm">
-                    {errors.languages.message}
+                    {errors.language.message}
                   </p>
                 )}
               </div>

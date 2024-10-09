@@ -6,6 +6,7 @@ import Resume from "./resume-form";
 import { lessThanExpiryDate } from "@/lib/utils";
 import { SERVER_API_URL } from "@/app/constants";
 import { ResumeType } from "./typings";
+import { Suspense } from "react";
 
 export async function getUser() {
   const cookiesStore = cookies();
@@ -48,7 +49,7 @@ export async function getUser() {
 export async function getResume(id:string) {
   const cookiesStore = cookies();
   const access = cookiesStore.get("access");
-
+  console.log('re running');
   const res = await fetch(`${SERVER_API_URL}/resumes/${id}`, {
     headers: {
       "Content-Type": "application/json",
@@ -57,6 +58,7 @@ export async function getResume(id:string) {
     next: {
       tags: ["Resume"],
     },
+    cache: 'no-store'
   });
 
   if (!res.ok) {
@@ -87,7 +89,9 @@ const ResumeEditPage = async ({params:{id}}:{params:{id:string;}}) => {
   return (
     <>
       <div>
+      <Suspense fallback={'loading'}>
         <Resume resume={resume}/>
+      </Suspense>
       </div>
     </>
   );

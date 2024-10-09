@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Other } from "../typings";
+import { useParams } from "next/navigation";
+import { updateOthers } from "../../action";
 
 
 type OthersProps = {
@@ -9,7 +11,6 @@ type OthersProps = {
   selectedSection: string[];
   setSelectedSection: any;
   setShowPreview: any;
-  selected: string;
   sectionTitle: string;
 }
 
@@ -27,7 +28,6 @@ const Others = ({
   selectedSection,
   setSelectedSection,
   setShowPreview,
-  selected,
   sectionTitle,
 }:OthersProps) => {
   const {
@@ -40,46 +40,56 @@ const Others = ({
     trigger,
     control,
   } = useForm<FormValues>({
-    defaultValues: {},
+    defaultValues: {
+      sectiontitle: sectionTitle,
+      title: "",
+      description: "",
+    },
   });
 
   const [show, setShowForm] = useState(true);
 
-  const handleForm = (othersData:FormValues) => {
+  const {id} = useParams<{id:string}>();
+
+  const updateOthersWithId = updateOthers.bind(null, id);
+
+  const handleForm =async (othersData:FormValues) => {
     console.log(othersData);
   
-    // Perform operations
-    const newothers = others.filter(
-      (other) => other.title.toLowerCase() !== sectionTitle.toLowerCase()
-    );
-    const existingother = others.find(
-      (other) => other.title.toLowerCase() === sectionTitle.toLowerCase()
-    );
+    // // Perform operations
+    // const newothers = others.filter(
+    //   (other) => other.title.toLowerCase() !== sectionTitle.toLowerCase()
+    // );
+    // const existingother = others.find(
+    //   (other) => other.title.toLowerCase() === sectionTitle.toLowerCase()
+    // );
   
-    const updatedData = existingother
-      ? {
-          ...newothers,
-          others: [
-            ...newothers,
-            { ...existingother, othersData },
-          ],
-        }
-      : {
-          ...newothers,
-          others: [
-            ...newothers,
-            {
-              sectionTitle,
-              ...othersData,
-            },
-          ],
-        };
+    // const updatedData = existingother
+    //   ? {
+    //       ...newothers,
+    //       others: [
+    //         ...newothers,
+    //         { ...existingother, othersData },
+    //       ],
+    //     }
+    //   : {
+    //       ...newothers,
+    //       others: [
+    //         ...newothers,
+    //         {
+    //           sectionTitle,
+    //           ...othersData,
+    //         },
+    //       ],
+    //     };
   
-    // Use functional update form for setData
-    setData(prevState => ({
-      ...prevState,
-      ...updatedData,
-    }));
+    // // Use functional update form for setData
+    // setData(prevState => ({
+    //   ...prevState,
+    //   ...updatedData,
+    // }));
+
+     const res = await updateOthersWithId(othersData);
   
     setShowForm(false);
     setShowPreview(true);
@@ -97,8 +107,6 @@ const Others = ({
 
   return (
     <>
-
-
       {show && (
         <div>
           <form onSubmit={handleSubmit(handleForm)}>
@@ -107,11 +115,13 @@ const Others = ({
             </h1>
 
             <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
+              
               <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
                 <label className="block text-black font-bold text-sm head mb-2">
                   Title
                   <span className="text-red-700">*</span>
                 </label>
+                <input type="hidden" {...register("sectiontitle")} />
                 <input
                   className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   {...register("title", {

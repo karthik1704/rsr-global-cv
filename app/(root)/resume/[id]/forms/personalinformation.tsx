@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useParams } from "next/navigation";
@@ -12,7 +12,7 @@ type Resume = {
   resume_title: string;
   first_name: string;
   last_name: string;
-  date_of_birth: string; // Format: YYYY-MM-DD
+  date_of_birth: string | Date; // Format: YYYY-MM-DD
   nationality: string;
   address_line_1: string;
   address_line_2: string;
@@ -55,7 +55,7 @@ const PersonalInformation = ({
     defaultValues: {
       first_name: personalInformation?.first_name ?? "",
       last_name: personalInformation?.last_name ?? "",
-      date_of_birth: personalInformation?.date_of_birth ?? "",
+      date_of_birth: new Date(personalInformation?.date_of_birth).toUTCString() ?? "",
       nationality: personalInformation?.nationality ?? "",
       address_line_1: personalInformation?.address_line_1 ?? "",
       address_line_2: personalInformation?.address_line_2 ?? "",
@@ -69,8 +69,9 @@ const PersonalInformation = ({
     },
   });
 
-  const [date, setDate] = useState<Date | undefined>(undefined);
+  const [date, setDate] = useState<Date | undefined>(new Date(personalInformation.date_of_birth) ?? undefined);
   const { id } = useParams();
+  const [show, setShowForm] = useState(true);
 
   const updateResumeWithId = updateResume.bind(null, id as string);
 
@@ -79,6 +80,18 @@ const PersonalInformation = ({
   //   console.log(newDate)
   //   setValue("date_of_birth", newDate);
   // };
+
+  // useEffect(() => {
+  //   if(personalInformation.date_of_birth) {
+  //     setDate(new Date(personalInformation.date_of_birth as string));
+  //   }
+  // }, [personalInformation.date_of_birth]);
+
+  useEffect(() => {
+    if(personalInformation.first_name) {
+      setShowForm(false);
+    }
+  }, [personalInformation.first_name]);
 
   const handleDateChange = (newDate: Date) => {
     setDate(newDate);
@@ -98,7 +111,6 @@ const PersonalInformation = ({
     return true;
   };
 
-  const [show, setShowForm] = useState(true);
 
   const [uploadedImage, setUploadedImage] = useState("");
 
@@ -148,7 +160,7 @@ const PersonalInformation = ({
           <p className="text-lg font-semibold text-gray-800">
             Date of birth :{" "}
             <span className="font-light">
-              {dateFormatter(personalInformation.date_of_birth)}
+              {dateFormatter(personalInformation.date_of_birth as string)}
             </span>
           </p>
           <p className="text-lg font-semibold text-gray-800">

@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   useForm,
   useFieldArray,
   useFormContext,
   FormProvider,
+  useWatch,
 } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -11,6 +12,7 @@ import { dateFormatter, getCurrentDate } from "@/lib/utils";
 import { useParams } from "next/navigation";
 import { updateWorkExperience } from "../../action";
 import { Experience } from "../typings";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 
 //capitalize letter
 
@@ -25,12 +27,12 @@ const capitalizeFirstLetter = (text: string) => {
 };
 
 type Props = {
-  setData: any;
+  setData: React.Dispatch<React.SetStateAction<any>>;
   workExperience: Experience[];
-  setShowPreview: any;
+  setShowPreview: React.Dispatch<React.SetStateAction<boolean>>;
   data: any;
-  showPreview: any;
-  setSelectedSection: any;
+  // showPreview: any;
+  setSelectedSection: React.Dispatch<React.SetStateAction<string[]>>;
   selectedSection: string[];
   job_applied_for?: string;
 };
@@ -56,37 +58,15 @@ const WorkExperience = ({
   workExperience,
   setShowPreview,
   data,
-  showPreview,
+  // showPreview,
   setSelectedSection,
   selectedSection,
   job_applied_for,
 }: Props) => {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    clearErrors,
-    formState: { errors },
-    getValues,
-    trigger,
-    control,
-  } = useForm<FormValues>({
+  const form = useForm<FormValues>({
     defaultValues: {
       job_applied_for: job_applied_for ?? "",
-      experiences: workExperience
-        ? workExperience
-        : [
-            {
-              employer: "",
-              website: "",
-              location: "",
-              occupation: "",
-              from_date: "",
-              to_date: "",
-              about_company: "",
-              responsibilities: "",
-            },
-          ],
+      experiences: workExperience ? workExperience : [],
     },
   });
 
@@ -95,10 +75,13 @@ const WorkExperience = ({
     append: appendExperience,
     remove: removeExperience,
   } = useFieldArray({
-    control,
+    control: form.control,
     name: "experiences",
   });
-
+  const watchExperience = useWatch({
+    control: form.control,
+    name: "experiences",
+  });
   const [isVisible, setIsVisible] = useState(true);
   const { id } = useParams();
 
@@ -118,10 +101,12 @@ const WorkExperience = ({
     index: number,
     field: keyof FormValues["experiences"][number]
   ) => {
+    console.log(event.target.value);
+    console.log(`experiences.${index}.${field}`);
     const { value } = event.target;
     const formattedValue = capitalizeFirstLetter(value);
-  
-    setValue(`experiences.${index}.${field}`, formattedValue);
+
+    form.setValue(`experiences.${index}.${field}`, formattedValue);
   };
 
   // const [isSwitchOn, setIsSwitchOn] = useState(false);
@@ -147,24 +132,47 @@ const WorkExperience = ({
 
   //work exp To Date disable
 
-  const workexpto = (value: string, { to_date }: { to_date: string|Date }) => {
+  const workexpto = (
+    value: string,
+    { to_date }: { to_date: string | Date }
+  ) => {
     if (!value || switchStates) {
       return true;
     }
     return (
-      new Date(value) >= new Date(to_date) || "End date must be after start date"
+      new Date(value) >= new Date(to_date) ||
+      "End date must be after start date"
     );
   };
 
-  const [switchStates, setSwitchStates] = useState<{ [key: number]: boolean }>(
-    experienceFields.reduce((acc, _, index) => ({ ...acc, [index]: false }), {})
+  const [switchStates, setSwitchStates] = useState<boolean[]>(
+    workExperience.length
+      ? workExperience.map((exp) => exp.currently_working)
+      : []
   );
+
+  const updateSwitchStates = useCallback(() => {
+    const currently_workings =
+      watchExperience?.map((field) => field.currently_working ?? false) || [];
+    if (currently_workings.length) {
+      setSwitchStates((prevState) => {
+        if (JSON.stringify(prevState) !== JSON.stringify(currently_workings)) {
+          return currently_workings;
+        }
+        return prevState;
+      });
+    }
+  }, [watchExperience]);
+
+  useEffect(() => {
+    updateSwitchStates();
+  }, [updateSwitchStates]);
 
   const handleSwitchChange = (index: number) => {
     setSwitchStates((prevStates) => {
       const newSwitchState = !prevStates[index];
       if (newSwitchState) {
-        setValue(`experiences.${index}.to_date`, null);
+        form.setValue(`experiences.${index}.to_date`, null);
       }
       return {
         ...prevStates,
@@ -177,7 +185,7 @@ const WorkExperience = ({
     const minDate = new Date("1980-01-01");
     const maxDate = new Date("2024-12-31");
     const selectedDate = new Date(value);
-  
+
     if (selectedDate < minDate || selectedDate > maxDate) {
       return "please enter valid Year";
     }
@@ -193,6 +201,10 @@ const WorkExperience = ({
   };
 
   const [show, setShowForm] = useState(true);
+  useEffect(() => {
+    // if(!workExperience.length) setShowForm(false);
+    if (workExperience.length) setShowForm(false);
+  }, [workExperience.length]);
 
   const handleForm = async (workexpData: FormValues) => {
     console.log(workexpData);
@@ -202,14 +214,14 @@ const WorkExperience = ({
     //   workExperience: workexpData.experiences,
     // }));
     // workexpData.resume_title = workExperience.resume_title;
-    // const res = await updateWorkExperienceWithId(workexpData)
+    const res = await updateWorkExperienceWithId(workexpData);
     setShowForm(false);
     setShowPreview(true);
   };
   // console.log(workExperience)
   return (
     <div className="my-8">
-      {isVisible && !show && workExperience.length && (
+      {!show && workExperience.length && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
           <p className="text-black text-2xl font-bold uppercase">
             Work Experience
@@ -283,294 +295,350 @@ const WorkExperience = ({
         </div>
       )}
       {show && (
-        <form onSubmit={handleSubmit(handleForm)}>
-          <div>
-            <div className="ml-7 my-2 w-1/4">
-              <label className="block text-black font-bold text-sm head mb-2">
-                Job applied for
-              </label>
-              <input
-                type="text"
-                placeholder="Software engineer"
-                className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                {...register("job_applied_for", {
-                  // required: {
-                  //   value: true,
-                  //   message: "job applied is required",
-                  // },
-                })}
-              />
-              {/* {errors.jobappliedfor && (
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(handleForm)}>
+            <div>
+              <div className="ml-7 my-2 w-1/4">
+                <label className="block text-black font-bold text-sm head mb-2">
+                  Job applied for
+                </label>
+                <input
+                  type="text"
+                  placeholder="Software engineer"
+                  className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                  {...form.register("job_applied_for", {
+                    // required: {
+                    //   value: true,
+                    //   message: "job applied is required",
+                    // },
+                  })}
+                />
+                {/* {errors.jobappliedfor && (
                 <p className="text-red-700 text-sm">{errors.jobappliedfor.message}</p>
               )} */}
-            </div>
+              </div>
 
-            {experienceFields.map((item, index) => (
-              <div key={item.id}>
-                <div className="mb-4  w-2/4 px-6">
-                  <div className="flex justify-between items-center	">
-                    <p className="text-black font-bold text-3xl mb-4">
-                      Work experience
-                    </p>
-                    <button
-                      type="button"
-                      className="w-10 capitalize bg-green-600 hover:bg-green-500 text-white rounded-full font-bold p-2"
-                      onClick={() => removeExperience(index)}
-                    >
-                      X
-                    </button>
-                  </div>
+              {experienceFields.map((item, index) => (
+                <div key={item.id}>
+                  <div className="mb-4  w-2/4 px-6">
+                    <div className="flex justify-between items-center	">
+                      <p className="text-black font-bold text-3xl mb-4">
+                        Work experience
+                      </p>
+                      <button
+                        type="button"
+                        className="w-10 capitalize bg-green-600 hover:bg-green-500 text-white rounded-full font-bold p-2"
+                        onClick={() => removeExperience(index)}
+                      >
+                        X
+                      </button>
+                    </div>
 
-                  <label className="block text-black font-bold text-sm head mb-2">
-                    Employer<span className="text-red-700">*</span>
-                  </label>
-                  <input
-                    {...register(`experiences.${index}.employer`, {
-                      required: {
-                        value: true,
-                        message: "Employer name is required",
-                      },
-                    })}
-                    placeholder="Company name"
-                    className="pl-4 block w-full rounded-md border-0 capitalize py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                  />
-                  {errors.experiences?.[index]?.employer && (
-                    <p className="text-red-700 text-sm">
-                      {errors.experiences[index].employer.message}
-                    </p>
-                  )}
-                </div>
-
-                <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-                  <div className="mb-4  w-2/4 px-6  ">
                     <label className="block text-black font-bold text-sm head mb-2">
-                      Website<span className="text-red-700">*</span>
+                      Employer<span className="text-red-700">*</span>
                     </label>
+                    
+                      <input
+                        {...form.register(`experiences.${index}.id`)}
+                        type="hidden"
+                       
+                      />
+                    
                     <input
-                      {...register(`experiences.${index}.website`, {
+                      {...form.register(`experiences.${index}.employer`, {
                         required: {
                           value: true,
-                          message: "Company’s Website is required",
-                        },
-                        pattern: {
-                          value:
-                            /^(https?:\/\/)?(www\.)?[a-z0-9-]+\.[a-z0-9]+\.(com|org|in|net|co.in|co|biz|edu|io|gov)$/,
-                          message:
-                            "Please enter a valid website (e.g. www.goolgle.com)",
+                          message: "Employer name is required",
                         },
                       })}
-                      placeholder="Company’s website"
-                      className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                      placeholder="Company name"
+                      className="pl-4 block w-full rounded-md border-0 capitalize py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                     />
-                    {errors.experiences?.[index]?.website && (
+                    {form.formState.errors.experiences?.[index]?.employer && (
                       <p className="text-red-700 text-sm">
-                        {errors.experiences[index].website.message}
+                        {
+                          form.formState.errors.experiences[index].employer
+                            .message
+                        }
                       </p>
                     )}
                   </div>
 
+                  <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
+                    <div className="mb-4  w-2/4 px-6  ">
+                      <label className="block text-black font-bold text-sm head mb-2">
+                        Website<span className="text-red-700">*</span>
+                      </label>
+                      <input
+                        {...form.register(`experiences.${index}.website`, {
+                          required: {
+                            value: true,
+                            message: "Company’s Website is required",
+                          },
+                          pattern: {
+                            value:
+                              /^(https?:\/\/)?(www\.)?[a-z0-9-]+\.[a-z0-9]+\.(com|org|in|net|co.in|co|biz|edu|io|gov)$/,
+                            message:
+                              "Please enter a valid website (e.g. www.goolgle.com)",
+                          },
+                        })}
+                        placeholder="Company’s website"
+                        className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                      />
+                      {form.formState.errors.experiences?.[index]?.website && (
+                        <p className="text-red-700 text-sm">
+                          {
+                            form.formState.errors.experiences[index].website
+                              .message
+                          }
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="mb-4  w-2/4 px-6  ">
+                      <label className="block text-black font-bold text-sm head mb-2">
+                        Location
+                      </label>
+                      <input
+                        {...form.register(`experiences.${index}.location`, {
+                          // required: {
+                          //   value: true,
+                          //   message: 'First Name is required'
+                          // }
+                        })}
+                        placeholder="Working location"
+                        className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                      />
+                    </div>
+                  </div>
+
                   <div className="mb-4  w-2/4 px-6  ">
                     <label className="block text-black font-bold text-sm head mb-2">
-                      Location
+                      Occupation or position held
+                      <span className="text-red-700">*</span>
                     </label>
                     <input
-                      {...register(`experiences.${index}.location`, {
+                      {...form.register(`experiences.${index}.occupation`, {
+                        required: {
+                          value: true,
+                          message: "Position is required",
+                        },
+                      })}
+                      placeholder="Position"
+                      className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                    />
+                    {form.formState.errors.experiences?.[index]?.occupation && (
+                      <p className="text-red-700 text-sm">
+                        {
+                          form.formState.errors.experiences[index].occupation
+                            .message
+                        }
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
+                    <div className="mb-4  w-2/6 px-6  ">
+                      <label className="block text-black font-bold text-sm head mb-2">
+                        From<span className="text-red-700">*</span>
+                      </label>
+                      <input
+                        {...form.register(`experiences.${index}.from_date`, {
+                          required: {
+                            value: true,
+                            message: "Date is required",
+                          },
+                          validate: validateDateRange,
+                        })}
+                        min="1980-01-01"
+                        max={getCurrentDate()}
+                        onChange={(e) => setFromDate(e.target.value)}
+                        className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        type="Date"
+                      />
+                      {form.formState.errors.experiences?.[index]
+                        ?.from_date && (
+                        <p className="text-red-700 text-sm">
+                          {
+                            form.formState.errors.experiences[index].from_date
+                              .message
+                          }
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="mb-4  w-2/6  px-6  ">
+                      <label className="block text-black font-bold text-sm head mb-2">
+                        To<span className="text-red-700">*</span>
+                      </label>
+                      <input
+                        {...form.register(`experiences.${index}.to_date`, {
+                          required: !switchStates[index]
+                            ? {
+                                value: true,
+                                message: "Date is required",
+                              }
+                            : false,
+                          validate: (value) =>
+                            !switchStates[index]
+                              ? workexpto(value as string, {
+                                  to_date: form.getValues(
+                                    `experiences.${index}.to_date`
+                                  ) as string | Date,
+                                })
+                              : true,
+                        })}
+                        min={getMinToDate()}
+                        max={getCurrentDate()}
+                        className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        type="Date"
+                        disabled={switchStates[index]}
+                      />
+                      {form.formState.errors.experiences?.[index]?.to_date && (
+                        <p className="text-red-700 text-sm">
+                          {
+                            form.formState.errors.experiences[index]?.to_date
+                              .message
+                          }
+                        </p>
+                      )}
+                    </div>
+
+                    <>
+                      {index === 0 ? (
+                        <>
+                          <div className="mb-4  w-2/6  px-6  ">
+                            <Label className="block text-black font-bold text-sm head mb-2">
+                              Working as
+                            </Label>
+                            <FormField
+                              control={form.control}
+                              name={`experiences.${index}.currently_working`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormControl>
+                                    <Switch
+                                      checked={field.value}
+                                      onCheckedChange={field.onChange}
+                                    />
+                                  </FormControl>
+                                </FormItem>
+                              )}
+                            />
+                            {/* <Switch
+                            id={`switch-${index}`}
+                            checked={switchStates[index]}
+                            onCheckedChange={() => handleSwitchChange(index)}
+                            // checked={isSwitchOn}
+                            // onCheckedChange={handleSwitchChange}
+                          /> */}
+                          </div>
+                        </>
+                      ) : (
+                        <input
+                          type="hidden"
+                          {...form.register(
+                            `experiences.${index}.currently_working`
+                          )}
+                          value={0}
+                        />
+                      )}
+                    </>
+                  </div>
+
+                  <div className="mb-4  w-full px-6">
+                    <label className="block text-black font-bold text-sm head mb-2">
+                      About company
+                    </label>
+                    <textarea
+                      className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                      {...form.register(`experiences.${index}.about_company`, {
                         // required: {
                         //   value: true,
                         //   message: 'First Name is required'
                         // }
                       })}
-                      placeholder="Working location"
-                      className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                    />
-                  </div>
-                </div>
-
-                <div className="mb-4  w-2/4 px-6  ">
-                  <label className="block text-black font-bold text-sm head mb-2">
-                    Occupation or position held
-                    <span className="text-red-700">*</span>
-                  </label>
-                  <input
-                    {...register(`experiences.${index}.occupation`, {
-                      required: {
-                        value: true,
-                        message: "Position is required",
-                      },
-                    })}
-                    placeholder="Position"
-                    className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                  />
-                  {errors.experiences?.[index]?.occupation && (
-                    <p className="text-red-700 text-sm">
-                      {errors.experiences[index].occupation.message}
-                    </p>
-                  )}
-                </div>
-
-                <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-                  <div className="mb-4  w-2/6 px-6  ">
-                    <label className="block text-black font-bold text-sm head mb-2">
-                      From<span className="text-red-700">*</span>
-                    </label>
-                    <input
-                      {...register(`experiences.${index}.from_date`, {
-                        required: {
-                          value: true,
-                          message: "Date is required",
-                        },
-                        validate: validateDateRange,
-                      })}
-                      min="1980-01-01"
-                      max={getCurrentDate()}
-                      onChange={(e) => setFromDate(e.target.value)}
-                      className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                      type="Date"
-                    />
-                    {errors.experiences?.[index]?.from_date && (
-                      <p className="text-red-700 text-sm">
-                        {errors.experiences[index].from_date.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="mb-4  w-2/6  px-6  ">
-                    <label className="block text-black font-bold text-sm head mb-2">
-                      To<span className="text-red-700">*</span>
-                    </label>
-                    <input
-                      {...register(`experiences.${index}.to_date`, {
-                        required: !switchStates[index]
-                          ? {
-                              value: true,
-                              message: "Date is required",
-                            }
-                          : false,
-                        validate: (value) =>
-                          !switchStates[index]
-                            ? workexpto(
-                                value as string,
-                                { to_date: getValues(`experiences.${index}.to_date`) as string | Date }
-                              )
-                            : true,
-                      })}
-                      min={getMinToDate()}
-                      max={getCurrentDate()}
-                      className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                      type="Date"
-                      disabled={switchStates[index]}
-                    />
-                    {errors.experiences?.[index]?.to_date && (
-                      <p className="text-red-700 text-sm">
-                        {errors.experiences[index]?.to_date.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <>
-                    {index === 0 && (
-                      <div className="mb-4  w-2/6  px-6  ">
-                        <Label className="block text-black font-bold text-sm head mb-2">
-                          Working as
-                        </Label>
-                        <Switch
-                          id={`switch-${index}`}
-                          checked={switchStates[index]}
-                          onCheckedChange={() => handleSwitchChange(index)}
-                          // checked={isSwitchOn}
-                          // onCheckedChange={handleSwitchChange}
-                        />
-                      </div>
-                    )}
-                  </>
-                </div>
-
-                <div className="mb-4  w-full px-6">
-                  <label className="block text-black font-bold text-sm head mb-2">
-                    About company
-                  </label>
-                  <textarea
-                    className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                    {...register(`experiences.${index}.about_company`, {
-                      // required: {
-                      //   value: true,
-                      //   message: 'First Name is required'
+                      // value={item.about_company}
+                      // onChange={(event) =>
+                      //   handleChange(event, index, "about_company")
                       // }
-                    })}
-                    value={item.about_company}
-                    onChange={(event) =>
-                      handleChange(event, index, "about_company")
-                    }
-                    placeholder="About company"
-                    rows={5}
-                  />
-                </div>
+                      placeholder="About company"
+                      rows={5}
+                    />
+                  </div>
 
-                <div className="mb-4  w-full px-6">
-                  <label className="block text-black font-bold text-sm head mb-2">
-                    Main activities and responsibilities
-                  </label>
-                  <textarea
-                    className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                    {...register(`experiences.${index}.responsibilities`, {
-                      // required: {
-                      //   value: true,
-                      //   message: 'First Name is required'
+                  <div className="mb-4  w-full px-6">
+                    <label className="block text-black font-bold text-sm head mb-2">
+                      Main activities and responsibilities
+                    </label>
+                    <textarea
+                      className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                      {...form.register(
+                        `experiences.${index}.responsibilities`,
+                        {
+                          // required: {
+                          //   value: true,
+                          //   message: 'First Name is required'
+                          // }
+                        }
+                      )}
+                      // value={item.responsibilities}
+                      // onChange={(event) =>
+                      //   handleChange(event, index, "responsibilities")
                       // }
-                    })}
-                    value={item.responsibilities}
-                    onChange={(event) => handleChange(event, index, "responsibilities")}
-                    placeholder="About work responsibilities"
-                    rows={5}
-                  />
+                      placeholder="About work responsibilities"
+                      rows={5}
+                    />
+                  </div>
                 </div>
+              ))}
+
+              <div className="flex items-center mx-6 py-4">
+                <p className="text-gray-700 font-bold text-base head">
+                  New work experience
+                </p>
+                <button
+                  type="button"
+                  className="w-14 items-center capitalize bg-slate-300 hover:bg-slate-200 text-black text-2xl mx-5 rounded-md font-extrabold"
+                  onClick={() =>
+                    appendExperience({
+                      id:undefined,
+                      employer: "",
+                      website: "",
+                      location: "",
+                      occupation: "",
+                      from_date: "",
+                      to_date: "",
+                      about_company: "",
+                      responsibilities: "",
+                      currently_working: false,
+                    })
+                  }
+                >
+                  +
+                </button>
               </div>
-            ))}
 
-            <div className="flex items-center mx-6 py-4">
-              <p className="text-gray-700 font-bold text-base head">
-                New work experience
-              </p>
-              <button
-                type="button"
-                className="w-14 items-center capitalize bg-slate-300 hover:bg-slate-200 text-black text-2xl mx-5 rounded-md font-extrabold"
-                onClick={() =>
-                  appendExperience({
-                    employer: "",
-                    website: "",
-                    location: "",
-                    occupation: "",
-                    from_date: "",
-                    to_date: "",
-                    about_company: "",
-                    responsibilities: "",
-                    currently_working: false,
-                  })
-                }
-              >
-                +
-              </button>
+              <div className="flex mx-6">
+                <button
+                  type="button"
+                  className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
+                  // onClick={()=> setShowPreview(true)}
+                  onClick={cancel}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="w-16 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10	font-bold rounded-md"
+                  // onClick={handleNext}
+                >
+                  Save
+                </button>
+              </div>
             </div>
-
-            <div className="flex mx-6">
-              <button
-                type="button"
-                className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
-                // onClick={()=> setShowPreview(true)}
-                onClick={cancel}
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="w-16 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10	font-bold rounded-md"
-                // onClick={handleNext}
-              >
-                Save
-              </button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </Form>
       )}
     </div>
   );

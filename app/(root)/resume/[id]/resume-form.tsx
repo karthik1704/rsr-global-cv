@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import Link from "next/link";
 
@@ -36,6 +36,36 @@ const Resume = ({ resume }: ResumeProps) => {
 
   const [show, setShow] = useState(0);
 
+  useEffect(() => {
+    if (resume.first_name) {
+      setShowPreview(true);
+    }
+  }, [resume.first_name]);
+
+  useEffect(() => {
+    const sections = [
+      { key: "work", data: resume.experiences },
+      { key: "education", data: resume.education },
+      { key: "language", data: resume.language_skills.language },
+      { key: "additional", data: resume.training_awards },
+      { key: "drivinglicense", data: resume.driving_license },
+      { key: "others", data: resume.others },
+    ];
+
+    sections.forEach(({ key, data }) => {
+
+
+      if (  data.length && !selectedSection.includes(key)) {
+        setSelectedSection((prevState) => {
+          if (!prevState.includes(key)) {
+            return [...prevState, key];
+          }
+          return prevState;
+        });
+      }
+    });
+  }, [resume, selectedSection]);
+
   const [data, setData] = useState({
     personalInformation: null,
     workExperience: [],
@@ -58,7 +88,11 @@ const Resume = ({ resume }: ResumeProps) => {
     },
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, key: string, subkey?: string) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    key: string,
+    subkey?: string
+  ) => {
     const value = event.target.value;
     const updatedValue = value.charAt(0).toUpperCase() + value.slice(1);
     setText((prevValues) => {
@@ -87,7 +121,7 @@ const Resume = ({ resume }: ResumeProps) => {
 
   const [showFields, setShowFields] = useState(true);
 
-  const formComponents= {
+  const formComponents = {
     // "personal":<PersonalInformation setData={setData} personalInformation={data.personalInformation}/>,
     work: (
       <WorkExperience
@@ -95,8 +129,9 @@ const Resume = ({ resume }: ResumeProps) => {
         setSelectedSection={setSelectedSection}
         setData={setData}
         setShowPreview={setShowPreview}
-        workExperience={data.workExperience}
+        workExperience={resume.experiences}
         data={data}
+        job_applied_for={resume.job_applied_for}
       />
     ),
     education: (
@@ -105,7 +140,7 @@ const Resume = ({ resume }: ResumeProps) => {
         setSelectedSection={setSelectedSection}
         setData={setData}
         setShowPreview={setShowPreview}
-        education={data.education}
+        education={resume.education}
       />
     ),
     additional: (
@@ -114,7 +149,7 @@ const Resume = ({ resume }: ResumeProps) => {
         setSelectedSection={setSelectedSection}
         setData={setData}
         setShowPreview={setShowPreview}
-        training={data.training}
+        trainings={resume.training_awards}
       />
     ),
     language: (
@@ -123,7 +158,7 @@ const Resume = ({ resume }: ResumeProps) => {
         setSelectedSection={setSelectedSection}
         setShowPreview={setShowPreview}
         setData={setData}
-        language={data.language}
+        language={resume.language_skills}
       />
     ),
     drivinglicense: (
@@ -132,7 +167,7 @@ const Resume = ({ resume }: ResumeProps) => {
         setSelectedSection={setSelectedSection}
         setShowPreview={setShowPreview}
         setData={setData}
-        lic={data.lic}
+        lic={resume.driving_license}
       />
     ),
     others: (
@@ -141,8 +176,8 @@ const Resume = ({ resume }: ResumeProps) => {
         setSelectedSection={setSelectedSection}
         setShowPreview={setShowPreview}
         setData={setData}
-        others={resume}
-        additionalTitle={data.others}
+        others={resume.others}
+        sectionTitle={additionalTitle}
       />
     ),
   };
@@ -155,7 +190,7 @@ const Resume = ({ resume }: ResumeProps) => {
 
   // handler for dropdown change
 
-  const addSections = (sectionName:string) => {
+  const addSections = (sectionName: string) => {
     setSelectedSection((prevState) => [...prevState, sectionName]);
   };
 
@@ -263,9 +298,7 @@ const Resume = ({ resume }: ResumeProps) => {
 
                   <p className="text-lg font-semibold text-gray-800">
                     Title :{" "}
-                    <span className="font-light capitalize">
-                      {other.title}
-                    </span>
+                    <span className="font-light capitalize">{other.title}</span>
                   </p>
 
                   <p className="text-lg font-semibold text-gray-800">

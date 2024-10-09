@@ -3,12 +3,13 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { SERVER_API_URL } from "@/app/constants";
 // import { getErrorMessage } from "@/lib/utils";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function createResume(prevState: any, formData: FormData) {
   let jsonObject = Object.fromEntries(formData.entries());
 
   const access_token = cookies().get("access");
+  revalidateTag("Resume");
 
   const res = await fetch(`${SERVER_API_URL}/resumes/`, {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -41,8 +42,7 @@ export async function createResume(prevState: any, formData: FormData) {
     };
   }
 
-  revalidateTag("Resume");
-
+ 
   if (res.status === 201) {
     return {
       fieldErrors: null,
@@ -57,6 +57,7 @@ export async function updateResume(id:number|string , formData: any) {
   // let jsonObject = Object.fromEntries(formData.entries());
 
   const access_token = cookies().get("access");
+  revalidateTag("Resume");
 
   const res = await fetch(`${SERVER_API_URL}/resumes/${id}`, {
     method: "PUT", // *GET, POST, PUT, DELETE, etc.
@@ -89,7 +90,6 @@ export async function updateResume(id:number|string , formData: any) {
     };
   }
 
-  revalidateTag("Resume");
 
   if (res.status === 204) {
     return {
@@ -105,8 +105,10 @@ export async function updateWorkExperience(id:number|string,formData: any) {
   // let jsonObject = Object.fromEntries(formData.entries());
 
   const access_token = cookies().get("access");
-
-  const res = await fetch(`${SERVER_API_URL}/experiences`, {
+  
+  revalidateTag("Resume");
+  revalidatePath(`/resume/${id}`);
+  const res = await fetch(`${SERVER_API_URL}/resumes/${id}/experiences/multi/`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -133,7 +135,6 @@ export async function updateWorkExperience(id:number|string,formData: any) {
     };
   }
 
-  revalidateTag("Resume");
 
   return {
     fieldErrors: null,
@@ -145,8 +146,9 @@ export async function updateWorkExperience(id:number|string,formData: any) {
 export async function updateEducation(id:number|string, formData: any) {
   // let jsonObject = Object.fromEntries(formData.entries());
   const access_token = cookies().get("access");
+  revalidateTag("Resume");
 
-  const res = await fetch(`${SERVER_API_URL}/education/`, {
+  const res = await fetch(`${SERVER_API_URL}/resumes/${id}/education/multi/`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -173,7 +175,6 @@ export async function updateEducation(id:number|string, formData: any) {
     };
   }
 
-  revalidateTag("Resume");
 
   return {
     fieldErrors: null,
@@ -182,11 +183,13 @@ export async function updateEducation(id:number|string, formData: any) {
   };
 }
 
-export async function updateAdditionalInfo(id:number|string,formData: any) {
+export async function updateLanguage(id:number|string,formData: any) {
   // let jsonObject = Object.fromEntries(formData.entries());
   const access_token = cookies().get("access");
+  
+  revalidateTag("Resume");
 
-  const res = await fetch(`${SERVER_API_URL}/additional-info/`, {
+  const res = await fetch(`${SERVER_API_URL}/resumes/${id}/language-skills/`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -213,7 +216,6 @@ export async function updateAdditionalInfo(id:number|string,formData: any) {
     };
   }
 
-  revalidateTag("Resume");
 
   return {
     fieldErrors: null,
@@ -221,5 +223,131 @@ export async function updateAdditionalInfo(id:number|string,formData: any) {
     message: "Additional Information Added Successfully",
   };
 }
+
+export async function updateAdditionalInfo(id:number|string,formData: any) {
+  // let jsonObject = Object.fromEntries(formData.entries());
+  const access_token = cookies().get("access");
+  revalidateTag("Resume");
+
+  const res = await fetch(`${SERVER_API_URL}/resumes/${id}/training-award/multi/`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access_token?.value}`,
+    },
+    body: JSON.stringify(formData),
+  });
+
+  if (res.status === 422) {
+    const resJson = await res.json();
+    console.log(resJson);
+    resJson.detail.map((error: any) => {
+      console.log(error.loc);
+    });
+  }
+
+  if (res.status === 401) redirect("/login");
+
+  if (res.status !== 201) {
+    const error = await res.json();
+    return {
+      fieldErrors: null,
+      type: "Error",
+    };
+  }
+
+
+  return {
+    fieldErrors: null,
+    type: "Success",
+    message: "Additional Information Added Successfully",
+  };
+}
+
+export async function updateOthers(id:number|string,formData: any) {
+  // let jsonObject = Object.fromEntries(formData.entries());
+  const access_token = cookies().get("access");
+  revalidateTag("Resume");
+
+
+  const res = await fetch(`${SERVER_API_URL}/resumes/${id}/others/`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access_token?.value}`,
+    },
+    body: JSON.stringify(formData),
+  });
+
+  if (res.status === 422) {
+    const resJson = await res.json();
+    console.log(resJson);
+    resJson.detail.map((error: any) => {
+      console.log(error.loc);
+    });
+  }
+
+  if (res.status === 401) redirect("/login");
+
+  if (res.status !== 201) {
+    const error = await res.json();
+    return {
+      fieldErrors: null,
+      type: "Error",
+    };
+  }
+
+
+  return {
+    fieldErrors: null,
+    type: "Success",
+    message: "Additional Information Added Successfully",
+  };
+}
+
+
+
+
+export async function updateLicense(id:number|string,formData: any) {
+  // let jsonObject = Object.fromEntries(formData.entries());
+  const access_token = cookies().get("access");
+  revalidateTag("Resume");
+
+
+  const res = await fetch(`${SERVER_API_URL}/resumes/${id}/driving-license/multi/`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access_token?.value}`,
+    },
+    body: JSON.stringify(formData),
+  });
+
+  if (res.status === 422) {
+    const resJson = await res.json();
+    console.log(resJson);
+    resJson.detail.map((error: any) => {
+      console.log(error.loc);
+    });
+  }
+
+  if (res.status === 401) redirect("/login");
+
+  if (res.status !== 201) {
+    const error = await res.json();
+    return {
+      fieldErrors: null,
+      type: "Error",
+    };
+  }
+
+
+  return {
+    fieldErrors: null,
+    type: "Success",
+    message: "Additional Information Added Successfully",
+  };
+}
+
 
 
