@@ -70,6 +70,17 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                   setShowPreview(true);
         }
 
+        //validation function on date
+
+        const [fromDate, setFromDate]=useState('');
+
+        const getMinToDate = () =>{
+          if(!fromDate) return undefined;
+          const minDate = new Date(fromDate);
+          minDate.setDate(minDate.getDate()+1);
+          return minDate.toISOString().split('T')[0];
+        }
+
         //--validation function for date year range--
 
   const validateDateRange = (value) => {
@@ -124,7 +135,8 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
               {trainingFields?.map((item, index) => {
                 return (
                   <div key={item.id}>
-                    <div className="flex justify-between items-center	mb-4  w-2/4 px-6">
+                    <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
+                    <div className="flex justify-between items-center">
                       <p className="text-black font-bold text-3xl mb-4">
                       Training & Awards
                       </p>
@@ -137,6 +149,7 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                           X
                         </button>
                       )}
+                    </div>
                     </div>
 
                     {/* <div className="mb-4  w-2/4 px-6">
@@ -157,7 +170,7 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                     </div> */}
 
                     <div>
-                      <div className="mb-4  w-2/4 px-6">
+                      <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                         <div className="flex justify-between items-center	">
                           <p className="text-gray-700 font-extrabold text-sm">
                             Awards
@@ -184,9 +197,9 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                         )}
                       </div>
 
-                      <div className="mb-4  w-2/4 px-6">
-                        <div className="flex justify-between items-center	">
-                        </div>
+                      <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
+                        {/* <div className="flex justify-between items-center	">
+                        </div> */}
                         <label className="block text-black font-bold text-sm head my-2">
                          Awarding Institute <span className="text-red-700">*</span>
                         </label>
@@ -208,8 +221,8 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                         )}
                       </div>
 
-                      <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-                        <div className="mb-4  w-2/4 px-6  ">
+                      <div className="flex flex-col lg:flex-col xl:flex-row gap-4 md:flex-col md:gap-6 lg:mx-auto xl:mx-auto">
+                        <div className="mb-4 w-full md:px-6">
                           <label className="block text-black font-bold text-sm head mb-2">
                             From<span className="text-red-700">*</span>
                           </label>
@@ -223,8 +236,9 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                             })}
                             min="1980-01-01"
                             max={getCurrentDate()}
-                            className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                            className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                             type="Date"
+                            onChange={(e)=>setFromDate(e.target.value)}
                           />
                           {errors.training?.[index]?.trainingfrom && (
                             <p className="text-red-700 text-sm">
@@ -232,9 +246,9 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                             </p>
                           )}
                         </div>
-                      </div>
+                      
 
-                      <div className="mb-4  w-2/4 px-6  ">
+                      <div className="mb-4 w-full md:px-6">
                         <label className="block text-black font-bold text-sm head mb-2">
                           To<span className="text-red-700">*</span>
                         </label>
@@ -246,10 +260,11 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                             },
                             validate: validateDateRange,
                           })}
-                          min="1980-01-01"
+                          min={getMinToDate()}
                           max={getCurrentDate()}
-                          className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                          className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                           type="Date"
+                          disabled ={!fromDate}
                         />
                         {errors.training?.[index]?.trainingto && (
                           <p className="text-red-700 text-sm">
@@ -257,9 +272,10 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                           </p>
                         )}
                       </div>
+                      </div>
                     </div>
 
-                    <div className="mb-4  w-2/4 px-6  ">
+                    <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                       <label className="block text-black font-bold text-sm head mb-2">
                         Location<span className="text-red-700">*</span>
                       </label>

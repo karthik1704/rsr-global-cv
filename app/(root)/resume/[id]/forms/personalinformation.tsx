@@ -121,7 +121,7 @@ const PersonalInformation = ({
   };
 
   return (
-    <div className="md:w-full lg:w-full sm:w-full">
+    <div className="md:w-full lg:w-full sm:w-full xl:w-full">
       {!show && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
           <p className="text-black text-2xl font-bold uppercase">
@@ -208,7 +208,7 @@ const PersonalInformation = ({
           <ImageUploader onImageChange={handleImageChange} />
 
           <div className="mb-4.5 flex flex-col lg:flex-row mt-2">
-            <div className="w-full lg:w-1/2 px-6 md:w-[504px]">
+            <div className="w-full lg:w-1/2 md:px-6 md:w-[504px]">
               <label className="block text-black font-bold text-sm head mb-2">
                 First Name<span className="text-red-700">*</span>
               </label>
@@ -231,7 +231,7 @@ const PersonalInformation = ({
 
             <br />
 
-            <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
+            <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
               <label className="block text-black font-bold text-sm head mb-2">
                 Last Name<span className="text-gray-700"></span>
               </label>
@@ -253,7 +253,7 @@ const PersonalInformation = ({
             </div>
           </div>
 
-          <div className="mb-4 w-[354px] lg:w-2/5 md:w-[554px] px-6">
+          <div className="mb-4 w-[354px] lg:w-2/5 md:w-[554px] md:px-6">
             <label className="block text-black font-bold text-sm head">
               Date of birth<span className="text-red-700">*</span>
             </label>
@@ -273,7 +273,7 @@ const PersonalInformation = ({
           </div>
 
           <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-            <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
+            <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
               <label className="block text-black font-bold text-sm head mb-2">
                 Nationality
                 <span className="text-red-700">*</span>
@@ -299,7 +299,7 @@ const PersonalInformation = ({
           <h1 className="px-6 text-black font-bold">Address</h1>
           <hr className="my-2" />
 
-          <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px] ">
+          <div className="mb-4 w-full lg:w-1/2 md:w-[504px] md:px-6">
             <label className="block text-black font-bold text-sm head mb-2">
               Address Line 1<span className="text-red-700">*</span>
             </label>
@@ -318,7 +318,7 @@ const PersonalInformation = ({
             )}
           </div>
 
-          <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px] ">
+          <div className="mb-4 w-full lg:w-1/2 md:w-[504px] md:px-6">
             <label className="block text-black font-bold text-sm head mb-2">
               Address Line 2<span className="text-red-700">*</span>
             </label>
@@ -337,7 +337,7 @@ const PersonalInformation = ({
             )}
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-4 md:flex-col md:gap-6">
+          <div className="flex flex-col lg:flex-col xl:flex-row gap-4 md:flex-col md:gap-6 lg:mx-auto xl:mx-auto">
             <div className="mb-4 w-full md:px-6">
               <label className="block text-black font-bold text-sm head mb-2">
                 Postal Code
@@ -399,12 +399,12 @@ const PersonalInformation = ({
           <h1 className="px-6 text-black font-bold">Contact</h1>
           <hr className="my-2" />
           <div className="flex flex-col gap-3 md:flex-col">
-            <div className="mb-4 w-full px-6">
+            <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
               <label className="block text-black font-bold text-sm head mb-2">
                 Email Address
               </label>
               <input
-                className="pl-4 block w-full lg:w-[550px] md:w-[455px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                 {...register("email_address", {
                   // required: {
                   //   value: true,
@@ -418,12 +418,12 @@ const PersonalInformation = ({
             )} */}
             </div>
 
-            <div className="mb-4 w-full px-6">
+            <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
               <label className="block md:w-full text-black font-bold text-sm head mb-2">
                 Contact Number
               </label>
               <input
-                className="pl-4 block w-full lg:w-[550px] md:w-[455px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                 {...register("contact_number", {
                   // required: {
                   //   value: true,
@@ -438,7 +438,7 @@ const PersonalInformation = ({
             </div>
           </div>
 
-          <div className="mb-4 w-full px-6">
+          <div className="mb-4 w-full md:px-6">
             <label className="block text-black font-bold text-sm head mb-2">
               Main activities and responsibilities
             </label>
@@ -458,7 +458,7 @@ const PersonalInformation = ({
           </div>
 
           <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-            <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
+            <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
               <label className="block text-black font-bold text-sm head mb-2">
                 Referred By
                 <span className="text-red-700">*</span>

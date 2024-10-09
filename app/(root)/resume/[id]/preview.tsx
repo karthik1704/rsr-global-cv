@@ -117,7 +117,7 @@ const Preview = ({ data, handleNext,image,handleEdit}: PreviewProps) => {
              <span className="text-2xl font-bold text-gray-700 cont capitalize">{data.personalInformation.first_name} {data.personalInformation.last_name}</span>
               </p>
 
-            <hr className="border-b-2 border-slate-500" />
+            <hr className="border-b-2 border-slate-500 w-10/12" />
             <div className=" w-5/6 flex my-2">
               <p className="text-black font-semibold text-base head ">
                 Date of birth : <span className="text-base cont font-medium">{new Date(data.personalInformation.date_of_birth).toLocaleDateString("en-GB")}</span>
@@ -195,9 +195,9 @@ const Preview = ({ data, handleNext,image,handleEdit}: PreviewProps) => {
   'Currently Working'
 )}
                   </p>
-                  <p className="text-gray-700 font-medium text-base">,{' '}
+                  {/* <p className="text-gray-700 font-medium text-base capitalize">,{' '}
                 {exp.location}
-                  </p>
+                  </p> */}
                 </div>
                 <div className="w-4/5">
                   <p className="text-gray-700 font-semibold text-2xl uppercase">
@@ -229,8 +229,7 @@ const Preview = ({ data, handleNext,image,handleEdit}: PreviewProps) => {
                       {exp.position}
                     </span>
                   </p>
-                  <p className="text-black font-semibold text-base mx-5">
-                   | Website : {' '}
+                  <p className="text-black font-semibold text-base mx-5"> | Website : {' '}
                     <span className="font-medium text-base">
                       {exp.workwebsite}
                     </span>

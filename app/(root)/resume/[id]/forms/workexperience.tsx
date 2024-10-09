@@ -121,6 +121,13 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
         minDate.setDate(minDate.getDate()+1);
         return minDate.toISOString().split('T')[0];
       }
+
+      // const getMinToDate = () => {
+      //   if (!fromDate) return undefined;
+      //   const minDate = new Date(fromDate);
+      //   minDate.setDate(minDate.getDate() + 1);
+      //   return minDate;
+      // };
     
       //work exp To Date disable
     
@@ -228,7 +235,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
             {show && (
             <form onSubmit={handleSubmit(handleForm)}>
             <div>
-              <div className="ml-7 my-2 w-1/4">
+              <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                 <label className="block text-black font-bold text-sm head mb-2">
                   Job applied for
                 </label>
@@ -252,7 +259,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
 
               {experienceFields.map((item, index) => (
                 <div key={item.id}>
-                  <div className="mb-4  w-2/4 px-6">
+                  <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                     <div className="flex justify-between items-center	">
                       <p className="text-black font-bold text-3xl mb-4">
                         Work experience
@@ -265,7 +272,10 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                         X
                       </button>
                     </div>
+                    </div>
 
+                    <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
+                    <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                     <label className="block text-black font-bold text-sm head mb-2">
                       Employer<span className="text-red-700">*</span>
                     </label>
@@ -284,10 +294,13 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                         {errors.experiences[index].companyName.message}
                       </p>
                     )}
-                  </div>
+                    </div>
+                    </div>
 
-                  <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-                    <div className="mb-4  w-2/4 px-6  ">
+                 
+
+                  <div className="mb-4.5 flex flex-col lg:flex-row mt-2">
+                    <div className="w-full lg:w-1/2 md:px-6 md:w-[504px]">
                       <label className="block text-black font-bold text-sm head mb-2">
                         Website<span className="text-red-700">*</span>
                       </label>
@@ -299,11 +312,11 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                           },
                           pattern: {
                             value: /^(https?:\/\/)?(www\.)?[a-z0-9-]+\.[a-z0-9]+\.(com|org|in|net|co.in|co|biz|edu|io|gov)$/,
-                            message: "Please enter a valid website (e.g. www.rsrglobal.org)",
+                            message: "Please enter a valid website (e.g. www.google.com)",
                           },
                         })}
                         placeholder="Company’s website"
-                        className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        className="pl-4 block w-full max-w-xs sm:max-w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                       />
                       {errors.experiences?.[index]?.workwebsite && (
                         <p className="text-red-700 text-sm">
@@ -312,7 +325,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                       )}
                     </div>
 
-                    <div className="mb-4  w-2/4 px-6  ">
+                    <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                       <label className="block text-black font-bold text-sm head mb-2">
                         Location
                       </label>
@@ -329,7 +342,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                     </div>
                   </div>
 
-                  <div className="mb-4  w-2/4 px-6  ">
+                  <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                     <label className="block text-black font-bold text-sm head mb-2">
                       Occupation or position held
                       <span className="text-red-700">*</span>
@@ -351,8 +364,8 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                     )}
                   </div>
 
-                  <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-                    <div className="mb-4  w-2/6 px-6  ">
+                  <div className="flex flex-col lg:flex-col xl:flex-row gap-4 md:flex-col md:gap-6 lg:mx-auto xl:mx-auto">
+                    <div className="mb-4 w-full md:px-6">
                       <label className="block text-black font-bold text-sm head mb-2">
                         From<span className="text-red-700">*</span>
                       </label>
@@ -367,7 +380,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                         min="1980-01-01"
                         max={getCurrentDate()}
                         onChange={(e)=>setFromDate(e.target.value)}
-                        className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
                       />
                       {errors.experiences?.[index]?.workfrom && (
@@ -377,7 +390,7 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                       )}
                     </div>
 
-                    <div className="mb-4  w-2/6  px-6  ">
+                    <div className="mb-4 w-full md:px-6">
                       <label className="block text-black font-bold text-sm head mb-2">
                         To<span className="text-red-700">*</span>
                       </label>
@@ -391,9 +404,9 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                         })}
                         min={getMinToDate()}
                         max={getCurrentDate()}
-                        className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
-                        disabled={switchStates[index]}
+                        disabled={switchStates[index] || !fromDate}
                       />
                       {errors.experiences?.[index]?.workto && (
                         <p className="text-red-700 text-sm">
@@ -422,12 +435,12 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                   </div>
                   
 
-                  <div className="mb-4  w-full px-6">
+                  <div className="mb-4 w-full md:px-6">
                     <label className="block text-black font-bold text-sm head mb-2">
                       About company
                     </label>
                     <textarea
-                      className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                      className="pl-4 block w-full lg:w-full md:w-[455px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                       {...register(`experiences.${index}.aboutcompany`, {
                         // required: {
                         //   value: true,
@@ -441,12 +454,12 @@ const WorkExperience = ({setData,workExperience,setShowPreview,data,showPreview,
                     />
                   </div>
 
-                  <div className="mb-4  w-full px-6">
+                  <div className="mb-4 w-full md:px-6">
                     <label className="block text-black font-bold text-sm head mb-2">
                       Main activities and responsibilities
                     </label>
                     <textarea
-                      className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                      className="pl-4 block w-full lg:w-full md:w-[455px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                       {...register(`experiences.${index}.about2`, {
                         // required: {
                         //   value: true,

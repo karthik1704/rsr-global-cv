@@ -77,13 +77,6 @@ const Education = ({setData,education,setShowPreview,sectionDeleted,setSelectedS
 
         const [fromDate, setFromDate]= useState('');
 
-        const validateToDate = (value) =>{
-          if(!fromDate) return 'select a from date first';
-
-          const from = new Date(fromDate);
-          const to = new Date(value);
-        }
-
         const getMinToDate = () =>{
           if(!fromDate) return undefined;
           const minDate = new Date(fromDate);
@@ -144,7 +137,8 @@ const Education = ({setData,education,setShowPreview,sectionDeleted,setSelectedS
               {educationFields?.map((item, index) => {
                 return (
                   <div key={item.id}>
-                    <div className="flex justify-between items-center	mb-4  w-2/4 px-6">
+                    <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
+                    <div className="flex justify-between items-center">
                       <p className="text-black font-bold text-3xl mb-4">
                         Education
                       </p>
@@ -158,8 +152,9 @@ const Education = ({setData,education,setShowPreview,sectionDeleted,setSelectedS
                         </button>
                       )}
                     </div>
+                    </div>
 
-                    <div className="mb-4 w-2/4 px-6">
+                    <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                       <label className="block text-black font-bold text-sm head mb-2">
                         Title of qualification/credential awarded
                         <span className="text-red-700">*</span>
@@ -181,7 +176,7 @@ const Education = ({setData,education,setShowPreview,sectionDeleted,setSelectedS
                       )}
                     </div>
 
-                    <div className="mb-4 w-2/4 px-6">
+                    <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                       <label className="block text-black font-bold text-sm head mb-2">
                         Organisation providing education and training
                         <span className="text-red-700">*</span>
@@ -203,8 +198,8 @@ const Education = ({setData,education,setShowPreview,sectionDeleted,setSelectedS
                       )}
                     </div>
 
-                    <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-                      <div className="mb-4 w-2/4 px-6">
+                    <div className="mb-4.5 flex flex-col lg:flex-row mt-2">
+                      <div className="w-full lg:w-1/2 md:px-6 md:w-[504px]">
                         <label className="block text-black font-bold text-sm head mb-2">
                           From<span className="text-red-700">*</span>
                         </label>
@@ -229,7 +224,7 @@ const Education = ({setData,education,setShowPreview,sectionDeleted,setSelectedS
                         )}
                       </div>
 
-                      <div className="mb-4 w-2/4 px-6">
+                      <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                         <label className="block text-black font-bold text-sm head mb-2">
                           To<span className="text-red-700">*</span>
                         </label>
@@ -255,8 +250,8 @@ const Education = ({setData,education,setShowPreview,sectionDeleted,setSelectedS
                       </div>
                     </div>
 
-                    <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-                      <div className="mb-4 w-2/4 px-6">
+                    <div className="mb-4.5 flex flex-col lg:flex-row mt-2">
+                      <div className="w-full lg:w-1/2 md:px-6 md:w-[504px]">
                         <label className="block text-black font-bold text-sm head mb-2">
                           City<span className="text-red-700">*</span>
                         </label>
@@ -277,7 +272,7 @@ const Education = ({setData,education,setShowPreview,sectionDeleted,setSelectedS
                         )}
                       </div>
 
-                      <div className="mb-4 w-2/4 px-6">
+                      <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                         <label className="block text-black font-bold text-sm head mb-2">
                           Country<span className="text-red-700">*</span>
                         </label>
