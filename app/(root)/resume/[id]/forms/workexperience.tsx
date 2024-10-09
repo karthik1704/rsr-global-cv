@@ -157,12 +157,13 @@ const WorkExperience = ({
     if (currently_workings.length) {
       setSwitchStates((prevState) => {
         if (JSON.stringify(prevState) !== JSON.stringify(currently_workings)) {
+          form.setValue(`experiences.${0}.to_date`, null);
           return currently_workings;
         }
         return prevState;
       });
     }
-  }, [watchExperience]);
+  }, [watchExperience, form]);
 
   useEffect(() => {
     updateSwitchStates();
