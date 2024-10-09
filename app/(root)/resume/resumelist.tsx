@@ -15,7 +15,7 @@ const ResumeList = ({ resumes }) => {
                   <FilePlus className="text-green-700" size={32} />
                   <span className="pl-3 text-xl font-bold text-black">
                     Resumes:{" "}
-                    <span className="text-lg font-normal">File_name</span>
+                    <span className="text-lg font-normal">{resume.resume_title}</span>
                   </span>
                 </p>
 
