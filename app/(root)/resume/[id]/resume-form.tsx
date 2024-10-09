@@ -46,7 +46,7 @@ const Resume = ({ resume }: ResumeProps) => {
     const sections = [
       { key: "work", data: resume.experiences },
       { key: "education", data: resume.education },
-      { key: "language", data: resume.language_skills.language },
+      { key: "language", data: resume?.language_skills?.language },
       { key: "additional", data: resume.training_awards },
       { key: "drivinglicense", data: resume.driving_license },
       { key: "others", data: resume.others },
@@ -55,7 +55,7 @@ const Resume = ({ resume }: ResumeProps) => {
     sections.forEach(({ key, data }) => {
 
 
-      if (  data.length && !selectedSection.includes(key)) {
+      if ( data && data.length && !selectedSection.includes(key)) {
         setSelectedSection((prevState) => {
           if (!prevState.includes(key)) {
             return [...prevState, key];
