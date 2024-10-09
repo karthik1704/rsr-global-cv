@@ -136,7 +136,7 @@ const WorkExperience = ({
     value: string,
     { to_date }: { to_date: string | Date }
   ) => {
-    if (!value || switchStates) {
+    if (!value ) {
       return true;
     }
     return (
@@ -483,7 +483,7 @@ const WorkExperience = ({
                               }
                             : false,
                           validate: (value) =>
-                            !switchStates[index]
+                            switchStates[index]
                               ? workexpto(value as string, {
                                   to_date: form.getValues(
                                     `experiences.${index}.to_date`
@@ -495,7 +495,7 @@ const WorkExperience = ({
                         max={getCurrentDate()}
                         className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
-                        disabled={switchStates[index] || !fromDate}
+                        disabled={switchStates[index]}
                       />
                       {form.formState.errors.experiences?.[index]?.to_date && (
                         <p className="text-red-700 text-sm">
@@ -530,7 +530,7 @@ const WorkExperience = ({
                             />
                             {/* <Switch
                             id={`switch-${index}`}
-                            checked={switchStates[index]}
+                            checke[index]}
                             onCheckedChange={() => handleSwitchChange(index)}
                             // checked={isSwitchOn}
                             // onCheckedChange={handleSwitchChange}
@@ -585,10 +585,10 @@ const WorkExperience = ({
                         }
                       )}
                       className="pl-4 block w-full lg:w-full md:w-[455px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                      value={item.responsibilities}
-                      onChange={(event) =>
-                        handleChange(event, index, "responsibilities")
-                      }
+                      // value={item.responsibilities}
+                      // onChange={(event) =>
+                      //   handleChange(event, index, "responsibilities")
+                      // }
                       placeholder="About work responsibilities"
                       rows={5}
                     />

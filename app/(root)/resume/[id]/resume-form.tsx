@@ -89,7 +89,7 @@ const Resume = ({ resume }: ResumeProps) => {
   });
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     key: string,
     subkey?: string
   ) => {
@@ -121,8 +121,11 @@ const Resume = ({ resume }: ResumeProps) => {
 
   const [showFields, setShowFields] = useState(true);
 
-  const formComponents = {
-    // "personal":<PersonalInformation setData={setData} personalInformation={data.personalInformation}/>,
+  type FormComponentsType = {
+    [key: string]: JSX.Element;
+  };
+
+  const formComponents: FormComponentsType = {
     work: (
       <WorkExperience
         selectedSection={selectedSection}
@@ -196,7 +199,7 @@ const Resume = ({ resume }: ResumeProps) => {
 
   //--validation function for date year range--
 
-  const validateDateRange = (value) => {
+  const validateDateRange = (value:string|Date) => {
     const minDate = new Date("1950-01-01");
     const maxDate = new Date("2100-12-31");
     const selectedDate = new Date(value);
@@ -212,7 +215,7 @@ const Resume = ({ resume }: ResumeProps) => {
   const handleNext = async () => {
     // const isValid = await trigger();
     // if(isValid){
-    if (data.personalInformation === null) {
+    if (resume.first_name === null) {
       toast.error("Please Enter Personal Information", {
         duration: 10000,
         closeButton: true,
@@ -238,19 +241,19 @@ const Resume = ({ resume }: ResumeProps) => {
 
   const [uploadedImage, setUploadedImage] = useState("");
 
-  const handleImageChange = (imageurl) => {
+  const handleImageChange = (imageurl:string) => {
     setUploadedImage(imageurl);
   };
 
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    console.log(data);
-    setData({ ...data, profileImage: uploadedImage });
-    handleNext();
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(data);
-    setShow(4);
-    setShowPreview(true);
-  };
+  // const onSubmit: SubmitHandler<FormValues> = async (data) => {
+  //   console.log(data);
+  //   setData({ ...data, profileImage: uploadedImage });
+  //   handleNext();
+  //   await new Promise((resolve) => setTimeout(resolve, 1000));
+  //   console.log(data);
+  //   setShow(4);
+  //   setShowPreview(true);
+  // };
 
   const handleEdit = async () => {
     console.log("Going back with data:", data);
@@ -355,7 +358,7 @@ const Resume = ({ resume }: ResumeProps) => {
         {show === 1 && (
           <div>
             <Preview
-              data={data}
+              data={resume}
               handleNext={handleNext}
               image={uploadedImage}
             />
@@ -407,7 +410,9 @@ const Resume = ({ resume }: ResumeProps) => {
 
       {show === 2 && (
         <div>
-          <PreviewPdf data={data} handleNext={handleNext} />
+          <PreviewPdf data={resume} 
+          // handleNext={handleNext} 
+          />
 
           <div className="flex py-4 px-8">
             {/* <button

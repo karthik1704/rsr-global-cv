@@ -3,9 +3,10 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "react-pdf.org",
-        port: "",
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '8000',
+        pathname: '**/*',
       },
     ],
   },

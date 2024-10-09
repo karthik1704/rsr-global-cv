@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
 "use client";
-// import { PrivateField, additionalInfo, allSkills, personal } from "@content";
 import {
   Document,
   Font,
@@ -10,136 +9,32 @@ import {
   View,
   Image,
 } from "@react-pdf/renderer";
-// import Profile from "../../image/pexels-photo-704748.webp";
-// import { HtmlProps } from "node_modules/react-pdf-html/dist/types/Html";
+
 import { dateFormatter } from "@/lib/utils";
-import React from "react";
-// import Html from "react-pdf-html";
-// import { htmlRenderers } from "./pdfhtml";
+
 import resumeConfig from "../../edit-me/resume-config";
-import PersonalInformation from "./forms/personalinformation";
 import { ResumeType } from "./typings";
-// import Theme from "../edit-me/resume-config";
-// import { contrastColor } from "../helpers/colorcontrast";
-// import { getAccentColor, getNeutralColor } from "../helpers/colors";
-// import { Bold } from "lucide-react";
-// import {
-//   fullName,
-//   sortedAchievements,
-//   sortedProfessionalExperiences,
-// } from "../helpers/utils";
+
 
 const theme = resumeConfig.pdfTheme;
-const albertSrc = "https://fonts.gstatic.com/s/albertsans/v1";
-const jetbrainsSrc = "https://fonts.gstatic.com/s/jetbrainsmono/v18";
-// const robot =
-//   "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap";
 
-type data = {
-  experiences: {
-    workfrom: string;
-    workto: String;
-    years: number;
-    description: string;
-    companyName: string;
-    aboutcompany: string;
-    about2: string;
-    position: string;
-    location: string;
-    workwebsite: string;
-    workdepartment: String;
-    workaddress: string;
-  }[];
-  education: {
-    qualification: string;
-    organisation: string;
-    educationfrom: string;
-    educationto: string;
-    educationcity: string;
-    educationcountry: string;
-  }[];
-  training: {
-    title: string;
-    institute: string;
-    trainingfrom: string;
-    trainingto: string;
-    traininglocation: string;
-    trainingskills: string;
-  }[];
-  others: {
-    othertitle: string;
-    otherdesc: string;
-    mainTitle: string;
-  }[];
-  lic: {
-    license: string;
-    daterange: {
-      datefrom: string;
-      dateto: string;
-    };
-  }[];
-};
+
+
 
 Font.register({
-  family: "Albert Sans",
+  family: "Carlito",
   fonts: [
+    { src: "/fonts/Carlito/Carlito-Regular.ttf" }, // font-style: normal, font-weight: normal
+    { src: "/fonts/Carlito/Carlito-Bold.ttf", fontWeight: 700 }, // font-style: normal, font-weight: normal
+    { src: "/fonts/Carlito/Carlito-Italic.ttf", fontStyle: "italic" },
     {
-      fontStyle: "normal",
-      fontWeight: 400,
-      src: `${albertSrc}/i7dZIFdwYjGaAMFtZd_QA3xXSKZqhr-TenSHq5P_rI32TxAj1g.ttf`,
-    },
-    {
-      fontStyle: "italic",
-      fontWeight: 400,
-      src: `${albertSrc}/i7dfIFdwYjGaAMFtZd_QA1Zeelmy79QJ1HOSY9AX74fybRUz1r5t.ttf`,
-    },
-    {
-      fontStyle: "normal",
-      fontWeight: 700,
-      src: `${albertSrc}/i7dZIFdwYjGaAMFtZd_QA3xXSKZqhr-TenSHTJT_rI32TxAj1g.ttf`,
-    },
-    {
+      src: "/fonts/Carlito/Carlito-BoldItalic.ttf",
       fontStyle: "italic",
       fontWeight: 700,
-      src: `${albertSrc}/i7dfIFdwYjGaAMFtZd_QA1Zeelmy79QJ1HOSY9Dw6IfybRUz1r5t.ttf`,
     },
   ],
 });
 
-// Font.register({
-//   family: "Roboto",
-//   fonts: [
-//     {
-//       fontStyle: "normal",
-//       fontWeight: 500,
-//       src: `${robot}/Roboto-Medium.ttf`,
-//     },
-//   ],
-// });
-
-Font.register({
-  family: "Open Sans",
-  fonts: [
-    {
-      src: "https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-regular.ttf",
-    },
-    {
-      src: "https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-600.ttf",
-      fontWeight: 600,
-    },
-  ],
-});
-
-Font.register({
-  family: "JetBrains Mono",
-  fonts: [
-    {
-      fontStyle: "normal",
-      fontWeight: 500,
-      src: `${jetbrainsSrc}/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPVmUsaaDhw.ttf`,
-    },
-  ],
-});
 
 const hyphenationCallback = (word: string) => {
   // don't hyphenate
@@ -148,81 +43,12 @@ const hyphenationCallback = (word: string) => {
 
 Font.registerHyphenationCallback(hyphenationCallback);
 
-Font.registerEmojiSource({
-  format: "png",
-  url: "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/",
-});
-
-interface PDFProps {
-  // privateInformation?: PrivateField[];
-}
-
-const fullName = "Catherin";
-const personal = {
-  givenName: "Stacy",
-  familyName: "Fakename",
-  title: "Official Job Title",
-  location: "Austin, TX",
-  twitterUsername: "stacy_fakename\r",
-  body: {
-    raw: "\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra [justo nec ultrices](#). Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis nisl rhoncus mattis rhoncus urna neque viverra.\r\n",
-    html: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra <a href="#">justo nec ultrices</a>. Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis nisl rhoncus mattis rhoncus urna neque viverra.</p>',
-  },
-  type: "Personal",
-};
-const allSkills = [
-  {
-    title: "Proficient\r",
-    body: {
-      raw: "\r\nSFTP, Drafting Agreements, HSPA, International Business, Honeywell DCS, Speech Writing, TPMS, XML Schema, Swedish, HNI\r\n",
-      html: "<p>SFTP, Drafting Agreements, HSPA, International Business, Honeywell DCS, Speech Writing, TPMS, XML Schema, Swedish, HNI</p>",
-    },
-    type: "Skill",
-  },
-];
-
-const privateInformation = [
-  {
-    label: "WARNING\r",
-    body: {
-      raw: "\r\n**Please be aware** of the security concerns of commiting private information to Git, whether it is a public or a private repo. See the README for more information on using the private feature, and note that we are not responsible if your data is exposed.\r\n",
-      html: "<p><strong>Please be aware</strong> of the security concerns of commiting private information to Git, whether it is a public or a private repo. See the README for more information on using the private feature, and note that we are not responsible if your data is exposed.</p>",
-    },
-
-    type: "PrivateField",
-  },
-];
-
-const additionalInfo = {
-  title: "Hobbies & Interests\r",
-  body: {
-    raw: "\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra justo nec ultrices. Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis nisl rhoncus mattis rhoncus urna neque viverra.\r\n\r\nAll Markdown files will be rendered as rich text, so you can include features such as \r\n",
-    html: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra justo nec ultrices. Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis nisl rhoncus mattis rhoncus urna neque viverra.</p>\n<p>All Markdown files will be rendered as rich text, so you can include features such as .</p>",
-  },
-
-  type: "AdditionalInfo",
-};
-
-const sortedAchievements: [] = [];
-const sortedProfessionalExperiences = [
-  {
-    title: "Official Job Title",
-    organization: "Some Company",
-    startDate: "August 2019\r",
-    endDate: "August 2019\r",
-    body: {
-      raw: "\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra justo nec ultrices. Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis `nisl rhoncus mattis` rhoncus urna neque viverra. Tristique senectus et netus et malesuada fames ac. Arcu cursus euismod quis viverra nibh cras pulvinar mattis nunc. Volutpat consequat mauris nunc congue nisi vitae suscipit. Venenatis lectus magna fringilla urna porttitor rhoncus. Id porta nibh venenatis cras. Felis bibendum ut tristique et egestas quis ipsum suspendisse.\r\n",
-      html: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Neque viverra justo nec ultrices. Urna nunc id cursus metus aliquam eleifend mi in nulla. Proin sagittis <code>nisl rhoncus mattis</code> rhoncus urna neque viverra. Tristique senectus et netus et malesuada fames ac. Arcu cursus euismod quis viverra nibh cras pulvinar mattis nunc. Volutpat consequat mauris nunc congue nisi vitae suscipit. Venenatis lectus magna fringilla urna porttitor rhoncus. Id porta nibh venenatis cras. Felis bibendum ut tristique et egestas quis ipsum suspendisse.</p>",
-    },
-    type: "ProfessionalExperience",
-  },
-];
 
 const styles = StyleSheet.create({
   page: {
     // flexDirection: "row",
     fontWeight: "extrabold",
-    fontFamily: 'Open Sans',
+    fontFamily: 'Carlito',
   },
 
   photoContainer: {
@@ -431,18 +257,18 @@ const PDF = ({ data }: {data:ResumeType}) => {
     // @ts-ignore
     <Document
       author={`${data.first_name} ${data.last_name}`}
-      title={`Résume for ${data.first_name}, ${year}`}
+      title={`Résume: ${data.resume_title}, ${year}`}
     >
       {/* @ts-ignore */}
       <Page size="LETTER" style={styles.page}>
         <View style={styles.sidebar}>
-        {!!data.personalInformation.profileImage && (
+        {!!data.resume_image && (
           <View style={styles.photoContainer}>
             {/* <Text>CHEF DE PARTIE</Text>
             <Text>QATAR AIRWAYS GROUP</Text> */}
             
               <Image
-                src={data.personalInformation.profileImage}
+                src={data.resume_image}
                 style={{
                   borderRadius: "50",
                   width: "auto",
@@ -462,8 +288,8 @@ const PDF = ({ data }: {data:ResumeType}) => {
                   fontWeight: 1000,
                   textTransform: "capitalize",
                 }}>
-                  {data.personalInformation.first_name}{" "}
-                  {data.personalInformation.last_name}
+                  {data.first_name}{" "}
+                  {data.last_name}
                 </Text>
                 <View style={styles.photoContainer1}>
                   <Image src="/images/rsr_logo-1.png" />
@@ -492,15 +318,15 @@ const PDF = ({ data }: {data:ResumeType}) => {
                   </Text>
                   <Text style={styles.text2}>
                     {/* {new Date(data.dob).toLocaleDateString("en-GB")} | */}
-                    {data.personalInformation.date_of_birth
+                    {data.date_of_birth
                       ? new Date(
-                          data.personalInformation.date_of_birth
+                          data.date_of_birth
                         ).toLocaleDateString("en-GB")
                       : null}{" "}
                     |
                   </Text>
                 </View>
-                {data.personalInformation.contact_number ? (
+                {data.contact_number ? (
                   <View
                     style={{
                       flexDirection: "row",
@@ -509,7 +335,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                   >
                     <Text style={styles.text1}>Contact Number :</Text>
                     <Text style={styles.text2}>
-                      {data.personalInformation.contact_number} |
+                      {data.contact_number} |
                     </Text>
                   </View>
                 ) : null}
@@ -534,10 +360,10 @@ const PDF = ({ data }: {data:ResumeType}) => {
                   </Text>
                   <Text style={styles.text2}>
                     {/* {new Date(data.dob).toLocaleDateString("en-GB")} | */}
-                    {data.personalInformation.nationality} |
+                    {data.nationality} |
                   </Text>
                 </View>
-                {data.personalInformation.email_address ? (
+                {data.email_address ? (
                   <View
                     style={{
                       flexDirection: "row",
@@ -546,7 +372,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                   >
                     <Text style={styles.text1}>Email ID:</Text>
                     <Text style={styles.text2}>
-                      {data.personalInformation.email_address} |
+                      {data.email_address} |
                     </Text>
                   </View>
                 ) : null}
@@ -555,11 +381,11 @@ const PDF = ({ data }: {data:ResumeType}) => {
               <View style={{ flexDirection: "row", gap: "7" }}>
                 <Text style={styles.text1}>Address:</Text>
                 <Text style={styles.text6}>
-                  {data.personalInformation.address_line_1 &&
-                  data.personalInformation.address_line_2 &&
-                  data.personalInformation.city &&
-                  data.personalInformation.country
-                    ? `${data.personalInformation.address_line_1}, ${data.personalInformation.address_line_2} ${data.personalInformation.city}, ${data.personalInformation.postal_code} ${data.personalInformation.country}`
+                  {data.address_line_1 &&
+                  data.address_line_2 &&
+                  data.city &&
+                  data.country
+                    ? `${data.address_line_1}, ${data.address_line_2} ${data.city}, ${data.postal_code} ${data.country}`
                     : null}
                   {/* F-72, Mangal Bazar, Subhash Chowk, Laxmi Nagar, 110092, Delhi,
                   India (Home) */}
@@ -567,11 +393,11 @@ const PDF = ({ data }: {data:ResumeType}) => {
               </View>
             </View>
 
-            {data.personalInformation.responsibilities ? (
+            {data.responsibilities ? (
               <View>
                 <Text style={styles.text7}>About me:</Text>
                 <Text style={styles.text8}>
-                  {data.personalInformation.responsibilities}
+                  {data.responsibilities}
                 </Text>
               </View>
             ) : null}
@@ -582,7 +408,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
           {/* <Text style={styles.work1}>{exp.workfrom ? WORK EXPERIENCE: null}</Text> */}
           {/* <View style={styles.line1} /> */}
 
-          {data.jobappliedfor && (
+          {data.job_applied_for && (
             <View
               style={{
                 flexDirection: "row",
@@ -592,23 +418,23 @@ const PDF = ({ data }: {data:ResumeType}) => {
               }}
             >
               <Text style={styles.work1}>Job applied for :</Text>
-              <Text style={styles.jobappliedfor}>{data.jobappliedfor}</Text>
+              <Text style={styles.jobappliedfor}>{data.job_applied_for}</Text>
             </View>
           )}
 
-          {data.workExperience.length ? (
+          {data.experiences.length ? (
             <View>
-              {data.workExperience.map((exp, index) => (
+              {data.experiences.map((exp, index) => (
                 <View key={index}>
                   <Text style={styles.work1}>WORK EXPERIENCE</Text>
                   <View style={styles.line1} />
 
-                  <View style={styles.job}>
+                  <View style={styles.jobTitle}>
                     {/* <Text style={styles.dates}>05/08/2022 - CURRENT Doha, Qatar</Text> */}
                     <Text style={styles.dates}>
-                      {dateFormatter(exp.workfrom)} -
-                      {exp.workto
-                        ? dateFormatter(exp.workto)
+                      {dateFormatter(exp.from_date)} -
+                      {exp.to_date
+                        ? dateFormatter(exp.to_date)
                         : "Currently Working"}
                 
                     </Text>
@@ -621,8 +447,8 @@ const PDF = ({ data }: {data:ResumeType}) => {
                         textTransform:'capitalize',
                       }}
                     >
-                      <Text style={styles.jobTitle}>{exp.position}</Text>
-                      <Text style={styles.company}>{exp.companyName}</Text>
+                      <Text style={styles.jobTitle}>{exp.occupation}</Text>
+                      <Text style={styles.company}>{exp.employer}</Text>
                       {/* <Text style={styles.company}>QATAR AIRWAYS GROUP</Text> */}
                     </View>
                     <View style={styles.line1} />
@@ -639,14 +465,14 @@ const PDF = ({ data }: {data:ResumeType}) => {
                           textTransform: "capitalize",
                         }}
                       >
-                        {exp.companyName}
+                        {exp.employer}
                       </Text>
                       <Text style={styles.description}>
                         {/* Qatar Airways is the national airline of the State of Qatar. The
                 airline's headquarters is located in Doha, and it offers
                 exceptional hospitality as well as a range of lounges and
                 restaurants that offer utmost comfort and luxury. */}
-                        {exp.aboutcompany}
+                        {exp.about_company}
                       </Text>
                       <Text style={styles.description}>
                         {/* The number of chefs in the kitchen exceeds 150. Including
@@ -667,7 +493,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
               them. Ensure the kitchen is hygienic, food is safe, and the
               temperature of food is appropriate. Promoted to CDP on April 1st,
               2023. */}
-                      {exp.about2}
+                      {exp.responsibilities}
                     </Text>
                     <Text
                       style={{
@@ -676,9 +502,9 @@ const PDF = ({ data }: {data:ResumeType}) => {
                         fontWeight: "extrabold",
                       }}
                     >
-                      Department : {exp.companyName} | Address : {exp.location}{" "}
+                      Department : {exp.employer} | Address : {exp.location}{" "}
                       | Website :
-                      <Text style={styles.link}>{exp.workwebsite}</Text>
+                      <Text style={styles.link}>{exp.website}</Text>
                     </Text>
                   </View>
                 </View>
@@ -686,8 +512,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
             </View>
           ) : null}
 
-          {console.log(data.experiences)}
-
+          
           {/* <View style={styles.job1}>
             <Text style={styles.dates}>07/2020 - 07/2022 Siliguri, India</Text>
             <View
@@ -738,11 +563,11 @@ const PDF = ({ data }: {data:ResumeType}) => {
                 EDUCATION AND TRAINING
               </Text>
               <View style={styles.line1} />
-              <View style={styles.job}>
+              <View style={styles.jobTitle}>
                 <Text style={styles.dates}>
-                  {dateFormatter(educ.educationfrom)} -{" "}
-                  {dateFormatter(educ.educationto)} {educ.educationcity},{" "}
-                  {educ.educationcountry}
+                  {dateFormatter(educ.from_date)} -{" "}
+                  {dateFormatter(educ.to_date)} {educ.city},{" "}
+                  {educ.country}
                 </Text>
 
                 <View
@@ -753,8 +578,8 @@ const PDF = ({ data }: {data:ResumeType}) => {
                     gap: "5",
                   }}
                 >
-                  <Text style={styles.jobTitle}>{educ.qualification} </Text>
-                  <Text style={styles.jobTitle}>{educ.organisation} </Text>
+                  <Text style={styles.jobTitle}>{educ.title_of_qualification} </Text>
+                  <Text style={styles.jobTitle}>{educ.organization_name} </Text>
                   <Text style={styles.company}>
                     {/* Symbiosis International University */}
                   </Text>
@@ -781,12 +606,12 @@ const PDF = ({ data }: {data:ResumeType}) => {
                   Address :
                 </Text>
                 <Text style={{ fontSize: 10, marginTop: 10 }}>
-                  {educ.educationcity}, {educ.educationcountry}
+                  {educ.city}, {educ.country}
                 </Text>
               </View>
             </View>
           ))}
-          {data.language && (
+          {data.language_skills?.language && (
             <View>
               <Text
                 style={{
@@ -812,7 +637,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
               >
                 <Text style={{ fontSize: 10 }}>Languages Known :</Text>
                 <Text style={{ fontSize: 10, fontWeight: "extrabold",textTransform:'capitalize' }}>
-                  {data.language.mothertongue}
+                  {data.language_skills.language}
                 </Text>
               </View>
 
@@ -871,7 +696,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
               <Text style={styles.listItemText}>Traveling</Text>
             </View> */}
           {/* </View> */}
-          {!!data.training.length && (
+          {!!data.training_awards.length && (
             <View>
               <Text
                 style={{
@@ -889,15 +714,15 @@ const PDF = ({ data }: {data:ResumeType}) => {
               >
                 HONORS AND AWARDS
               </Text>
-              {data.training.map((train, index) => (
+              {data.training_awards.map((train, index) => (
                 <View key={index}>
                   <View style={styles.listItems}>
                     <Text style={styles.listItemDate}>
-                      {dateFormatter(train.trainingfrom)} -{" "}
-                      {dateFormatter(train.trainingto)}
+                      {dateFormatter(train.from_date)} -{" "}
+                      {dateFormatter(train.to_date)}
                     </Text>
                     <Text style={styles.listItemTitle}>
-                      {train.title}, {train.institute}, {train.traininglocation}
+                      {train.title}, {train.awarding_institute}, {train.location}
                     </Text>
                   </View>
                 </View>
@@ -932,18 +757,18 @@ const PDF = ({ data }: {data:ResumeType}) => {
                         fontWeight: "extrabold",
                       }}
                     >
-                      {oth.mainTitle}
+                      {oth.sectiontitle}
                       {/* <Text style={styles.listItemDate}>{oth.mainTitle}</Text> */}
                     </Text>
-                    <Text style={styles.listItemDate}>{oth.othertitle}</Text>
-                    <Text style={styles.listItemTitle}>{oth.otherdesc}</Text>
+                    <Text style={styles.listItemDate}>{oth.title}</Text>
+                    <Text style={styles.listItemTitle}>{oth.description}</Text>
                   </View>
                 </View>
               ))}
             </View>
           )}
 
-          {!!data.license && data.license.length > 0 && (
+          {!!data.driving_license && data.driving_license.length > 0 && (
             <View>
               <Text
                 style={{
@@ -955,7 +780,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                 License
               </Text>
               <View style={styles.line1} />
-              {data.license.map((li, index) => (
+              {data.driving_license.map((li, index) => (
                 <View key={index}>
                   <View style={styles.listItems}>
                     <Text
@@ -965,11 +790,11 @@ const PDF = ({ data }: {data:ResumeType}) => {
                         fontWeight: "extrabold",
                       }}
                     >
-                      {li.license}
+                      {li.license_type}
                       {/* <Text style={styles.listItemDate}>{oth.mainTitle}</Text> */}
                     </Text>
                     <Text style={styles.listItemDate}>
-                      {li.daterange.datefrom} - {li.daterange.dateto}
+                      {li.license_issued_date} - {li.license_expiry_date}
                     </Text>
                   </View>
                 </View>

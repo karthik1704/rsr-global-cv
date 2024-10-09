@@ -175,6 +175,7 @@ export async function updateEducation(id:number|string, formData: any) {
     };
   }
 
+  revalidateTag("Resume");
 
   return {
     fieldErrors: null,

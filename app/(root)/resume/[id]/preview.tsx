@@ -1,19 +1,19 @@
 import Image from "next/image";
 import { dateFormatter } from "@/lib/utils";
 import { ResumeType } from "./typings";
+import { SERVER_API_URL } from "@/app/constants";
 
 type PreviewProps = {
   data: ResumeType;
   handleNext: () => void;
-  handleEdit: () => void;
+  // handleEdit: () => void;
   image: string;
 };
 
-const Preview = ({ data, handleNext, image, handleEdit }: PreviewProps) => {
+const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
   console.log(data);
   const handleClick = () => {
     handleNext();
-    handleEdit();
   };
   return (
     <>
@@ -26,7 +26,7 @@ const Preview = ({ data, handleNext, image, handleEdit }: PreviewProps) => {
           {!!data.resume_image && (
             <div className="mx-10 my-5">
               <Image
-                src={data.resume_image}
+                src={`${SERVER_API_URL}/static/${data.resume_image}`}
                 height={150}
                 width={150}
                 alt=""
@@ -100,18 +100,18 @@ const Preview = ({ data, handleNext, image, handleEdit }: PreviewProps) => {
           </div>
         </div>
         <div className="pl-8 pr-28">
-          {data.jobappliedfor && (
+          {data.job_applied_for && (
             <div className="flex my-2 justify-start items-center">
               <p className="text-black font-semibold text-base ">
                 Job applied for :
               </p>
               <span className=" px-2 block font-medium text-black text-base capitalize">
-                {data.jobappliedfor}
+                {data.job_applied_for}
               </span>
             </div>
           )}
 
-          {!!data.experiences.length && (
+          {!!data.experiences?.length && (
             <>
               <p className="block text-black font-extrabold text-2xl">
                 Work Experience
@@ -215,7 +215,7 @@ const Preview = ({ data, handleNext, image, handleEdit }: PreviewProps) => {
           </div>
         )}
 
-        {!!data.language && (
+        {!!data?.language_skills?.language && (
           <div className="className pl-8 pr-28">
             <p className="block text-black font-bold text-2xl mt-6">
               Language Skills
@@ -225,7 +225,7 @@ const Preview = ({ data, handleNext, image, handleEdit }: PreviewProps) => {
             <p className="block text-base text-black my-3">
               Languages Known :{" "}
               <span className="text-lg font-bold text-black cont capitalize">
-                {data.language.mothertongue}
+                {data.language_skills.language}
               </span>
             </p>
             {/* <p className="block text-base text-black my-3">
@@ -234,7 +234,7 @@ const Preview = ({ data, handleNext, image, handleEdit }: PreviewProps) => {
           </div>
         )}
 
-        {!!data.training.length && (
+        {!!data.training_awards.length && (
           <div className="pl-8 pr-28">
             <p className="block text-black font-bold text-2xl mt-6">
               Additional Information
@@ -244,7 +244,7 @@ const Preview = ({ data, handleNext, image, handleEdit }: PreviewProps) => {
               Honors & Awards
             </p>
 
-            {data.training.map((train, index) => (
+            {data.training_awards.map((train, index) => (
               <div key={index}>
                 {/* <p className="text-gray-700 font-semibold text-base py-2">
               {" "}
@@ -252,18 +252,12 @@ const Preview = ({ data, handleNext, image, handleEdit }: PreviewProps) => {
             </p> */}
                 <div className="flex justify-start w-4/5">
                   <p className="text-gray-700 text-base">
-                    {dateFormatter(train.trainingfrom)} {"-"}
+                    {dateFormatter(train.from_date)} {"-"}
                   </p>
                   <p className="text-gray-700 text-base">
-                    {dateFormatter(train.trainingto)}
+                    {dateFormatter(train.to_date)}
                   </p>
-                  <p className="text-gray-700 font-medium text-base">
-                  {exp.workto ? (
-  dateFormatter(exp.workto)
-) : (
-  'Currently Working'
-)}
-                  </p>
+                 
                   {/* <p className="text-gray-700 font-medium text-base capitalize">,{' '}
                 {exp.location}
                   </p> */}
@@ -276,14 +270,11 @@ const Preview = ({ data, handleNext, image, handleEdit }: PreviewProps) => {
                   </p>
                   <p className="text-gray-700 font-semibold text-base capitalize">
                     {" "}
-                    {train.institute} {","}
+                    {train.awarding_institute} {","}
                   </p>
                   <p className="text-gray-700 font-semibold text-base capitalize">
-                    {train.traininglocation}
-                  <p className="text-black font-semibold text-base mx-5"> | Website : {' '}
-                    <span className="font-medium text-base">
-                      {exp.workwebsite}
-                    </span>
+                    {train.location}
+                 
                   </p>
                 </div>
               </div>
@@ -297,23 +288,25 @@ const Preview = ({ data, handleNext, image, handleEdit }: PreviewProps) => {
             <p className="block text-black font-bold text-2xl mt-6">Others</p>
 
             <hr className="border-b-2 border-slate-500" />
-
+            <h4 className="text-lg font-bold text-black capitalize">
+                {newItem.sectiontitle}
+              </h4>
             <p className="block text-base text-black my-3">
               Title :{" "}
               <span className="text-lg font-bold text-black capitalize">
-                {newItem.othertitle}
+                {newItem.sectiontitle}
               </span>
             </p>
             <p className="block text-base text-black my-3">
               Description :{" "}
               <span className="text-lg font-bold text-black capitalize">
-                {newItem.otherdesc}
+                {newItem.description}
               </span>
             </p>
           </div>
         ))}
 
-        {!!data.license && (
+        {!!data.driving_license.length && (
           <>
             <div className="pl-8 pr-28">
               <p className="block text-black font-bold text-2xl mt-6 ">
@@ -321,18 +314,18 @@ const Preview = ({ data, handleNext, image, handleEdit }: PreviewProps) => {
               </p>
               <hr className="border-b-2 border-slate-500" />
             </div>
-            {data.license.map((lice, index) => (
+            {data.driving_license.map((lice, index) => (
               <div key={index} className="pl-8 pr-28">
                 <p className="block text-lg font-bold text-black my-3">
                   Vehicle Type :{" "}
                   <span className="text-black text-base font-normal">
-                    {lice.license}
+                    {lice.license_type}
                   </span>
                 </p>
                 <p className="block text-lg font-bold text-black my-3">
                   License Validation :{" "}
                   <span className="text-black text-base font-normal">
-                    {lice.daterange.datefrom} to {lice.daterange.dateto}
+                    {lice.license_issued_date} to {lice.license_expiry_date}
                   </span>
                 </p>
               </div>

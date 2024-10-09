@@ -28,7 +28,7 @@ type Resume = {
 type PersonalInformationProps = {
   setData: (data: any) => void;
   personalInformation: Resume;
-  image: string;
+  image?: string;
   setShowPreview: (showPreview: boolean) => void;
   text: string;
   handleChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
