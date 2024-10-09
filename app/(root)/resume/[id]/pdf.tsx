@@ -591,7 +591,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                 marginBottom: 10,
               }}
             >
-              <Text style={styles.work1}>Job applied for:</Text>
+              <Text style={styles.work1}>Job applied for :</Text>
               <Text style={styles.jobappliedfor}>{data.jobappliedfor}</Text>
             </View>
           )}
@@ -600,7 +600,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
             <View>
               {data.workExperience.map((exp, index) => (
                 <View key={index}>
-                  <Text style={styles.work1}>Work Experience</Text>
+                  <Text style={styles.work1}>WORK EXPERIENCE</Text>
                   <View style={styles.line1} />
 
                   <View style={styles.job}>
@@ -610,7 +610,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                       {exp.workto
                         ? dateFormatter(exp.workto)
                         : "Currently Working"}
-                      ,{exp.location}
+                
                     </Text>
 
                     <View
@@ -660,7 +660,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                     <Text style={styles.text1}>
                       Duties & Responsibilities:
                     </Text>
-                    <Text style={styles.responsibility}>
+                    <Text style={styles.description}>
                       {/* Ensure the quality and quantity of food for lunch, afternoon tea,
               and dinner in the kitchen. Make food indents and maintain regular
               checks on the staff. Prepare the dishes and garnish and plate
