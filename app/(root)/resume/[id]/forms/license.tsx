@@ -14,7 +14,6 @@ type Props = {
 
 type FormValues = {
   driving_licenses: {
-    id?:number;
     license_type: string;
     checked: boolean;
 
@@ -58,19 +57,22 @@ const LicenseForm = ({
       driving_licenses: lic.length
         ?[
           // Check if "Two Wheeler" license exists in lic, if not add the default
-          lic.find(license => license.license_type === "Two Wheeler") || {
+          lic.find(license => license.license_type === "Two Wheeler")
+          ? { ...lic.find(license => license.license_type === "Two Wheeler"), checked: true }:  {
             license_type: "Two Wheeler",
             checked: false,
             license_issued_date: "",
             license_expiry_date: "",
           },
           // Check if "Four Wheeler" license exists in lic, if not add the default
-          lic.find(license => license.license_type === "Four Wheeler") || {
-            license_type: "Four Wheeler",
-            checked: false,
-            license_issued_date: "",
-            license_expiry_date: "",
-          }
+          lic.find(license => license.license_type === "Four Wheeler")
+          ? { ...lic.find(license => license.license_type === "Four Wheeler"), checked: true }
+          : {
+              license_type: "Four Wheeler",
+              checked: false,
+              license_issued_date: "",
+              license_expiry_date: "",
+            }
         ]
         : [
             {
