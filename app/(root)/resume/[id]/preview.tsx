@@ -41,7 +41,7 @@ const Preview = ({ data, handleNext, image, handleEdit }: PreviewProps) => {
               </span>
             </p>
 
-            <hr className="border-b-2 border-slate-500" />
+            <hr className="border-b-2 border-slate-500 w-10/12" />
             <div className=" w-5/6 flex my-2">
               <p className="text-black font-semibold text-base head ">
                 Date of birth :{" "}
@@ -257,6 +257,16 @@ const Preview = ({ data, handleNext, image, handleEdit }: PreviewProps) => {
                   <p className="text-gray-700 text-base">
                     {dateFormatter(train.trainingto)}
                   </p>
+                  <p className="text-gray-700 font-medium text-base">
+                  {exp.workto ? (
+  dateFormatter(exp.workto)
+) : (
+  'Currently Working'
+)}
+                  </p>
+                  {/* <p className="text-gray-700 font-medium text-base capitalize">,{' '}
+                {exp.location}
+                  </p> */}
                 </div>
                 <div className="flex">
                   <p className="text-gray-700 font-semibold text-base capitalize">
@@ -270,6 +280,10 @@ const Preview = ({ data, handleNext, image, handleEdit }: PreviewProps) => {
                   </p>
                   <p className="text-gray-700 font-semibold text-base capitalize">
                     {train.traininglocation}
+                  <p className="text-black font-semibold text-base mx-5"> | Website : {' '}
+                    <span className="font-medium text-base">
+                      {exp.workwebsite}
+                    </span>
                   </p>
                 </div>
               </div>

@@ -27,7 +27,7 @@ const SignUp = () => {
 
         </div>
       </div>
-      <div className=" min-h-screen flex flex-col-reverse md:flex-row p-5 md:p-0 justify-center items-center bg-green-100">
+      <div className=" min-h-screen flex flex-col md:flex-row p-5 md:p-0 justify-center items-center bg-green-100">
 
         <div className="md:h-3/4 bg-cover md:pr-10 lg:content-center basis-2/5 ">
           <div className="grid grid-rows-1 p-5 md:p-0 gap-5 lg:gap-16 text-black">

@@ -298,7 +298,7 @@ const WorkExperience = ({
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleForm)}>
             <div>
-              <div className="ml-7 my-2 w-1/4">
+              <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                 <label className="block text-black font-bold text-sm head mb-2">
                   Job applied for
                 </label>
@@ -320,7 +320,7 @@ const WorkExperience = ({
 
               {experienceFields.map((item, index) => (
                 <div key={item.id}>
-                  <div className="mb-4  w-2/4 px-6">
+                  <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                     <div className="flex justify-between items-center	">
                       <p className="text-black font-bold text-3xl mb-4">
                         Work experience
@@ -333,39 +333,42 @@ const WorkExperience = ({
                         X
                       </button>
                     </div>
-
-                    <label className="block text-black font-bold text-sm head mb-2">
-                      Employer<span className="text-red-700">*</span>
-                    </label>
-                    
-                      <input
-                        {...form.register(`experiences.${index}.id`)}
-                        type="hidden"
-                       
-                      />
-                    
-                    <input
-                      {...form.register(`experiences.${index}.employer`, {
-                        required: {
-                          value: true,
-                          message: "Employer name is required",
-                        },
-                      })}
-                      placeholder="Company name"
-                      className="pl-4 block w-full rounded-md border-0 capitalize py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                    />
-                    {form.formState.errors.experiences?.[index]?.employer && (
-                      <p className="text-red-700 text-sm">
-                        {
-                          form.formState.errors.experiences[index].employer
-                            .message
-                        }
-                      </p>
-                    )}
                   </div>
 
                   <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-                    <div className="mb-4  w-2/4 px-6  ">
+                    <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
+                      <label className="block text-black font-bold text-sm head mb-2">
+                        Employer<span className="text-red-700">*</span>
+                      </label>
+
+                      <input
+                        {...form.register(`experiences.${index}.id`)}
+                        type="hidden"
+                      />
+
+                      <input
+                        {...form.register(`experiences.${index}.employer`, {
+                          required: {
+                            value: true,
+                            message: "Employer name is required",
+                          },
+                        })}
+                        placeholder="Company name"
+                        className="pl-4 block w-full rounded-md border-0 capitalize py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                      />
+                      {form.formState.errors.experiences?.[index]?.employer && (
+                        <p className="text-red-700 text-sm">
+                          {
+                            form.formState.errors.experiences[index].employer
+                              .message
+                          }
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="mb-4.5 flex flex-col lg:flex-row mt-2">
+                    <div className="w-full lg:w-1/2 md:px-6 md:w-[504px]">
                       <label className="block text-black font-bold text-sm head mb-2">
                         Website<span className="text-red-700">*</span>
                       </label>
@@ -379,11 +382,11 @@ const WorkExperience = ({
                             value:
                               /^(https?:\/\/)?(www\.)?[a-z0-9-]+\.[a-z0-9]+\.(com|org|in|net|co.in|co|biz|edu|io|gov)$/,
                             message:
-                              "Please enter a valid website (e.g. www.goolgle.com)",
+                              "Please enter a valid website (e.g. www.google.com)",
                           },
                         })}
                         placeholder="Company’s website"
-                        className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        className="pl-4 block w-full max-w-xs sm:max-w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                       />
                       {form.formState.errors.experiences?.[index]?.website && (
                         <p className="text-red-700 text-sm">
@@ -395,7 +398,7 @@ const WorkExperience = ({
                       )}
                     </div>
 
-                    <div className="mb-4  w-2/4 px-6  ">
+                    <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                       <label className="block text-black font-bold text-sm head mb-2">
                         Location
                       </label>
@@ -412,7 +415,7 @@ const WorkExperience = ({
                     </div>
                   </div>
 
-                  <div className="mb-4  w-2/4 px-6  ">
+                  <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                     <label className="block text-black font-bold text-sm head mb-2">
                       Occupation or position held
                       <span className="text-red-700">*</span>
@@ -437,8 +440,8 @@ const WorkExperience = ({
                     )}
                   </div>
 
-                  <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-                    <div className="mb-4  w-2/6 px-6  ">
+                  <div className="flex flex-col lg:flex-col xl:flex-row gap-4 md:flex-col md:gap-6 lg:mx-auto xl:mx-auto">
+                    <div className="mb-4 w-full md:px-6">
                       <label className="block text-black font-bold text-sm head mb-2">
                         From<span className="text-red-700">*</span>
                       </label>
@@ -453,7 +456,7 @@ const WorkExperience = ({
                         min="1980-01-01"
                         max={getCurrentDate()}
                         onChange={(e) => setFromDate(e.target.value)}
-                        className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
                       />
                       {form.formState.errors.experiences?.[index]
@@ -467,7 +470,7 @@ const WorkExperience = ({
                       )}
                     </div>
 
-                    <div className="mb-4  w-2/6  px-6  ">
+                    <div className="mb-4 w-full md:px-6">
                       <label className="block text-black font-bold text-sm head mb-2">
                         To<span className="text-red-700">*</span>
                       </label>
@@ -490,9 +493,9 @@ const WorkExperience = ({
                         })}
                         min={getMinToDate()}
                         max={getCurrentDate()}
-                        className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
-                        disabled={switchStates[index]}
+                        disabled={switchStates[index] || !fromDate}
                       />
                       {form.formState.errors.experiences?.[index]?.to_date && (
                         <p className="text-red-700 text-sm">
@@ -546,18 +549,18 @@ const WorkExperience = ({
                     </>
                   </div>
 
-                  <div className="mb-4  w-full px-6">
+                  <div className="mb-4 w-full md:px-6">
                     <label className="block text-black font-bold text-sm head mb-2">
                       About company
                     </label>
                     <textarea
-                      className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                       {...form.register(`experiences.${index}.about_company`, {
                         // required: {
                         //   value: true,
                         //   message: 'First Name is required'
                         // }
                       })}
+                      className="pl-4 block w-full lg:w-full md:w-[455px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                       // value={item.about_company}
                       // onChange={(event) =>
                       //   handleChange(event, index, "about_company")
@@ -567,12 +570,11 @@ const WorkExperience = ({
                     />
                   </div>
 
-                  <div className="mb-4  w-full px-6">
+                  <div className="mb-4 w-full md:px-6">
                     <label className="block text-black font-bold text-sm head mb-2">
                       Main activities and responsibilities
                     </label>
                     <textarea
-                      className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                       {...form.register(
                         `experiences.${index}.responsibilities`,
                         {
@@ -582,10 +584,11 @@ const WorkExperience = ({
                           // }
                         }
                       )}
-                      // value={item.responsibilities}
-                      // onChange={(event) =>
-                      //   handleChange(event, index, "responsibilities")
-                      // }
+                      className="pl-4 block w-full lg:w-full md:w-[455px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                      value={item.responsibilities}
+                      onChange={(event) =>
+                        handleChange(event, index, "responsibilities")
+                      }
                       placeholder="About work responsibilities"
                       rows={5}
                     />
@@ -602,7 +605,7 @@ const WorkExperience = ({
                   className="w-14 items-center capitalize bg-slate-300 hover:bg-slate-200 text-black text-2xl mx-5 rounded-md font-extrabold"
                   onClick={() =>
                     appendExperience({
-                      id:undefined,
+                      id: undefined,
                       employer: "",
                       website: "",
                       location: "",

@@ -77,6 +77,18 @@ const Training = ({
       setShowForm(false);
     }
   }, [trainings.length]);
+        //validation function on date
+
+        const [fromDate, setFromDate]=useState('');
+
+        const getMinToDate = () =>{
+          if(!fromDate) return undefined;
+          const minDate = new Date(fromDate);
+          minDate.setDate(minDate.getDate()+1);
+          return minDate.toISOString().split('T')[0];
+        }
+
+        //--validation function for date year range--
 
   const handleForm = async (trainData:FormValues) => {
     console.log(trainData);
@@ -170,26 +182,28 @@ const Training = ({
         </div>
       )}
 
-      {show && (
-        <form onSubmit={handleSubmit(handleForm)}>
-          <div>
-            {trainingFields?.map((item, index) => {
-              return (
-                <div key={item.id}>
-                  <div className="flex justify-between items-center	mb-4  w-2/4 px-6">
-                    <p className="text-black font-bold text-3xl mb-4">
+{show && (
+<form onSubmit={handleSubmit(handleForm)}>
+<div>
+              {trainingFields?.map((item, index) => {
+                return (
+                  <div key={item.id}>
+                    <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
+                    <div className="flex justify-between items-center">
+                      <p className="text-black font-bold text-3xl mb-4">
                       Training & Awards
-                    </p>
-                    {index > 0 && (
-                      <button
-                        type="button"
-                        className="w-10 capitalize bg-green-600 hover:bg-green-500 text-white rounded-full font-bold p-2"
-                        onClick={() => removeTraining(index)}
-                      >
-                        X
-                      </button>
-                    )}
-                  </div>
+                      </p>
+                      {index > 0 && (
+                        <button
+                          type="button"
+                          className="w-10 capitalize bg-green-600 hover:bg-green-500 text-white rounded-full font-bold p-2"
+                          onClick={() => removeTraining(index)}
+                        >
+                          X
+                        </button>
+                      )}
+                    </div>
+                    </div>
 
                   {/* <div className="mb-4  w-2/4 px-6">
                       <label className="block text-black font-bold text-sm head mb-2">
@@ -208,51 +222,53 @@ const Training = ({
                       />
                     </div> */}
 
-                  <div>
-                    <div className="mb-4  w-2/4 px-6">
-                      <div className="flex justify-between items-center	">
-                        <p className="text-gray-700 font-extrabold text-sm">
-                          Awards
-                        </p>
+                    <div>
+                      <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
+                        <div className="flex justify-between items-center	">
+                          <p className="text-gray-700 font-extrabold text-sm">
+                            Awards
+                          </p>
+                        </div>
+                        <label className="block text-black font-bold text-sm head my-2">
+                         Title <span className="text-red-700">*</span>
+                        </label>
+                        <input {...register(`training_awards.${index}.id`)} type="hidden" />
+
+                        <input
+                          {...register(`training_awards.${index}.title`, {
+                            required: {
+                              value: true,
+                              message: "institute is required",
+                            },
+                          })}
+                          placeholder="Title of the award"
+                          className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        />
+
+                        {errors.training_awards?.[index]?.title && (
+                          <p className="text-red-700 text-sm">
+                            {errors.training_awards[index].title.message}
+                          </p>
+                        )}
                       </div>
-                      <label className="block text-black font-bold text-sm head my-2">
-                        Title <span className="text-red-700">*</span>
-                      </label>
-                      <input {...register(`training_awards.${index}.id`)} type="hidden" />
-                      <input
-                        {...register(`training_awards.${index}.title`, {
-                          required: {
-                            value: true,
-                            message: "institute is required",
-                          },
-                        })}
-                        placeholder="Title of the award"
-                        className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                      />
-
-                      {errors.training_awards?.[index]?.title && (
-                        <p className="text-red-700 text-sm">
-                          {errors.training_awards[index].title.message}
-                        </p>
-                      )}
+                    
                     </div>
-
-                    <div className="mb-4  w-2/4 px-6">
-                      <div className="flex justify-between items-center	"></div>
-                      <label className="block text-black font-bold text-sm head my-2">
-                        Awarding Institute{" "}
-                        <span className="text-red-700">*</span>
-                      </label>
-                      <input
-                        {...register(`training_awards.${index}.awarding_institute`, {
-                          required: {
-                            value: true,
-                            message: "institute is required",
-                          },
-                        })}
-                        placeholder="Name of institute"
-                        className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                      />
+                      <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
+                        {/* <div className="flex justify-between items-center	">
+                        </div> */}
+                        <label className="block text-black font-bold text-sm head my-2">
+                         Awarding Institute <span className="text-red-700">*</span>
+                        </label>
+                        <input
+                          {...register(`training_awards.${index}.awarding_institute`, {
+                            required: {
+                              value: true,
+                              message: "institute is required",
+                            },
+                          })}
+                          placeholder="Name of institute"
+                          className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        />
 
                       {errors.training_awards?.[index]?.awarding_institute && (
                         <p className="text-red-700 text-sm">
@@ -263,31 +279,36 @@ const Training = ({
 
                     <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
                       <div className="mb-4  w-2/4 px-6  ">
-                        <label className="block text-black font-bold text-sm head mb-2">
-                          From<span className="text-red-700">*</span>
-                        </label>
-                        <input
-                          {...register(`training_awards.${index}.from_date`, {
-                            required: {
-                              value: true,
-                              message: "Date is required",
-                            },
-                            validate: validateDateRange,
-                          })}
-                          min="1980-01-01"
-                          max={getCurrentDate()}
-                          className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                          type="Date"
-                        />
-                        {errors.training_awards?.[index]?.from_date && (
-                          <p className="text-red-700 text-sm">
-                            {errors.training_awards[index].from_date.message}
-                          </p>
-                        )}
+                      <div className="flex flex-col lg:flex-col xl:flex-row gap-4 md:flex-col md:gap-6 lg:mx-auto xl:mx-auto">
+                        <div className="mb-4 w-full md:px-6">
+                          <label className="block text-black font-bold text-sm head mb-2">
+                            From<span className="text-red-700">*</span>
+                          </label>
+                          <input
+                            {...register(`training_awards.${index}.from_date`, {
+                              required: {
+                                value: true,
+                                message: "Date is required",
+                              },
+                              validate: validateDateRange,
+                            })}
+                            min="1980-01-01"
+                            max={getCurrentDate()}
+                            className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                            type="Date"
+                            onChange={(e)=>setFromDate(e.target.value)}
+                          />
+                          {errors.training_awards?.[index]?.from_date && (
+                            <p className="text-red-700 text-sm">
+                              {errors.training_awards[index].from_date.message}
+                            </p>
+                          )}
+                        </div>
+                      
                       </div>
                     </div>
 
-                    <div className="mb-4  w-2/4 px-6  ">
+                    <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                       <label className="block text-black font-bold text-sm head mb-2">
                         To<span className="text-red-700">*</span>
                       </label>
