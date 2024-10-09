@@ -2,12 +2,14 @@ import { Clock2, FilePlus, WalletCards } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { ResumeType } from "./[id]/typings";
+import { dateFormatter } from "@/lib/utils";
 
 type Props = {
   resumes: ResumeType[];
+  user: User;
 };
 
-const ResumeList = ({ resumes }: Props) => {
+const ResumeList = ({ resumes, user }: Props) => {
   return (
     <div className="max-w-4xl mx-auto p-4">
       <h1 className="text-2xl text-center font-semibold text-gray-800 mb-4">
@@ -40,7 +42,7 @@ const ResumeList = ({ resumes }: Props) => {
                   <Clock2 className="text-green-700" size={32} />
                   <span className="pl-3 text-xl font-bold text-black">
                     Validate Till :{" "}
-                    <span className="text-lg font-normal">28/12/2024</span>
+                    <span className="text-lg font-normal">{user.expiry_date && dateFormatter(user.expiry_date)}</span>
                   </span>
                 </p>
 
