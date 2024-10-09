@@ -1,30 +1,39 @@
 import { Clock2, FilePlus, WalletCards } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { ResumeType } from "./[id]/typings";
 
-const ResumeList = ({ resumes }) => {
+type Props = {
+  resumes: ResumeType[];
+};
+
+const ResumeList = ({ resumes }: Props) => {
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-2xl text-center font-semibold text-gray-800 mb-4">Resume List</h1>
+      <h1 className="text-2xl text-center font-semibold text-gray-800 mb-4">
+        Resume List
+      </h1>
       {resumes.map((resume) => (
         <Link href={`/resume/${resume.id}`} key={resume.id}>
           <div className="w-full box-border shadow-2xl mx-auto overflow-hidden mb-4 transition-transform transform hover:scale-105">
             <div className="p-6 flex flex-col justify-evenly">
               <div className="text-gray-600 space-y-4 flex-col items-start">
                 <div className="flex items-center justify-evenly ml-3">
-                <p className="flex items-center">
-                  <FilePlus className="text-green-700" size={32} />
-                  <span className="pl-3 text-xl font-bold text-black">
-                    Resumes:{" "}
-                    <span className="text-lg font-normal">{resume.resume_title}</span>
-                  </span>
-                </p>
-                <Link
-              href="/signup"
-              className="flex w-24 justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-             Edit
-            </Link>
+                  <p className="flex items-center">
+                    <FilePlus className="text-green-700" size={32} />
+                    <span className="pl-3 text-xl font-bold text-black">
+                      Resumes:{" "}
+                      <span className="text-lg font-normal">
+                        {resume.resume_title}
+                      </span>
+                    </span>
+                  </p>
+                  <Link
+                    href={`/resume/${resume.id}`}
+                    className="flex w-24 justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >
+                    Edit
+                  </Link>
                 </div>
 
                 <p className="flex items-center ml-44">
@@ -53,13 +62,13 @@ const ResumeList = ({ resumes }) => {
              Edit
             </Link> */}
     </div>
-
-);
+  );
 };
 
 export default ResumeList;
 
-{/* <div className="max-w-4xl mx-auto p-4">
+{
+  /* <div className="max-w-4xl mx-auto p-4">
   <h1 className="text-2xl text-center font-semibold text-gray-800 mb-4">Resume List</h1>
   <div className="flex justify-center gap-4">
     {resumes.map((resume) => (
@@ -100,9 +109,5 @@ export default ResumeList;
   </Link>
     ))}
   </div>
-</div> */}
-
-  
-
-
-
+</div> */
+}
