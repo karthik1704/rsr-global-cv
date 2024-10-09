@@ -36,7 +36,7 @@ const Language = ({
     control,
   } = useForm<FormValues>({
     defaultValues: {
-      id: language.id ?? undefined,
+      id: language?.id ?? undefined,
       language: language?.language ?? "",
     },
   });
@@ -51,7 +51,7 @@ const Language = ({
     if(language?.language){
       setShowForm(false);
     }
-  }, [language.language]);
+  }, [language]);
 
   const handleForm =async (languageData:FormValues) => {
     console.log(languageData);
