@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import { DayPicker, getDefaultClassNames} from "react-day-picker";
 import { CalendarIcon } from '@heroicons/react/24/outline';
 
-const DatePicker = ({ selectedDate, onDateChange }) => {
+
+type Props = {
+  selectedDate: Date |undefined;
+  onDateChange: (date: Date) => void;
+}
+
+const DatePicker = forwardRef<HTMLDivElement, Props>(({ selectedDate, onDateChange }, ref) => {
   const [open, setOpen] = useState(false);
   const [selectedYear, setSelectedYear] = useState(
     selectedDate ? selectedDate.getFullYear() : new Date().getFullYear()
@@ -21,22 +27,22 @@ const DatePicker = ({ selectedDate, onDateChange }) => {
     setCurrentMonth(new Date(selectedYear, selectedMonth));
   }, [selectedYear, selectedMonth]);
 
-  const handleDate = (day) => {
+  const handleDate = (day: Date) => {
     onDateChange(day);
     setOpen(false);
   };
 
-  const handleYearChange = (e) => {
+  const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const year = Number(e.target.value);
     setSelectedYear(year);
   };
 
-  const handleMonthChange = (month) => {
+  const handleMonthChange = (month:Date) => {
     setSelectedMonth(month.getMonth());
     setCurrentMonth(month);
   };
 
-  const formatDate = (date) => {
+  const formatDate = (date:Date) => {
     if (!date) return "";
     const day = date.getDate().toString().padStart(2, "0");
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -68,7 +74,7 @@ const DatePicker = ({ selectedDate, onDateChange }) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative" ref={ref}>
       <input
         className="px-4 block w-1/2 rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
         type="text"
@@ -112,6 +118,7 @@ const DatePicker = ({ selectedDate, onDateChange }) => {
       )}
     </div>
   );
-};
+});
 
+DatePicker.displayName = "DatePicker";
 export default DatePicker;

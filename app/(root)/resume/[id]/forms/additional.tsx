@@ -1,78 +1,106 @@
-import { useState } from "react";
-import {useForm,useFieldArray} from 'react-hook-form';
-import {dateFormatter,getCurrentDate} from '@/lib/utils'
+import { use, useEffect, useState } from "react";
+import { useForm, useFieldArray } from "react-hook-form";
+import { dateFormatter, getCurrentDate } from "@/lib/utils";
 import { useParams } from "next/navigation";
 import { updateAdditionalInfo } from "../../action";
+import { TrainingAward } from "../typings";
 
-// type Resume ={
-//   resume_title: string;
-//   title: string;
-//   awarding_institute: string;
-//   from_date: "2024-10-01";
-//   to_date: "2024-10-01";
-//   location: string;
-// }
 
-const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSection}) =>{
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        clearErrors,
-        formState: { errors },
-        getValues,
-        trigger,
-        control,
-      } = useForm<Resume>({
-        defaultValues: {
-            training: [
-                {
-                  Hobbies: undefined,
-                  institute: undefined,
-                  trainingfrom: undefined,
-                  trainingto: undefined,
-                  traininglocation: undefined,
-                  title: undefined,
-                },
-              ],
-        },
-      });
+type TrainingProps = {
+  setData: React.Dispatch<React.SetStateAction<any>>;
+  trainings: TrainingAward[];
+  setShowPreview: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedSection: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedSection: string[];
+};
 
-      const {
-        fields: trainingFields,
-        append: appendTraining,
-        remove: removeTraining,
-      } = useFieldArray({
-        control,
-        name: "training",
-      });
+type FormValues = {
+  training_awards: {
+    title: string;
+    awarding_institute: string;
+    from_date: string;
+    to_date: string;
+    location: string;
+    id?: number;
+  }[];
+};
 
-      const [show, setShowForm] = useState(true);
-      const {id} = useParams()
+const Training = ({
+  setData,
+  trainings,
+  setShowPreview,
+  setSelectedSection,
+  selectedSection,
+}: TrainingProps) => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    clearErrors,
+    formState: { errors },
+    getValues,
+    trigger,
+    control,
+  } = useForm<FormValues>({
+    defaultValues: {
+      training_awards: trainings.length
+        ? trainings
+        : [
+            {
+              title: "",
+              awarding_institute: "",
+              from_date: "",
+              to_date: "",
+              location: "",
+              id: undefined,
+            },
+          ],
+    },
+  });
 
-      const updateAdditionalWithId = updateAdditionalInfo.bind(null, id as string)
+  const {
+    fields: trainingFields,
+    append: appendTraining,
+    remove: removeTraining,
+  } = useFieldArray({
+    control,
+    name: "training_awards",
+  });
 
-      const handleForm = async (trainData) => {
-          console.log(trainData);
-          setData((prevState) => ({
-            ...prevState,
-            training: trainData.training,
-          }));
-          // trainData.resume_title = training.resume_title;
-          // const res = await updateAdditionalWithId(trainData) 
-          setShowForm(false);
-          setShowPreview(true);
-        };
+  const [show, setShowForm] = useState(true);
+  const { id } = useParams();
 
-        const cancel =() =>{
-          const newSelectoptions = selectedSection.filter(selected=>selected!=='additional');
-          setSelectedSection(newSelectoptions);
-                  setShowPreview(true);
-        }
+  const updateAdditionalWithId = updateAdditionalInfo.bind(null, id as string);
 
-        //--validation function for date year range--
+  useEffect(() => {
+    if (trainings.length) {
+      setShowForm(false);
+    }
+  }, [trainings.length]);
 
-  const validateDateRange = (value) => {
+  const handleForm = async (trainData:FormValues) => {
+    console.log(trainData);
+    // setData((prevState) => ({
+    //   ...prevState,
+    //   training: trainData.training,
+    // }));
+    // trainData.resume_title = training.resume_title;
+    const res = await updateAdditionalWithId(trainData)
+    setShowForm(false);
+    setShowPreview(true);
+  };
+
+  const cancel = () => {
+    const newSelectoptions = selectedSection.filter(
+      (selected) => selected !== "additional"
+    );
+    setSelectedSection(newSelectoptions);
+    setShowPreview(true);
+  };
+
+  //--validation function for date year range--
+
+  const validateDateRange = (value:string) => {
     const minDate = new Date("1950-01-01");
     const maxDate = new Date("2100-12-31");
     const selectedDate = new Date(value);
@@ -83,63 +111,87 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
     return true;
   };
 
-    return(
-
-<div className="my-8">
-{!show && training.length &&
-            <div>
-              {training.map((train,index)=>(
-                <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md" key={index}>
-                  <p className="text-black text-2xl font-bold uppercase">Training & Awards</p>
-{/* <p className="text-lg font-semibold text-gray-800">Hobbies : <span className="font-light">{train.Hobbies}</span></p> */}
-<p className="text-lg font-semibold text-gray-800">Title of Award : <span className="font-light capitalize">{train.title}</span></p>
-<p className="text-lg font-semibold text-gray-800">Awarding Institution : <span className="font-light capitalize">{train.institute}</span></p>
-<p className="text-lg font-semibold text-gray-800">From : <span className="font-light">{dateFormatter(train.trainingfrom)}</span></p>
-<p className="text-lg font-semibold text-gray-800">To : <span className="font-light">{dateFormatter(train.trainingto)}</span></p>
-<p className="text-lg font-semibold text-gray-800">Location : <span className="font-light capitalize">{train.traininglocation}</span></p>
-<div className="flex mx-6">
-              <button
-              onClick={()=>setShowForm(true)}
-                type="button"
-                className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
-              >
-                Edit
-              </button>
-              {/* <button
+  return (
+    <div className="my-8">
+      {!show && trainings.length && (
+        <div>
+          {trainings.map((train, index) => (
+            <div
+              className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md"
+              key={train.id}
+            >
+              <p className="text-black text-2xl font-bold uppercase">
+                Training & Awards
+              </p>
+              {/* <p className="text-lg font-semibold text-gray-800">Hobbies : <span className="font-light">{train.Hobbies}</span></p> */}
+              <p className="text-lg font-semibold text-gray-800">
+                Title of Award :{" "}
+                <span className="font-light capitalize">{train.title}</span>
+              </p>
+              <p className="text-lg font-semibold text-gray-800">
+                Awarding Institution :{" "}
+                <span className="font-light capitalize">{train.awarding_institute}</span>
+              </p>
+              <p className="text-lg font-semibold text-gray-800">
+                From :{" "}
+                <span className="font-light">
+                  {dateFormatter(train.from_date)}
+                </span>
+              </p>
+              <p className="text-lg font-semibold text-gray-800">
+                To :{" "}
+                <span className="font-light">
+                  {dateFormatter(train.to_date)}
+                </span>
+              </p>
+              <p className="text-lg font-semibold text-gray-800">
+                Location :{" "}
+                <span className="font-light capitalize">
+                  {train.location}
+                </span>
+              </p>
+              <div className="flex mx-6">
+                <button
+                  onClick={() => setShowForm(true)}
+                  type="button"
+                  className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
+                >
+                  Edit
+                </button>
+                {/* <button
                 type="button"
                 className="w-24 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10	font-bold rounded-md"
               >
                 Delete
               </button> */}
+              </div>
             </div>
-                </div>
-              ))}
-              
-                </div>
-            }
+          ))}
+        </div>
+      )}
 
-{show && (
-<form onSubmit={handleSubmit(handleForm)}>
-<div>
-              {trainingFields?.map((item, index) => {
-                return (
-                  <div key={item.id}>
-                    <div className="flex justify-between items-center	mb-4  w-2/4 px-6">
-                      <p className="text-black font-bold text-3xl mb-4">
+      {show && (
+        <form onSubmit={handleSubmit(handleForm)}>
+          <div>
+            {trainingFields?.map((item, index) => {
+              return (
+                <div key={item.id}>
+                  <div className="flex justify-between items-center	mb-4  w-2/4 px-6">
+                    <p className="text-black font-bold text-3xl mb-4">
                       Training & Awards
-                      </p>
-                      {index > 0 && (
-                        <button
-                          type="button"
-                          className="w-10 capitalize bg-green-600 hover:bg-green-500 text-white rounded-full font-bold p-2"
-                          onClick={() => removeTraining(index)}
-                        >
-                          X
-                        </button>
-                      )}
-                    </div>
+                    </p>
+                    {index > 0 && (
+                      <button
+                        type="button"
+                        className="w-10 capitalize bg-green-600 hover:bg-green-500 text-white rounded-full font-bold p-2"
+                        onClick={() => removeTraining(index)}
+                      >
+                        X
+                      </button>
+                    )}
+                  </div>
 
-                    {/* <div className="mb-4  w-2/4 px-6">
+                  {/* <div className="mb-4  w-2/4 px-6">
                       <label className="block text-black font-bold text-sm head mb-2">
                         Hobbies and interests
                         <span className="text-red-700">*</span>
@@ -156,90 +208,66 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                       />
                     </div> */}
 
-                    <div>
-                      <div className="mb-4  w-2/4 px-6">
-                        <div className="flex justify-between items-center	">
-                          <p className="text-gray-700 font-extrabold text-sm">
-                            Awards
-                          </p>
-                        </div>
-                        <label className="block text-black font-bold text-sm head my-2">
-                         Title <span className="text-red-700">*</span>
-                        </label>
-                        <input
-                          {...register(`training.${index}.title`, {
-                            required: {
-                              value: true,
-                              message: "institute is required",
-                            },
-                          })}
-                          placeholder="Title of the award"
-                          className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                        />
-
-                        {errors.training?.[index]?.institute && (
-                          <p className="text-red-700 text-sm">
-                            {errors.training[index].institute.message}
-                          </p>
-                        )}
+                  <div>
+                    <div className="mb-4  w-2/4 px-6">
+                      <div className="flex justify-between items-center	">
+                        <p className="text-gray-700 font-extrabold text-sm">
+                          Awards
+                        </p>
                       </div>
+                      <label className="block text-black font-bold text-sm head my-2">
+                        Title <span className="text-red-700">*</span>
+                      </label>
+                      <input {...register(`training_awards.${index}.id`)} type="hidden" />
+                      <input
+                        {...register(`training_awards.${index}.title`, {
+                          required: {
+                            value: true,
+                            message: "institute is required",
+                          },
+                        })}
+                        placeholder="Title of the award"
+                        className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                      />
 
-                      <div className="mb-4  w-2/4 px-6">
-                        <div className="flex justify-between items-center	">
-                        </div>
-                        <label className="block text-black font-bold text-sm head my-2">
-                         Awarding Institute <span className="text-red-700">*</span>
-                        </label>
-                        <input
-                          {...register(`training.${index}.institute`, {
-                            required: {
-                              value: true,
-                              message: "institute is required",
-                            },
-                          })}
-                          placeholder="Name of institute"
-                          className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                        />
+                      {errors.training_awards?.[index]?.title && (
+                        <p className="text-red-700 text-sm">
+                          {errors.training_awards[index].title.message}
+                        </p>
+                      )}
+                    </div>
 
-                        {errors.training?.[index]?.institute && (
-                          <p className="text-red-700 text-sm">
-                            {errors.training[index].institute.message}
-                          </p>
-                        )}
-                      </div>
+                    <div className="mb-4  w-2/4 px-6">
+                      <div className="flex justify-between items-center	"></div>
+                      <label className="block text-black font-bold text-sm head my-2">
+                        Awarding Institute{" "}
+                        <span className="text-red-700">*</span>
+                      </label>
+                      <input
+                        {...register(`training_awards.${index}.awarding_institute`, {
+                          required: {
+                            value: true,
+                            message: "institute is required",
+                          },
+                        })}
+                        placeholder="Name of institute"
+                        className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                      />
 
-                      <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-                        <div className="mb-4  w-2/4 px-6  ">
-                          <label className="block text-black font-bold text-sm head mb-2">
-                            From<span className="text-red-700">*</span>
-                          </label>
-                          <input
-                            {...register(`training.${index}.trainingfrom`, {
-                              required: {
-                                value: true,
-                                message: "Date is required",
-                              },
-                              validate: validateDateRange,
-                            })}
-                            min="1980-01-01"
-                            max={getCurrentDate()}
-                            className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                            type="Date"
-                          />
-                          {errors.training?.[index]?.trainingfrom && (
-                            <p className="text-red-700 text-sm">
-                              {errors.training[index].trainingfrom.message}
-                            </p>
-                          )}
-                        </div>
-                      </div>
+                      {errors.training_awards?.[index]?.awarding_institute && (
+                        <p className="text-red-700 text-sm">
+                          {errors.training_awards[index].awarding_institute.message}
+                        </p>
+                      )}
+                    </div>
 
+                    <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
                       <div className="mb-4  w-2/4 px-6  ">
                         <label className="block text-black font-bold text-sm head mb-2">
-                          To<span className="text-red-700">*</span>
+                          From<span className="text-red-700">*</span>
                         </label>
                         <input
-                          {...register(`training.${index}.trainingto`, {
+                          {...register(`training_awards.${index}.from_date`, {
                             required: {
                               value: true,
                               message: "Date is required",
@@ -251,9 +279,9 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                           className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                           type="Date"
                         />
-                        {errors.training?.[index]?.trainingto && (
+                        {errors.training_awards?.[index]?.from_date && (
                           <p className="text-red-700 text-sm">
-                            {errors.training[index].trainingto.message}
+                            {errors.training_awards[index].from_date.message}
                           </p>
                         )}
                       </div>
@@ -261,42 +289,67 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
 
                     <div className="mb-4  w-2/4 px-6  ">
                       <label className="block text-black font-bold text-sm head mb-2">
-                        Location<span className="text-red-700">*</span>
+                        To<span className="text-red-700">*</span>
                       </label>
                       <input
-                        {...register(`training.${index}.traininglocation`, {
+                        {...register(`training_awards.${index}.to_date`, {
                           required: {
                             value: true,
-                            message: "Location is required",
+                            message: "Date is required",
                           },
+                          validate: validateDateRange,
                         })}
-                        placeholder="Location name"
-                        className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        min="1980-01-01"
+                        max={getCurrentDate()}
+                        className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        type="Date"
                       />
-                      {errors.training?.[index]?.traininglocation && (
+                      {errors.training_awards?.[index]?.to_date && (
                         <p className="text-red-700 text-sm">
-                          {errors.training[index].traininglocation.message}
+                          {errors.training_awards[index].to_date.message}
                         </p>
                       )}
                     </div>
                   </div>
-                );
-              })}
 
-              <div className="flex items-center mx-6">
-                <p className="text-gray-700 font-extrabold text-base head">
-                  New Awards
-                </p>
-                <button
-                  type="button"
-                  className="w-14 rounded-md items-center capitalize bg-slate-300 hover:bg-slate-200 text-black  mx-5 text-2xl font-bold"
-                  onClick={() => appendTraining({ years: 0, description: "" })}
-                >
-                  +
-                </button>
-              </div>
+                  <div className="mb-4  w-2/4 px-6  ">
+                    <label className="block text-black font-bold text-sm head mb-2">
+                      Location<span className="text-red-700">*</span>
+                    </label>
+                    <input
+                      {...register(`training_awards.${index}.location`, {
+                        required: {
+                          value: true,
+                          message: "Location is required",
+                        },
+                      })}
+                      placeholder="Location name"
+                      className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                    />
+                    {errors.training_awards?.[index]?.location && (
+                      <p className="text-red-700 text-sm">
+                        {errors.training_awards[index].location.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
 
-              <div className="flex mx-6 my-4">
+            <div className="flex items-center mx-6">
+              <p className="text-gray-700 font-extrabold text-base head">
+                New Awards
+              </p>
+              <button
+                type="button"
+                className="w-14 rounded-md items-center capitalize bg-slate-300 hover:bg-slate-200 text-black  mx-5 text-2xl font-bold"
+                onClick={() => appendTraining({ title: "", awarding_institute: "", from_date: "", to_date: "", location: "" , id: undefined})}
+              >
+                +
+              </button>
+            </div>
+
+            <div className="flex mx-6 my-4">
               <button
                 type="button"
                 className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
@@ -311,12 +364,11 @@ const Training = ({setData,training,setShowPreview,setSelectedSection,selectedSe
                 Save
               </button>
             </div>
+          </div>
+        </form>
+      )}
+    </div>
+  );
+};
 
-            </div>
-            </form>
-             )}
-             </div>
-            )
-        }
-
-        export default Training
+export default Training;

@@ -1,9 +1,14 @@
-import { lessThanExpiryDate } from "@/lib/utils";
-import Resume from "./resume-form";
-import { SERVER_API_URL } from "@/app/constants";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-export async function getData() {
+
+import Resume from "./resume-form";
+
+import { lessThanExpiryDate } from "@/lib/utils";
+import { SERVER_API_URL } from "@/app/constants";
+import { ResumeType } from "./typings";
+import { Suspense } from "react";
+
+export async function getUser() {
   const cookiesStore = cookies();
   const access = cookiesStore.get("access");
 
@@ -40,12 +45,11 @@ export async function getData() {
   return user;
 }
 
-type Data = User;
-export async function getResume(id) {
+
+export async function getResume(id:string) {
   const cookiesStore = cookies();
   const access = cookiesStore.get("access");
-
-  console.log(access);
+  console.log('re running');
   const res = await fetch(`${SERVER_API_URL}/resumes/${id}`, {
     headers: {
       "Content-Type": "application/json",
@@ -54,15 +58,17 @@ export async function getResume(id) {
     next: {
       tags: ["Resume"],
     },
+    cache: 'no-store'
   });
 
   if (!res.ok) {
     console.log("error");
+    redirect('/login')
+
   }
 
   if (res.status === 401) {
-    // redirect("/resume/[id]");
-    // redirect('/resume')
+    redirect('/login')
   }
   if (res.status !== 200) {
     // redirect("/resume/[id]");
@@ -70,26 +76,25 @@ export async function getResume(id) {
     console.log("resume",res);
   }
 
-  const resumes = await res.json();
-  console.log('resume',resumes);
+  const resume = await res.json();
 
-  return resumes;
+  return resume;
 }
 
-type ResumeType = {};
 
-const Page = async ({params:{id}}) => {
-  console.log('id', id)
-  const user: Data = await getData();
-  const resume:ResumeType = await getResume(id)
+const ResumeEditPage = async ({params:{id}}:{params:{id:string;}}) => {
+  const user: User = await getUser();
+  const resume:ResumeType = await getResume(id);
   
   return (
     <>
       <div>
+      <Suspense fallback={'loading'}>
         <Resume resume={resume}/>
+      </Suspense>
       </div>
     </>
   );
 };
 
-export default Page;
+export default ResumeEditPage;

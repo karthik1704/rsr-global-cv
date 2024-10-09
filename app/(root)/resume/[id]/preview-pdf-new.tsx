@@ -1,5 +1,4 @@
 "use client";
-import dynamic from "next/dynamic";
 import { PDFViewer } from "@react-pdf/renderer";
 
 // const PDFViewer = dynamic(
@@ -11,8 +10,11 @@ import { PDFViewer } from "@react-pdf/renderer";
 // );
 // import PDFDownloadButton from "./pfddwld";
 import PDF from "./pdf";
-
-const PreviewPdf = ({data}) => {
+import { ResumeType } from "./typings";
+type Props = {
+  data: ResumeType;
+}
+const PreviewPdf = ({data}:Props) => {
   return (
     <>
       <div className="flex items-center justify-center">

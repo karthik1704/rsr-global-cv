@@ -3,8 +3,13 @@
 import { PDFViewer } from "@react-pdf/renderer";
 // import PDFDownloadButton from "./pfddwld";
 import PDF from "@/app/(root)/Pdf/pdf";
+import { ResumeType } from "./typings";
 
-const PreviewPdf = ({ data }) => {
+type Props = {
+  data:ResumeType;
+}
+
+const PreviewPdf = ({ data }:Props) => {
   return (
     <>
       <div className="flex items-center justify-center">

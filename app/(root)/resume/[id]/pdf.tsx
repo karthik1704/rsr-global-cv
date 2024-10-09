@@ -18,6 +18,7 @@ import React from "react";
 // import { htmlRenderers } from "./pdfhtml";
 import resumeConfig from "../../edit-me/resume-config";
 import PersonalInformation from "./forms/personalinformation";
+import { ResumeType } from "./typings";
 // import Theme from "../edit-me/resume-config";
 // import { contrastColor } from "../helpers/colorcontrast";
 // import { getAccentColor, getNeutralColor } from "../helpers/colors";
@@ -419,7 +420,7 @@ paddingTop:'10px',
   },
 });
 
-const PDF = ({ data }: data) => {
+const PDF = ({ data }: {data:ResumeType}) => {
   const year = new Date().getFullYear();
 
   // console.log(data.experiences.length);
@@ -429,8 +430,8 @@ const PDF = ({ data }: data) => {
   return (
     // @ts-ignore
     <Document
-      author={fullName}
-      title={`Résume for ${data.personalInformation.firstName}, ${year}`}
+      author={`${data.first_name} ${data.last_name}`}
+      title={`Résume for ${data.first_name}, ${year}`}
     >
       {/* @ts-ignore */}
       <Page size="LETTER" style={styles.page}>
