@@ -425,14 +425,14 @@ const Resume = ({ resume }: ResumeProps) => {
           // handleNext={handleNext} 
           />
 
-          <div className="flex py-4 px-8">
-            {/* <button
+          <div className="flex justify-between py-4 px-8">
+            <button
                   type="button"
                   className="w-16 items-center capitalize bg-white hover:bg-green-600 text-black hover:text-slate-100 p-2 font-bold rounded-md"
                   onClick={handlePrevious}
                 >
-                  Edit
-                </button> */}
+                  Back
+                </button>
             {/* <button
                   type="button"
                   className="w-16 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10 font-bold rounded-md"
