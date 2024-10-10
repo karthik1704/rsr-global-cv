@@ -148,7 +148,7 @@ const LicenseForm = ({
   };
 
   return (
-    <div>
+    <div className="my-8">
       {" "}
       {showForm ? (
         <form onSubmit={handleSubmit(handleForm)} className="space-y-4">

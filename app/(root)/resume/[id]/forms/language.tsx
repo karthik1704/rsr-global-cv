@@ -75,7 +75,7 @@ const Language = ({
   };
 
   return (
-    <>
+    <div className="my-8">
       {!show && language && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
           <p className="text-black text-2xl font-bold uppercase">
@@ -191,7 +191,7 @@ const Language = ({
           </form>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

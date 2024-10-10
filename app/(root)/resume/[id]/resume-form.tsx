@@ -34,6 +34,8 @@ const Resume = ({ resume }: ResumeProps) => {
 
   const [showPreview, setShowPreview] = useState(false);
 
+  const [otherId, setOtherId] = useState<number|null>(null);
+
   const [show, setShow] = useState(0);
 
   useEffect(() => {
@@ -175,12 +177,15 @@ const Resume = ({ resume }: ResumeProps) => {
     ),
     others: (
       <Others
+      otherId={otherId}
+      setOtherId={setOtherId}
         selectedSection={selectedSection}
         setSelectedSection={setSelectedSection}
         setShowPreview={setShowPreview}
         setData={setData}
         others={resume.others}
         sectionTitle={additionalTitle}
+        setSectionTitle={setAdditionalTitle}
       />
     ),
   };
@@ -286,14 +291,14 @@ const Resume = ({ resume }: ResumeProps) => {
             </div>
 
             {selectedSection.map((selected) => (
-              <div key={selected}>{formComponents[selected]}</div>
+              selected !== "others" && <div key={selected}>{formComponents[selected]}</div>
             ))}
             {selectedSection.includes("others") &&
-              resume.others.length &&
+              resume.others.length && !additionalTitle && 
               resume.others.map((other) => (
                 <div
                   key={other.id}
-                  className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md"
+                  className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md my-8"
                 >
                   <p className="text-black text-2xl font-bold uppercase">
                     {other.sectiontitle}
@@ -312,16 +317,22 @@ const Resume = ({ resume }: ResumeProps) => {
                   </p>
 
                   <div className="flex gap-4">
-                    {/* <button
-                            onClick={() => setShowForm(true)}
-                            type="button"
-                            className="w-24 bg-white text-black hover:text-white hover:bg-green-600 p-2 font-bold rounded-md border border-gray-300"
-                          >
-                            Edit
-                          </button> */}
-                  </div>
+            <button
+              onClick={() => 
+                {setAdditionalTitle(other.sectiontitle)
+                setOtherId(other.id)
+                }}
+              type="button"
+              className="w-24 bg-white text-black hover:text-white hover:bg-green-600 p-2 font-bold rounded-md border border-gray-300"
+            >
+              Edit
+            </button>
+          </div>
                 </div>
               ))}
+               {selectedSection.includes('others') && (
+               <div >{formComponents['others']}</div>
+            )}
           </div>
           <div className="my-3">
             {showPreview ? (

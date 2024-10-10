@@ -56,7 +56,8 @@ const DrivingLicense = ({
   };
 
   return (
-    <>
+    <div className="my-8">
+
       {show && (
         <div>
           <p className="text-2xl text-black text-center font-bold py-3 uppercase">
@@ -430,7 +431,7 @@ const DrivingLicense = ({
           </form>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

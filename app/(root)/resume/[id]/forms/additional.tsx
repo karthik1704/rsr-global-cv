@@ -126,10 +126,10 @@ const Training = ({
   return (
     <div className="my-8">
       {!show && trainings.length && (
-        <div>
+        <div className="space-y-4 bg-gray-100 rounded-lg shadow-md">
           {trainings.map((train, index) => (
             <div
-              className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md"
+              className="p-6 "
               key={train.id}
             >
               <p className="text-black text-2xl font-bold uppercase">

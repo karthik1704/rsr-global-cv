@@ -1,26 +1,28 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Other } from "../typings";
 import { useParams } from "next/navigation";
 import { updateOthers } from "../../action";
-
+import { set } from "zod";
 
 type OthersProps = {
-  setData: any;
+  setData: React.Dispatch<React.SetStateAction<any>>;
   others: Other[];
   selectedSection: string[];
-  setSelectedSection: any;
-  setShowPreview: any;
+  setSelectedSection: React.Dispatch<React.SetStateAction<string[]>>;
+  setShowPreview: React.Dispatch<React.SetStateAction<boolean>>;
   sectionTitle: string;
-}
+  setSectionTitle: React.Dispatch<React.SetStateAction<string>>;
+  otherId?: null | number;
+  setOtherId: React.Dispatch<React.SetStateAction<number | null>>;
+};
 
 type FormValues = {
   sectiontitle: string;
   title: string;
   description: string;
   id?: number;
-}
-
+};
 
 const Others = ({
   setData,
@@ -29,70 +31,75 @@ const Others = ({
   setSelectedSection,
   setShowPreview,
   sectionTitle,
-}:OthersProps) => {
+  setSectionTitle,
+  otherId,
+  setOtherId,
+}: OthersProps) => {
+  console.log(otherId)
+  const existOther = others.find((other) => other.id === otherId);
+
   const {
     register,
     handleSubmit,
-    setValue,
-    clearErrors,
     formState: { errors },
-    getValues,
-    trigger,
-    control,
+    setValue,
+    reset,
   } = useForm<FormValues>({
-    defaultValues: {
-      sectiontitle: sectionTitle,
-      title: "",
-      description: "",
-    },
+    defaultValues: otherId
+      ? {
+          id: existOther?.id,
+          sectiontitle: existOther?.sectiontitle,
+          title: existOther?.title,
+          description: existOther?.description,
+        }
+      : {
+          id: undefined,
+          sectiontitle: sectionTitle,
+          title: "",
+          description: "",
+        },
   });
+
+  console.log(others.find((other) => other.sectiontitle === sectionTitle));
 
   const [show, setShowForm] = useState(true);
 
-  const {id} = useParams<{id:string}>();
+  const { id } = useParams<{ id: string }>();
 
   const updateOthersWithId = updateOthers.bind(null, id);
 
-  const handleForm =async (othersData:FormValues) => {
+  useEffect(() => {
+    if (!sectionTitle ) {
+      setShowForm(false);
+      return;
+    }
+    setShowForm(true);
+    setValue("sectiontitle", sectionTitle);
+  }, [sectionTitle, setValue]);
+
+  useEffect(() => {
+    if (otherId) {
+      setValue("sectiontitle", existOther?.sectiontitle || "");
+      setValue("title", existOther?.title || "");
+      setValue("description", existOther?.description || "");
+      setValue("id", existOther?.id );
+      return;
+    }
+    reset();
+    setValue("sectiontitle", sectionTitle);
+  }, [existOther?.description, existOther?.id, existOther?.sectiontitle, existOther?.title, otherId, reset, sectionTitle, setValue]);
+
+  const handleForm = async (othersData: FormValues) => {
     console.log(othersData);
-  
-    // // Perform operations
-    // const newothers = others.filter(
-    //   (other) => other.title.toLowerCase() !== sectionTitle.toLowerCase()
-    // );
-    // const existingother = others.find(
-    //   (other) => other.title.toLowerCase() === sectionTitle.toLowerCase()
-    // );
-  
-    // const updatedData = existingother
-    //   ? {
-    //       ...newothers,
-    //       others: [
-    //         ...newothers,
-    //         { ...existingother, othersData },
-    //       ],
-    //     }
-    //   : {
-    //       ...newothers,
-    //       others: [
-    //         ...newothers,
-    //         {
-    //           sectionTitle,
-    //           ...othersData,
-    //         },
-    //       ],
-    //     };
-  
-    // // Use functional update form for setData
-    // setData(prevState => ({
-    //   ...prevState,
-    //   ...updatedData,
-    // }));
 
      const res = await updateOthersWithId(othersData);
-  
-    setShowForm(false);
+     if (otherId) {
+      setOtherId(null);
+    }
+    setSectionTitle("");
     setShowPreview(true);
+    setShowForm(false);
+    
   };
 
   const cancel = () => {
@@ -100,10 +107,14 @@ const Others = ({
       (selected) => selected !== "others"
     );
     setSelectedSection(newSelectoptions);
+    setSectionTitle("");
     setShowPreview(true);
     setShowForm(false);
+    if (otherId) {
+      setOtherId(null);
+    }
   };
-  console.log(others)
+  console.log(others);
 
   return (
     <>
@@ -113,15 +124,46 @@ const Others = ({
             <h1 className="my-4 px-6  text-black font-bold text-3xl">
               {sectionTitle}
             </h1>
+            {otherId ? (
+              <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
+                <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
+                  <label className="block text-black font-bold text-sm head mb-2">
+                    Section Title
+                    <span className="text-red-700">*</span>
+                  </label>
+                  <input
+                    className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                    {...register("sectiontitle", {
+                      required: {
+                        value: true,
+                        message: "section title is required",
+                      },
+                    })}
+                    placeholder="Section Title"
+                  />
+                  {errors.title && (
+                    <p className="text-red-700 text-sm">
+                      {errors.title.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <input
+                type="hidden"
+                {...register("sectiontitle")}
+                value={sectionTitle}
+              />
+            )}
 
             <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-              
               <div className="mb-4 w-full lg:w-1/2 px-6 md:w-[504px]">
                 <label className="block text-black font-bold text-sm head mb-2">
                   Title
                   <span className="text-red-700">*</span>
                 </label>
-                <input type="hidden" {...register("sectiontitle")} />
+                <input type="hidden" {...register("id")} />
+              
                 <input
                   className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   {...register("title", {
@@ -133,9 +175,7 @@ const Others = ({
                   placeholder=" Title"
                 />
                 {errors.title && (
-                  <p className="text-red-700 text-sm">
-                    {errors.title.message}
-                  </p>
+                  <p className="text-red-700 text-sm">{errors.title.message}</p>
                 )}
               </div>
             </div>
