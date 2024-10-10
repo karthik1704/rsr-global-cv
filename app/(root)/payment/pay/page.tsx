@@ -19,7 +19,7 @@ if (!process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY) {
   ); 
 const options: StripeElementsOptions = {
   mode: "payment",
-  amount: 20000,
+  amount: 1000,
   currency: "gbp",
 
   // Fully customizable with appearance API.
