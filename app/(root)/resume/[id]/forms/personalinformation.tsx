@@ -6,7 +6,8 @@ import { useParams } from "next/navigation";
 import ImageUploader from "@/components/image/image_uploader";
 import { dateFormatter } from "@/lib/utils";
 import DatePicker from "../datepicker";
-import { updateResume } from "../../action";
+import { updateResume, uploadImage } from "../../action";
+import { toast } from "sonner";
 
 type Resume = {
   resume_title: string;
@@ -70,10 +71,11 @@ const PersonalInformation = ({
   });
 
   const [date, setDate] = useState<Date | undefined>(new Date(personalInformation.date_of_birth) ?? undefined);
-  const { id } = useParams();
+  const { id } = useParams<{id:string;}>();
   const [show, setShowForm] = useState(true);
 
-  const updateResumeWithId = updateResume.bind(null, id as string);
+  const updateResumeWithId = updateResume.bind(null, id );
+  const uploadImageWithId = uploadImage.bind(null, id );
 
   // const handleDateChange = (newDate) => {
   //   setDate(newDate);
@@ -116,6 +118,7 @@ const PersonalInformation = ({
 
   const handleImageChange = (imageurl: string) => {
     setUploadedImage(imageurl);
+
   };
 
   const handleForm = async (personalData: Resume) => {
@@ -129,8 +132,21 @@ const PersonalInformation = ({
     console.log(personalData.date_of_birth)
     const res = await updateResumeWithId(personalData)
 
-    setShowForm(false);
-    setShowPreview(true);
+    if(res?.type==="Success") {
+      toast.success("Personal Information added successfully", {
+        duration: 10000,
+        closeButton: true,
+      });
+      setShowForm(false);
+      setShowPreview(true);
+    }else{
+      toast.error("Error in adding Personal Information", {
+        duration: 10000,
+        closeButton: true,
+      });
+    }
+
+   
   };
 
   return (

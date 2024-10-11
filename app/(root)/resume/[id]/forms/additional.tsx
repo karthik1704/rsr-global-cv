@@ -2,8 +2,9 @@ import { use, useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { dateFormatter, getCurrentDate } from "@/lib/utils";
 import { useParams } from "next/navigation";
-import { updateAdditionalInfo } from "../../action";
+import { deleteAdditionalInfo, updateAdditionalInfo } from "../../action";
 import { TrainingAward } from "../typings";
+import { toast } from "sonner";
 
 
 type TrainingProps = {
@@ -68,9 +69,10 @@ const Training = ({
   });
 
   const [show, setShowForm] = useState(true);
-  const { id } = useParams();
+  const { id } = useParams<{id:string;}>();
 
-  const updateAdditionalWithId = updateAdditionalInfo.bind(null, id as string);
+  const updateAdditionalWithId = updateAdditionalInfo.bind(null, id );
+  const deleteTrainingWithId = deleteAdditionalInfo.bind(null, id);
 
   useEffect(() => {
     if (trainings.length) {
@@ -98,8 +100,20 @@ const Training = ({
     // }));
     // trainData.resume_title = training.resume_title;
     const res = await updateAdditionalWithId(trainData)
-    setShowForm(false);
-    setShowPreview(true);
+    if(res){
+      toast.success("Training & Awards added successfully", {
+        duration: 10000,
+        closeButton: true,
+      });
+      setShowForm(false);
+      setShowPreview(true);
+    }else{
+      toast.error("Failed to add Training & Awards", {
+        duration: 10000,
+        closeButton: true,
+      });
+    }
+   
   };
 
   const cancel = () => {
@@ -122,6 +136,21 @@ const Training = ({
     }
     return true;
   };
+  const handleDeleteTraining = async (training_id: string | number) => {
+    const res = await deleteTrainingWithId(training_id);
+
+    if (res) {
+      toast.success("Training & Awards Deleted Successfully",{
+        duration: 10000,
+        closeButton: true,
+      });
+    } else {
+      toast.error("Failed to delete Training & Awards",{
+        duration: 10000,
+        closeButton: true,
+      });
+    }
+  }
 
   return (
     <div className="my-8">
@@ -170,12 +199,13 @@ const Training = ({
                 >
                   Edit
                 </button>
-                {/* <button
-                type="button"
-                className="w-24 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10	font-bold rounded-md"
-              >
-                Delete
-              </button> */}
+                <button
+                  type="button"
+                  className="w-24 items-center capitalize bg-red-600 hover:bg-red-500 text-white p-2 mx-10	font-bold rounded-md"
+                  onClick={() => handleDeleteTraining(train.id)}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           ))}

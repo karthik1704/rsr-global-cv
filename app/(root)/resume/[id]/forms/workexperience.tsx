@@ -10,9 +10,10 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { dateFormatter, getCurrentDate } from "@/lib/utils";
 import { useParams } from "next/navigation";
-import { updateWorkExperience } from "../../action";
+import { deleteWorkExperience, updateWorkExperience } from "../../action";
 import { Experience } from "../typings";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { toast } from "sonner";
 
 //capitalize letter
 
@@ -83,12 +84,11 @@ const WorkExperience = ({
     name: "experiences",
   });
   const [isVisible, setIsVisible] = useState(true);
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
 
-  const updateWorkExperienceWithId = updateWorkExperience.bind(
-    null,
-    id as string
-  );
+  const updateWorkExperienceWithId = updateWorkExperience.bind(null, id);
+
+  const deleteWorkExperienceWithId = deleteWorkExperience.bind(null, id);
 
   const sectionDeleted = () => {
     setIsVisible(false);
@@ -136,7 +136,7 @@ const WorkExperience = ({
     value: string,
     { to_date }: { to_date: string | Date }
   ) => {
-    if (!value ) {
+    if (!value) {
       return true;
     }
     return (
@@ -216,9 +216,38 @@ const WorkExperience = ({
     // }));
     // workexpData.resume_title = workExperience.resume_title;
     const res = await updateWorkExperienceWithId(workexpData);
-    setShowForm(false);
-    setShowPreview(true);
+    if(res.type==="Success"){
+      toast.success("Work Experience added successfully",{
+        duration: 10000,
+        closeButton: true,
+      });
+      form.reset();
+      setShowForm(false);
+      setShowPreview(true);
+    } else {
+      toast.error("Something went wrong",{
+        duration: 10000,
+        closeButton: true,
+      });
+    }
+ 
   };
+
+  const deleteExperience = async (id: number) => {
+    const res = await deleteWorkExperienceWithId(id);
+
+    if(res.type==="Success"){
+      toast.success("Work Experience deleted successfully", {
+        duration: 10000,
+        closeButton: true,
+      });
+    } else {
+      toast.error("Something went wrong", {
+        duration: 10000,
+        closeButton: true,
+      });
+    }
+  }
   // console.log(workExperience)
   return (
     <div className="my-8">
@@ -283,13 +312,13 @@ const WorkExperience = ({
                 >
                   Edit
                 </button>
-                {/* <button
-                type="button"
-                className="w-24 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10	font-bold rounded-md"
-                onClick={sectionDeleted}
-              >
-                Delete
-              </button> */}
+                <button
+                  type="button"
+                  className="w-24 items-center capitalize bg-red-600 hover:bg-red-500 text-white p-2 mx-10	font-bold rounded-md"
+                  onClick={() => deleteExperience(exp.id)}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           ))}

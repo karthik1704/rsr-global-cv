@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { dateFormatter, getCurrentDate } from "@/lib/utils";
 import { useParams } from "next/navigation";
-import { updateEducation } from "../../action";
+import { deleteEducation, updateEducation } from "../../action";
 import { Education as EducationType } from "../typings";
+import { toast } from "sonner";
 
 type Props = {
   setData: any;
@@ -72,6 +73,7 @@ const Education = ({
   const { id } = useParams();
 
   const updateEducationWithId = updateEducation.bind(null, id as string);
+  const deleteEducationWithId = deleteEducation.bind(null, id as string);
 
   useEffect(() => {
     if (education.length) {
@@ -88,8 +90,21 @@ const Education = ({
     // educationData.resume_title = education.resume_title;
     const res = await updateEducationWithId(educationData);
 
-    setShowForm(false);
-    setShowPreview(true);
+    if(res.type==="Success"){ 
+      toast.success("Education Updated Successfully", {
+        duration: 10000,
+        closeButton: true,
+      });
+      setShowForm(false);
+      setShowPreview(true);
+    }else{
+      toast.error("Failed to update Education",{
+        duration: 10000,
+        closeButton: true,
+      });
+    }
+
+   
   };
 
   const cancel = () => {
@@ -140,6 +155,21 @@ const Education = ({
     }
     return true;
   };
+
+  const handleDeleteEducation = async (edu_id: number) => {
+    const res = await deleteEducationWithId(edu_id);
+    if(res.type==="Success"){
+      toast.success("Education Deleted Successfully", {
+        duration: 10000,
+        closeButton: true,
+      });
+    }else{
+      toast.error("Failed to delete Education",{
+        duration: 10000,
+        closeButton: true,
+      });
+    }
+  }
 
   return (
     <div className="my-8">
@@ -197,13 +227,13 @@ const Education = ({
                 >
                   Edit
                 </button>
-                {/* <button
-                    type="button"
-                    className="w-24 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10	font-bold rounded-md"
-                    onClick={sectionDeleted}
-                  >
-                    Delete
-                  </button> */}
+                <button
+              type="button"
+              className="w-24 items-center capitalize bg-red-600 hover:bg-red-500 text-white p-2 mx-10	font-bold rounded-md"
+              onClick={() => handleDeleteEducation(edu.id)}
+            >
+              Delete
+            </button>
               </div>
             </div>
           ))}

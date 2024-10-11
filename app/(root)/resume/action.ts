@@ -351,4 +351,220 @@ export async function updateLicense(id:number|string,formData: any) {
 }
 
 
+// Delete actions
 
+export async function deleteWorkExperience(id:number|string, experience_id: number|string) {
+  const access_token = cookies().get("access");
+  revalidateTag("Resume");
+  revalidatePath(`/resume/${id}`);
+  const res = await fetch(`${SERVER_API_URL}/resumes/${id}/experiences/${experience_id}/`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access_token?.value}`,
+    },
+  });
+
+  if (res.status === 401) redirect("/login");
+
+  if (res.status !== 204) {
+    const error = await res.json();
+    return {
+      fieldErrors: null,
+      type: "Error",
+    };
+  }
+
+  return {
+    fieldErrors: null,
+    type: "Success",
+    message: "Work Experience Deleted Successfully",
+  };
+}
+
+export async function deleteEducation(id:number|string, education_id: number|string) {
+  const access_token = cookies().get("access");
+  revalidateTag("Resume");
+  revalidatePath(`/resume/${id}`);
+  const res = await fetch(`${SERVER_API_URL}/resumes/${id}/education/${education_id}/`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access_token?.value}`,
+    },
+  });
+
+  if (res.status === 401) redirect("/login");
+
+  if (res.status !== 204) {
+    const error = await res.json();
+    return {
+      fieldErrors: null,
+      type: "Error",
+    };
+  }
+
+  return {
+    fieldErrors: null,
+    type: "Success",
+    message: "Education Deleted Successfully",
+  };
+}
+
+export async function deleteLicense(id:number|string, license_id: number|string) {
+  const access_token = cookies().get("access");
+  revalidateTag("Resume");
+  revalidatePath(`/resume/${id}`);
+  const res = await fetch(`${SERVER_API_URL}/resumes/${id}/driving-license/${license_id}/`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access_token?.value}`,
+    },
+  });
+
+  if (res.status === 401) redirect("/login");
+
+  if (res.status !== 204) {
+    const error = await res.json();
+    return {
+      fieldErrors: null,
+      type: "Error",
+    };
+  }
+
+  return {
+    fieldErrors: null,
+    type: "Success",
+    message: "License Deleted Successfully",
+  };
+}
+
+export async function deleteLanguage(id:number|string, language_id: number|string) {
+  const access_token = cookies().get("access");
+  revalidateTag("Resume");
+  revalidatePath(`/resume/${id}`);
+  const res = await fetch(`${SERVER_API_URL}/resumes/${id}/language-skills/${language_id}/`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access_token?.value}`,
+    },
+  });
+
+  if (res.status === 401) redirect("/login");
+
+  if (res.status !== 204) {
+    const error = await res.json();
+    return {
+      fieldErrors: null,
+      type: "Error",
+    };
+  }
+
+  return {
+    fieldErrors: null,
+    type: "Success",
+    message: "Language Deleted Successfully",
+  };
+}
+
+export async function deleteAdditionalInfo(id:number|string, additional_info_id: number|string) {
+  const access_token = cookies().get("access");
+  revalidateTag("Resume");
+  revalidatePath(`/resume/${id}`);
+  const res = await fetch(`${SERVER_API_URL}/resumes/${id}/training-award/${additional_info_id}/`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access_token?.value}`,
+    },
+  });
+
+  if (res.status === 401) redirect("/login");
+
+  if (res.status !== 204) {
+    const error = await res.json();
+    return {
+      fieldErrors: null,
+      type: "Error",
+    };
+  }
+
+  return {
+    fieldErrors: null,
+    type: "Success",
+    message: "Additional Information Deleted Successfully",
+  };
+}
+
+export async function deleteOthers(id:number|string, others_id: number|string) {
+  const access_token = cookies().get("access");
+  revalidateTag("Resume");
+  revalidatePath(`/resume/${id}`);
+  const res = await fetch(`${SERVER_API_URL}/resumes/${id}/others/${others_id}/`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access_token?.value}`,
+    },
+  });
+
+  if (res.status === 401) redirect("/login");
+
+  if (res.status !== 204) {
+    const error = await res.json();
+    return {
+      fieldErrors: null,
+      type: "Error",
+    };
+  }
+
+  return {
+    fieldErrors: null,
+    type: "Success",
+    message: "Others Deleted Successfully",
+  };
+}
+
+
+// upload Image
+
+export async function uploadImage(id:number|string, file: any) {
+  const access_token = cookies().get("access");
+  revalidateTag("Resume");
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const res = await fetch(`${SERVER_API_URL}/resumes/upload-image/${id}/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${access_token?.value}`,
+    },
+    body: formData,
+  });
+
+  if (res.status === 401) redirect("/login");
+
+  if(res.status === 422) {
+    const resJson = await res.json();
+    console.log(resJson);
+    resJson.detail.map((error: any) => {
+      console.log(error.loc);
+    });
+  }
+
+  if (res.status !== 201) {
+    const error = await res.json();
+    return {
+      fieldErrors: null,
+      type: "Error",
+    };
+  }
+
+  return {
+    fieldErrors: null,
+    type: "Success",
+    message: "Image Uploaded Successfully",
+  };
+}

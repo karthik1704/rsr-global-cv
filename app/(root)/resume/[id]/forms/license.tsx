@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { DrivingLicense } from "../typings";
 import { useParams } from "next/navigation";
-import { updateLicense } from "../../action";
+import { updateLicense, deleteLicense } from "../../action";
+import { toast } from "sonner";
 
 type Props = {
   selectedSection: string[];
@@ -49,31 +50,39 @@ const LicenseForm = ({
   const [showForm, setShowForm] = useState(true);
   const [submittedData, setSubmittedData] = useState([]);
 
- 
-
-  
   const { control, handleSubmit, watch, register } = useForm<FormValues>({
     defaultValues: {
       driving_licenses: lic.length
-        ?[
-          // Check if "Two Wheeler" license exists in lic, if not add the default
-          lic.find(license => license.license_type === "Two Wheeler")
-          ? { ...lic.find(license => license.license_type === "Two Wheeler"), checked: true }:  {
-            license_type: "Two Wheeler",
-            checked: false,
-            license_issued_date: "",
-            license_expiry_date: "",
-          },
-          // Check if "Four Wheeler" license exists in lic, if not add the default
-          lic.find(license => license.license_type === "Four Wheeler")
-          ? { ...lic.find(license => license.license_type === "Four Wheeler"), checked: true }
-          : {
-              license_type: "Four Wheeler",
-              checked: false,
-              license_issued_date: "",
-              license_expiry_date: "",
-            }
-        ]
+        ? [
+            // Check if "Two Wheeler" license exists in lic, if not add the default
+            lic.find((license) => license.license_type === "Two Wheeler")
+              ? {
+                  ...lic.find(
+                    (license) => license.license_type === "Two Wheeler"
+                  ),
+                  checked: true,
+                }
+              : {
+                  license_type: "Two Wheeler",
+                  checked: false,
+                  license_issued_date: "",
+                  license_expiry_date: "",
+                },
+            // Check if "Four Wheeler" license exists in lic, if not add the default
+            lic.find((license) => license.license_type === "Four Wheeler")
+              ? {
+                  ...lic.find(
+                    (license) => license.license_type === "Four Wheeler"
+                  ),
+                  checked: true,
+                }
+              : {
+                  license_type: "Four Wheeler",
+                  checked: false,
+                  license_issued_date: "",
+                  license_expiry_date: "",
+                },
+          ]
         : [
             {
               license_type: "Two Wheeler",
@@ -96,17 +105,17 @@ const LicenseForm = ({
     name: "driving_licenses",
   });
 
-  const {id} = useParams<{id:string}>();
+  const { id } = useParams<{ id: string }>();
   const updateLicenseWithId = updateLicense.bind(null, id);
-  
+  const deleteLicenseWithId = deleteLicense.bind(null, id);
+
   const isChecked = watch("driving_licenses");
 
   useEffect(() => {
-    if(lic.length){
+    if (lic.length) {
       setShowForm(false);
     }
   }, [lic.length]);
-
 
   const handleCheckboxChange = (index: number, checked: boolean) => {
     const updatedCheckboxes = [...isChecked];
@@ -130,12 +139,27 @@ const LicenseForm = ({
     // }));
     // setSubmittedData(formattedData);
     console.log(licenseData);
-    const drivingLicense = licenseData.driving_licenses.filter((item) => item.checked);
-    const data = {driving_licenses: drivingLicense};
-    console.log(data)
+    const drivingLicense = licenseData.driving_licenses.filter(
+      (item) => item.checked
+    );
+    const data = { driving_licenses: drivingLicense };
+    console.log(data);
     const res = await updateLicenseWithId(data);
-    setShowForm(false);
-    setShowPreview(true);
+
+    if (res.type === "Success") {
+      toast.success("License Updated Successfully", {
+        duration: 10000,
+        closeButton: true,
+      });
+      setShowForm(false);
+      setShowPreview(true);
+      
+    } else {
+      toast.error("Something went wrong", {
+        duration: 10000,
+        closeButton: true,
+      });
+    }
   };
 
   const cancel = () => {
@@ -145,6 +169,19 @@ const LicenseForm = ({
     setSelectedSection(newSelectoptions);
     setShowPreview(true);
     setShowForm(false);
+  };
+
+  const handleDeleteLicense = async (id: string | number) => {
+    const res = await deleteLicenseWithId(id);
+    if (res.type === "Success") {
+      toast.success("License Deleted Successfully");
+      const newSelectoptions = selectedSection.filter(
+        (selected) => selected !== "drivinglicense"
+      );
+      setSelectedSection(newSelectoptions);
+    } else {
+      toast.error("Failed to delete License");
+    }
   };
 
   return (
@@ -157,7 +194,10 @@ const LicenseForm = ({
           </p>
           {checkboxFields.map((checkbox, index) => (
             <div key={checkbox.id} className="flex items-center">
-              <input type={"hidden"} {...register(`driving_licenses.${index}.id`)} />
+              <input
+                type={"hidden"}
+                {...register(`driving_licenses.${index}.id`)}
+              />
               <Controller
                 name={`driving_licenses.${index}.checked`}
                 control={control}
@@ -184,7 +224,7 @@ const LicenseForm = ({
                           Issued Date<span className="text-red-700">*</span>
                         </label>
                         <input
-                         type="date"
+                          type="date"
                           {...register(
                             `driving_licenses.${index}.license_issued_date`,
                             {
@@ -202,7 +242,8 @@ const LicenseForm = ({
                         <label className="block text-black font-bold text-sm head mb-2">
                           Expiry Date<span className="text-red-700">*</span>
                         </label>
-                        <input type="date"
+                        <input
+                          type="date"
                           {...register(
                             `driving_licenses.${index}.license_expiry_date`,
                             {
@@ -216,8 +257,6 @@ const LicenseForm = ({
                           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         />
                       </div>
-
-                     
                     </div>
                   </div>
                 )}
@@ -248,27 +287,35 @@ const LicenseForm = ({
           </h2>
           <ul>
             {lic.map((item, index) => (
-              <li key={index}>
-                <strong className="text-black">License:</strong>{" "}
-                <p className="text-black">{item.license_type}</p>
-                <strong className="text-black">Date Validation:</strong>{" "}
-                <p className="text-black">
-                  {" "}
-                  {item.license_issued_date} to {item.license_expiry_date}
-                </p>
-              </li>
+              <div key={item.id}>
+                <li key={index}>
+                  <strong className="text-black">License:</strong>{" "}
+                  <p className="text-black">{item.license_type}</p>
+                  <strong className="text-black">Date Validation:</strong>{" "}
+                  <p className="text-black">
+                    {" "}
+                    {item.license_issued_date} to {item.license_expiry_date}
+                  </p>
+                </li>
+                <div className="flex mx-6 my-4">
+                  <button
+                    onClick={() => setShowForm(true)}
+                    type="button"
+                    className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    className="w-24 items-center capitalize bg-red-600 hover:bg-red-500 text-white p-2 mx-10	font-bold rounded-md"
+                    onClick={() => handleDeleteLicense(item.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
             ))}
           </ul>
-
-          <div className="flex mx-6">
-            <button
-              onClick={() => setShowForm(true)}
-              type="button"
-              className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
-            >
-              Edit
-            </button>
-          </div>
         </div>
       )}
     </div>

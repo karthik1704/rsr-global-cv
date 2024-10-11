@@ -18,6 +18,7 @@ import License from "./forms/license";
 
 import { toast } from "sonner";
 import { ResumeType } from "./typings";
+import { deleteOthers } from "../action";
 
 type ResumeProps = {
   resume: ResumeType;
@@ -116,6 +117,24 @@ const Resume = ({ resume }: ResumeProps) => {
   };
 
   const [additionalTitle, setAdditionalTitle] = useState("");
+
+  const deleteOthersWithId = deleteOthers.bind(null, resume.id);
+
+  const deleteOther = async (id: number) => {
+    const res = await deleteOthersWithId(id);
+
+    if (res.type ==="Success") {
+      toast.success("Section Deleted Successfully", {
+        duration: 10000,
+        closeButton: true,
+      });
+    } else {
+      toast.error("Error Deleting Section", {
+        duration: 10000,
+        closeButton: true,
+      });
+    }
+  }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAdditionalTitle(event.target.value);
@@ -327,6 +346,13 @@ const Resume = ({ resume }: ResumeProps) => {
             >
               Edit
             </button>
+            <button
+                  type="button"
+                  className="w-24 items-center capitalize bg-red-600 hover:bg-red-500 text-white p-2 mx-10	font-bold rounded-md"
+                  onClick={() => deleteOther(other.id)}
+                >
+                  Delete
+                </button>
           </div>
                 </div>
               ))}

@@ -2,7 +2,8 @@ import { use, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { LanguageSkill } from "../typings";
 import { useParams } from "next/navigation";
-import { updateLanguage } from "../../action";
+import { deleteLanguage, updateLanguage } from "../../action";
+import { toast } from "sonner";
 
 type LanguageProps = {
   setData: any;
@@ -13,7 +14,7 @@ type LanguageProps = {
 };
 
 type FormValues = {
-  id?:number ;
+  id?: number;
   language: string;
 };
 
@@ -23,7 +24,6 @@ const Language = ({
   selectedSection,
   setSelectedSection,
   setShowPreview,
-  
 }: LanguageProps) => {
   const {
     register,
@@ -43,23 +43,30 @@ const Language = ({
 
   const [show, setShowForm] = useState(true);
 
-  const {id} = useParams<{id:string}>();
+  const { id } = useParams<{ id: string }>();
 
   const updateLanguageWithId = updateLanguage.bind(null, id);
+  const deleteLanguageWithId = deleteLanguage.bind(null, id);
 
   useEffect(() => {
-    if(language?.language){
+    if (language?.language) {
       setShowForm(false);
     }
   }, [language]);
 
-  const handleForm =async (languageData:FormValues) => {
+  const handleForm = async (languageData: FormValues) => {
     console.log(languageData);
     // setData((prevState) => ({
     //   ...prevState,
     //   language: { ...languageData },
     // }));
     const res = await updateLanguageWithId(languageData);
+
+    if(res.type === "Success") {
+      toast.success("Language Updated Successfully");
+    } else {
+      toast.error("Something went wrong");
+    }
 
     setShowForm(false);
     setShowPreview(true);
@@ -74,6 +81,16 @@ const Language = ({
     setShowForm(false);
   };
 
+  const handleDeleteLanguage = async (language_id: string | number) => {
+    const res = await deleteLanguageWithId(language_id);
+
+    if (res.type === "Success") {
+      toast.success("Language Deleted Successfully");
+    } else {
+      toast.error("Failed to delete language");
+    }
+  };
+
   return (
     <div className="my-8">
       {!show && language && (
@@ -85,9 +102,7 @@ const Language = ({
           {language.language && (
             <p className="text-lg font-semibold text-gray-800">
               Languages Known :{" "}
-              <span className="font-light capitalize">
-                {language.language}
-              </span>
+              <span className="font-light capitalize">{language.language}</span>
             </p>
           )}
 
@@ -107,12 +122,13 @@ const Language = ({
             >
               Edit
             </button>
-            {/* <button
-            type="button"
-            className="w-24 bg-green-600 hover:bg-green-500 text-white p-2 font-bold rounded-md"
-        >
-            Delete
-        </button> */}
+            <button
+              type="button"
+              className="w-24 items-center capitalize bg-red-600 hover:bg-red-500 text-white p-2 mx-10	font-bold rounded-md"
+              onClick={() => handleDeleteLanguage(language.id)}
+            >
+              Delete
+            </button>
           </div>
         </div>
       )}
@@ -130,7 +146,7 @@ const Language = ({
                   Languages Known
                   <span className="text-red-700">*</span>
                 </label>
-                <input type="hidden" {...register('id')} />
+                <input type="hidden" {...register("id")} />
                 <input
                   className="pl-4 block w-full capitalize rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   {...register("language", {

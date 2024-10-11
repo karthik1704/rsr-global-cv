@@ -1,3 +1,5 @@
+import { uploadImage } from "@/app/(root)/resume/action";
+import { useParams } from "next/navigation";
 import React, { useState } from "react";
 
 const DEFAULT_IMAGE_URL = "https://via.placeholder.com/256?text=Profile+Image";
@@ -5,13 +7,22 @@ const MAX_SIZE_MB = 2;
 const MAX_WIDTH = 800;
 const MAX_HEIGHT = 800;
 
+type Props = {
+  onImageChange: (image: string) => void;
+};
 
-const ImageUploader = ({onImageChange}) => {
+const ImageUploader = ({onImageChange}:Props) => {
   const [image, setImage] = useState(DEFAULT_IMAGE_URL);
   const [errorMessage, setErrorMessage]=useState('');
+  const {id} = useParams<{id:string}>();
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  const uploadImageWithId = uploadImage.bind(null, id);
+  
+  interface HandleImageChangeEvent extends React.ChangeEvent<HTMLInputElement> {}
+  
+  const handleImageChange = async (e: HandleImageChangeEvent) => {
+    e.preventDefault();
+    const file = e.target.files?.[0];
     if (file) {
       if (file.size > MAX_SIZE_MB * 1024 * 1024) {
         setErrorMessage(`File size exceeds ${MAX_SIZE_MB} MB`);
@@ -20,9 +31,9 @@ const ImageUploader = ({onImageChange}) => {
 
       const reader = new FileReader();
       const img = new Image();
-      
+
       reader.onloadend = () => {
-        img.src = reader.result; 
+        img.src = reader.result as string;
       };
 
       img.onload = () => {
@@ -32,10 +43,23 @@ const ImageUploader = ({onImageChange}) => {
           return;
         }
         setErrorMessage('');
-        setImage(reader.result);
-        onImageChange(reader.result);
+        setImage(reader.result as string);
+        onImageChange(reader.result as string);
       };
+      const formData = new FormData();
+      formData.append('file', file);
+  
 
+      const res = await fetch(`/api/image-upload?id=${id}`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data =   await res.json();
+      console.log(data)
+
+
+      
       reader.readAsDataURL(file);
     }
   };
