@@ -11,6 +11,7 @@ import { toast } from "sonner";
 
 type Resume = {
   resume_title: string;
+  resume_image:string;
   first_name: string;
   last_name: string;
   date_of_birth: string | Date; // Format: YYYY-MM-DD
@@ -156,10 +157,10 @@ const PersonalInformation = ({
           <p className="text-black text-2xl font-bold uppercase">
             Personal Information
           </p>
-          {!!uploadedImage && (
+          {!!personalInformation.resume_image && (
             <div>
               <Image
-                src={uploadedImage}
+                src={`http://localhost:8000${personalInformation.resume_image}`}
                 height={150}
                 width={150}
                 alt=""

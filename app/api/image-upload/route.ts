@@ -8,6 +8,9 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData()
     const file = formData.get('file') as File;
 
+    const newData = new FormData();
+    newData.append('file', file);
+
     if (!file) {
         return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
       }
@@ -17,13 +20,13 @@ export async function POST(request: NextRequest) {
     const response = await fetch(`${SERVER_API_URL}/resumes/upload-image/${id}/`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            
             Authorization: `Bearer ${access_token?.value}`,
         },
-        body: formData
+        body: newData,
     });
 
-   if(response.status===222){
+   if(response.status===422){
     const error = await response.json();
     console.error('Error details:', error.detail);
     console.error('Error details:', error.detail[0].loc);
