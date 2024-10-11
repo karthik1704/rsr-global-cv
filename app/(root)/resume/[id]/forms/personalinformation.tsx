@@ -8,6 +8,7 @@ import { dateFormatter } from "@/lib/utils";
 import DatePicker from "../datepicker";
 import { updateResume, uploadImage } from "../../action";
 import { toast } from "sonner";
+import { SERVER_IMAGE_URL } from "@/app/constants";
 
 type Resume = {
   resume_title: string;
@@ -160,7 +161,7 @@ const PersonalInformation = ({
           {!!personalInformation.resume_image && (
             <div>
               <Image
-                src={`http://localhost:8000${personalInformation.resume_image}`}
+                src={`${SERVER_IMAGE_URL}${personalInformation.resume_image}`}
                 height={150}
                 width={150}
                 alt=""
