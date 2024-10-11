@@ -500,6 +500,7 @@ export async function deleteAdditionalInfo(id:number|string, additional_info_id:
 
 export async function deleteOthers(id:number|string, others_id: number|string) {
   const access_token = cookies().get("access");
+  console.log("from _others", access_token);
   revalidateTag("Resume");
   revalidatePath(`/resume/${id}`);
   const res = await fetch(`${SERVER_API_URL}/resumes/${id}/others/${others_id}/`, {
@@ -509,6 +510,8 @@ export async function deleteOthers(id:number|string, others_id: number|string) {
       Authorization: `Bearer ${access_token?.value}`,
     },
   });
+
+  console.log(res.status);
 
   if (res.status === 401) redirect("/login");
 

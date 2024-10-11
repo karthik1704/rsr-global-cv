@@ -146,7 +146,7 @@ const LicenseForm = ({
     console.log(data);
     const res = await updateLicenseWithId(data);
 
-    if (res.type === "Success") {
+    if (res?.type === "Success") {
       toast.success("License Updated Successfully", {
         duration: 10000,
         closeButton: true,
@@ -173,7 +173,7 @@ const LicenseForm = ({
 
   const handleDeleteLicense = async (id: string | number) => {
     const res = await deleteLicenseWithId(id);
-    if (res.type === "Success") {
+    if (res?.type === "Success") {
       toast.success("License Deleted Successfully");
       const newSelectoptions = selectedSection.filter(
         (selected) => selected !== "drivinglicense"

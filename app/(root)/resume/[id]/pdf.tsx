@@ -14,6 +14,7 @@ import { dateFormatter } from "@/lib/utils";
 
 import resumeConfig from "../../edit-me/resume-config";
 import { ResumeType } from "./typings";
+import { SERVER_IMAGE_URL } from "@/app/constants";
 
 
 const theme = resumeConfig.pdfTheme;
@@ -268,7 +269,8 @@ const PDF = ({ data }: {data:ResumeType}) => {
             <Text>QATAR AIRWAYS GROUP</Text> */}
             
               <Image
-                src={data.resume_image}
+                src={`${SERVER_IMAGE_URL}${data.resume_image}`}
+                
                 style={{
                   borderRadius: "50",
                   width: "auto",

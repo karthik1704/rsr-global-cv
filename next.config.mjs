@@ -11,8 +11,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'api.rsrglobalresumebuilder.com',
-        pathname: 'static/*',
-      },
+        pathname: '/static/**',      },
     ],
   },
   eslint: {

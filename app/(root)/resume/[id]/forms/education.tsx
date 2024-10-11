@@ -90,7 +90,7 @@ const Education = ({
     // educationData.resume_title = education.resume_title;
     const res = await updateEducationWithId(educationData);
 
-    if(res.type==="Success"){ 
+    if(res?.type==="Success"){ 
       toast.success("Education Updated Successfully", {
         duration: 10000,
         closeButton: true,
@@ -158,7 +158,7 @@ const Education = ({
 
   const handleDeleteEducation = async (edu_id: number) => {
     const res = await deleteEducationWithId(edu_id);
-    if(res.type==="Success"){
+    if(res?.type==="Success"){
       toast.success("Education Deleted Successfully", {
         duration: 10000,
         closeButton: true,
