@@ -127,7 +127,7 @@ export async function updateWorkExperience(id:number|string,formData: any) {
 
   if (res.status === 401) redirect("/login");
 
-  if (res.status !== 201) {
+  if (res.status !== 200) {
     const error = await res.json();
     return {
       fieldErrors: null,
@@ -167,7 +167,7 @@ export async function updateEducation(id:number|string, formData: any) {
 
   if (res.status === 401) redirect("/login");
 
-  if (res.status !== 201) {
+  if (res.status !== 200) {
     const error = await res.json();
     return {
       fieldErrors: null,
@@ -209,7 +209,7 @@ export async function updateLanguage(id:number|string,formData: any) {
 
   if (res.status === 401) redirect("/login");
 
-  if (res.status !== 201) {
+  if (res.status !== 200) {
     const error = await res.json();
     return {
       fieldErrors: null,
@@ -249,7 +249,7 @@ export async function updateAdditionalInfo(id:number|string,formData: any) {
 
   if (res.status === 401) redirect("/login");
 
-  if (res.status !== 201) {
+  if (res.status !== 200) {
     const error = await res.json();
     return {
       fieldErrors: null,
@@ -290,7 +290,7 @@ export async function updateOthers(id:number|string,formData: any) {
 
   if (res.status === 401) redirect("/login");
 
-  if (res.status !== 201) {
+  if (res.status !== 200) {
     const error = await res.json();
     return {
       fieldErrors: null,
@@ -302,7 +302,7 @@ export async function updateOthers(id:number|string,formData: any) {
   return {
     fieldErrors: null,
     type: "Success",
-    message: "Additional Information Added Successfully",
+    message: "Others Added Successfully",
   };
 }
 
@@ -334,7 +334,7 @@ export async function updateLicense(id:number|string,formData: any) {
 
   if (res.status === 401) redirect("/login");
 
-  if (res.status !== 201) {
+  if (res.status !== 200) {
     const error = await res.json();
     return {
       fieldErrors: null,

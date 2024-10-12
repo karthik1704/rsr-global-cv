@@ -8,6 +8,7 @@ const nextConfig = {
         port: '8000',
         pathname: '**/*',
       },
+    
       {
         protocol: 'https',
         hostname: 'api.rsrglobalresumebuilder.com',

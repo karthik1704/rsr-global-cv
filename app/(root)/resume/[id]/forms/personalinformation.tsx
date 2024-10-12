@@ -243,7 +243,7 @@ const PersonalInformation = ({
             profile
           </p> */}
 
-          <ImageUploader onImageChange={handleImageChange} />
+          <ImageUploader onImageChange={handleImageChange} image_url={personalInformation.resume_image} />
 
           <div className="mb-4.5 flex flex-col lg:flex-row mt-2">
             <div className="w-full lg:w-1/2 md:px-6 md:w-[504px]">
