@@ -216,7 +216,7 @@ const WorkExperience = ({
     // }));
     // workexpData.resume_title = workExperience.resume_title;
     const res = await updateWorkExperienceWithId(workexpData);
-    if(res.type==="Success"){
+    if(res?.type==="Success"){
       toast.success("Work Experience added successfully",{
         duration: 10000,
         closeButton: true,
@@ -236,7 +236,7 @@ const WorkExperience = ({
   const deleteExperience = async (id: number) => {
     const res = await deleteWorkExperienceWithId(id);
 
-    if(res.type==="Success"){
+    if(res?.type==="Success"){
       toast.success("Work Experience deleted successfully", {
         duration: 10000,
         closeButton: true,

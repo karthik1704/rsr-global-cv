@@ -100,7 +100,7 @@ const Training = ({
     // }));
     // trainData.resume_title = training.resume_title;
     const res = await updateAdditionalWithId(trainData)
-    if(res){
+    if(res?.type==="Success"){
       toast.success("Training & Awards added successfully", {
         duration: 10000,
         closeButton: true,
@@ -139,7 +139,7 @@ const Training = ({
   const handleDeleteTraining = async (training_id: string | number) => {
     const res = await deleteTrainingWithId(training_id);
 
-    if (res) {
+    if (res?.type==="Success") {
       toast.success("Training & Awards Deleted Successfully",{
         duration: 10000,
         closeButton: true,

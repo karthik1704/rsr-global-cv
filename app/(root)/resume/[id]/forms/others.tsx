@@ -104,7 +104,7 @@ const Others = ({
 
     const res = await updateOthersWithId(othersData);
 
-    if (res.type === "Success") {
+    if (res?.type === "Success") {
       toast.success("Others added successfully", {
         duration: 10000,
         closeButton: true,

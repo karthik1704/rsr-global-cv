@@ -8,9 +8,11 @@ import { dateFormatter } from "@/lib/utils";
 import DatePicker from "../datepicker";
 import { updateResume, uploadImage } from "../../action";
 import { toast } from "sonner";
+import { SERVER_IMAGE_URL } from "@/app/constants";
 
 type Resume = {
   resume_title: string;
+  resume_image:string;
   first_name: string;
   last_name: string;
   date_of_birth: string | Date; // Format: YYYY-MM-DD
@@ -157,6 +159,7 @@ const PersonalInformation = ({
           <p className="text-black text-2xl font-bold uppercase">
             Personal Information
           </p>
+
           <button
               onClick={() => setShowForm(true)}
               type="button"
@@ -165,10 +168,12 @@ const PersonalInformation = ({
               Edit
             </button>
           </div>
-          {!!uploadedImage && (
+
+          {!!personalInformation.resume_image && (
+
             <div>
               <Image
-                src={uploadedImage}
+                src={`${SERVER_IMAGE_URL}${personalInformation.resume_image}`}
                 height={150}
                 width={150}
                 alt=""
@@ -248,7 +253,7 @@ const PersonalInformation = ({
             profile
           </p> */}
 
-          <ImageUploader onImageChange={handleImageChange} />
+          <ImageUploader onImageChange={handleImageChange} image_url={personalInformation.resume_image} />
 
           <div className="mb-4.5 flex flex-col lg:flex-row mt-2">
             <div className="w-full lg:w-1/2 md:px-6 md:w-[504px]">

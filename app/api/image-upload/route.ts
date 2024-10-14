@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {SERVER_API_URL} from '@/app/constants';
 import { cookies } from "next/headers";
+import { revalidateTag } from 'next/cache';
 
 export async function POST(request: NextRequest) {
     const { searchParams } = new URL(request.url);
@@ -8,6 +9,9 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData()
     const file = formData.get('file') as File;
 
+    const newData = new FormData();
+    newData.append('file', file);
+    
     if (!file) {
         return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
       }
@@ -17,20 +21,24 @@ export async function POST(request: NextRequest) {
     const response = await fetch(`${SERVER_API_URL}/resumes/upload-image/${id}/`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            
             Authorization: `Bearer ${access_token?.value}`,
         },
-        body: formData
+        body: newData,
     });
+    revalidateTag("Resume");
 
-   if(response.status===222){
+   if(response.status===422){
     const error = await response.json();
     console.error('Error details:', error.detail);
     console.error('Error details:', error.detail[0].loc);
    }
 
     const data = await response.json();
+
     console.log(data)
+
+
     if (response.ok) {
         return NextResponse.json(data);
     } else {

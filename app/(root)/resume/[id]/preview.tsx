@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { dateFormatter } from "@/lib/utils";
 import { ResumeType } from "./typings";
-import { SERVER_API_URL } from "@/app/constants";
+import { SERVER_API_URL, SERVER_IMAGE_URL } from "@/app/constants";
 
 type PreviewProps = {
   data: ResumeType;
@@ -26,7 +26,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
           {!!data.resume_image && (
             <div className="mx-10 my-5">
               <Image
-                src={`${SERVER_API_URL}/static/${data.resume_image}`}
+                src={`${SERVER_IMAGE_URL}${data.resume_image}`}
                 height={150}
                 width={150}
                 alt=""

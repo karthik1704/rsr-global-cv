@@ -123,7 +123,7 @@ const Resume = ({ resume }: ResumeProps) => {
   const deleteOther = async (id: number) => {
     const res = await deleteOthersWithId(id);
 
-    if (res.type ==="Success") {
+    if (res?.type ==="Success") {
       toast.success("Section Deleted Successfully", {
         duration: 10000,
         closeButton: true,

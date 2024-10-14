@@ -62,7 +62,7 @@ const Language = ({
     // }));
     const res = await updateLanguageWithId(languageData);
 
-    if(res.type === "Success") {
+    if(res?.type === "Success") {
       toast.success("Language Updated Successfully");
     } else {
       toast.error("Something went wrong");
@@ -84,7 +84,7 @@ const Language = ({
   const handleDeleteLanguage = async (language_id: string | number) => {
     const res = await deleteLanguageWithId(language_id);
 
-    if (res.type === "Success") {
+    if (res?.type === "Success") {
       toast.success("Language Deleted Successfully");
     } else {
       toast.error("Failed to delete language");
