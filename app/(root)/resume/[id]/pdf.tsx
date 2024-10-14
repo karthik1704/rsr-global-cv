@@ -44,12 +44,15 @@ const hyphenationCallback = (word: string) => {
 
 Font.registerHyphenationCallback(hyphenationCallback);
 
+const pageValue: number = 2;
 
 const styles = StyleSheet.create({
   page: {
     // flexDirection: "row",
     fontWeight: "extrabold",
     fontFamily: 'Carlito',
+    paddingTop: pageValue !==1 ? 35 :0,
+    paddingBottom: 65,
   },
 
   photoContainer: {
@@ -109,6 +112,7 @@ paddingTop:'10px',
   text2: {
     fontSize: 10,
     margin: 1,
+    fontWeight:'normal',
   },
   text3: {
     fontSize: 12,
@@ -137,6 +141,7 @@ paddingTop:'10px',
     fontSize: 10,
     minWidth: 30,
     paddingLeft:15,
+    fontWeight:'normal',
   },
   work: {
     padding: 20,
@@ -171,6 +176,7 @@ paddingTop:'10px',
     fontSize: 10,
     marginBottom: 7,
     marginTop: 5,
+    fontWeight:'normal',
   },
   subheading: {
     fontSize: 12,
@@ -186,6 +192,7 @@ paddingTop:'10px',
     alignItems: "center",
     fontSize: 11,
     paddingLeft: 3,
+    fontWeight:'normal',
   },
 
   link: {
@@ -212,12 +219,12 @@ paddingTop:'10px',
   },
   listItemDate: {
     fontSize: 10,
-    fontWeight: "bold",
+    fontWeight: "normal",
   },
   listItemTitle: {
     fontSize: 10,
     // marginLeft: 10,
-    fontWeight: "bold",
+    fontWeight: "normal",
     textTransform:'capitalize',
   },
   headings: {
@@ -382,7 +389,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
 
               <View style={{ flexDirection: "row", gap: "7" }}>
                 <Text style={styles.text1}>Address:</Text>
-                <Text style={styles.text6}>
+                <Text style={styles.text2}>
                   {data.address_line_1 &&
                   data.address_line_2 &&
                   data.city &&
@@ -504,7 +511,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                         fontWeight: "extrabold",
                       }}
                     >
-                      Department : {exp.employer} | Address : {exp.location}{" "}
+                      Department : <Text style={styles.text2}>{exp.employer}</Text> | Address : <Text style={styles.text2}>{exp.location}</Text>{" "}
                       | Website :
                       <Text style={styles.link}>{exp.website}</Text>
                     </Text>
@@ -607,7 +614,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                 >
                   Address :
                 </Text>
-                <Text style={{ fontSize: 10, marginTop: 10 }}>
+                <Text style={{ fontSize: 10, marginTop: 10,fontWeight:'normal' }}>
                   {educ.city}, {educ.country}
                 </Text>
               </View>
@@ -638,7 +645,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                 }}
               >
                 <Text style={{ fontSize: 10 }}>Languages Known :</Text>
-                <Text style={{ fontSize: 10, fontWeight: "extrabold",textTransform:'capitalize' }}>
+                <Text style={{ fontSize: 10, fontWeight: "normal",textTransform:'capitalize' }}>
                   {data.language_skills.language}
                 </Text>
               </View>
@@ -779,7 +786,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                   marginTop: 10,
                 }}
               >
-                License
+                LICENSE
               </Text>
               <View style={styles.line1} />
               {data.driving_license.map((li, index) => (
@@ -796,7 +803,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                       {/* <Text style={styles.listItemDate}>{oth.mainTitle}</Text> */}
                     </Text>
                     <Text style={styles.listItemDate}>
-                      {li.license_issued_date} - {li.license_expiry_date}
+                      {dateFormatter(li.license_issued_date)} - {dateFormatter(li.license_expiry_date)}
                     </Text>
                   </View>
                 </View>

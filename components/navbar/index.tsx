@@ -92,7 +92,13 @@ const Navbar = async () => {
                   {" "}
                   <Avatar className="mr-5">
                     {/* <AvatarImage src="" alt="@shadcn" /> */}
-                    <AvatarFallback>{`${user.first_name[0].toUpperCase()}${user.last_name[0].toUpperCase()}`}</AvatarFallback>
+                    {/* <AvatarFallback>{`${user.first_name[0].toUpperCase()}${user.last_name[0].toUpperCase()}`}</AvatarFallback> */}
+                    <AvatarFallback>
+  {user && user.first_name && user.last_name
+    ? `${user.first_name[0]?.toUpperCase() || ""}${user.last_name[0]?.toUpperCase() || ""}`
+    : "?"}
+</AvatarFallback>
+
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>

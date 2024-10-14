@@ -180,56 +180,60 @@ const Education = ({
               className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md"
               key={edu.id}
             >
+              <div className="flex justify-between border-b-2">
               <p className="text-black text-2xl font-bold uppercase">
                 Education and Training
               </p>
-              <p className="text-lg font-semibold text-gray-800">
-                Qualification :{" "}
-                <span className="font-light capitalize">
-                  {edu.title_of_qualification}
-                </span>
-              </p>
-              <p className="text-lg font-semibold text-gray-800">
-                Organisation :{" "}
-                <span className="font-light capitalize">
-                  {edu.organization_name}
-                </span>
-              </p>
-              <p className="text-lg font-semibold text-gray-800">
-                From :{" "}
-                <span className="font-light">
-                  {dateFormatter(edu.from_date)}
-                </span>
-              </p>
-              <p className="text-lg font-semibold text-gray-800">
-                To :{" "}
-                <span className="font-light">
-                  {dateFormatter(edu.to_date)}
-                </span>
-              </p>
-              <p className="text-lg font-semibold text-gray-800">
-                City :{" "}
-                <span className="font-light capitalize">
-                  {edu.city}
-                </span>
-              </p>
-              <p className="text-lg font-semibold text-gray-800">
-                Country :{" "}
-                <span className="font-light capitalize">
-                  {edu.country}
-                </span>
-              </p>
-              <div className="flex mx-6">
-                <button
+              <button
                   onClick={() => setShowForm(true)}
                   type="button"
-                  className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
+                  className="w-24 items-center capitalize bg-green-600 text-white hover:text-slate-100 hover:bg-green-700 p-2 font-bold rounded-md"
                 >
                   Edit
                 </button>
+              </div>
+              <div className="grid grid-cols-2 gap-3 w-10/12">
+              <p className="text-lg font-semibold text-gray-800">
+                Qualification :{" "}
+              </p>
+              <p className="font-light capitalize">
+                  {edu.title_of_qualification}
+                </p>
+              <p className="text-lg font-semibold text-gray-800">
+                Organisation :{" "}
+              </p>
+              <p className="font-light capitalize">
+                  {edu.organization_name}
+                </p>
+              <p className="text-lg font-semibold text-gray-800">
+                From :{" "}
+              </p>
+              <p className="font-light">
+                  {dateFormatter(edu.from_date)}
+                </p>
+              <p className="text-lg font-semibold text-gray-800">
+                To :{" "}
+              </p>
+              <p className="font-light">
+                  {dateFormatter(edu.to_date)}
+                </p>
+              <p className="text-lg font-semibold text-gray-800">
+                City :{" "}
+              </p>
+              <p className="font-light capitalize">
+                  {edu.city}
+                </p>
+              <p className="text-lg font-semibold text-gray-800">
+                Country :{" "}
+              </p>
+              <p className="font-light capitalize">
+                  {edu.country}
+                </p>
+              </div>
+              <div>
                 <button
               type="button"
-              className="w-24 items-center capitalize bg-red-600 hover:bg-red-500 text-white p-2 mx-10	font-bold rounded-md"
+              className="w-24 items-center capitalize bg-red-600 hover:bg-red-700 text-white p-2 mx-5	font-bold rounded-md"
               onClick={() => handleDeleteEducation(edu.id)}
             >
               Delete
@@ -422,7 +426,7 @@ const Education = ({
             <div className="flex mx-6">
               <button
                 type="button"
-                className="w-24 items-center capitalize bg-white text-black hover:bg-green-600 hover:text-slate-100 p-2 font-bold rounded-md"
+                className="w-24 items-center capitalize bg-white border border-gray-300 text-black hover:bg-green-600 hover:text-slate-100 p-2 font-bold rounded-md"
                 onClick={cancel}
               >
                 Cancel

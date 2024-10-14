@@ -319,36 +319,38 @@ const Resume = ({ resume }: ResumeProps) => {
                   key={other.id}
                   className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md my-8"
                 >
+                  <div className="flex justify-between border-b-2">
                   <p className="text-black text-2xl font-bold uppercase">
                     {other.sectiontitle}
                   </p>
-
-                  <p className="text-lg font-semibold text-gray-800">
-                    Title :{" "}
-                    <span className="font-light capitalize">{other.title}</span>
-                  </p>
-
-                  <p className="text-lg font-semibold text-gray-800">
-                    Description :{" "}
-                    <span className="font-light capitalize">
-                      {other.description}
-                    </span>
-                  </p>
-
-                  <div className="flex gap-4">
-            <button
+                  <button
               onClick={() => 
                 {setAdditionalTitle(other.sectiontitle)
                 setOtherId(other.id)
                 }}
               type="button"
-              className="w-24 bg-white text-black hover:text-white hover:bg-green-600 p-2 font-bold rounded-md border border-gray-300"
+              className="w-24 bg-green-600 text-white hover:text-white hover:bg-green-700 p-2 font-bold rounded-md border border-gray-300"
             >
               Edit
             </button>
+                  </div>
+<div className="grid grid-cols-2 gap-3 w-10/12">
+                  <p className="text-lg font-semibold text-gray-800">
+                    Title :{" "}
+                  </p>
+                  <p className="font-light capitalize">{other.title}</p>
+
+                  <p className="text-lg font-semibold text-gray-800">
+                    Description :{" "}
+                  </p>
+                  <p className="font-light capitalize">
+                      {other.description}
+                    </p>
+                  </div>
+                  <div>
             <button
                   type="button"
-                  className="w-24 items-center capitalize bg-red-600 hover:bg-red-500 text-white p-2 mx-10	font-bold rounded-md"
+                  className="w-24 items-center capitalize bg-red-600 hover:bg-red-700 text-white p-2 mx-5	font-bold rounded-md"
                   onClick={() => deleteOther(other.id)}
                 >
                   Delete
@@ -375,7 +377,7 @@ const Resume = ({ resume }: ResumeProps) => {
           <div className="flex mx-6 my-10">
             <button
               type="button"
-              className="w-24 items-center capitalize bg-white hover:bg-green-600 text-black p-2 hover:text-slate-100 font-bold rounded-md"
+              className="w-24 items-center capitalize bg-white border border-gray-300 hover:bg-green-600 text-black p-2 hover:text-slate-100 font-bold rounded-md"
               onClick={handleHome}
             >
               Exit
@@ -403,7 +405,7 @@ const Resume = ({ resume }: ResumeProps) => {
             <div className="flex py-4 px-8">
               <button
                 type="button"
-                className="w-16 items-center capitalize bg-white hover:bg-green-600 text-black hover:text-slate-100 p-2 font-bold rounded-md"
+                className="w-16 items-center capitalize bg-white border border-gray-300 hover:bg-green-600 text-black hover:text-slate-100 p-2 font-bold rounded-md"
                 onClick={handleEdit}
                 // onClick={() => setShowForm(true)}
               >
@@ -454,20 +456,13 @@ const Resume = ({ resume }: ResumeProps) => {
           <div className="flex justify-between py-4 px-8">
             <button
                   type="button"
-                  className="w-16 items-center capitalize bg-white hover:bg-green-600 text-black hover:text-slate-100 p-2 font-bold rounded-md"
+                  className="w-16 items-center capitalize bg-white border border-gray-300 hover:bg-green-600 text-black hover:text-slate-100 p-2 font-bold rounded-md"
                   onClick={handlePrevious}
                 >
                   Back
                 </button>
-            {/* <button
-                  type="button"
-                  className="w-16 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10 font-bold rounded-md"
-                  onClick={handleNext}
-                >
-                  next
-                </button> */}
             <Link
-              href="/profile"
+              href="/resume"
               className="w-28 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10 font-bold rounded-md inline-flex justify-center"
             >
               Go To Profile

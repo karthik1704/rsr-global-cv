@@ -158,50 +158,54 @@ const Training = ({
         <div className="space-y-4 bg-gray-100 rounded-lg shadow-md">
           {trainings.map((train, index) => (
             <div
-              className="p-6 "
+              className="p-6 space-y-4"
               key={train.id}
             >
+              <div className="flex justify-between border-b-2">
               <p className="text-black text-2xl font-bold uppercase">
                 Training & Awards
               </p>
-              {/* <p className="text-lg font-semibold text-gray-800">Hobbies : <span className="font-light">{train.Hobbies}</span></p> */}
-              <p className="text-lg font-semibold text-gray-800">
-                Title of Award :{" "}
-                <span className="font-light capitalize">{train.title}</span>
-              </p>
-              <p className="text-lg font-semibold text-gray-800">
-                Awarding Institution :{" "}
-                <span className="font-light capitalize">{train.awarding_institute}</span>
-              </p>
-              <p className="text-lg font-semibold text-gray-800">
-                From :{" "}
-                <span className="font-light">
-                  {dateFormatter(train.from_date)}
-                </span>
-              </p>
-              <p className="text-lg font-semibold text-gray-800">
-                To :{" "}
-                <span className="font-light">
-                  {dateFormatter(train.to_date)}
-                </span>
-              </p>
-              <p className="text-lg font-semibold text-gray-800">
-                Location :{" "}
-                <span className="font-light capitalize">
-                  {train.location}
-                </span>
-              </p>
-              <div className="flex mx-6">
-                <button
+              <button
                   onClick={() => setShowForm(true)}
                   type="button"
-                  className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
+                  className="w-24 items-center capitalize bg-green-600 text-white hover:text-slate-100 hover:bg-green-700 p-2 font-bold rounded-md"
                 >
                   Edit
                 </button>
+              </div>
+              {/* <p className="text-lg font-semibold text-gray-800">Hobbies : <span className="font-light">{train.Hobbies}</span></p> */}
+              <div className="grid grid-cols-2 gap-3 w-10/12">
+              <p className="text-lg font-semibold text-gray-800">
+                Title of Award :{" "}
+              </p>
+              <p className="font-light capitalize">{train.title}</p>
+              <p className="text-lg font-semibold text-gray-800">
+                Awarding Institution :{" "}
+              </p>
+              <p className="font-light capitalize">{train.awarding_institute}</p>
+              <p className="text-lg font-semibold text-gray-800">
+                From :{" "}
+              </p>
+              <p className="font-light">
+                  {dateFormatter(train.from_date)}
+                </p>
+              <p className="text-lg font-semibold text-gray-800">
+                To :{" "}
+              </p>
+              <p className="font-light">
+                  {dateFormatter(train.to_date)}
+                </p>
+              <p className="text-lg font-semibold text-gray-800">
+                Location :{" "}
+              </p>
+              <p className="font-light capitalize">
+                  {train.location}
+                </p>
+              </div>
+              <div>
                 <button
                   type="button"
-                  className="w-24 items-center capitalize bg-red-600 hover:bg-red-500 text-white p-2 mx-10	font-bold rounded-md"
+                  className="w-24 items-center capitalize bg-red-600 hover:bg-red-700 text-white p-2 mx-5	font-bold rounded-md"
                   onClick={() => handleDeleteTraining(train.id)}
                 >
                   Delete
@@ -308,7 +312,7 @@ const Training = ({
                     </div>
 
                     <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-                      <div className="mb-4  w-2/4 px-6  ">
+                      <div className="mb-4  w-full">
                       <div className="flex flex-col lg:flex-col xl:flex-row gap-4 md:flex-col md:gap-6 lg:mx-auto xl:mx-auto">
                         <div className="mb-4 w-full md:px-6">
                           <label className="block text-black font-bold text-sm head mb-2">
@@ -324,7 +328,7 @@ const Training = ({
                             })}
                             min="1980-01-01"
                             max={getCurrentDate()}
-                            className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                            className="pl-4 block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                             type="Date"
                             onChange={(e)=>setFromDate(e.target.value)}
                           />
@@ -338,7 +342,7 @@ const Training = ({
                       </div>
                     </div>
 
-                    <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
+                    <div className="mb-4 w-full md:px-6">
                       <label className="block text-black font-bold text-sm head mb-2">
                         To<span className="text-red-700">*</span>
                       </label>
@@ -352,7 +356,7 @@ const Training = ({
                         })}
                         min="1980-01-01"
                         max={getCurrentDate()}
-                        className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        className="pl-4 block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
                       />
                       {errors.training_awards?.[index]?.to_date && (
@@ -363,7 +367,7 @@ const Training = ({
                     </div>
                   </div>
 
-                  <div className="mb-4  w-2/4 px-6  ">
+                  <div className="mb-4  w-2/4 md:px-6  ">
                     <label className="block text-black font-bold text-sm head mb-2">
                       Location<span className="text-red-700">*</span>
                     </label>
@@ -403,7 +407,7 @@ const Training = ({
             <div className="flex mx-6 my-4">
               <button
                 type="button"
-                className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
+                className="w-24 items-center capitalize bg-white border border-gray-300 text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
                 onClick={cancel}
               >
                 Cancel

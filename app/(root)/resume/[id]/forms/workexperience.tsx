@@ -253,9 +253,19 @@ const WorkExperience = ({
     <div className="my-8">
       {!show && workExperience.length && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
+          <div className="flex justify-between border-b-2">
           <p className="text-black text-2xl font-bold uppercase">
             Work Experience
           </p>
+          <button
+                  onClick={() => setShowForm(true)}
+                  type="button"
+                  className="w-24 items-center capitalize bg-green-600 text-white hover:text-slate-100 hover:bg-green-700 p-2 font-bold rounded-md"
+                  // onClick={handlePrevious}
+                >
+                  Edit
+                </button>
+          </div>
           {!!data.jobappliedfor && (
             <p className="text-lg font-semibold text-gray-800">
               Job Applied :{" "}
@@ -263,58 +273,56 @@ const WorkExperience = ({
             </p>
           )}
           {workExperience.map((exp, index) => (
-            <div className="space-y-4" key={index}>
+            <div key={index}>
+              <div  className="grid grid-cols-2 gap-3 w-10/12 mb-6">
               <p className="text-lg font-semibold text-gray-800">
                 Employer :{" "}
-                <span className="font-light capitalize">{exp.employer}</span>
               </p>
+              <p className="font-light capitalize">{exp.employer}</p>
               <p className="text-lg font-semibold text-gray-800">
-                Website : <span className="font-light">{exp.website}</span>
+                Website :
               </p>
+              <p className="font-light">{exp.website}</p>
               <p className="text-lg font-semibold text-gray-800">
                 Location :{" "}
-                <span className="font-light capitalize">{exp.location}</span>
               </p>
+              <p className="font-light capitalize">{exp.location}</p>
+
               <p className="text-lg font-semibold text-gray-800">
                 Occupation:{" "}
-                <span className="font-light capitalize">{exp.occupation}</span>
               </p>
+              <p className="font-light capitalize">{exp.occupation}</p>
+
               <p className="text-lg font-semibold text-gray-800">
                 From :{" "}
-                <span className="font-light">
-                  {dateFormatter(exp.from_date)}
-                </span>
               </p>
+              <p className="font-light">
+                  {dateFormatter(exp.from_date)}
+                </p>
               <p className="text-lg font-semibold text-gray-800">
                 To :{" "}
-                {exp.to_date ? (
-                  <span className="font-light">
+              </p>
+              {exp.to_date ? (
+                  <p className="font-light">
                     {dateFormatter(exp.to_date)}
-                  </span>
+                  </p>
                 ) : (
                   "Currently working"
                 )}
-              </p>
-              <p className="text-lg font-semibold text-gray-800">
+                </div>
+              <p className="text-lg font-semibold text-gray-800 my-6">
                 About Company :{" "}
                 <span className="font-light">{exp.about_company}</span>
               </p>
               <p className="text-lg font-semibold text-gray-800">
-                work Responsibilities :{" "}
+                Work Responsibilities :{" "}
                 <span className="font-light">{exp.responsibilities}</span>
               </p>
-              <div className="flex mx-6">
-                <button
-                  onClick={() => setShowForm(true)}
-                  type="button"
-                  className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
-                  // onClick={handlePrevious}
-                >
-                  Edit
-                </button>
+              <div>
+                
                 <button
                   type="button"
-                  className="w-24 items-center capitalize bg-red-600 hover:bg-red-500 text-white p-2 mx-10	font-bold rounded-md"
+                  className="w-24 my-3 items-center capitalize bg-red-600 hover:bg-red-700 text-white p-2 mx-5	font-bold rounded-md"
                   onClick={() => deleteExperience(exp.id)}
                 >
                   Delete
@@ -486,7 +494,7 @@ const WorkExperience = ({
                         min="1980-01-01"
                         max={getCurrentDate()}
                         onChange={(e) => setFromDate(e.target.value)}
-                        className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
                       />
                       {form.formState.errors.experiences?.[index]
@@ -523,7 +531,7 @@ const WorkExperience = ({
                         })}
                         min={getMinToDate()}
                         max={getCurrentDate()}
-                        className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                        className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
                         disabled={switchStates[index]}
                       />
@@ -655,7 +663,7 @@ const WorkExperience = ({
               <div className="flex mx-6">
                 <button
                   type="button"
-                  className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
+                  className="w-24 items-center capitalize bg-white border border-gray-300 text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
                   // onClick={()=> setShowPreview(true)}
                   onClick={cancel}
                 >

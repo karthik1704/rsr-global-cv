@@ -60,6 +60,7 @@ const SignUp = () => {
                   <input
                     type="text"
                     name="first_name"
+                    placeholder="Enter Your First Name"
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
                 </div>
@@ -70,6 +71,7 @@ const SignUp = () => {
                   <input
                     type="text"
                     name="last_name"
+                    placeholder="Enter Your Last Name"
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
                 </div>
@@ -83,6 +85,7 @@ const SignUp = () => {
                   <input
                     type="text"
                     name="phone"
+                    placeholder="Enter Your Phone Number"
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
                 </div>
@@ -93,6 +96,7 @@ const SignUp = () => {
                   <input
                     type="email"
                     name="email"
+                    placeholder="Enter Your Email-ID"
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
                 </div>
@@ -106,6 +110,7 @@ const SignUp = () => {
                   <input
                     type="password"
                     name="password"
+                    placeholder="Enter Password"
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
                 </div>
@@ -116,6 +121,7 @@ const SignUp = () => {
                   <input
                     type="password"
                     name="password2"
+                    placeholder="Enter Confirm Password"
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
                 </div>
@@ -140,7 +146,7 @@ const SignUp = () => {
                 Already having an account?{" "}
                 <a
                   href="/login"
-                  className=" font-medium text-blue-500 hover:text-blue-700"
+                  className=" font-medium text-green-700 hover:text-green-600"
                 >
                   Login
                 </a>
