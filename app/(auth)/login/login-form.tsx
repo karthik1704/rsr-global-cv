@@ -6,6 +6,7 @@ import { signinJwt } from "./actions";
 import { useEffect } from "react";
 import { useFormState } from "react-dom";
 import img from "@/public/images/rsr_logo-1.png";
+import SubmitButton from "@/components/submit-button/submit-button";
 
 const initalState = {
   message: null,
@@ -36,12 +37,13 @@ const LoginForm = () => {
           <form action={formAction}>
             <div className="mb-4 mx:4 md:mx-8 lg:mx-12">
               <label className="block text-gray-100 font-bold">
-                Enter your e-mail address
+                Email-ID
               </label>
               <div className="relative">
                 <input
                   type="text"
                   name="username"
+                  placeholder="Enter Your E-mail ID"
                   className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                 />
               </div>
@@ -51,12 +53,13 @@ const LoginForm = () => {
             </div>
             <div className="mb-4 mx:4 md:mx-8 lg:mx-12">
               <label className="block text-gray-100 font-bold">
-                Enter your password
+                Password
               </label>
               <div className="relative">
                 <input
                   type="password"
                   name="password"
+                  placeholder="Enter Your Password"
                   className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                 />
               </div>
@@ -64,30 +67,9 @@ const LoginForm = () => {
                 <p className="text-red-500">{state?.fieldErrors?.password}</p>
               )}
             </div>
-            <div className="flex justify-center">
-              {/* <Link
-            href="/signup"
-            className="text-green-600 hover:text-green-500 underline text-sm mx-12 mb-6 font-bold"
-          >
-            Create an account
-          </Link> */}
-              <button
-                type="submit"
-                className="flex justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Login
-              </button>
-            </div>
-
-            <div className="flex ml-64">
-              {/* <label>
-        <input
-          type="checkbox"
-        />
-        Remember Me
-      </label> */}
-              {/* <h1>forgot Password?</h1> */}
-            </div>
+            <div className="ml-44 flex items-center justify-center w-20">
+  <SubmitButton name='Login' />
+</div>
           </form>
         </div>
 
@@ -95,7 +77,7 @@ const LoginForm = () => {
           <div className="flex flex-col justify-center items-center py-16">
             <Image src={img} alt="logo"></Image>
             <h1 className="text-black text-4xl font-bold my-2">
-              Welcome to Login
+              Welcome to RSR CV Builder
             </h1>
             <p className="text-black my-2">Don&apos;t have an account?</p>
             <Link

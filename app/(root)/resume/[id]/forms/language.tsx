@@ -95,15 +95,26 @@ const Language = ({
     <div className="my-8">
       {!show && language && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
+          <div className="flex justify-between border-b-2">
           <p className="text-black text-2xl font-bold uppercase">
             Language Information
           </p>
+          <button
+              onClick={() => setShowForm(true)}
+              type="button"
+              className="w-24 bg-green-600 text-white hover:text-white hover:bg-green-700 p-2 font-bold rounded-md border border-gray-300"
+            >
+              Edit
+            </button>
+          </div>
 
           {language.language && (
+            <div className="grid grid-cols-2 gap-3 w-10/12">
             <p className="text-lg font-semibold text-gray-800">
               Languages Known :{" "}
-              <span className="font-light capitalize">{language.language}</span>
             </p>
+            <p className="font-light capitalize">{language.language}</p>
+            </div>
           )}
 
           {language.other_languages && (
@@ -114,17 +125,10 @@ const Language = ({
               </span>
             </p>
           )}
-          <div className="flex gap-4">
-            <button
-              onClick={() => setShowForm(true)}
-              type="button"
-              className="w-24 bg-white text-black hover:text-white hover:bg-green-600 p-2 font-bold rounded-md border border-gray-300"
-            >
-              Edit
-            </button>
+          <div>
             <button
               type="button"
-              className="w-24 items-center capitalize bg-red-600 hover:bg-red-500 text-white p-2 mx-10	font-bold rounded-md"
+              className="w-24 items-center capitalize bg-red-600 hover:bg-red-700 text-white p-2 mx-5	font-bold rounded-md"
               onClick={() => handleDeleteLanguage(language.id)}
             >
               Delete
@@ -192,14 +196,14 @@ const Language = ({
             <div className="flex mx-6 my-4">
               <button
                 type="button"
-                className="w-24 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 font-bold rounded-md"
+                className="w-24 items-center capitalize bg-white  border border-gray-300 hover:bg-green-600 hover:text-white text-black p-2 font-bold rounded-md"
                 onClick={cancel}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="w-16 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10	font-bold rounded-md"
+                className="w-16 items-center capitalize bg-green-600 hover:bg-green-700 text-white p-2 mx-10	font-bold rounded-md"
               >
                 Save
               </button>

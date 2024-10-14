@@ -4,6 +4,7 @@ import { DrivingLicense } from "../typings";
 import { useParams } from "next/navigation";
 import { updateLicense, deleteLicense } from "../../action";
 import { toast } from "sonner";
+import { dateFormatter, getCurrentDate } from "@/lib/utils";
 
 type Props = {
   selectedSection: string[];
@@ -266,7 +267,7 @@ const LicenseForm = ({
           <div className="flex mx-6 my-4">
             <button
               type="button"
-              className="w-24 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 font-bold rounded-md"
+              className="w-24 items-center capitalize bg-white border border-gray-300 text-black hover:bg-green-600 hover:text-white p-2 font-bold rounded-md"
               onClick={cancel}
             >
               Cancel
@@ -282,32 +283,36 @@ const LicenseForm = ({
         </form>
       ) : (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
+          <div className="flex justify-between border-b-2">
           <h2 className="text-black text-2xl font-bold uppercase">
             Driving License
           </h2>
+          <button
+                    onClick={() => setShowForm(true)}
+                    type="button"
+                    className="w-24 items-center capitalize bg-green-600 text-white hover:text-slate-100 hover:bg-green-700 p-2 font-bold rounded-md"
+                  >
+                    Edit
+                  </button>
+          </div>
           <ul>
             {lic.map((item, index) => (
               <div key={item.id}>
                 <li key={index}>
+                <div className="grid grid-cols-2 gap-3 w-10/12">
                   <strong className="text-black">License:</strong>{" "}
                   <p className="text-black">{item.license_type}</p>
-                  <strong className="text-black">Date Validation:</strong>{" "}
+                  <strong className="text-black my-3">Date Validation:</strong>{" "}
                   <p className="text-black">
                     {" "}
-                    {item.license_issued_date} to {item.license_expiry_date}
+                    {dateFormatter(item.license_issued_date)} to {dateFormatter(item.license_expiry_date)}
                   </p>
+                  </div>
                 </li>
-                <div className="flex mx-6 my-4">
-                  <button
-                    onClick={() => setShowForm(true)}
-                    type="button"
-                    className="w-24 items-center capitalize bg-white text-black hover:text-slate-100 hover:bg-green-600 p-2 font-bold rounded-md"
-                  >
-                    Edit
-                  </button>
+                <div>
                   <button
                     type="button"
-                    className="w-24 items-center capitalize bg-red-600 hover:bg-red-500 text-white p-2 mx-10	font-bold rounded-md"
+                    className="w-24 my-3 items-center capitalize bg-red-600 hover:bg-red-700 text-white p-2 mx-5	font-bold rounded-md"
                     onClick={() => handleDeleteLicense(item.id)}
                   >
                     Delete

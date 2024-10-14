@@ -113,7 +113,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
           {!!data.experiences?.length && (
             <>
-              <p className="block text-black font-extrabold text-2xl">
+              <p className="block text-black font-extrabold text-2xl uppercase">
                 Work Experience
               </p>
               <hr className="border-b-2 border-slate-500" />
@@ -181,7 +181,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
         {!!data.education.length && (
           <div className="pl-8 pr-28">
-            <p className="block text-black font-extrabold text-2xl mt-6">
+            <p className="block text-black font-extrabold text-2xl mt-6 uppercase">
               Education and Training
             </p>
             <hr className="border-b-2 border-slate-500" />
@@ -217,14 +217,14 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
         {!!data?.language_skills?.language && (
           <div className="className pl-8 pr-28">
-            <p className="block text-black font-bold text-2xl mt-6">
+            <p className="block text-black font-bold text-2xl mt-6 uppercase">
               Language Skills
             </p>
             <hr className="border-b-2 border-slate-500" />
 
-            <p className="block text-base text-black my-3">
+            <p className="block text-lg font-bold text-black my-3">
               Languages Known :{" "}
-              <span className="text-lg font-bold text-black cont capitalize">
+              <span className="text-base font-normal text-black cont capitalize">
                 {data.language_skills.language}
               </span>
             </p>
@@ -236,7 +236,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
         {!!data.training_awards.length && (
           <div className="pl-8 pr-28">
-            <p className="block text-black font-bold text-2xl mt-6">
+            <p className="block text-black font-bold text-2xl mt-6 uppercase">
               Additional Information
             </p>
             <hr className="border-b-2 border-slate-500" />
@@ -270,10 +270,10 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
                   </p>
                   <p className="text-gray-700 font-semibold text-base capitalize">
                     {" "}
-                    {train.awarding_institute} {","}
+                    {train.awarding_institute }{","} 
                   </p>
                   <p className="text-gray-700 font-semibold text-base capitalize">
-                    {train.location}
+                  {train.location}
                  
                   </p>
                 </div>
@@ -285,21 +285,21 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
         {data.others.map((newItem, index) => (
           <div key={index} className="pl-8 pr-28">
-            <p className="block text-black font-bold text-2xl mt-6">Others</p>
+            <p className="block text-black font-bold text-2xl mt-6 uppercase">Others</p>
 
             <hr className="border-b-2 border-slate-500" />
             <h4 className="text-lg font-bold text-black capitalize">
                 {newItem.sectiontitle}
               </h4>
-            <p className="block text-base text-black my-3">
+            <p className="block text-lg font-bold text-black my-3">
               Title :{" "}
-              <span className="text-lg font-bold text-black capitalize">
+              <span className="text-base font-normal text-black capitalize">
                 {newItem.sectiontitle}
               </span>
             </p>
-            <p className="block text-base text-black my-3">
+            <p className="block text-lg font-bold text-black my-3">
               Description :{" "}
-              <span className="text-lg font-bold text-black capitalize">
+              <span className="text-base font-normal text-black capitalize">
                 {newItem.description}
               </span>
             </p>
@@ -309,7 +309,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
         {!!data.driving_license.length && (
           <>
             <div className="pl-8 pr-28">
-              <p className="block text-black font-bold text-2xl mt-6 ">
+              <p className="block text-black font-bold text-2xl mt-6 uppercase">
                 Driving License
               </p>
               <hr className="border-b-2 border-slate-500" />
@@ -325,7 +325,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
                 <p className="block text-lg font-bold text-black my-3">
                   License Validation :{" "}
                   <span className="text-black text-base font-normal">
-                    {lice.license_issued_date} to {lice.license_expiry_date}
+                    {dateFormatter(lice.license_issued_date)} to {dateFormatter(lice.license_expiry_date)}
                   </span>
                 </p>
               </div>

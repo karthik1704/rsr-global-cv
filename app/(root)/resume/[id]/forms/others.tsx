@@ -228,7 +228,7 @@ const Others = ({
             <div className="flex mx-6 my-4">
               <button
                 type="button"
-                className="w-24 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 font-bold rounded-md"
+                className="w-24 items-center capitalize bg-white border border-gray-300 hover:bg-green-600 hover:text-white text-black p-2 font-bold rounded-md"
                 onClick={cancel}
               >
                 Cancel

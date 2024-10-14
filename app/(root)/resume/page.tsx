@@ -85,7 +85,7 @@ const Page = async () => {
   const user : User = await getUser();
   return (
     <>
-      <div className="w-9/12 shadow-2xl border-gray-300 text-justify mx-auto my-7">
+      <div>
         {resumes.length ?  <ResumeList resumes={resumes} user={user}/> : <AddResumeForm /> }
       </div>
     </>
