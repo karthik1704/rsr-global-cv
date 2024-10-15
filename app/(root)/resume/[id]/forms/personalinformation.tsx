@@ -9,6 +9,7 @@ import DatePicker from "../datepicker";
 import { updateResume, uploadImage } from "../../action";
 import { toast } from "sonner";
 import { SERVER_IMAGE_URL } from "@/app/constants";
+import { textHandleChange } from "@/components/textarea/textarea";
 
 type Resume = {
   resume_title: string;
@@ -155,7 +156,7 @@ const PersonalInformation = ({
     <div className="md:w-full lg:w-full sm:w-full xl:w-full">
       {!show && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between border-b-2">
+          <div className="flex justify-between border-b-2 pb-2">
           <p className="text-black text-2xl font-bold uppercase">
             Personal Information
           </p>
@@ -504,8 +505,7 @@ const PersonalInformation = ({
                 //   message: 'First Name is required'
                 // }
               })}
-              value={text}
-              onChange={handleChange}
+              onChange={textHandleChange}
               placeholder="About us"
               rows={5}
             />

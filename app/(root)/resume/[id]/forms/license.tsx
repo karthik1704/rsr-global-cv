@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { updateLicense, deleteLicense } from "../../action";
 import { toast } from "sonner";
 import { dateFormatter, getCurrentDate } from "@/lib/utils";
+import DeleteButton from "@/components/deleteButton/deletebutton";
 
 type Props = {
   selectedSection: string[];
@@ -283,7 +284,7 @@ const LicenseForm = ({
         </form>
       ) : (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between border-b-2">
+          <div className="flex justify-between border-b-2 pb-2">
           <h2 className="text-black text-2xl font-bold uppercase">
             Driving License
           </h2>
@@ -310,13 +311,8 @@ const LicenseForm = ({
                   </div>
                 </li>
                 <div>
-                  <button
-                    type="button"
-                    className="w-24 my-3 items-center capitalize bg-red-600 hover:bg-red-700 text-white p-2 mx-5	font-bold rounded-md"
-                    onClick={() => handleDeleteLicense(item.id)}
-                  >
-                    Delete
-                  </button>
+
+                  <DeleteButton onClick={()=> handleDeleteLicense(item.id)}/>
                 </div>
               </div>
             ))}

@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { deleteAdditionalInfo, updateAdditionalInfo } from "../../action";
 import { TrainingAward } from "../typings";
 import { toast } from "sonner";
+import DeleteButton from "@/components/deleteButton/deletebutton";
 
 
 type TrainingProps = {
@@ -161,7 +162,7 @@ const Training = ({
               className="p-6 space-y-4"
               key={train.id}
             >
-              <div className="flex justify-between border-b-2">
+              <div className="flex justify-between border-b-2 pb-2">
               <p className="text-black text-2xl font-bold uppercase">
                 Training & Awards
               </p>
@@ -203,13 +204,8 @@ const Training = ({
                 </p>
               </div>
               <div>
-                <button
-                  type="button"
-                  className="w-24 items-center capitalize bg-red-600 hover:bg-red-700 text-white p-2 mx-5	font-bold rounded-md"
-                  onClick={() => handleDeleteTraining(train.id)}
-                >
-                  Delete
-                </button>
+
+                <DeleteButton onClick={()=>handleDeleteTraining(train.id)}/>
               </div>
             </div>
           ))}

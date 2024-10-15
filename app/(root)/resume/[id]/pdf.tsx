@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     width: "18%",
     borderRadius: 50,
     paddingTop: 10,
-    paddingRight: 10,
+    // paddingRight: 10,
     overflow:'hidden',
   },
   photoContainer1: {
@@ -288,7 +288,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
           </View>
            )}
 
-          <View style={{ width:'82%'
+          <View style={{ width:'77%'
            }}>
             <View style={styles.heading}>
               <View style={styles.log}>

@@ -4,6 +4,7 @@ import { LanguageSkill } from "../typings";
 import { useParams } from "next/navigation";
 import { deleteLanguage, updateLanguage } from "../../action";
 import { toast } from "sonner";
+import DeleteButton from "@/components/deleteButton/deletebutton";
 
 type LanguageProps = {
   setData: any;
@@ -95,7 +96,7 @@ const Language = ({
     <div className="my-8">
       {!show && language && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between border-b-2">
+          <div className="flex justify-between border-b-2 pb-2">
           <p className="text-black text-2xl font-bold uppercase">
             Language Information
           </p>
@@ -126,13 +127,8 @@ const Language = ({
             </p>
           )}
           <div>
-            <button
-              type="button"
-              className="w-24 items-center capitalize bg-red-600 hover:bg-red-700 text-white p-2 mx-5	font-bold rounded-md"
-              onClick={() => handleDeleteLanguage(language.id)}
-            >
-              Delete
-            </button>
+           
+            <DeleteButton onClick={()=>handleDeleteLanguage(language.id)}/>
           </div>
         </div>
       )}

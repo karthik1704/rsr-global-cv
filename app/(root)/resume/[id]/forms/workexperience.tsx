@@ -14,6 +14,8 @@ import { deleteWorkExperience, updateWorkExperience } from "../../action";
 import { Experience } from "../typings";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { toast } from "sonner";
+import DeleteButton from "@/components/deleteButton/deletebutton";
+import { textHandleChange } from "@/components/textarea/textarea";
 
 //capitalize letter
 
@@ -253,7 +255,7 @@ const WorkExperience = ({
     <div className="my-8">
       {!show && workExperience.length && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between border-b-2">
+          <div className="flex justify-between border-b-2 pb-2">
           <p className="text-black text-2xl font-bold uppercase">
             Work Experience
           </p>
@@ -320,13 +322,7 @@ const WorkExperience = ({
               </p>
               <div>
                 
-                <button
-                  type="button"
-                  className="w-24 my-3 items-center capitalize bg-red-600 hover:bg-red-700 text-white p-2 mx-5	font-bold rounded-md"
-                  onClick={() => deleteExperience(exp.id)}
-                >
-                  Delete
-                </button>
+                  <DeleteButton onClick={()=>deleteExperience(exp.id)}/>
               </div>
             </div>
           ))}
@@ -603,6 +599,7 @@ const WorkExperience = ({
                       // onChange={(event) =>
                       //   handleChange(event, index, "about_company")
                       // }
+                      onChange={textHandleChange}
                       placeholder="About company"
                       rows={5}
                     />
@@ -627,6 +624,7 @@ const WorkExperience = ({
                       // onChange={(event) =>
                       //   handleChange(event, index, "responsibilities")
                       // }
+                      onChange={textHandleChange}
                       placeholder="About work responsibilities"
                       rows={5}
                     />

@@ -19,6 +19,7 @@ import License from "./forms/license";
 import { toast } from "sonner";
 import { ResumeType } from "./typings";
 import { deleteOthers } from "../action";
+import DeleteButton from "@/components/deleteButton/deletebutton";
 
 type ResumeProps = {
   resume: ResumeType;
@@ -319,7 +320,7 @@ const Resume = ({ resume }: ResumeProps) => {
                   key={other.id}
                   className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md my-8"
                 >
-                  <div className="flex justify-between border-b-2">
+                  <div className="flex justify-between border-b-2 pb-2">
                   <p className="text-black text-2xl font-bold uppercase">
                     {other.sectiontitle}
                   </p>
@@ -348,13 +349,7 @@ const Resume = ({ resume }: ResumeProps) => {
                     </p>
                   </div>
                   <div>
-            <button
-                  type="button"
-                  className="w-24 items-center capitalize bg-red-600 hover:bg-red-700 text-white p-2 mx-5	font-bold rounded-md"
-                  onClick={() => deleteOther(other.id)}
-                >
-                  Delete
-                </button>
+                <DeleteButton onClick={()=> deleteOther(other.id)}/>
           </div>
                 </div>
               ))}

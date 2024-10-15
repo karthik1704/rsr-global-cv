@@ -87,16 +87,17 @@ const ResumeList = ({ resumes, user }: Props) => {
               <div className="w-full mx-auto transition-transform transform hover:scale-105 bg-white shadow-lg rounded-lg overflow-hidden">
                 <div className="p-4 md:p-6 flex flex-col md:flex-row justify-evenly">
                   <div className="text-gray-600 space-y-2 flex-col items-center">
+                  {user && user.first_name && user.last_name
+                          ?(
                     <p className="flex">
                       <span>
                         <UserCheck color="#121d91" size={32} />
                       </span>
                       <span className="pl-3 text-2xl font-bold text-black">
-                        {user && user.first_name && user.last_name
-                          ? `${user.first_name} ${user.last_name}`
-                          : null}
+                        { `${user.first_name} ${user.last_name}`}
                       </span>
                     </p>
+                          ): null}
 
                     <p className="text-lg text-black flex items-center space-x-2">
                       <span>
@@ -119,40 +120,43 @@ const ResumeList = ({ resumes, user }: Props) => {
                       </span>
                       <span className="pl-3 text-black">{user.email}</span>
                     </p>
+                    {resumes && resumes[0].country ? (
                     <p className="flex">
                       <span>
                         <MapPinCheck />
                       </span>
                       <span className="pl-3 text-black">
-                        {resumes && resumes[0].country ? `${resumes[0].country}` : null}
+                       {`${resumes[0].country}`}
                       </span>
                     </p>
+                     ): null}
                   </div>
+                  {resumes && resumes[0] && (
+  <div className="text-gray-600 space-y-1 flex-col items-center">
+    <p className="flex flex-col items-start">
+      {resumes[0].address_line_1 || resumes[0].address_line_2 || resumes[0].city || resumes[0].postal_code ? (
+        <span className="flex items-center">
+          {resumes[0].address_line_1 && <MapPin />}
+          <span className="pl-3 text-black">
+            {resumes[0].address_line_1 ? `${resumes[0].address_line_1}` : null}
+            {resumes[0].address_line_1 && (
+              <>
+                {resumes[0].address_line_2 || resumes[0].city || resumes[0].postal_code ? ',' : ''}
+              </>
+            )}
+          </span>
+        </span>
+      ) : null}
 
-                  <div className="text-gray-600 space-y-1 flex-col items-center">
-                    <p className="flex flex-col items-start">
-                      <span className="flex items-center">
-                        <MapPin />
-                        <span className="pl-3 text-black">
-                          {resumes && resumes[0].address_line_1
-                            ? `${resumes[0].address_line_1}`
-                            : null}
-                          ,
-                        </span>
-                      </span>
-                      <span className="pl-9 text-black">
-                      {resumes && resumes[0].address_line_2
-                            ? `${resumes[0].address_line_2}`
-                            : null}, 
-                            {resumes && resumes[0].city
-                              ? `${resumes[0].city}`
-                              : null}, 
-                            {resumes && resumes[0].postal_code
-                              ? `${resumes[0].postal_code}`
-                              : null},
-                      </span>
-                    </p>
-                  </div>
+      <span className="pl-9 text-black">
+        {resumes[0].address_line_2 && `${resumes[0].address_line_2}`}{resumes[0].address_line_2 ? ',' : ''}
+        {resumes[0].city && `${resumes[0].city}`}{resumes[0].city ? ',' : ''}
+        {resumes[0].postal_code && `${resumes[0].postal_code}`}
+      </span>
+    </p>
+  </div>
+)}
+
                 </div>
               </div>
 
