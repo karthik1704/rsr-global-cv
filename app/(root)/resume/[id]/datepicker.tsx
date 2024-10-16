@@ -60,7 +60,7 @@ const DatePicker = forwardRef<HTMLDivElement, Props>(({ selectedDate, onDateChan
   const dayPickerStyle = {
     fontFamily: 'Arial, sans-serif',
     borderRadius: '4px',
-    padding: '10px'
+    padding: '10px',
   };
   
   const selectedStyle = {
@@ -85,7 +85,7 @@ const DatePicker = forwardRef<HTMLDivElement, Props>(({ selectedDate, onDateChan
       />
       <CalendarIcon className="absolute inset-y-0 right-42 left-24 md:left-80 lg:left-64 top-3 w-16 h-5 text-gray-500 pointer-events-none" />
       {open && (
-        <div className="absolute w-full lg:w-1/2 md:w-1/2 z-10 mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-5">
+        <div className="absolute w-full lg:w-4/5 md:w-1/2 z-10 mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-5">
           <select
             value={selectedYear}
             onChange={handleYearChange}

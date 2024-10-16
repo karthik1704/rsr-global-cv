@@ -83,7 +83,7 @@ const ResumeList = ({ resumes, user }: Props) => {
       {resumes.map((resume) => (
         <div key={resume.id}>
           <div className="w-full flex items-center justify-center">
-            <div className="p-10 flex flex-col border w-11/12 mx-auto overflow-hidden mb-4 border-gray-300 rounded-lg shadow-lg bg-right-bottom bg-cover bg-[url('/section/background.WEBP')]">
+            <div className="p-10 flex flex-col border w-11/12 mx-auto overflow-hidden mb-4 border-gray-300 rounded-lg shadow-lg bg-right-bottom bg-cover bg-[url('/section/background.webp')]">
               <div className="w-full mx-auto transition-transform transform hover:scale-105 bg-white shadow-lg rounded-lg overflow-hidden">
                 <div className="p-4 md:p-6 flex flex-col md:flex-row justify-evenly">
                   <div className="text-gray-600 space-y-2 flex-col items-center">

@@ -7,6 +7,7 @@ import { lessThanExpiryDate } from "@/lib/utils";
 import { SERVER_API_URL } from "@/app/constants";
 import { ResumeType } from "./typings";
 import { Suspense } from "react";
+import Loader from "@/components/common/Loader";
 
 export async function getUser() {
   const cookiesStore = cookies();
@@ -89,7 +90,7 @@ const ResumeEditPage = async ({params:{id}}:{params:{id:string;}}) => {
   return (
     <>
       <div>
-      <Suspense fallback={'loading'}>
+      <Suspense fallback={<Loader />}>
         <Resume resume={resume}/>
       </Suspense>
       </div>

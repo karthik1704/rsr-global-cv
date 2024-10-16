@@ -4,7 +4,7 @@ import { useFormStatus } from "react-dom";
 const SubmitButton = ({
   name = "Submit",
   loading = "Loading...",
-  width="w-full"
+  width="w-full",
 }: {
   name?: string;
   loading?: React.ReactNode | string;

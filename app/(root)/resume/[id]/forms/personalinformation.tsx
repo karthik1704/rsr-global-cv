@@ -525,7 +525,7 @@ const PersonalInformation = ({
                     message: "Referred is required",
                   },
                 })}
-                placeholder="if not referred, specify as RSR Global"
+                placeholder="Independent candidate or referred by RSR Global Partner"
               />
               {errors.referred_by && (
                 <p className="text-red-700 text-sm">
