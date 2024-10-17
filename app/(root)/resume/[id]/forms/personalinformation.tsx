@@ -9,7 +9,7 @@ import DatePicker from "../datepicker";
 import { updateResume, uploadImage } from "../../action";
 import { toast } from "sonner";
 import { SERVER_IMAGE_URL } from "@/app/constants";
-import { textHandleChange } from "@/components/textarea/textarea";
+import { textHandleChange } from "@/lib/utils";
 
 type Resume = {
   resume_title: string;

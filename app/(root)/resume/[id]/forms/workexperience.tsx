@@ -15,7 +15,7 @@ import { Experience } from "../typings";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { toast } from "sonner";
 import DeleteButton from "@/components/deleteButton/deletebutton";
-import { textHandleChange } from "@/components/textarea/textarea";
+import { textHandleChange } from "@/lib/utils";
 
 //capitalize letter
 

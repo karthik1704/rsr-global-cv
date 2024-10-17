@@ -103,7 +103,8 @@ const DatePicker = forwardRef<HTMLDivElement, Props>(({ selectedDate, onDateChan
             today: `border-amber-500`, // Add a border to today's date
             selected: `bg-amber-500 border-amber-500 text-white`, // Highlight the selected day
             root: `${defaultClassNames.root} shadow-lg p-5`, // Add a shadow to the root element
-            chevron: `${defaultClassNames.chevron} fill-amber-500` // Change the color of the chevron
+            chevron: `${defaultClassNames.chevron} fill-amber-500`, // Change the color of the chevron
+            day: 'w-10 h-10 text-center',
           }}
           style={dayPickerStyle}
             selected={selectedDate}
