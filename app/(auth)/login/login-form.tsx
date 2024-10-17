@@ -28,7 +28,7 @@ const LoginForm = () => {
   }, [state?.message, state]);
 
   return (
-    <div className=" min-h-screen flex flex-col justify-center items-center py-10 bg-slate-100">
+    <div className="h-full flex flex-col justify-center items-center py-10 bg-slate-100">
       <div className=" w-full flex flex-col lg:flex-row items-center justify-center">
         <div className="bg-[url('/sign-bg-1.jpg')] bg-cover bg-center w-4/5 sm:w-3/5 md:w-7/12 lg:w-4/12 p-8 bg-white shadow-lg text-justify mb-6 lg:mb-0">
           <h1 className="text-4xl text-gray-100 font-bold mb-4 text-center ">
@@ -67,13 +67,13 @@ const LoginForm = () => {
                 <p className="text-red-500">{state?.fieldErrors?.password}</p>
               )}
             </div>
-            <div className="ml-44 flex items-center justify-center w-20">
-  <SubmitButton name='Login' />
+            <div className="mb-4 pt-2 mx:4 md:mx-8 lg:mx-12">
+  <SubmitButton name='Login'/>
 </div>
           </form>
         </div>
 
-        <div className="w-4/5 sm:w-3/5 md:w-7/12 lg:w-4/12 bg-slate-200">
+        <div className="w-4/5 sm:w-3/5 md:w-7/12 lg:w-4/12 p-3 bg-slate-200">
           <div className="flex flex-col justify-center items-center py-16">
             <Image src={img} alt="logo"></Image>
             <h1 className="text-black text-4xl font-bold my-2">
@@ -89,24 +89,6 @@ const LoginForm = () => {
           </div>
         </div>
       </div>
-
-      {/* <p className="text-left m-6">
-        Easy, fast and secure: download the{" "}
-        <span className="font-bold">RSR Login app</span>
-      </p>
-
-      <ul className="flex">
-        <li className="mx-2">
-          <a href="#">
-            <Image src='/images/google-play-img-1.png' height={150} width={100} alt="" />
-          </a>
-        </li>
-        <li className="mx-2 rounded-md">
-          <a href="#">
-            <Image src='/images/app-store-img-1.png' height={150} width={100} alt="" />
-          </a>
-        </li>
-      </ul> */}
     </div>
   );
 };

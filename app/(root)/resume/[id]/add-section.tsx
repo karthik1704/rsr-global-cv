@@ -43,11 +43,19 @@ const AddSection = ({
     setSelected(event.target.value);
   };
 
+  const [errorMessage, setErrorMessage] = useState('')
+
   const addToSection = () => {
+    if(selected === 'others' && !additionalTitle.trim()){
+      setErrorMessage('Please enter a Section Title');
+      return;
+    }
     addSections(selected);
     setIsPopupVisible(false);
     setShowPreview(false);
   };
+
+  const isAddButtonDisabled = selected === ''|| selected === 'select an option';
 
   const handleButtonClick = () => {
     setShowPreview(!showPreview);
@@ -93,8 +101,12 @@ const AddSection = ({
                     id="additional-title"
                     value={additionalTitle}
                     onChange={handleInputChange}
+                    required
                     className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
+                  {errorMessage && (
+                    <p className="text-red-500 text-sm mt-1">{errorMessage}</p>
+                  )}
                 </div>
               ) : null}
               {/* <Others title={additionalTitle} /> */}
@@ -108,6 +120,7 @@ const AddSection = ({
               </button>
               <button
                 onClick={addToSection}
+                disabled={isAddButtonDisabled}
                 className="w-28 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2  mx-10 font-bold rounded-md"
               >
                 Add Section

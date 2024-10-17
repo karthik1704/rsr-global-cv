@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { deleteEducation, updateEducation } from "../../action";
 import { Education as EducationType } from "../typings";
 import { toast } from "sonner";
+import DeleteButton from "@/components/deleteButton/deletebutton";
 
 type Props = {
   setData: any;
@@ -180,7 +181,7 @@ const Education = ({
               className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md"
               key={edu.id}
             >
-              <div className="flex justify-between border-b-2">
+              <div className="flex justify-between border-b-2 pb-2">
               <p className="text-black text-2xl font-bold uppercase">
                 Education and Training
               </p>
@@ -231,13 +232,7 @@ const Education = ({
                 </p>
               </div>
               <div>
-                <button
-              type="button"
-              className="w-24 items-center capitalize bg-red-600 hover:bg-red-700 text-white p-2 mx-5	font-bold rounded-md"
-              onClick={() => handleDeleteEducation(edu.id)}
-            >
-              Delete
-            </button>
+            <DeleteButton onClick={()=> handleDeleteEducation(edu.id)}/>
               </div>
             </div>
           ))}
