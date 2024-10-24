@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge"
 
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { Value } from "@radix-ui/react-select";
 
 dayjs.extend(customParseFormat);
 
@@ -38,13 +39,14 @@ export function lessThanExpiryDate(expiry_date:string):boolean{
   return expiry > today;
 }
 
-export const textHandleChange =(event) =>{
-  const input = event.target.value
+export const textHandleChange = (event) => {
+  const input = event.target.value;
 
-const words = input.split(' ');
+  // Capitalize the first letter of the input
+  event.target.value = input.charAt(0).toUpperCase() + input.slice(1);
+};
 
-if(words.length > 0){
-  words[0] = words[0].charAt(0).toUpperCase()+ words[0].slice(1);
-}
-event.target.value = words.join(' ');
-}
+export const maxLengthValidation = (maxLength) => ({
+  value: maxLength,
+  message: `Maximum length is ${maxLength} characters`,
+});

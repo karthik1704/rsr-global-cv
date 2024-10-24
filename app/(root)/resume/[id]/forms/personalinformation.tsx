@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useParams } from "next/navigation";
-
 import ImageUploader from "@/components/image/image_uploader";
 import { dateFormatter } from "@/lib/utils";
 import DatePicker from "../datepicker";
@@ -10,13 +9,15 @@ import { updateResume, uploadImage } from "../../action";
 import { toast } from "sonner";
 import { SERVER_IMAGE_URL } from "@/app/constants";
 import { textHandleChange } from "@/lib/utils";
+import { maxLengthValidation } from "@/lib/utils";
+import { Contact } from "lucide-react";
 
 type Resume = {
   resume_title: string;
   resume_image:string;
   first_name: string;
   last_name: string;
-  date_of_birth: string | Date; // Format: YYYY-MM-DD
+  date_of_birth: Date | string; // Format: YYYY-MM-DD
   nationality: string;
   address_line_1: string;
   address_line_2: string;
@@ -37,6 +38,8 @@ type PersonalInformationProps = {
   text: string;
   handleChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
+
+
 
 const PersonalInformation = ({
   setData,
@@ -76,6 +79,7 @@ const PersonalInformation = ({
   const [date, setDate] = useState<Date | undefined>(new Date(personalInformation.date_of_birth) ?? undefined);
   const { id } = useParams<{id:string;}>();
   const [show, setShowForm] = useState(true);
+  const [error, setError] = useState('');
 
   const updateResumeWithId = updateResume.bind(null, id );
   const uploadImageWithId = uploadImage.bind(null, id );
@@ -105,16 +109,16 @@ const PersonalInformation = ({
     setValue("date_of_birth", formattedDate);
   };
 
-  const validateDateRange = (value: Date) => {
-    const minDate = new Date("1950-01-01");
-    const maxDate = new Date("2100-12-31");
-    const selectedDate = new Date(value);
+  // const validateDateRange = (value: Date) => {
+  //   const minDate = new Date("1950-01-01");
+  //   const maxDate = new Date("2100-12-31");
+  //   const selectedDate = new Date(value);
 
-    if (selectedDate < minDate || selectedDate > maxDate) {
-      return "please enter valid Year";
-    }
-    return true;
-  };
+  //   if (selectedDate < minDate || selectedDate > maxDate) {
+  //     return "please enter valid Year";
+  //   }
+  //   return true;
+  // };
 
 
   const [uploadedImage, setUploadedImage] = useState("");
@@ -126,11 +130,9 @@ const PersonalInformation = ({
 
   const handleForm = async (personalData: Resume) => {
     console.log(personalData);
-    // setData((prevState) => ({
-    //   ...prevState,
-    //   personalInformation: { ...personalData, profileImage: uploadedImage },
-    // }));
+    console.log(personalData.date_of_birth)
     personalData.resume_title=personalInformation.resume_title;
+    console.log(personalData.date_of_birth)
     personalData.date_of_birth = new Date(personalData.date_of_birth).toISOString().split("T")[0];
     console.log(personalData.date_of_birth)
     const res = await updateResumeWithId(personalData)
@@ -268,6 +270,16 @@ const PersonalInformation = ({
                     value: true,
                     message: "First Name is required",
                   },
+                    minLength: {
+                      value: 1,
+                      message: "must have a minimum of one character.",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "Maximum 20 characters allowed.",
+                    },
+                 
+                  // maxLength : maxLengthValidation(20),
                 })}
                 placeholder="Type name same as in the passport"
               />
@@ -291,14 +303,23 @@ const PersonalInformation = ({
                   //   value: true,
                   //   message: "Last Name is required",
                   // },
+                  // maxLength : maxLengthValidation(20),
+                  minLength: {
+                    value: 1,
+                    message: "must have a minimum of one character.",
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: "Maximum 20 characters allowed.",
+                  },
                 })}
                 placeholder="Last Name"
               />
-              {/* {errors.lastName && (
+              {errors.last_name && (
                 <p className="text-red-700 text-sm">
-                  {errors.lastName.message}
+                  {errors.last_name.message}
                 </p>
-              )} */}
+              )}
             </div>
           </div>
 
@@ -336,6 +357,14 @@ const PersonalInformation = ({
                     value: true,
                     message: "Nationality is required",
                   },
+                  minLength: {
+                    value: 1,
+                    message: "must have a minimum of one character.",
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: "Maximum 20 characters allowed.",
+                  },
                 })}
                 placeholder="Nationality"
               />
@@ -361,6 +390,14 @@ const PersonalInformation = ({
                   value: true,
                   message: "Address is required",
                 },
+                minLength: {
+                  value: 1,
+                  message: "must have a minimum of one character.",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "Maximum 20 characters allowed.",
+                },
               })}
               placeholder="Street name, P.O, box"
             />
@@ -381,6 +418,14 @@ const PersonalInformation = ({
                 required: {
                   value: true,
                   message: "Address is required",
+                },
+                minLength: {
+                  value: 1,
+                  message: "must have a minimum of one character.",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "Maximum 20 characters allowed.",
                 },
               })}
               placeholder="Apartment, suite, unit, building, floor, etc"
@@ -404,12 +449,20 @@ const PersonalInformation = ({
                   //   value: true,
                   //   message: "postal code is required",
                   // },
+                  minLength: {
+                    value: 1,
+                    message: "must have a minimum of one character.",
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: "Maximum 20 characters allowed.",
+                  },
                 })}
                 placeholder="6000 01"
               />
-              {/* {errors.code && (
-                <p className="text-red-700 text-sm">{errors.code.message}</p>
-              )} */}
+              {errors.postal_code && (
+                <p className="text-red-700 text-sm">{errors.postal_code.message}</p>
+              )}
             </div>
 
             <div className="mb-4 w-full md:px-6">
@@ -422,6 +475,14 @@ const PersonalInformation = ({
                   required: {
                     value: true,
                     message: "City is required",
+                  },
+                  minLength: {
+                    value: 1,
+                    message: "must have a minimum of one character.",
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: "Maximum 20 characters allowed.",
                   },
                 })}
                 placeholder="Chennai"
@@ -442,6 +503,18 @@ const PersonalInformation = ({
                     value: true,
                     message: "Country is required",
                   },
+                  minLength: {
+                    value: 1,
+                    message: "must have a minimum of one character.",
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: "Maximum 20 characters allowed.",
+                  },
+                  // validate: (value) => {
+                  //   const validation = maxLengthValidation(10);
+                  //   return value.length <= validation.value || validation.message;
+                  // },
                 })}
                 placeholder="India"
               />
@@ -465,6 +538,14 @@ const PersonalInformation = ({
                   //   value: true,
                   //   message: "Email Id is required",
                   // },
+                  minLength: {
+                    value: 1,
+                    message: "must have a minimum of one character.",
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: "Maximum 30 characters allowed.",
+                  },
                 })}
                 placeholder="Email"
               />
@@ -500,15 +581,30 @@ const PersonalInformation = ({
             <textarea
               className="pl-4 block w-full lg:w-full md:w-[455px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
               {...register("responsibilities", {
+                minLength: {
+                  value: 0,
+                  message: "Must be at least 10 characters long",
+                },
+                maxLength: {
+                  value: 300,
+                  message: "Maximum length is 300 characters",
+                },
                 // required: {
                 //   value: true,
                 //   message: 'First Name is required'
-                // }
+                // },
+                // maxLength : maxLengthValidation(300),
               })}
+              // onChange={(event)=>textHandleChange(event, updateText)}
               onChange={textHandleChange}
               placeholder="About us"
+              // name="aboutus"
               rows={5}
+              // maxLength={300}
             />
+             {errors.responsibilities && (
+              <p className="text-red-700 text-sm">{errors.responsibilities.message}</p>
+            )}
           </div>
 
           <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
@@ -523,7 +619,9 @@ const PersonalInformation = ({
                   required: {
                     value: true,
                     message: "Referred is required",
-                  },
+                    // maxLength : () => maxLengthValidation(10),
+                  },                 
+                maxLength : maxLengthValidation(20),
                 })}
                 placeholder="Independent candidate or referred by RSR Global Partner"
               />

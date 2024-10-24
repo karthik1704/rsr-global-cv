@@ -6,6 +6,8 @@ import { deleteEducation, updateEducation } from "../../action";
 import { Education as EducationType } from "../typings";
 import { toast } from "sonner";
 import DeleteButton from "@/components/deleteButton/deletebutton";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type Props = {
   setData: any;
