@@ -8,7 +8,7 @@ import {
 } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { dateFormatter, getCurrentDate } from "@/lib/utils";
+import { dateFormatter, getCurrentDate, maxLengthValidation } from "@/lib/utils";
 import { useParams } from "next/navigation";
 import { deleteWorkExperience, updateWorkExperience } from "../../action";
 import { Experience } from "../typings";
@@ -312,14 +312,18 @@ const WorkExperience = ({
                   "Currently working"
                 )}
                 </div>
+                {exp.about_company && (
               <p className="text-lg font-semibold text-gray-800 my-6">
                 About Company :{" "}
                 <span className="font-light">{exp.about_company}</span>
               </p>
+                )}
+                {exp.responsibilities && (
               <p className="text-lg font-semibold text-gray-800">
                 Work Responsibilities :{" "}
                 <span className="font-light">{exp.responsibilities}</span>
               </p>
+              )}
               <div>
                 
                   <DeleteButton onClick={()=>deleteExperience(exp.id)}/>
@@ -589,10 +593,15 @@ const WorkExperience = ({
                     </label>
                     <textarea
                       {...form.register(`experiences.${index}.about_company`, {
-                        // required: {
-                        //   value: true,
-                        //   message: 'First Name is required'
-                        // }
+                        // maxLength : maxLengthValidation(300),
+                        minLength: {
+                          value: 0,
+                          message: "Must be at least 10 characters long",
+                        },
+                        maxLength: {
+                          value: 300,
+                          message: "Maximum 300 characters allowed.",
+                        },
                       })}
                       className="pl-4 block w-full lg:w-full md:w-[455px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                       // value={item.about_company}
@@ -600,9 +609,18 @@ const WorkExperience = ({
                       //   handleChange(event, index, "about_company")
                       // }
                       onChange={textHandleChange}
+                      
                       placeholder="About company"
                       rows={5}
                     />
+                    {form.formState.errors.experiences?.[index]?.about_company && (
+                      <p className="text-red-700 text-sm">
+                        {
+                          form.formState.errors.experiences[index].about_company
+                            .message
+                        }
+                      </p>
+                    )}
                   </div>
 
                   <div className="mb-4 w-full md:px-6">
@@ -613,21 +631,31 @@ const WorkExperience = ({
                       {...form.register(
                         `experiences.${index}.responsibilities`,
                         {
-                          // required: {
-                          //   value: true,
-                          //   message: 'First Name is required'
-                          // }
+                          minLength: {
+                            value: 0,
+                            message: "Must be at least 10 characters long",
+                          },
+                          maxLength: {
+                            value: 300,
+                            message: "Maximum 300 characters allowed.",
+                          },
+                          
                         }
                       )}
                       className="pl-4 block w-full lg:w-full md:w-[455px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                      // value={item.responsibilities}
-                      // onChange={(event) =>
-                      //   handleChange(event, index, "responsibilities")
-                      // }
+                      
                       onChange={textHandleChange}
                       placeholder="About work responsibilities"
                       rows={5}
                     />
+                                        {form.formState.errors.experiences?.[index]?.responsibilities && (
+                      <p className="text-red-700 text-sm">
+                        {
+                          form.formState.errors.experiences[index].responsibilities
+                            .message
+                        }
+                      </p>
+                    )}
                   </div>
                 </div>
               ))}

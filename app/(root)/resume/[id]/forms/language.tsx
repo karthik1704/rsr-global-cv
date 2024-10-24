@@ -5,6 +5,12 @@ import { useParams } from "next/navigation";
 import { deleteLanguage, updateLanguage } from "../../action";
 import { toast } from "sonner";
 import DeleteButton from "@/components/deleteButton/deletebutton";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const languageSchema = z.object({
+  language : z.string().min(2, {message:'Language is Required'}).max(30,{message:'Maximum characters: 30'})
+})
 
 type LanguageProps = {
   setData: any;
@@ -36,6 +42,7 @@ const Language = ({
     trigger,
     control,
   } = useForm<FormValues>({
+    resolver : zodResolver(languageSchema),
     defaultValues: {
       id: language?.id ?? undefined,
       language: language?.language ?? "",
