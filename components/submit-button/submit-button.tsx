@@ -15,7 +15,7 @@ const SubmitButton = ({
   return (
     <button
       type="submit"
-      className={`${width} cursor-pointer rounded-lg border border-primary bg-green-600 p-1 text-white transition ${pending ? 'opacity-50 cursor-wait' : 'hover:bg-green-700'}`}
+      className={`${width} cursor-pointer rounded-lg  bg-green-600 p-1 text-white transition ${pending ? 'opacity-50 cursor-wait' : 'hover:bg-green-500'}`}
       aria-disabled={pending}
       disabled={pending}
     >
