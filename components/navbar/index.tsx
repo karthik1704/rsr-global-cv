@@ -35,11 +35,9 @@ export async function getData() {
     console.log("error");
   }
 
-  if (res.status === 401) {
-    redirect ('/login');
-  }
+  
   if (res.status !== 200) {
-    return {};
+    return null;
   }
 
 
