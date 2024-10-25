@@ -18,7 +18,7 @@ export default function AuthLayout({
       {loading ? (
         <Loader />
       ) : (
-        <div className="h-screen grid items-center justify-items-center">
+        <div className="h-screen w-full grid items-center justify-items-center">
           <main className="lg:w-full lg:h-full">
             <div className="mx-auto lg:w-full lg:h-full">{children}</div>
           </main>
