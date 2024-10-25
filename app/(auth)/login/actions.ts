@@ -120,6 +120,6 @@ export async function signinJwt(prevState: any, formData: any) {
   if (lessThanExpiryDate(expiry_date)) {
     redirect("/resume");
   } else {
-    redirect("/payment/renew");
+    redirect("/payment");
   }
 }
