@@ -104,7 +104,11 @@ const PersonalInformation = ({
 
   const handleDateChange = (newDate: Date) => {
     setDate(newDate);
-    const formattedDate = newDate.toISOString().split("T")[0];
+    // const formattedDate = newDate.toISOString().split("T")[0];
+    const year = newDate.getFullYear();
+  const month = String(newDate.getMonth() + 1).padStart(2, '0');
+  const day = String(newDate.getDate()).padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`;
     console.log(formattedDate);
     setValue("date_of_birth", formattedDate);
   };
