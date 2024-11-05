@@ -104,7 +104,7 @@ const ResumeList = ({ resumes, user }: Props) => {
                         <CircleCheckBig color="#32b34c" />
                       </span>
                       <span className="text-lg text-black flex items-center space-x-2">
-                      Joined : {dateFormatter(user.created_at)}
+                      Joined: {dateFormatter(user.created_at)}
                       </span>
                     </p>
                   </div>
