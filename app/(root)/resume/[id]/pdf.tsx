@@ -113,10 +113,12 @@ paddingTop:'10px',
     fontSize: 10,
     margin: 1,
     fontWeight:'normal',
+    textTransform:'capitalize',
   },
   text3: {
-    fontSize: 12,
-    fontWeight: 1000,
+    fontSize: 10,
+    margin: 1,
+    fontWeight:'normal',
   },
   text4: {
     fontSize: 10,
@@ -145,7 +147,8 @@ paddingTop:'10px',
   },
   work: {
     padding: 20,
-    margin: 10,
+    marginLeft: 10,
+    marginRight: 10,
   },
   line1: {
     height: 2,
@@ -193,6 +196,7 @@ paddingTop:'10px',
     fontSize: 11,
     paddingLeft: 3,
     fontWeight:'normal',
+    textTransform:'capitalize',
   },
 
   link: {
@@ -252,6 +256,7 @@ paddingTop:'10px',
   date: {
     fontSize: 10,
   },
+  
 });
 
 const PDF = ({ data }: {data:ResumeType}) => {
@@ -323,8 +328,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                   <Text
                     style={{ ...styles.text1,}}
                   >
-                    Date of birth :
-                  </Text>
+                    Date of birth : </Text>
                   <Text style={styles.text2}>
                     {/* {new Date(data.dob).toLocaleDateString("en-GB")} | */}
                     {data.date_of_birth
@@ -342,8 +346,8 @@ const PDF = ({ data }: {data:ResumeType}) => {
                       justifyContent: "flex-start",
                     }}
                   >
-                    <Text style={styles.text1}>Contact Number :</Text>
-                    <Text style={styles.text2}>
+                    <Text style={styles.text1}>Contact Number : </Text>
+                    <Text style={styles.text3}>
                       {data.contact_number} |
                     </Text>
                   </View>
@@ -365,8 +369,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                   <Text
                     style={{ ...styles.text1, }}
                   >
-                    Nationality :
-                  </Text>
+                    Nationality : </Text>
                   <Text style={styles.text2}>
                     {/* {new Date(data.dob).toLocaleDateString("en-GB")} | */}
                     {data.nationality} |
@@ -379,16 +382,16 @@ const PDF = ({ data }: {data:ResumeType}) => {
                       justifyContent: "flex-start",
                     }}
                   >
-                    <Text style={styles.text1}>Email ID:</Text>
-                    <Text style={styles.text2}>
+                    <Text style={styles.text1}>Email ID : </Text>
+                    <Text style={styles.text3}>
                       {data.email_address} |
                     </Text>
                   </View>
                 ) : null}
               </View>
 
-              <View style={{ flexDirection: "row", gap: "7" }}>
-                <Text style={styles.text1}>Address:</Text>
+              <View style={{ flexDirection: "row", gap: "4"}}>
+                <Text style={styles.text1}>Address :</Text>
                 <Text style={styles.text2}>
                   {data.address_line_1 &&
                   data.address_line_2 &&
@@ -403,7 +406,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
             </View>
 
             {data.responsibilities ? (
-              <View>
+              <View style={{marginBottom:'5', marginTop:'5'}}>
                 <Text style={styles.text7}>About me:</Text>
                 <Text style={styles.text8}>
                   {data.responsibilities}
@@ -430,18 +433,19 @@ const PDF = ({ data }: {data:ResumeType}) => {
               <Text style={styles.jobappliedfor}>{data.job_applied_for}</Text>
             </View>
           )}
+           <Text style={styles.work1}>WORK EXPERIENCE</Text>
 
           {data.experiences.length ? (
             <View>
               {data.experiences.map((exp, index) => (
                 <View key={index}>
-                  <Text style={styles.work1}>WORK EXPERIENCE</Text>
+                  {/* <Text style={styles.work1}>WORK EXPERIENCE</Text> */}
                   <View style={styles.line1} />
 
                   <View style={styles.jobTitle}>
                     {/* <Text style={styles.dates}>05/08/2022 - CURRENT Doha, Qatar</Text> */}
                     <Text style={styles.dates}>
-                      {dateFormatter(exp.from_date)} -
+                      {dateFormatter(exp.from_date)} - {" "}
                       {exp.to_date
                         ? dateFormatter(exp.to_date)
                         : "Currently Working"}
@@ -457,7 +461,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                       }}
                     >
                       <Text style={styles.jobTitle}>{exp.occupation}</Text>
-                      <Text style={styles.company}>{exp.employer}</Text>
+                      {/* <Text style={styles.company}>{exp.employer}</Text> */}
                       {/* <Text style={styles.company}>QATAR AIRWAYS GROUP</Text> */}
                     </View>
                     <View style={styles.line1} />
@@ -493,7 +497,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                       </Text>
                     </View>
                     <Text style={styles.text1}>
-                      Duties & Responsibilities:
+                      Duties & Responsibilities :
                     </Text>
                     <Text style={styles.description}>
                       {/* Ensure the quality and quantity of food for lunch, afternoon tea,
@@ -511,9 +515,8 @@ const PDF = ({ data }: {data:ResumeType}) => {
                         fontWeight: "extrabold",
                       }}
                     >
-                      Department : <Text style={styles.text2}>{exp.employer}</Text> | Address : <Text style={styles.text2}>{exp.location}</Text>{" "}
-                      | Website :
-                      <Text style={styles.link}>{exp.website}</Text>
+                      Address : <Text style={styles.text2}>{exp.location}</Text>{" "}
+                      | Website : <Text style={styles.link}>{exp.website}</Text>
                     </Text>
                   </View>
                 </View>
@@ -560,9 +563,9 @@ const PDF = ({ data }: {data:ResumeType}) => {
               </Text>
             </View>
           </View> */}
-          {data.education.map((educ, index) => (
-            <View key={index}>
-              <Text
+          {!!data.education.length && (
+          <View>
+          <Text
                 style={{
                   fontSize: 12,
                   fontWeight: "extrabold",
@@ -571,6 +574,17 @@ const PDF = ({ data }: {data:ResumeType}) => {
               >
                 EDUCATION AND TRAINING
               </Text>
+          {data.education.map((educ, index) => (
+            <View key={index}>
+              {/* <Text
+                style={{
+                  fontSize: 12,
+                  fontWeight: "extrabold",
+                  paddingTop: 10,
+                }}
+              >
+                EDUCATION AND TRAINING
+              </Text> */}
               <View style={styles.line1} />
               <View style={styles.jobTitle}>
                 <Text style={styles.dates}>
@@ -620,6 +634,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
               </View>
             </View>
           ))}
+</View>)}
           {data.language_skills?.language && (
             <View>
               <Text
@@ -750,7 +765,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                 style={{
                   fontSize: 12,
                   fontWeight: "extrabold",
-                  marginTop: 10,
+                  marginTop: 5,
                 }}
               >
                 Others
@@ -761,7 +776,7 @@ const PDF = ({ data }: {data:ResumeType}) => {
                   <View style={styles.listItems}>
                     <Text
                       style={{
-                        marginTop: 10,
+                        marginTop: 5,
                         fontSize: 12,
                         fontWeight: "extrabold",
                       }}

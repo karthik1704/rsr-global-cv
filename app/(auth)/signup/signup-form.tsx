@@ -15,9 +15,23 @@ import { createUser } from "./actions";
 import Image from "next/image";
 import logo from "@/public/images/rsr_logo.webp";
 import { useState } from "react";
+import { Eye, EyeOff } from 'lucide-react';
 
 const SignUp = () => {
   const [state, action] = useFormState(createUser, []);
+
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePaswword = () =>{
+    setShowPassword(!showPassword);
+  }
+
+  const confirmTogglePassword = () =>{
+    setShowConfirmPassword(!showConfirmPassword);
+  }
 
   return (
     <>
@@ -107,23 +121,59 @@ const SignUp = () => {
                   <label className="block text-gray-700 font-bold">
                     Password{" "}
                   </label>
+                  <div className="relative">
                   <input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     name="password"
+                    value={password}
                     placeholder="Enter Password"
+                    onChange={(e)=> setPassword(e.target.value)}
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
+                   <button
+        type="button"
+        onClick={togglePaswword}
+        style={{
+          position: 'absolute',
+          right: '10px',
+          top: '10px',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+        }}
+      >
+        {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+      </button>
+      </div>
                 </div>
                 <div>
                   <label className="block text-gray-700 font-bold">
                     Confirm password
                   </label>
+                  <div className="relative">
                   <input
-                    type="password"
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    value={confirmPassword}
                     name="password2"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Enter Confirm Password"
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
+                  <button
+        type="button"
+        onClick={confirmTogglePassword}
+        style={{
+          position: 'absolute',
+          right: '10px',
+          top: '10px',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+        }}
+      >
+        {showConfirmPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+      </button>
+      </div>
                 </div>
                 
               </div>
