@@ -105,7 +105,7 @@ const Navbar = async () => {
                   {user.expiry_date && lessThanExpiryDate(user.expiry_date) && (
                     <>
                       <DropdownMenuItem>
-                        <Link href="/profile">Profile</Link>
+                        <Link href="/resume">Profile</Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem>
                         <Link href="/resume">Create Cv</Link>

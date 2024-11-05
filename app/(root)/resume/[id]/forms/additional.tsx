@@ -156,15 +156,10 @@ const Training = ({
   return (
     <div className="my-8">
       {!show && trainings.length && (
-        <div className="space-y-4 bg-gray-100 rounded-lg shadow-md">
-          {trainings.map((train, index) => (
-            <div
-              className="p-6 space-y-4"
-              key={train.id}
-            >
-              <div className="flex justify-between border-b-2 pb-2">
+        <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
+          <div className="flex justify-between border-b-2 p-2">
               <p className="text-black text-2xl font-bold uppercase">
-                Training & Awards
+                Honors & Awards
               </p>
               <button
                   onClick={() => setShowForm(true)}
@@ -174,6 +169,23 @@ const Training = ({
                   Edit
                 </button>
               </div>
+          {trainings.map((train, index) => (
+            <div
+              className="p-6 space-y-4"
+              key={train.id}
+            >
+              {/* <div className="flex justify-between border-b-2 pb-2">
+              <p className="text-black text-2xl font-bold uppercase">
+                Honors & Awards
+              </p>
+              <button
+                  onClick={() => setShowForm(true)}
+                  type="button"
+                  className="w-24 items-center capitalize bg-green-600 text-white hover:text-slate-100 hover:bg-green-700 p-2 font-bold rounded-md"
+                >
+                  Edit
+                </button>
+              </div> */}
               {/* <p className="text-lg font-semibold text-gray-800">Hobbies : <span className="font-light">{train.Hobbies}</span></p> */}
               <div className="grid grid-cols-2 gap-3 w-10/12">
               <p className="text-lg font-semibold text-gray-800">
@@ -221,7 +233,7 @@ const Training = ({
                     <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
                     <div className="flex justify-between items-center">
                       <p className="text-black font-bold text-3xl mb-4">
-                      Training & Awards
+                      Honors & Awards
                       </p>
                       {index > 0 && (
                         <button

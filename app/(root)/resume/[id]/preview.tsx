@@ -283,9 +283,10 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
           </div>
         )}
 
+<p className="block text-black font-bold text-2xl mt-6 uppercase pl-8">Others</p>
         {data.others.map((newItem, index) => (
           <div key={index} className="pl-8 pr-28">
-            <p className="block text-black font-bold text-2xl mt-6 uppercase">Others</p>
+           
 
             <hr className="border-b-2 border-slate-500" />
             <h4 className="text-lg font-bold text-black capitalize">
