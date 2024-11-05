@@ -77,7 +77,7 @@ const ResumeList = ({ resumes, user }: Props) => {
   return (
     <div className="mx-auto p-4">
       <h1 className="text-2xl text-center font-semibold text-green-700 my-4">
-        Resume List
+        Profile
       </h1>
 
       {resumes.map((resume) => (
@@ -103,7 +103,9 @@ const ResumeList = ({ resumes, user }: Props) => {
                       <span>
                         <CircleCheckBig color="#32b34c" />
                       </span>
-                      <span>Joined: 28/03/2021</span>
+                      <span className="text-lg text-black flex items-center space-x-2">
+                      Joined: {dateFormatter(user.created_at)}
+                      </span>
                     </p>
                   </div>
 
