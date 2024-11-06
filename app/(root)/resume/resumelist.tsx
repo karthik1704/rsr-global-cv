@@ -93,7 +93,7 @@ const ResumeList = ({ resumes, user }: Props) => {
                       <span>
                         <UserCheck color="#121d91" size={32} />
                       </span>
-                      <span className="pl-3 text-2xl font-bold text-black">
+                      <span className="pl-3 text-2xl font-bold text-black capitalize">
                         { `${user.first_name} ${user.last_name}`}
                       </span>
                     </p>
@@ -151,8 +151,8 @@ const ResumeList = ({ resumes, user }: Props) => {
       ) : null}
 
       <span className="pl-9 text-black">
-        {resumes[0].address_line_2 && `${resumes[0].address_line_2}`}{resumes[0].address_line_2 ? ',' : ''}
-        {resumes[0].city && `${resumes[0].city}`}{resumes[0].city ? ',' : ''}
+        {resumes[0].address_line_2 && `${resumes[0].address_line_2}`}{resumes[0].address_line_2 ? ', ' : ''}
+        {resumes[0].city && `${resumes[0].city}`}{resumes[0].city ? ', ' : ''}
         {resumes[0].postal_code && `${resumes[0].postal_code}`}
       </span>
     </p>

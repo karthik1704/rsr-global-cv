@@ -327,7 +327,7 @@ const PersonalInformation = ({
             </div>
           </div>
 
-          <div className="mb-4 w-[354px] lg:w-2/5 md:w-[554px] md:px-6">
+          <div className="mb-4 w-[354px] lg:w-1/2 md:w-[554px] md:px-6">
             <label className="block text-black font-bold text-sm head">
               Date of birth<span className="text-red-700">*</span>
             </label>
