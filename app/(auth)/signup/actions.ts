@@ -11,33 +11,50 @@ const schema = z
     email: z
       .string()
       .email({
-        message: "Invalid Email",
+        message: "Email Id is required",
       })
       .trim(),
-    password: z.string().trim().min(8, "Password Required"),
+      first_name: z.string().min(1, 'First name is required'),
+      last_name: z.string().min(1, 'Last name is required'),
+      phone: z.string().min(1, 'Phone number is required'),
+      // email: z.string().min(1, 'Email Id is Required'),
+    password: z.string().trim().min(8, "Password must be at least 8 characters"),
+    password2: z.string().trim().min(8, "Password must be at least 8 characters"),
+  }).refine((data) => data.password === data.password2, {
+    path: ['password2'],
+    message: 'Password does not match'
   })
-  .required({ email: true, password: true });
+  // .required({ email: true, password: true });
 
 
 export async function createUser(prevState: any, formData: FormData) {
   const data = Object.fromEntries(formData.entries())
   console.log(data)
 
-//   const validatedFields = schema.safeParse({
-//     username: username,
-//     password: password,
-//   });
+  const validatedFields = schema.safeParse({
+    first_name: data.first_name,
+    password: data.password,
+    last_name: data.last_name,
+    phone: data.phone,
+    email: data.email,
+    password2: data.password2,
+  });
 
-//   // Return early if the form data is invalid
-//   if (!validatedFields.success) {
-//     console.log(validatedFields.error.flatten().fieldErrors);
-//     return {
-//       message: null,
-//       fieldErrors: {
-//         username: validatedFields.error.flatten().fieldErrors.email,
-//         password: validatedFields.error.flatten().fieldErrors.password,
-//       },
-//     };
+  // Return early if the form data is invalid
+  if (!validatedFields.success) {
+    console.log(validatedFields.error.flatten().fieldErrors);
+    return {
+      message: null,
+      fieldErrors: {
+        first_name: validatedFields.error.flatten().fieldErrors.first_name,
+        password: validatedFields.error.flatten().fieldErrors.password,
+        password2: validatedFields.error.flatten().fieldErrors.password2,
+        last_name: validatedFields.error.flatten().fieldErrors.last_name,
+        phone: validatedFields.error.flatten().fieldErrors.phone,
+        email: validatedFields.error.flatten().fieldErrors.email,
+      },
+    };
+  }
 
     const res = await fetch(`${SERVER_API_URL}/auth/signup`, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -56,7 +73,7 @@ export async function createUser(prevState: any, formData: FormData) {
         ...prevState,
         message: error?.detail,
         fieldErrors: {
-          username: null,
+          firstname: null,
           password: null,
         },
       }

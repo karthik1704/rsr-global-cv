@@ -16,9 +16,31 @@ import Image from "next/image";
 import logo from "@/public/images/rsr_logo.webp";
 import { useState } from "react";
 import { Eye, EyeOff } from 'lucide-react';
+import { useEffect } from "react";
+import { toast } from "sonner";
+import SubmitButton from "@/components/submit-button/submit-button";
+
+const initalState = {
+  message: null,
+  fieldErrors:{
+    first_name: null,
+    password: null,
+    last_name: null,
+    email: null,
+    password2: null,
+  }
+}
 
 const SignUp = () => {
-  const [state, action] = useFormState(createUser, []);
+  const [state, formAction] = useFormState(createUser, initalState);
+
+  useEffect(() => {
+    if (state?.message)
+      toast.error(state?.message, {
+        duration: 10000,
+        closeButton: true,
+      });
+  }, [state?.message, state]);
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -65,11 +87,11 @@ const SignUp = () => {
             <h1 className="text-xl md:text-3xl font-bold p-2 mb-2 text-center text-black">
               Sign up now to craft a professional CV
             </h1>
-            <form action={action}>
+            <form action={formAction}>
               <div className=" mb-4 mx-4 sm:mx-12 md:mx-4 lg:mx-12 gap-4">
                 <div className="mb-4">
                   <label className="block text-gray-700 font-bold mb-1">
-                    First Name
+                    First Name  <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -77,10 +99,13 @@ const SignUp = () => {
                     placeholder="Enter Your First Name"
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
+                  {state?.fieldErrors?.first_name && (
+          <p className="text-red-500">{state?.fieldErrors?.first_name}</p>
+        )}
                 </div>
                 <div>
                   <label className="block text-gray-700 font-bold mb-1">
-                    Last Name
+                    Last Name  <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -88,13 +113,16 @@ const SignUp = () => {
                     placeholder="Enter Your Last Name"
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
+                  {state?.fieldErrors?.last_name && (
+          <p className="text-red-500">{state?.fieldErrors?.last_name}</p>
+        )}
                 </div>
               </div>
 
               <div className="mb-4 mx-4 sm:mx-12 md:mx-4 lg:mx-12 gap-4">
                 <div className="mb-4">
                   <label className="block text-gray-700 font-bold">
-                    Phone Number
+                    Phone Number  <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -102,10 +130,13 @@ const SignUp = () => {
                     placeholder="Enter Your Phone Number"
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
+                  {state?.fieldErrors?.phone && (
+          <p className="text-red-500">{state?.fieldErrors?.phone}</p>
+        )}
                 </div>
                 <div>
                   <label className="block text-gray-700 font-bold">
-                    E-mail
+                    E-mail  <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
@@ -113,13 +144,16 @@ const SignUp = () => {
                     placeholder="Enter Your Email-ID"
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
+                  {state?.fieldErrors?.email && (
+          <p className="text-red-500">{state?.fieldErrors?.email}</p>
+        )}
                 </div>
               </div>
 
               <div className="mb-4 mx-4 sm:mx-12 md:mx-4 lg:mx-12 gap-4">
                 <div className="mb-4">
                   <label className="block text-gray-700 font-bold">
-                    Password{" "}
+                    Password{" "}  <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                   <input
@@ -145,10 +179,14 @@ const SignUp = () => {
         {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
       </button>
       </div>
+      {state?.fieldErrors?.password && (
+          <p className="text-red-500">{state?.fieldErrors?.password}</p>
+        )}
                 </div>
+
                 <div>
                   <label className="block text-gray-700 font-bold">
-                    Confirm password
+                    Confirm Password  <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                   <input
@@ -174,17 +212,23 @@ const SignUp = () => {
         {showConfirmPassword ? <Eye size={20} /> : <EyeOff size={20} />}
       </button>
       </div>
+      {state?.fieldErrors?.password2 && (
+          <p className="text-red-500">{state?.fieldErrors?.password2}</p>
+        )}
                 </div>
                 
               </div>
 
               <div className="flex justify-center">
-                <button
+                <div  className=" pt-1 lg:mx-5">
+                  <SubmitButton name="Create an account"/>
+                </div>
+                {/* <button
                   type="submit"
                   className="bg-green-700 rounded-md text-white py-2 px-4 hover:bg-green-600 font-bold focus:outline-none mx-2"
                 >
                   Create an account
-                </button>
+                </button> */}
                 <Link
                   href="/"
                   className="bg-gray-300 rounded-md text-black py-2 px-4 hover:bg-green-600 focus:outline-none hover:text-white font-bold mx-2"
