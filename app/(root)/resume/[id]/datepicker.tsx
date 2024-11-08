@@ -85,6 +85,7 @@ const DatePicker = forwardRef<HTMLDivElement, Props>(({ selectedDate, onDateChan
       />
 <CalendarIcon 
   className="absolute md:right-24 right-28 lg:right-3 w-5 top-2 bg-transparent border-0 cursor-pointer"
+  onClick={() => setOpen(!open)}
 />
       {open && (
         <div className="absolute w-full lg:w-full md:w-10/12 xl:w-11/12 z-10 mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-5">
