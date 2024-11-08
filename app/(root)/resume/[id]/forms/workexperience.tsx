@@ -69,7 +69,7 @@ const WorkExperience = ({
   const form = useForm<FormValues>({
     defaultValues: {
       job_applied_for: job_applied_for ?? "",
-      experiences: workExperience.length ? workExperience : [],
+      experiences: workExperience ? workExperience : [],
     },
   });
 
