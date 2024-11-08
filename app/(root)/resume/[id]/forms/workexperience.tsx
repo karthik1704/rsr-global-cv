@@ -132,6 +132,19 @@ const WorkExperience = ({
     return minDate.toISOString().split("T")[0];
   };
 
+  //Website validation
+
+  const validateWebsite = (website) => {
+    const regex = /^(https?:\/\/)?([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,})(\.[a-zA-Z]{2,})?$/;
+    if (!website) {
+      return { valid: false, message: "Company’s Website is required" };
+    }
+    if (!regex.test(website)) {
+      return { valid: false, message: "Please enter a valid website (e.g. www.google.com)" };
+    }
+    return { valid: true, message: '' };
+  };
+
   //work exp To Date disable
 
   const workexpto = (
@@ -416,12 +429,18 @@ const WorkExperience = ({
                             value: true,
                             message: "Company’s Website is required",
                           },
-                          pattern: {
-                            value:
-                              /^(https?:\/\/)?(www\.)?[a-z0-9-]+\.[a-z0-9]+\.(com|org|in|net|co.in|co|biz|edu|io|gov)$/,
-                            message:
-                              "Please enter a valid website (e.g. www.google.com)",
+                          validate: (value) => {
+                            const result = validateWebsite(value); 
+                            if (!result.valid) {
+                              return result.message;
+                            }
                           },
+                          // pattern: {
+                          //   value:
+                          //     /^(https?:\/\/)?(www\.)?[a-z0-9-]+\.[a-z0-9]+\.(com|org|in|net|co.in|co|biz|edu|io|gov)$/,
+                          //   message:
+                          //     "Please enter a valid website (e.g. www.google.com)",
+                          // },
                         })}
                         placeholder="Company’s website"
                         className="pl-4 block w-full max-w-xs sm:max-w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
