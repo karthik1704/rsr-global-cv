@@ -69,7 +69,7 @@ const WorkExperience = ({
   const form = useForm<FormValues>({
     defaultValues: {
       job_applied_for: job_applied_for ?? "",
-      experiences: workExperience ? workExperience : [],
+      experiences: workExperience.length ? workExperience : [],
     },
   });
 
@@ -135,7 +135,7 @@ const WorkExperience = ({
   //Website validation
 
   const validateWebsite = (website) => {
-    const regex = /^(https?:\/\/)?([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,})(\.[a-zA-Z]{2,})?$/;
+    const regex = /^(https:\/\/|https:\/\/www\.|www\.)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
     if (!website) {
       return { valid: false, message: "Company’s Website is required" };
     }
@@ -236,7 +236,7 @@ const WorkExperience = ({
         duration: 10000,
         closeButton: true,
       });
-      form.reset();
+      // form.reset();
       setShowForm(false);
       setShowPreview(true);
     } else {
