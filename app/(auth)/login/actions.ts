@@ -14,7 +14,12 @@ const schema = z
       .email({
         message: "Invalid Email",
       })
-      .trim(),
+      .trim()
+      .transform((email)=>{
+        const lowercasedEmail = email.toLowerCase();
+        console.log('transformed email:', lowercasedEmail);
+        return lowercasedEmail;
+      }),
     password: z.string().trim().min(1, "Password Required"),
   })
   .required({ username: true, password: true });

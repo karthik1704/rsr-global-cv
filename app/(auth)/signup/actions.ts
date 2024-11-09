@@ -13,7 +13,12 @@ const schema = z
       .email({
         message: "Email Id is required",
       })
-      .trim(),
+      .trim()
+      .transform((email) => {
+        const lowercasedEmail = email.toLowerCase();
+        console.log("Transformed email:", lowercasedEmail);
+        return lowercasedEmail;
+      }),
       first_name: z.string().min(1, 'First name is required'),
       last_name: z.string().min(1, 'Last name is required'),
       phone: z.string().min(1, 'Phone number is required'),
