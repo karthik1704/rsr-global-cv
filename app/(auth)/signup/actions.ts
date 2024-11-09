@@ -10,13 +10,14 @@ const schema = z
   .object({
     email: z
       .string()
-      .trim()
-      .refine((email) => email === email.toLowerCase(), {
-        message: 'Enter an valid email address',
+      .email({
+        message: "Email Id is required",
       })
-      .transform((email) => email.toLowerCase())
-      .refine((email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), {
-        message: 'Email is invalid',
+      .trim()
+      .transform((email) => {
+        const lowercasedEmail = email.toLowerCase();
+        console.log("Transformed email:", lowercasedEmail);
+        return lowercasedEmail;
       }),
       first_name: z.string().min(1, 'First name is required'),
       last_name: z.string().min(1, 'Last name is required'),
