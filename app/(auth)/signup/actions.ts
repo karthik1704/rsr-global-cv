@@ -61,13 +61,15 @@ export async function createUser(prevState: any, formData: FormData) {
     };
   }
 
+
+
     const res = await fetch(`${SERVER_API_URL}/auth/signup`, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       // mode: "cors", // no-cors, *cors, same-origin
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(validatedFields.data),
     });
 
     if( res.status===401){

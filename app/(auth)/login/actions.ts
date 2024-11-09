@@ -49,7 +49,7 @@ export async function signin(formData: any) {
   redirect("/");
 }
 
-export async function signinJwt(prevState: any, formData: any) {
+export async function signinJwt(prevState: any, formData:any) {
   const username = formData.get("username");
   const password = formData.get("password");
 
@@ -71,7 +71,7 @@ export async function signinJwt(prevState: any, formData: any) {
   }
 
   const params = new URLSearchParams();
-  params.append("username", username);
+  params.append("username", username.toLowerCase());
   params.append("password", password);
   params.append("grant_type", "");
   params.append("client_id", "");
