@@ -10,10 +10,14 @@ const schema = z
   .object({
     email: z
       .string()
-      .email({
-        message: "Email Id is required",
+      .trim()
+      .refine((email) => email === email.toLowerCase(), {
+        message: 'Enter an valid email address',
       })
-      .trim(),
+      .transform((email) => email.toLowerCase())
+      .refine((email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), {
+        message: 'Email is invalid',
+      }),
       first_name: z.string().min(1, 'First name is required'),
       last_name: z.string().min(1, 'Last name is required'),
       phone: z.string().min(1, 'Phone number is required'),
