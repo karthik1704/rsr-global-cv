@@ -9,6 +9,8 @@ import { ResumeType } from "./typings";
 import { Suspense } from "react";
 import Loader from "@/components/common/Loader";
 
+import { isMobileDevice } from "@/lib/is-mobile";
+
 export async function getUser() {
   const cookiesStore = cookies();
   const access = cookiesStore.get("access");
@@ -86,12 +88,13 @@ export async function getResume(id:string) {
 const ResumeEditPage = async ({params:{id}}:{params:{id:string;}}) => {
   const user: User = await getUser();
   const resume:ResumeType = await getResume(id);
+  const isMobile = await isMobileDevice();
   
   return (
     <>
       <div>
       <Suspense fallback={<Loader />}>
-        <Resume resume={resume}/>
+        <Resume resume={resume} isMobile={isMobile}/>
       </Suspense>
       </div>
     </>

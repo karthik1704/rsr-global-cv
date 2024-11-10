@@ -23,9 +23,10 @@ import DeleteButton from "@/components/deleteButton/deletebutton";
 
 type ResumeProps = {
   resume: ResumeType;
+  isMobile: boolean;
 };
 
-const Resume = ({ resume }: ResumeProps) => {
+const Resume = ({ resume, isMobile }: ResumeProps) => {
   const [section, setSection] = useState(false);
 
   const handleSection = () => {
@@ -395,6 +396,7 @@ const Resume = ({ resume }: ResumeProps) => {
               data={resume}
               handleNext={handleNext}
               image={uploadedImage}
+              
             />
             {/* <button className='w-20 flex items-center capitalize bg-blue-600 text-white p-2' onClick={handleNext}>Next</button> */}
             <div className="flex py-4 px-8">
@@ -444,7 +446,7 @@ const Resume = ({ resume }: ResumeProps) => {
 
       {show === 2 && (
         <div>
-          <PreviewPdf data={resume} 
+          <PreviewPdf data={resume} isMobile={isMobile}
           // handleNext={handleNext} 
           />
 

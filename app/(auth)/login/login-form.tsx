@@ -71,7 +71,7 @@ const LoginForm = () => {
       <div className="flex flex-col justify-center items-center py-10">
         <Image src={img} alt="logo" className="w-48 h-auto mb-4" />
         <h1 className="text-black text-3xl font-bold mb-2">Welcome to RSR CV Builder</h1>
-        <p className="text-black mb-4">Don't have an account?</p>
+        <p className="text-black mb-4">Don&apos;t have an account?</p>
         <Link
           href="/signup"
           className="flex w-32 justify-center rounded-md bg-green-600 px-4 py-2 text-sm font-semibold leading-6 text-white shadow-md hover:bg-green-500 transition duration-300"
