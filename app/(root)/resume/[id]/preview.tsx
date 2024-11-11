@@ -22,15 +22,15 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
           {" "}
           CV Preview
         </h1>
-        <div className=" flex col bg-slate-100">
+        <div className="flex flex-col lg:flex-row bg-slate-100">
           {!!data.resume_image && (
-            <div className="mx-10 my-5">
+            <div className="mx-auto lg:mx-10 my-auto xl:my-5">
               <Image
                 src={`${SERVER_IMAGE_URL}${data.resume_image}`}
                 height={150}
                 width={150}
                 alt=""
-                className="h-32 w-40 rounded-full border-2 border-gray-700"
+                className="lg:h-32 lg:w-40 h-32 w-32 rounded-full border-2 border-gray-700"
               />
             </div>
           )}
@@ -42,16 +42,15 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
             </p>
 
             <hr className="border-b-2 border-slate-500 w-10/12" />
-            <div className=" w-5/6 flex my-2">
+            <div className="flex md:flex-row flex-col my-2">
               <p className="text-black font-semibold text-base head ">
                 Date of birth :{" "}
-                <span className="text-base cont font-medium">
+                <span className="text-base font-medium">
                   {new Date(data.date_of_birth).toLocaleDateString("en-GB")}
                 </span>
               </p>
               {data.contact_number ? (
-                <p className="text-black font-semibold text-base head mx-5">
-                  | Contact Number :{" "}
+                <p className="text-black font-semibold text-base head md:ml-5">| Contact Number :
                   <span className="text-base font-medium cont">
                     {data.contact_number}
                   </span>
@@ -59,15 +58,15 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
               ) : null}
             </div>
 
-            <div className=" w-5/6 flex my-2">
+            <div className=" w-5/6 flex md:flex-row flex-col my-2">
               <p className="text-black font-semibold text-base head ">
                 Nationality :{" "}
-                <span className="text-base cont font-medium capitalize">
+                <span className="text-base font-medium capitalize">
                   {data.nationality}
                 </span>
               </p>
               {data.email_address ? (
-                <p className="text-black font-semibold text-base head mx-5">
+                <p className="text-black font-semibold text-base head md:mx-5">
                   | Email - Id :{" "}
                   <span className="text-base font-medium cont">
                     {data.email_address}
@@ -99,9 +98,9 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
             </div>
           </div>
         </div>
-        <div className="pl-8 pr-28">
+        <div className="pl-8 lg:pr-28 pr-8">
           {data.job_applied_for && (
-            <div className="flex my-2 justify-start items-center">
+            <div className="flex my-2">
               <p className="text-black font-semibold text-base ">
                 Job applied for :
               </p>
@@ -120,7 +119,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
               {data.experiences.map((exp, index) => (
                 <div key={exp.id}>
-                  <div className="flex justify-start w-3/5 pt-2">
+                  <div className="flex justify-start pt-2">
                     <p className="text-gray-700 font-medium text-base">
                       {dateFormatter(exp.from_date)} {"-"}
                     </p>
@@ -159,14 +158,14 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
                     </span>
                   </p>
 
-                  <div className="flex justify-start w-5/6 py-2">
+                  <div className="flex flex-col lg:flex-row py-2">
                     <p className="text-black font-semibold text-base ">
                       Address :{" "}
                       <span className="font-medium text-base capitalize">
                         {exp.location}
                       </span>
                     </p>
-                    <p className="text-black font-semibold text-base mx-5">
+                    <p className="text-black font-semibold text-base lg:mx-5">
                       | Website :{" "}
                       <span className="font-medium text-base">
                         {exp.website}
@@ -180,7 +179,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
         </div>
 
         {!!data.education.length && (
-          <div className="pl-8 pr-28">
+          <div className="pl-8 lg:pr-28 pr-8">
             <p className="block text-black font-extrabold text-2xl mt-6 uppercase">
               Education and Training
             </p>
@@ -188,7 +187,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
             {data.education.map((educ, index) => (
               <div key={educ.id}>
                 <div>
-                  <div className="flex justify-start w-3/5 mt-2">
+                  <div className="flex justify-start mt-2">
                     <p className="text-gray-700 font-medium text-base">
                       {dateFormatter(educ.from_date)}{" "}
                     </p>
@@ -216,7 +215,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
         )}
 
         {!!data?.language_skills?.language && (
-          <div className="className pl-8 pr-28">
+          <div className="pl-8 lg:pr-28 pr-8">
             <p className="block text-black font-bold text-2xl mt-6 uppercase">
               Language Skills
             </p>
@@ -235,7 +234,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
         )}
 
         {!!data.training_awards.length && (
-          <div className="pl-8 pr-28">
+          <div className="pl-8 lg:pr-28 pr-8">
             <p className="block text-black font-bold text-2xl mt-6 uppercase">
               Additional Information
             </p>
@@ -250,7 +249,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
               {" "}
                 {train.title}
             </p> */}
-                <div className="flex justify-start w-4/5">
+                <div className="flex justify-start">
                   <p className="text-gray-700 text-base">
                     {dateFormatter(train.from_date)} {"-"}
                   </p>
@@ -285,7 +284,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
 <p className="block text-black font-bold text-2xl mt-6 uppercase pl-8">Others</p>
         {data.others.map((newItem, index) => (
-          <div key={index} className="pl-8 pr-28">
+          <div key={index} className="pl-8 lg:pr-28 pr-8">
            
 
             <hr className="border-b-2 border-slate-500" />

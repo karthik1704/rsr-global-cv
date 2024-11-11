@@ -65,7 +65,7 @@ const AddSection = ({
     <>
       {isPopupVisible && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-          <div className="relative bg-white p-6 rounded-md shadow-lg w-1/2">
+          <div className="relative bg-white p-6 rounded-md shadow-lg w-11/12 sm:w-1/2 lg:w-1/3">
             <button
               className="absolute top-2 right-2 text-base text-black hover:text-gray-900 hover:bg-gray-200 py-2 px-4 rounded-full"
               onClick={() => setIsPopupVisible(false)}

@@ -321,7 +321,7 @@ const Resume = ({ resume, isMobile }: ResumeProps) => {
                   key={other.id}
                   className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md my-8"
                 >
-                  <div className="flex justify-between border-b-2 pb-2">
+                  <div className="flex justify-between items-center text-center border-b-2 pb-2">
                   <p className="text-black text-2xl font-bold uppercase">
                     {other.sectiontitle}
                   </p>
@@ -331,12 +331,12 @@ const Resume = ({ resume, isMobile }: ResumeProps) => {
                 setOtherId(other.id)
                 }}
               type="button"
-              className="w-24 bg-green-600 text-white hover:text-white hover:bg-green-700 p-2 font-bold rounded-md border border-gray-300"
+              className="md:w-24 w-14 h-12 bg-green-600 text-white hover:text-white hover:bg-green-700 p-2 font-bold rounded-md border border-gray-300"
             >
               Edit
             </button>
                   </div>
-<div className="grid grid-cols-2 gap-3 w-10/12">
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12">
                   <p className="text-lg font-semibold text-gray-800">
                     Title :{" "}
                   </p>

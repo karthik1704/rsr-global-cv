@@ -162,7 +162,7 @@ const PersonalInformation = ({
     <div className="md:w-full lg:w-full sm:w-full xl:w-full">
       {!show && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between border-b-2 pb-2">
+          <div className="flex justify-between text-center items-center border-b-2 pb-2">
           <p className="text-black text-2xl font-bold uppercase">
             Personal Information
           </p>
@@ -170,7 +170,7 @@ const PersonalInformation = ({
           <button
               onClick={() => setShowForm(true)}
               type="button"
-              className="w-24 bg-green-600 text-white hover:text-white hover:bg-green-700 p-2 font-bold rounded-md border border-gray-300"
+              className="md:w-24 w-14 h-12 bg-green-600 text-white hover:text-white hover:bg-green-700 p-2 font-bold rounded-md border border-gray-300"
             >
               Edit
             </button>
@@ -188,7 +188,7 @@ const PersonalInformation = ({
               />
             </div>
           )}
-          <div className="grid grid-cols-2 gap-3 w-10/12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12">
   <p className="text-lg font-semibold text-gray-800">
     Name:
   </p>
@@ -210,10 +210,10 @@ const PersonalInformation = ({
     {personalInformation.nationality}
   </p>
 
-  <p className="text-lg font-semibold text-gray-800 col-span-1">
+  <p className="text-lg font-semibold text-gray-800 ">
     Address:
   </p>
-  <p className="font-light capitalize">
+  <p className="font-light capitalize ">
     {personalInformation.address_line_1} {personalInformation.address_line_2} {personalInformation.postal_code} {personalInformation.city} {personalInformation.country}
   </p>
 
@@ -239,6 +239,7 @@ const PersonalInformation = ({
     </>
   )}
 </div>
+
 
           {personalInformation.responsibilities && (
             <p className="text-lg font-semibold text-gray-800">

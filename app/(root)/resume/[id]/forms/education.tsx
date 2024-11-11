@@ -177,25 +177,25 @@ const Education = ({
   return (
     <div className="my-8">
       {!show && education.length && (
-        <div>
-          {education.map((edu, index) => (
-            <div
-              className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md"
-              key={edu.id}
-            >
-              <div className="flex justify-between border-b-2 pb-2">
+        <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
+          <div className="flex justify-between items-center text-center border-b-2 pb-2">
               <p className="text-black text-2xl font-bold uppercase">
                 Education and Training
               </p>
               <button
                   onClick={() => setShowForm(true)}
                   type="button"
-                  className="w-24 items-center capitalize bg-green-600 text-white hover:text-slate-100 hover:bg-green-700 p-2 font-bold rounded-md"
+                  className="md:w-24 w-14 h-12 items-center capitalize bg-green-600 text-white hover:text-slate-100 hover:bg-green-700 p-2 font-bold rounded-md"
                 >
                   Edit
                 </button>
               </div>
-              <div className="grid grid-cols-2 gap-3 w-10/12">
+          {education.map((edu, index) => (
+            <div
+              
+              key={edu.id}
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12">
               <p className="text-lg font-semibold text-gray-800">
                 Qualification :{" "}
               </p>
