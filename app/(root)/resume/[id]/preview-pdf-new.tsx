@@ -22,7 +22,9 @@ const PreviewPdf = ({ data, isMobile }: Props) => {
   return (
     <div>
       {isMobile ? (
-        <div className="w-full h-svh flex items-center justify-center ">
+        <div className="w-full  flex flex-col items-center justify-center ">
+          <p className="text-black">Mobile and Tablet not supported PDF Preview</p>
+          
           <PDFDownloadLink
             document={<PDF data={data} />}
             fileName={`${data.resume_title}.pdf`}
