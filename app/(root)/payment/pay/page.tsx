@@ -1,39 +1,54 @@
-"use client";
 
-import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
-import {
-  Elements,
-} from "@stripe/react-stripe-js";
 import CheckoutForm from "./checkout-from";
+import { cookies } from "next/headers";
+import { SERVER_API_URL } from "@/app/constants";
+import { redirect } from "next/navigation";
+import PaymentWarpper from "./payment-warpper";
 
 
 
 
-if (!process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY) {
-    throw new Error("NEXT_PUBLIC_STRIPE_PUBLIC_KEY is not set");
+
+export async function getUser() {
+  const cookiesStore = cookies();
+  const access = cookiesStore.get("access");
+
+  const res = await fetch(`${SERVER_API_URL}/users/me`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access?.value}`,
+    },
+    next:{
+      tags:['User']
+    }
+  });
+
+  if (!res.ok) {
+    console.log("error");
   }
-  
-  
-  const stripePromise = loadStripe(
-    process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY 
-  ); 
-const options: StripeElementsOptions = {
-  mode: "payment",
-  amount: 1000,
-  currency: "gbp",
 
-  // Fully customizable with appearance API.
-  // appearance: {
-  // },
-};
+  if (res.status === 401) {
+    redirect ('/login');
+  }
+  if (res.status !== 200) {
+    return null;
+  }
 
-const CheckoutPage = () => {
 
+  const user = await res.json();
+  console.log(user);
+
+  return user;
+}
+
+type Data = User | null;
+
+
+const CheckoutPage = async () => {
+  const user = await getUser();
   return (
     <div className="flex justify-center items-center p-10 w-full">
-      <Elements stripe={stripePromise} options={options}>
-        <CheckoutForm  />
-      </Elements>
+        <PaymentWarpper user={user} />
     </div>
   );
 };
