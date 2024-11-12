@@ -16,6 +16,7 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { toast } from "sonner";
 import DeleteButton from "@/components/deleteButton/deletebutton";
 import { textHandleChange } from "@/lib/utils";
+import EditButton from "@/components/editButton/editbutton";
 
 //capitalize letter
 
@@ -269,56 +270,49 @@ const WorkExperience = ({
       {!show && workExperience.length && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
           <div className="flex justify-between text-center border-b-2 pb-2 items-center">
-          <p className="text-black text-2xl font-bold uppercase">
+          <p className="text-black lg:text-2xl text-xl font-bold uppercase">
             Work Experience
           </p>
-          <button
-                  onClick={() => setShowForm(true)}
-                  type="button"
-                  className="md:w-24 w-14 h-12 items-center capitalize bg-green-600 text-white hover:text-slate-100 hover:bg-green-700 p-2 font-bold rounded-md"
-                  // onClick={handlePrevious}
-                >
-                  Edit
-                </button>
+                <EditButton onClick={() => setShowForm(true)}/>
           </div>
           {!!data.jobappliedfor && (
-            <p className="text-lg font-semibold text-gray-800">
+            <p className="lg:text-lg text-base font-semibold text-gray-800">
               Job Applied :{" "}
-              <span className="font-light">{data.jobappliedfor}</span>
+              <span className="font-light lg:text-lg text-base">{data.jobappliedfor}</span>
             </p>
           )}
           {workExperience.map((exp, index) => (
             <div key={index}>
               <div  className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12 mb-6">
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 Employer :{" "}
               </p>
-              <p className="font-light capitalize">{exp.employer}</p>
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="font-light lg:text-lg text-base capitalize">{exp.employer}</p>
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 Website :
               </p>
-              <p className="font-light">{exp.website}</p>
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="font-light lg:text-lg text-base">{exp.website}</p>
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 Location :{" "}
               </p>
-              <p className="font-light capitalize">{exp.location}</p>
+              <p className="font-light lg:text-lg text-base capitalize">{exp.location}</p>
 
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 Occupation:{" "}
               </p>
-              <p className="font-light capitalize">{exp.occupation}</p>
+              <p className="font-light lg:text-lg text-base capitalize">{exp.occupation}</p>
 
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 From :{" "}
               </p>
-              <p className="font-light">
+              <p className="font-light lg:text-lg text-base">
                   {dateFormatter(exp.from_date)}
                 </p>
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 To :{" "}
               </p>
               {exp.to_date ? (
-                  <p className="font-light">
+                  <p className="font-light lg:text-lg text-base">
                     {dateFormatter(exp.to_date)}
                   </p>
                 ) : (
@@ -326,15 +320,15 @@ const WorkExperience = ({
                 )}
                 </div>
                 {exp.about_company && (
-              <p className="text-lg font-semibold text-gray-800 my-6">
+              <p className="lg:text-lg text-base font-semibold text-gray-800 my-6">
                 About Company :{" "}
-                <span className="font-light">{exp.about_company}</span>
+                <span className="font-light lg:text-lg text-base">{exp.about_company}</span>
               </p>
                 )}
                 {exp.responsibilities && (
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 Work Responsibilities :{" "}
-                <span className="font-light">{exp.responsibilities}</span>
+                <span className="font-light lg:text-lg text-base">{exp.responsibilities}</span>
               </p>
               )}
               <div>
@@ -679,7 +673,7 @@ const WorkExperience = ({
                 </div>
               ))}
 
-              <div className="flex items-center mx-6 py-4">
+              <div className="flex items-center md:mx-6 mx-0 py-4">
                 <p className="text-gray-700 font-bold text-base head">
                   New work experience
                 </p>

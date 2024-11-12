@@ -6,6 +6,7 @@ import { updateLicense, deleteLicense } from "../../action";
 import { toast } from "sonner";
 import { dateFormatter, getCurrentDate } from "@/lib/utils";
 import DeleteButton from "@/components/deleteButton/deletebutton";
+import EditButton from "@/components/editButton/editbutton";
 
 type Props = {
   selectedSection: string[];
@@ -216,12 +217,12 @@ const LicenseForm = ({
                 )}
               />
 
-              <div className="text-black flex bg-slate-200 p-4 text-2xl w-full">
+              <div className="text-black flex md:flex-row flex-col bg-slate-200 p-4 text-2xl w-full">
                 {checkbox.license_type}
                 {checkbox.checked && (
                   <div className="ml-4 text-lg text-black">
-                    <div className="flex gap-4 mb-2">
-                      <div className="flex flex-col ">
+                    <div className="flex flex-col gap-4 mb-2 md:flex-row md:gap-8">
+                      <div className="flex flex-col w-full md:w-auto">
                         <label className="block text-black font-bold text-sm head mb-2">
                           Issued Date<span className="text-red-700">*</span>
                         </label>
@@ -240,7 +241,7 @@ const LicenseForm = ({
                           className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         />
                       </div>
-                      <div className="flex flex-col ">
+                      <div className="flex flex-col w-full md:w-auto">
                         <label className="block text-black font-bold text-sm head mb-2">
                           Expiry Date<span className="text-red-700">*</span>
                         </label>
@@ -284,23 +285,17 @@ const LicenseForm = ({
         </form>
       ) : (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between border-b-2 pb-2">
-          <h2 className="text-black text-2xl font-bold uppercase">
+          <div className="flex justify-between items-center text-center border-b-2 pb-2">
+          <h2 className="text-black lg:text-2xl text-xl font-bold uppercase">
             Driving License
           </h2>
-          <button
-                    onClick={() => setShowForm(true)}
-                    type="button"
-                    className="w-24 items-center capitalize bg-green-600 text-white hover:text-slate-100 hover:bg-green-700 p-2 font-bold rounded-md"
-                  >
-                    Edit
-                  </button>
+                  <EditButton onClick={() => setShowForm(true)}/>
           </div>
           <ul>
             {lic.map((item, index) => (
               <div key={item.id}>
                 <li key={index}>
-                <div className="grid grid-cols-2 gap-3 w-10/12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12">
                   <strong className="text-black">License:</strong>{" "}
                   <p className="text-black">{item.license_type}</p>
                   <strong className="text-black my-3">Date Validation:</strong>{" "}

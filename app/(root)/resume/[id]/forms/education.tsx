@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import DeleteButton from "@/components/deleteButton/deletebutton";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import EditButton from "@/components/editButton/editbutton";
 
 type Props = {
   setData: any;
@@ -179,16 +180,10 @@ const Education = ({
       {!show && education.length && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
           <div className="flex justify-between items-center text-center border-b-2 pb-2">
-              <p className="text-black text-2xl font-bold uppercase">
+              <p className="text-black lg:text-2xl text-xl font-bold uppercase">
                 Education and Training
               </p>
-              <button
-                  onClick={() => setShowForm(true)}
-                  type="button"
-                  className="md:w-24 w-14 h-12 items-center capitalize bg-green-600 text-white hover:text-slate-100 hover:bg-green-700 p-2 font-bold rounded-md"
-                >
-                  Edit
-                </button>
+                <EditButton onClick={() => setShowForm(true)}/>
               </div>
           {education.map((edu, index) => (
             <div
@@ -196,40 +191,40 @@ const Education = ({
               key={edu.id}
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12">
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 Qualification :{" "}
               </p>
-              <p className="font-light capitalize">
+              <p className="font-light lg:text-lg text-base capitalize">
                   {edu.title_of_qualification}
                 </p>
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 Organisation :{" "}
               </p>
-              <p className="font-light capitalize">
+              <p className="font-light lg:text-lg text-base capitalize">
                   {edu.organization_name}
                 </p>
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 From :{" "}
               </p>
-              <p className="font-light">
+              <p className="font-light lg:text-lg text-base">
                   {dateFormatter(edu.from_date)}
                 </p>
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 To :{" "}
               </p>
-              <p className="font-light">
+              <p className="font-light lg:text-lg text-base">
                   {dateFormatter(edu.to_date)}
                 </p>
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 City :{" "}
               </p>
-              <p className="font-light capitalize">
+              <p className="font-light lg:text-lg text-base capitalize">
                   {edu.city}
                 </p>
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 Country :{" "}
               </p>
-              <p className="font-light capitalize">
+              <p className="font-light lg:text-lg text-base capitalize">
                   {edu.country}
                 </p>
               </div>

@@ -36,22 +36,22 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
           )}
           <div className=" flex-col pl-10 w-full">
             <p className="block font-semibold text-base my-3">
-              <span className="text-2xl font-bold text-gray-700 cont capitalize">
+              <span className="lg:text-2xl text-xl font-bold text-gray-700 cont capitalize">
                 {data.first_name} {data.last_name}
               </span>
             </p>
 
             <hr className="border-b-2 border-slate-500 w-10/12" />
             <div className="flex md:flex-row flex-col my-2">
-              <p className="text-black font-semibold text-base head ">
+              <p className="text-black font-semibold lg:text-base text-sm head ">
                 Date of birth :{" "}
-                <span className="text-base font-medium">
+                <span className="lg:text-base text-sm font-medium">
                   {new Date(data.date_of_birth).toLocaleDateString("en-GB")}
                 </span>
               </p>
               {data.contact_number ? (
-                <p className="text-black font-semibold text-base head md:ml-5">| Contact Number :
-                  <span className="text-base font-medium cont">
+                <p className="text-black font-semibold lg:text-base text-sm head md:ml-5">| Contact Number :
+                  <span className="lg:text-base text-sm font-medium cont">
                     {data.contact_number}
                   </span>
                 </p>
@@ -59,16 +59,16 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
             </div>
 
             <div className=" w-5/6 flex md:flex-row flex-col my-2">
-              <p className="text-black font-semibold text-base head ">
+              <p className="text-black font-semibold lg:text-base text-sm head ">
                 Nationality :{" "}
-                <span className="text-base font-medium capitalize">
+                <span className="lg:text-base text-sm font-medium capitalize">
                   {data.nationality}
                 </span>
               </p>
               {data.email_address ? (
-                <p className="text-black font-semibold text-base head md:mx-5">
+                <p className="text-black font-semibold lg:text-base text-sm head md:mx-5">
                   | Email - Id :{" "}
-                  <span className="text-base font-medium cont">
+                  <span className="lg:text-base text-sm font-medium cont">
                     {data.email_address}
                   </span>
                 </p>
@@ -76,21 +76,21 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
             </div>
 
             <div className="w-5/6">
-              <p className="text-black font-semibold text-base">
+              <p className="text-black font-semibold lg:text-base text-sm">
                 Address :{" "}
-                <span className="text-base font-medium cont capitalize">
+                <span className="lg:text-base text-sm font-medium cont capitalize">
                   {data.address_line_1}, {data.address_line_2}
                 </span>{" "}
-                <span className=" text-base font-medium cont capitalize">
+                <span className=" lg:text-base text-sm font-medium cont capitalize">
                   {data.city}, {data.postal_code} {data.country}
                 </span>
               </p>
               {data.responsibilities ? (
                 <div className="flex flex-col py-2">
-                  <p className="block text-black font-semibold text-base head flex-shrink-0 w-full">
+                  <p className="block text-black font-semibold lg:text-base text-sm head flex-shrink-0 w-full">
                     About me :
                   </p>
-                  <span className="block font-medium text-black text-base flex-grow cont">
+                  <span className="block font-medium text-black lg:text-base text-sm flex-grow cont">
                     {data.responsibilities}
                   </span>
                 </div>
@@ -101,10 +101,10 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
         <div className="pl-8 lg:pr-28 pr-8">
           {data.job_applied_for && (
             <div className="flex my-2">
-              <p className="text-black font-semibold text-base ">
+              <p className="text-black font-semibold lg:text-base text-sm ">
                 Job applied for :
               </p>
-              <span className=" px-2 block font-medium text-black text-base capitalize">
+              <span className=" px-2 block font-medium text-black lg:text-base text-sm capitalize">
                 {data.job_applied_for}
               </span>
             </div>
@@ -112,7 +112,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
           {!!data.experiences?.length && (
             <>
-              <p className="block text-black font-extrabold text-2xl uppercase">
+              <p className="block text-black font-extrabold lg:text-2xl text-xl uppercase">
                 Work Experience
               </p>
               <hr className="border-b-2 border-slate-500" />
@@ -120,20 +120,20 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
               {data.experiences.map((exp, index) => (
                 <div key={exp.id}>
                   <div className="flex justify-start pt-2">
-                    <p className="text-gray-700 font-medium text-base">
+                    <p className="text-gray-700 font-medium lg:text-base text-sm">
                       {dateFormatter(exp.from_date)} {"-"}
                     </p>
-                    <p className="text-gray-700 font-medium text-base">
+                    <p className="text-gray-700 font-medium lg:text-base text-sm">
                       {exp.to_date
                         ? dateFormatter(exp.to_date)
                         : "Currently Working"}
                     </p>
-                    <p className="text-gray-700 font-medium text-base">
+                    <p className="text-gray-700 font-medium lg:text-base text-sm">
                       , {exp.location}
                     </p>
                   </div>
                   <div className="w-4/5">
-                    <p className="text-gray-700 font-semibold text-2xl uppercase">
+                    <p className="text-gray-700 font-semibold lg:text-2xl text-xl uppercase">
                       {exp.occupation}{" "}
                       <span className="text-gray-700 font-medium capitalize">
                         {exp.employer}
@@ -142,18 +142,18 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
                   </div>
                   <hr className="border-b-1 border-slate-500" />
 
-                  <p className="text-black font-semibold text-base py-2">
+                  <p className="text-black font-semibold lg:text-base text-sm py-2">
                     {" "}
                     {exp.employer} :{" "}
-                    <span className="block font-medium text-base capitalize">
+                    <span className="block font-medium lg:text-base text-sm capitalize">
                       {exp.about_company}
                     </span>
                   </p>
 
-                  <p className="text-black font-semibold text-base py-2">
+                  <p className="text-black font-semibold lg:text-base text-sm py-2">
                     {" "}
                     Duties & Responsibilities :{" "}
-                    <span className="block font-medium text-base capitalize">
+                    <span className="block font-medium lg:text-base text-sm capitalize">
                       {exp.responsibilities}
                     </span>
                   </p>
@@ -165,9 +165,9 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
                         {exp.location}
                       </span>
                     </p>
-                    <p className="text-black font-semibold text-base lg:mx-5">
+                    <p className="text-black font-semibold lg:text-base text-sm lg:mx-5">
                       | Website :{" "}
-                      <span className="font-medium text-base">
+                      <span className="font-medium lg:text-base text-sm">
                         {exp.website}
                       </span>
                     </p>
@@ -180,7 +180,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
         {!!data.education.length && (
           <div className="pl-8 lg:pr-28 pr-8">
-            <p className="block text-black font-extrabold text-2xl mt-6 uppercase">
+            <p className="block text-black font-extrabold lg:text-2xl text-xl mt-6 uppercase">
               Education and Training
             </p>
             <hr className="border-b-2 border-slate-500" />
@@ -188,20 +188,20 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
               <div key={educ.id}>
                 <div>
                   <div className="flex justify-start mt-2">
-                    <p className="text-gray-700 font-medium text-base">
+                    <p className="text-gray-700 font-medium lg:text-base text-sm">
                       {dateFormatter(educ.from_date)}{" "}
                     </p>
-                    <p className="text-gray-700 font-medium text-base ">
+                    <p className="text-gray-700 font-medium lg:text-base text-sm ">
                       {" "}
                       - {dateFormatter(educ.to_date)}
                     </p>
-                    <p className="text-gray-700 font-medium text-base capitalize">
+                    <p className="text-gray-700 font-medium lg:text-base text-sm capitalize">
                       , {educ.country}
                     </p>
                   </div>
                 </div>
 
-                <p className="text-gray-700 font-semibold text-2xl uppercase">
+                <p className="text-gray-700 font-semibold lg:text-2xl text-xl uppercase">
                   {" "}
                   {educ.title_of_qualification}
                   <span className="text-gray-700 font-medium text-lg ml-2 capitalize">
@@ -216,14 +216,14 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
         {!!data?.language_skills?.language && (
           <div className="pl-8 lg:pr-28 pr-8">
-            <p className="block text-black font-bold text-2xl mt-6 uppercase">
+            <p className="block text-black font-bold lg:text-2xl text-xl mt-6 uppercase">
               Language Skills
             </p>
             <hr className="border-b-2 border-slate-500" />
 
-            <p className="block text-lg font-bold text-black my-3">
+            <p className="block lg:text-base text-sm font-bold text-black my-3">
               Languages Known :{" "}
-              <span className="text-base font-normal text-black cont capitalize">
+              <span className="lg:text-base text-sm font-normal text-black cont capitalize">
                 {data.language_skills.language}
               </span>
             </p>
@@ -235,11 +235,11 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
         {!!data.training_awards.length && (
           <div className="pl-8 lg:pr-28 pr-8">
-            <p className="block text-black font-bold text-2xl mt-6 uppercase">
+            <p className="block text-black font-bold lg:text-2xl text-xl mt-6 uppercase">
               Additional Information
             </p>
             <hr className="border-b-2 border-slate-500" />
-            <p className="block text-black font-bold text-2xl py-4">
+            <p className="block text-black font-bold lg:text-2xl text-xl py-4">
               Honors & Awards
             </p>
 
@@ -250,10 +250,10 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
                 {train.title}
             </p> */}
                 <div className="flex justify-start">
-                  <p className="text-gray-700 text-base">
+                  <p className="text-gray-700 lg:text-base text-sm">
                     {dateFormatter(train.from_date)} {"-"}
                   </p>
-                  <p className="text-gray-700 text-base">
+                  <p className="text-gray-700 lg:text-base text-sm">
                     {dateFormatter(train.to_date)}
                   </p>
                  
@@ -262,27 +262,23 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
                   </p> */}
                 </div>
                 <div className="flex">
-                  <p className="text-gray-700 font-semibold text-base capitalize">
-                    {" "}
-                    {train.title}
-                    {","}
-                  </p>
-                  <p className="text-gray-700 font-semibold text-base capitalize">
-                    {" "}
-                    {train.awarding_institute }{","} 
-                  </p>
-                  <p className="text-gray-700 font-semibold text-base capitalize">
-                  {train.location}
-                 
-                  </p>
-                </div>
+  <p className="text-gray-700 font-semibold lg:text-base text-sm capitalize">
+    {train.title},{" "}
+  </p>
+  <p className="text-gray-700 font-semibold lg:text-base text-sm capitalize">
+    {train.awarding_institute},{" "}
+  </p>
+  <p className="text-gray-700 font-semibold lg:text-base text-sm capitalize">
+    {train.location}
+  </p>
+</div>
               </div>
             ))}
             <hr className="border-b-1 border-slate-500" />
           </div>
         )}
 
-<p className="block text-black font-bold text-2xl mt-6 uppercase pl-8">Others</p>
+<p className="block text-black font-bold lg:text-2xl text-xl mt-6 uppercase pl-8">Others</p>
         {data.others.map((newItem, index) => (
           <div key={index} className="pl-8 lg:pr-28 pr-8">
            
@@ -291,15 +287,15 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
             <h4 className="text-lg font-bold text-black capitalize">
                 {newItem.sectiontitle}
               </h4>
-            <p className="block text-lg font-bold text-black my-3">
+            <p className="block lg:text-base text-sm font-bold text-black my-3">
               Title :{" "}
-              <span className="text-base font-normal text-black capitalize">
+              <span className="lg:text-base text-sm font-normal text-black capitalize">
                 {newItem.sectiontitle}
               </span>
             </p>
-            <p className="block text-lg font-bold text-black my-3">
+            <p className="block lg:text-base text-sm font-bold text-black my-3">
               Description :{" "}
-              <span className="text-base font-normal text-black capitalize">
+              <span className="lg:text-base text-sm font-normal text-black capitalize">
                 {newItem.description}
               </span>
             </p>
@@ -308,7 +304,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
         {!!data.driving_license.length && (
           <>
-            <div className="pl-8 pr-28">
+            <div className=" pl-8 lg:pr-28 pr-8">
               <p className="block text-black font-bold text-2xl mt-6 uppercase">
                 Driving License
               </p>
@@ -316,15 +312,15 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
             </div>
             {data.driving_license.map((lice, index) => (
               <div key={index} className="pl-8 pr-28">
-                <p className="block text-lg font-bold text-black my-3">
+                <p className="block lg:text-base text-sm font-bold text-black my-3">
                   Vehicle Type :{" "}
-                  <span className="text-black text-base font-normal">
+                  <span className="text-black lg:text-base text-sm font-normal">
                     {lice.license_type}
                   </span>
                 </p>
-                <p className="block text-lg font-bold text-black my-3">
+                <p className="block lg:text-base text-sm font-bold text-black my-3">
                   License Validation :{" "}
-                  <span className="text-black text-base font-normal">
+                  <span className="text-black lg:text-base text-sm font-normal">
                     {dateFormatter(lice.license_issued_date)} to {dateFormatter(lice.license_expiry_date)}
                   </span>
                 </p>
