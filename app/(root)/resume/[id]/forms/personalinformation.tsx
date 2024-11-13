@@ -11,6 +11,7 @@ import { SERVER_IMAGE_URL } from "@/app/constants";
 import { textHandleChange } from "@/lib/utils";
 import { maxLengthValidation } from "@/lib/utils";
 import { Contact } from "lucide-react";
+import EditButton from "@/components/editButton/editbutton";
 
 type Resume = {
   resume_title: string;
@@ -162,18 +163,11 @@ const PersonalInformation = ({
     <div className="md:w-full lg:w-full sm:w-full xl:w-full">
       {!show && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between border-b-2 pb-2">
-          <p className="text-black text-2xl font-bold uppercase">
+          <div className="flex justify-between text-center items-center border-b-2 pb-2">
+          <p className="text-black lg:text-2xl text-xl font-bold uppercase">
             Personal Information
           </p>
-
-          <button
-              onClick={() => setShowForm(true)}
-              type="button"
-              className="w-24 bg-green-600 text-white hover:text-white hover:bg-green-700 p-2 font-bold rounded-md border border-gray-300"
-            >
-              Edit
-            </button>
+            <EditButton onClick={() => setShowForm(true)}/>
           </div>
 
           {!!personalInformation.resume_image && (
@@ -188,41 +182,41 @@ const PersonalInformation = ({
               />
             </div>
           )}
-          <div className="grid grid-cols-2 gap-3 w-10/12">
-  <p className="text-lg font-semibold text-gray-800">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12">
+  <p className="lg:text-lg text-base font-semibold text-gray-800">
     Name:
   </p>
-  <p className="font-light text-lg capitalize">
+  <p className="font-light lg:text-lg text-base capitalize">
     {personalInformation.first_name} {personalInformation.last_name}
   </p>
 
-  <p className="text-lg font-semibold text-gray-800">
+  <p className="lg:text-lg text-base font-semibold text-gray-800">
     Date of Birth:
   </p>
-  <p className="font-light">
+  <p className="font-light lg:text-lg text-base">
     {dateFormatter(personalInformation.date_of_birth as string)}
   </p>
 
-  <p className="text-lg font-semibold text-gray-800">
+  <p className="lg:text-lg text-base font-semibold text-gray-800">
     Nationality:
   </p>
-  <p className="font-light capitalize">
+  <p className="font-light lg:text-lg text-base capitalize">
     {personalInformation.nationality}
   </p>
 
-  <p className="text-lg font-semibold text-gray-800 col-span-1">
+  <p className="lg:text-lg text-base font-semibold text-gray-800 ">
     Address:
   </p>
-  <p className="font-light capitalize">
+  <p className="font-light lg:text-lg text-base capitalize ">
     {personalInformation.address_line_1} {personalInformation.address_line_2} {personalInformation.postal_code} {personalInformation.city} {personalInformation.country}
   </p>
 
   {personalInformation.email_address && (
     <>
-      <p className="text-lg font-semibold text-gray-800">
+      <p className="lg:text-lg text-base font-semibold text-gray-800">
         Email Address:
       </p>
-      <p className="font-light">
+      <p className="font-light lg:text-lg text-base">
         {personalInformation.email_address}
       </p>
     </>
@@ -230,20 +224,21 @@ const PersonalInformation = ({
 
   {personalInformation.contact_number && (
     <>
-      <p className="text-lg font-semibold text-gray-800">
+      <p className="lg:text-lg text-base font-semibold text-gray-800">
         Contact Number:
       </p>
-      <p className="font-light">
+      <p className="font-light lg:text-lg text-base">
         {personalInformation.contact_number}
       </p>
     </>
   )}
 </div>
 
+
           {personalInformation.responsibilities && (
-            <p className="text-lg font-semibold text-gray-800">
+            <p className="lg:text-lg text-base font-semibold text-gray-800">
               Main Activities and Responsibilities :{" "}
-              <span className="font-light">
+              <span className="font-light lg:text-lg text-base">
                 {personalInformation.responsibilities}
               </span>
             </p>

@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import { ResumeType } from "./typings";
 import { deleteOthers } from "../action";
 import DeleteButton from "@/components/deleteButton/deletebutton";
+import EditButton from "@/components/editButton/editbutton";
 
 type ResumeProps = {
   resume: ResumeType;
@@ -321,31 +322,37 @@ const Resume = ({ resume, isMobile }: ResumeProps) => {
                   key={other.id}
                   className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md my-8"
                 >
-                  <div className="flex justify-between border-b-2 pb-2">
-                  <p className="text-black text-2xl font-bold uppercase">
+                  <div className="flex justify-between items-center text-center border-b-2 pb-2">
+                  <p className="text-black lg:text-2xl text-xl font-bold uppercase">
                     {other.sectiontitle}
                   </p>
-                  <button
+                  {/* <button
               onClick={() => 
                 {setAdditionalTitle(other.sectiontitle)
                 setOtherId(other.id)
                 }}
               type="button"
-              className="w-24 bg-green-600 text-white hover:text-white hover:bg-green-700 p-2 font-bold rounded-md border border-gray-300"
+              className="md:w-24 w-14 h-12 bg-green-600 text-white hover:text-white hover:bg-green-700 p-2 font-bold rounded-md border border-gray-300"
             >
               Edit
-            </button>
+            </button> */}
+            <EditButton 
+  onClick={() => {
+    setAdditionalTitle(other.sectiontitle);
+    setOtherId(other.id);
+  }}
+/>
                   </div>
-<div className="grid grid-cols-2 gap-3 w-10/12">
-                  <p className="text-lg font-semibold text-gray-800">
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12">
+                  <p className="lg:text-lg text-base font-semibold text-gray-800">
                     Title :{" "}
                   </p>
-                  <p className="font-light capitalize">{other.title}</p>
+                  <p className="font-light lg:text-lg text-base capitalize">{other.title}</p>
 
-                  <p className="text-lg font-semibold text-gray-800">
+                  <p className="lg:text-lg text-base font-semibold text-gray-800">
                     Description :{" "}
                   </p>
-                  <p className="font-light capitalize">
+                  <p className="font-light lg:text-lg text-base capitalize">
                       {other.description}
                     </p>
                   </div>

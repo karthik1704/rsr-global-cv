@@ -109,7 +109,7 @@ const Footer = () => {
 
         <div className="my-10 flex flex-col text-center items-center">
           <span>
-            © 2024{" "}
+            © {new Date().getFullYear()}{" "}
             <Link href={"https://vimkes.com/"} className="text-green-700" target="unblank">
               {" "}
               Vimkes Technologies

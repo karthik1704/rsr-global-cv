@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import DeleteButton from "@/components/deleteButton/deletebutton";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Pencil } from "lucide-react";
+import EditButton from "@/components/editButton/editbutton";
 
 const languageSchema = z.object({
   language : z.string().min(2, {message:'Language is Required'}).max(30,{message:'Maximum characters: 30'})
@@ -103,25 +105,19 @@ const Language = ({
     <div className="my-8">
       {!show && language && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between border-b-2 pb-2">
-          <p className="text-black text-2xl font-bold uppercase">
+          <div className="flex justify-between items-center text-center border-b-2 pb-2">
+          <p className="text-black lg:text-2xl text-xl font-bold uppercase">
             Language Information
           </p>
-          <button
-              onClick={() => setShowForm(true)}
-              type="button"
-              className="w-24 bg-green-600 text-white hover:text-white hover:bg-green-700 p-2 font-bold rounded-md border border-gray-300"
-            >
-              Edit
-            </button>
+<EditButton onClick={() => setShowForm(true)}/>
           </div>
 
           {language.language && (
-            <div className="grid grid-cols-2 gap-3 w-10/12">
-            <p className="text-lg font-semibold text-gray-800">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12">
+            <p className="lg:text-lg text-base font-semibold text-gray-800">
               Languages Known :{" "}
             </p>
-            <p className="font-light capitalize">{language.language}</p>
+            <p className="font-light lg:text-lg text-base capitalize">{language.language}</p>
             </div>
           )}
 

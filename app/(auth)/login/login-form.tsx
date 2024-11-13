@@ -29,14 +29,14 @@ const LoginForm = () => {
 
   return (
     // <div className="h-full flex flex-col items-center">
-  <div className="w-full h-full flex flex-col md:flex-col lg:flex-row items-center py-10 justify-evenly bg-[url('/login-bg.jpg')] bg-cover bg-no-repeat">
+<div className="w-full h-full flex flex-col sm:flex-col md:flex-row lg:flex-row items-center py-10 justify-evenly bg-[url('/login-bg.jpg')] bg-cover bg-no-repeat">
     
     {/* Sign In Form */}
-    <div className="bg-[url('/login-section-bg.jpg')] bg-cover bg-center w-4/5 sm:w-3/5 md:w-11/12 lg:w-4/12 p-8 rounded-lg shadow-lg text-justify mb-6 lg:mb-0">
+    <div className="bg-[url('/login-section-bg.jpg')] bg-cover bg-center w-4/5 mx-4 sm:w-3/5 md:w-4/6 lg:w-4/12 p-8 rounded-lg shadow-lg text-justify mb-6 lg:mb-0">
     {/* <div className="bg-gray-800/30 bg-cover bg-center w-4/5 sm:w-3/5 md:w-11/12 lg:w-4/12 p-8 rounded-lg shadow-lg text-justify mb-6 lg:mb-0"> */}
-      <h1 className="text-4xl text-black font-bold mb-6 text-center">Login</h1>
+      <h1 className="lg:text-3xl text-2xl text-black font-bold mb-6 text-center">Login</h1>
       <form action={formAction}>
-        <div className="mb-6 mx-4 lg:mx-12">
+        <div className="mb-6 mx-1 lg:mx-12">
           <label className="block text-black font-semibold mb-2">Email-ID</label>
           <input
             type="text"
@@ -48,7 +48,7 @@ const LoginForm = () => {
             <p className="text-red-500 mt-1">{state.fieldErrors.username}</p>
           )}
         </div>
-        <div className="mb-6 mx-4 lg:mx-12">
+        <div className="mb-6 mx-1 lg:mx-12">
           <label className="block text-black font-semibold mb-2">Password</label>
           <input
             type="password"
@@ -60,17 +60,17 @@ const LoginForm = () => {
             <p className="text-red-500 mt-1">{state.fieldErrors.password}</p>
           )}
         </div>
-        <div className="mb-4 pt-2 mx-4 lg:mx-12">
+        <div className="mb-4 pt-2 mx-1 lg:mx-12">
           <SubmitButton name='Login'/>
         </div>
       </form>
     </div>
 
     {/* Welcome Section */}
-    <div className="w-4/5 sm:w-3/5 md:w-11/12 lg:w-4/12 p-3 backdrop-blur-sm bg-gray-800/30 rounded-lg shadow-lg">
+    <div className="w-4/5 sm:w-3/5 md:w-4/6 lg:w-4/12 p-3 backdrop-blur-sm bg-gray-800/30 rounded-lg shadow-lg mx-4">
       <div className="flex flex-col justify-center items-center py-10">
         <Image src={img} alt="logo" className="w-48 h-auto mb-4" />
-        <h1 className="text-black text-3xl font-bold mb-2">Welcome to RSR CV Builder</h1>
+        <h1 className="text-black text-center lg:text-3xl text-2xl font-bold mb-2">Welcome to RSR CV Builder</h1>
         <p className="text-black mb-4">Don&apos;t have an account?</p>
         <Link
           href="/signup"

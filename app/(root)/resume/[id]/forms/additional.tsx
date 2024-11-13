@@ -6,6 +6,7 @@ import { deleteAdditionalInfo, updateAdditionalInfo } from "../../action";
 import { TrainingAward } from "../typings";
 import { toast } from "sonner";
 import DeleteButton from "@/components/deleteButton/deletebutton";
+import EditButton from "@/components/editButton/editbutton";
 
 
 type TrainingProps = {
@@ -157,21 +158,15 @@ const Training = ({
     <div className="my-8">
       {!show && trainings.length && (
         <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between border-b-2 p-2">
-              <p className="text-black text-2xl font-bold uppercase">
+          <div className="flex justify-between items-center text-center border-b-2 pb-2">
+              <p className="text-black lg:text-2xl text-xl font-bold uppercase">
                 Honors & Awards
               </p>
-              <button
-                  onClick={() => setShowForm(true)}
-                  type="button"
-                  className="w-24 items-center capitalize bg-green-600 text-white hover:text-slate-100 hover:bg-green-700 p-2 font-bold rounded-md"
-                >
-                  Edit
-                </button>
+                <EditButton onClick={() => setShowForm(true)}/>
               </div>
           {trainings.map((train, index) => (
             <div
-              className="p-6 space-y-4"
+              
               key={train.id}
             >
               {/* <div className="flex justify-between border-b-2 pb-2">
@@ -187,31 +182,31 @@ const Training = ({
                 </button>
               </div> */}
               {/* <p className="text-lg font-semibold text-gray-800">Hobbies : <span className="font-light">{train.Hobbies}</span></p> */}
-              <div className="grid grid-cols-2 gap-3 w-10/12">
-              <p className="text-lg font-semibold text-gray-800">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12">
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 Title of Award :{" "}
               </p>
-              <p className="font-light capitalize">{train.title}</p>
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="font-light lg:text-lg text-base capitalize">{train.title}</p>
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 Awarding Institution :{" "}
               </p>
-              <p className="font-light capitalize">{train.awarding_institute}</p>
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="font-light lg:text-lg text-base capitalize">{train.awarding_institute}</p>
+              <p className="lg:text-lg text-basefont-semibold text-gray-800">
                 From :{" "}
               </p>
-              <p className="font-light">
+              <p className="font-light lg:text-lg text-base">
                   {dateFormatter(train.from_date)}
                 </p>
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 To :{" "}
               </p>
-              <p className="font-light">
+              <p className="font-light lg:text-lg text-base">
                   {dateFormatter(train.to_date)}
                 </p>
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="lg:text-lg text-base font-semibold text-gray-800">
                 Location :{" "}
               </p>
-              <p className="font-light capitalize">
+              <p className="font-light lg:text-lg text-base capitalize">
                   {train.location}
                 </p>
               </div>
