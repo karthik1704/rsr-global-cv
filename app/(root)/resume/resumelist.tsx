@@ -170,9 +170,9 @@ const ResumeList = ({ resumes, user }: Props) => {
                     <div className="flex justify-center flex-col lg:flex-row sm:flex-col">
                       <p className="pl-3 lg:text-lg text-base font-bold text-black">
                         Resumes:{" "}
-                        <p className="lg:text-lg text-base font-normal">
+                        <span className="lg:text-lg text-base font-normal">
                           {resume.resume_title}
-                        </p>
+                        </span>
                       </p>
                     </div>
                     <Link
