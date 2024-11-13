@@ -36,7 +36,7 @@ const LoginForm = () => {
     {/* <div className="bg-gray-800/30 bg-cover bg-center w-4/5 sm:w-3/5 md:w-11/12 lg:w-4/12 p-8 rounded-lg shadow-lg text-justify mb-6 lg:mb-0"> */}
       <h1 className="lg:text-3xl text-2xl text-black font-bold mb-6 text-center">Login</h1>
       <form action={formAction}>
-        <div className="mb-6 mx-4 lg:mx-12">
+        <div className="mb-6 mx-1 lg:mx-12">
           <label className="block text-black font-semibold mb-2">Email-ID</label>
           <input
             type="text"
@@ -48,7 +48,7 @@ const LoginForm = () => {
             <p className="text-red-500 mt-1">{state.fieldErrors.username}</p>
           )}
         </div>
-        <div className="mb-6 mx-4 lg:mx-12">
+        <div className="mb-6 mx-1 lg:mx-12">
           <label className="block text-black font-semibold mb-2">Password</label>
           <input
             type="password"
@@ -60,7 +60,7 @@ const LoginForm = () => {
             <p className="text-red-500 mt-1">{state.fieldErrors.password}</p>
           )}
         </div>
-        <div className="mb-4 pt-2 mx-4 lg:mx-12">
+        <div className="mb-4 pt-2 mx-1 lg:mx-12">
           <SubmitButton name='Login'/>
         </div>
       </form>

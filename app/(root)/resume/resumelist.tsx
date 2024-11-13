@@ -5,6 +5,7 @@ import {
   Mail,
   MapPin,
   MapPinCheck,
+  Pencil,
   Phone,
   UserCheck,
   WalletCards,
@@ -162,8 +163,8 @@ const ResumeList = ({ resumes, user }: Props) => {
                 </div>
               </div>
 
-              <div className="bg-white transition-transform transform hover:scale-105 w-full my-5 rounded-lg lg:w-1/2 md:w-11/12">
-                <div className="p-4 md:p-6 flex-col lg:flex md:flex-col justify-evenly">
+              <div className="bg-white transition-transform transform hover:scale-105 w-full my-5 rounded-lg lg:w-1/2 md:w-3/4">
+                <div className="p-2 md:p-6 flex-col lg:flex md:flex-col justify-evenly">
                   <div className="p-10 flex">
                     <FilePlus className="text-green-700" size={32} />
                     <div className="flex justify-center flex-col lg:flex-row sm:flex-col">
@@ -173,29 +174,30 @@ const ResumeList = ({ resumes, user }: Props) => {
                           {resume.resume_title}
                         </p>
                       </p>
-                      <Link
-                        href={`/resume/${resume.id}`}
-                        className="lg:ml-5 flex w-24 h-10 justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      >
-                        Edit
-                      </Link>
                     </div>
+                    <Link
+                        href={`/resume/${resume.id}`}
+                        className="lg:ml-5 ml-5 flex lg:w-24 w-14 h-10 justify-center items-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      >
+                        <span className="hidden lg:block">Edit</span>
+                        <Pencil size={20} className='block lg:hidden'/>
+                      </Link>
                   </div>
 
                   <div className="p-10 flex">
                     <Clock2 className="text-green-700" size={32} />
                     <p className="pl-3 md:px-auto lg:text-lg text-base font-bold text-black">
                       Validate Till:{" "}
-                      <p className="lg:text-lg text-base font-normal">
+                      <span className="lg:text-lg text-base font-normal">
                         {user.expiry_date && dateFormatter(user.expiry_date)}
-                      </p>
+                      </span>
                     </p>
                   </div>
 
                   <div className="p-10 flex">
                     <WalletCards className="text-green-700" size={32} />
-                    <p className="pl-3 lg:text-lg text-base font-bold text-black">
-                      Payment: <p className="lg:text-lg text-base font-normal">Done</p>
+                    <p className="pl-3 flex flex-col md:flex-row lg:text-lg text-base font-bold text-black">
+                      Payment:<span className="lg:text-lg text-base font-normal ml-1">Done</span>
                     </p>
                   </div>
                 </div>
