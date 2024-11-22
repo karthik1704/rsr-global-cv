@@ -188,7 +188,7 @@ const LicenseForm = ({
   };
 
   return (
-    <div className="my-8">
+    <div className="my-4">
       {" "}
       {showForm ? (
         <form onSubmit={handleSubmit(handleForm)} className="space-y-4">
@@ -284,22 +284,20 @@ const LicenseForm = ({
           </div>
         </form>
       ) : (
-        <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
+        <div className="p-3 space-y-4 bg-gray-100 rounded-lg shadow-md">
           <div className="flex justify-between items-center text-center border-b-2 pb-2">
-          <h2 className="text-black lg:text-2xl text-xl font-bold uppercase">
+          <h2 className="text-black lg:text-xl text-lg font-bold uppercase">
             Driving License
           </h2>
                   <EditButton onClick={() => setShowForm(true)}/>
           </div>
           <ul>
             {lic.map((item, index) => (
-              <div key={item.id}>
+              <div className="flex justify-between" key={item.id}>
                 <li key={index}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12">
-                  <strong className="text-black">License:</strong>{" "}
-                  <p className="text-black">{item.license_type}</p>
-                  <strong className="text-black my-3">Date Validation:</strong>{" "}
-                  <p className="text-black">
+                <div>
+                  <p className="text-black lg:text-base text-sm font-bold">{item.license_type}</p>
+                  <p className=" font-light lg:text-base text-sm">
                     {" "}
                     {dateFormatter(item.license_issued_date)} to {dateFormatter(item.license_expiry_date)}
                   </p>

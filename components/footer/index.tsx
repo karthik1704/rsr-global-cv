@@ -23,8 +23,8 @@ const Footer = () => {
       rsrglobalresumebuilder.com
     </Link>
             </p>
-            <Link href={'/terms-condition'}>Terms and condition</Link>
-            <Link href={'/privacy-policy'}>Privacy Policy</Link>
+            <Link href={'/terms-condition'}  className="text-green-700 lg:text-base text-sm">Terms and conditions</Link>
+            <Link href={'/privacy-policy'}  className="text-green-700 lg:text-base text-sm">Privacy Policy</Link>
             <ul className="flex justify-center gap-4 sm:gap-6">
               <Link href={"https://www.facebook.com/people/RSR-Global-Training-Academy/61558372236248/"} target="unblank">
                 <li>
@@ -107,7 +107,7 @@ const Footer = () => {
           </div> */}
         </div>
 
-        <div className="my-10 flex flex-col text-center items-center">
+        <div className="my-10 lg:text-base text-sm flex flex-col text-center items-center">
           <span>
             © {new Date().getFullYear()}{" "}
             <Link href={"https://vimkes.com/"} className="text-green-700" target="unblank">
