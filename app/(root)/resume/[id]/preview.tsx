@@ -50,7 +50,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
                 </span>
               </p>
               {data.contact_number ? (
-                <p className="text-black font-semibold lg:text-base text-sm head md:ml-5">| Contact Number :
+                <p className="text-black font-semibold lg:text-base text-sm head md:ml-5">| Contact Number :{" "}
                   <span className="lg:text-base text-sm font-medium cont">
                     {data.contact_number}
                   </span>
@@ -112,7 +112,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
           {!!data.experiences?.length && (
             <>
-              <p className="block text-black font-extrabold lg:text-2xl text-xl uppercase">
+              <p className="block text-black font-extrabold lg:text-xl text-lg uppercase">
                 Work Experience
               </p>
               <hr className="border-b-2 border-slate-500" />
@@ -128,12 +128,10 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
                         ? dateFormatter(exp.to_date)
                         : "Currently Working"}
                     </p>
-                    <p className="text-gray-700 font-medium lg:text-base text-sm">
-                      , {exp.location}
-                    </p>
+                    
                   </div>
                   <div className="w-4/5">
-                    <p className="text-gray-700 font-semibold lg:text-2xl text-xl uppercase">
+                    <p className="text-gray-700 font-semibold lg:text-xl text-lg uppercase">
                       {exp.occupation}{" "}
                       <span className="text-gray-700 font-medium capitalize">
                         {exp.employer}
@@ -180,7 +178,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
         {!!data.education.length && (
           <div className="pl-8 lg:pr-28 pr-8">
-            <p className="block text-black font-extrabold lg:text-2xl text-xl mt-6 uppercase">
+            <p className="block text-black font-extrabold lg:text-xl text-lg mt-6 uppercase">
               Education and Training
             </p>
             <hr className="border-b-2 border-slate-500" />
@@ -201,7 +199,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
                   </div>
                 </div>
 
-                <p className="text-gray-700 font-semibold lg:text-2xl text-xl uppercase">
+                <p className="text-gray-700 font-semibold lg:text-xl text-lg uppercase">
                   {" "}
                   {educ.title_of_qualification}
                   <span className="text-gray-700 font-medium text-lg ml-2 capitalize">
@@ -216,7 +214,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
         {!!data?.language_skills?.language && (
           <div className="pl-8 lg:pr-28 pr-8">
-            <p className="block text-black font-bold lg:text-2xl text-xl mt-6 uppercase">
+            <p className="block text-black font-bold lg:text-xl text-lg mt-6 uppercase">
               Language Skills
             </p>
             <hr className="border-b-2 border-slate-500" />
@@ -235,11 +233,11 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
         {!!data.training_awards.length && (
           <div className="pl-8 lg:pr-28 pr-8">
-            <p className="block text-black font-bold lg:text-2xl text-xl mt-6 uppercase">
+            <p className="block text-black font-bold lg:text-xl text-lg mt-6 uppercase">
               Additional Information
             </p>
             <hr className="border-b-2 border-slate-500" />
-            <p className="block text-black font-bold lg:text-2xl text-xl py-4">
+            <p className="block text-black font-bold lg:text-xl text-lg py-4">
               Honors & Awards
             </p>
 
@@ -278,7 +276,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
           </div>
         )}
 
-<p className="block text-black font-bold lg:text-2xl text-xl mt-6 uppercase pl-8">Others</p>
+<p className="block text-black font-bold lg:text-xl text-lg mt-6 uppercase pl-8">Others</p>
         {data.others.map((newItem, index) => (
           <div key={index} className="pl-8 lg:pr-28 pr-8">
            

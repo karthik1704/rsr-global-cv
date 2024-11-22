@@ -121,42 +121,48 @@ const Education = ({
 
   //validation function on date
 
-  const [fromDate, setFromDate] = useState("");
+  // const [fromDate, setFromDate] = useState("");
 
-  const validateToDate = (value: string) => {
-    const getMinToDate = () => {
-      if (!fromDate) return undefined;
-      const minDate = new Date(fromDate);
-      minDate.setDate(minDate.getDate() + 1);
-      return minDate.toISOString().split("T")[0];
-    };
+  const [fromDates, setFromDates] = useState<{ [key: number]: string }>({});
 
-    if (!fromDate) return "select a from date first";
+const handleFromDateChange = (index: number, value: string) => {
+  setFromDates((prevState) => ({ ...prevState, [index]: value }));
+};
 
-    const from = new Date(fromDate);
-    const to = new Date(value);
-  };
-
-  const getMinToDate = () => {
+  const getMinToDate = (index: number) => {
+    const fromDate = fromDates[index];
     if (!fromDate) return undefined;
     const minDate = new Date(fromDate);
     minDate.setDate(minDate.getDate() + 1);
     return minDate.toISOString().split("T")[0];
   };
 
-  //--validation function for date year range--
-
-  const validateDateRange = (value: string |Date | undefined) => {
+  const validateDateRange = (value: string | Date | undefined, index: number) => {
     if (!value) {
-      return ;
+      return;
     }
+  
     const minDate = new Date("1980-01-01");
     const maxDate = new Date("2024-12-31");
     const selectedDate = new Date(value);
-
+  
+    // Validate the date range for each input individually
     if (selectedDate < minDate || selectedDate > maxDate) {
-      return "please enter valid Year";
+      return "Please enter a valid year";
     }
+  
+    // Add additional validation between the from and to dates
+    if (index > 0) {
+      const previousFromDate = fromDates[index - 1];
+      if (previousFromDate) {
+        const previousToDate = new Date(previousFromDate);
+        previousToDate.setDate(previousToDate.getDate() + 1);
+        if (selectedDate <= previousToDate) {
+          return "To date must be after the previous to date";
+        }
+      }
+    }
+  
     return true;
   };
 
@@ -176,61 +182,43 @@ const Education = ({
   }
 
   return (
-    <div className="my-8">
+    <div className="my-4">
       {!show && education.length && (
-        <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
+        <div className="p-3 space-y-2 bg-gray-100 rounded-lg shadow-md">
           <div className="flex justify-between items-center text-center border-b-2 pb-2">
-              <p className="text-black lg:text-2xl text-xl font-bold uppercase">
+              <p className="text-black lg:text-xl text-lg font-bold uppercase">
                 Education and Training
               </p>
                 <EditButton onClick={() => setShowForm(true)}/>
               </div>
           {education.map((edu, index) => (
-            <div
-              
+            <div className="border-b-2 pb-2"
               key={edu.id}
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12">
-              <p className="lg:text-lg text-base font-semibold text-gray-800">
-                Qualification :{" "}
-              </p>
-              <p className="font-light lg:text-lg text-base capitalize">
+              <div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+              <p className="font-light lg:text-base text-sm text-left">
+                  {dateFormatter(edu.from_date)} <span className="md:mx-1"> - </span> {dateFormatter(edu.to_date)}  {edu.city}, {edu.country}
+                </p>
+                </div>
+                <div>
+                <DeleteButton onClick={()=> handleDeleteEducation(edu.id)}/>
+                </div>
+
+                </div>
+                <div className="flex flex-col">
+                <p className="font-semibold lg:text-base text-sm capitalize">
                   {edu.title_of_qualification}
                 </p>
-              <p className="lg:text-lg text-base font-semibold text-gray-800">
-                Organisation :{" "}
-              </p>
-              <p className="font-light lg:text-lg text-base capitalize">
+                <p className="font-semibold lg:text-base text-sm capitalize">
                   {edu.organization_name}
                 </p>
-              <p className="lg:text-lg text-base font-semibold text-gray-800">
-                From :{" "}
-              </p>
-              <p className="font-light lg:text-lg text-base">
-                  {dateFormatter(edu.from_date)}
-                </p>
-              <p className="lg:text-lg text-base font-semibold text-gray-800">
-                To :{" "}
-              </p>
-              <p className="font-light lg:text-lg text-base">
-                  {dateFormatter(edu.to_date)}
-                </p>
-              <p className="lg:text-lg text-base font-semibold text-gray-800">
-                City :{" "}
-              </p>
-              <p className="font-light lg:text-lg text-base capitalize">
-                  {edu.city}
-                </p>
-              <p className="lg:text-lg text-base font-semibold text-gray-800">
-                Country :{" "}
-              </p>
-              <p className="font-light lg:text-lg text-base capitalize">
-                  {edu.country}
-                </p>
+                </div>
               </div>
-              <div>
+              {/* <div>
             <DeleteButton onClick={()=> handleDeleteEducation(edu.id)}/>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>
@@ -314,13 +302,13 @@ const Education = ({
                             value: true,
                             message: "Date is required",
                           },
-                          validate: validateDateRange,
+                          validate: (value) => validateDateRange(value, index),
                         })}
                         min="1980-01-01"
                         max={getCurrentDate()}
                         className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
-                        onChange={(e) => setFromDate(e.target.value)}
+                        onChange={(e) => handleFromDateChange(index, e.target.value)}
                       />
                       {errors.educations?.[index]?.from_date && (
                         <p className="text-red-700 text-sm">
@@ -339,13 +327,13 @@ const Education = ({
                             value: true,
                             message: "Date is required",
                           },
-                          validate: validateDateRange,
+                          validate: (value) => validateDateRange(value, index),
                         })}
-                        min={getMinToDate()}
+                        min={getMinToDate(index)}
                         max={getCurrentDate()}
                         className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
-                        disabled={!fromDate}
+                        disabled={!fromDates[index]}
                       />
                       {errors.educations?.[index]?.to_date && (
                         <p className="text-red-700 text-sm">

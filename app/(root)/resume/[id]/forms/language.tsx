@@ -102,22 +102,23 @@ const Language = ({
   };
 
   return (
-    <div className="my-8">
+    <div className="my-4">
       {!show && language && (
-        <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
+        <div className="p-3 space-y-4 bg-gray-100 rounded-lg shadow-md">
           <div className="flex justify-between items-center text-center border-b-2 pb-2">
-          <p className="text-black lg:text-2xl text-xl font-bold uppercase">
+          <p className="text-black lg:text-xl text-lg font-bold uppercase">
             Language Information
           </p>
 <EditButton onClick={() => setShowForm(true)}/>
           </div>
 
           {language.language && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12">
-            <p className="lg:text-lg text-base font-semibold text-gray-800">
+            <div className="flex justify-between">
+            {/* <p className="lg:text-lg text-base font-semibold text-gray-800">
               Languages Known :{" "}
-            </p>
-            <p className="font-light lg:text-lg text-base capitalize">{language.language}</p>
+            </p> */}
+            <p className="font-light lg:text-base text-sm capitalize">{language.language}</p>
+            <DeleteButton onClick={()=>handleDeleteLanguage(language.id)}/>
             </div>
           )}
 
@@ -129,10 +130,10 @@ const Language = ({
               </span>
             </p>
           )}
-          <div>
+          {/* <div>
            
             <DeleteButton onClick={()=>handleDeleteLanguage(language.id)}/>
-          </div>
+          </div> */}
         </div>
       )}
 

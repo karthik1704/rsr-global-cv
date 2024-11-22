@@ -266,11 +266,11 @@ const WorkExperience = ({
   }
   // console.log(workExperience)
   return (
-    <div className="my-8">
+    <div className="my-4">
       {!show && workExperience.length && (
-        <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
+        <div className="p-3 space-y-4 bg-gray-100 rounded-lg shadow-md">
           <div className="flex justify-between text-center border-b-2 pb-2 items-center">
-          <p className="text-black lg:text-2xl text-xl font-bold uppercase">
+          <p className="text-black lg:text-xl text-lg font-bold uppercase">
             Work Experience
           </p>
                 <EditButton onClick={() => setShowForm(true)}/>
@@ -282,59 +282,75 @@ const WorkExperience = ({
             </p>
           )}
           {workExperience.map((exp, index) => (
-            <div key={index}>
-              <div  className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12 mb-6">
-              <p className="lg:text-lg text-base font-semibold text-gray-800">
+            <div className="border-b-2 pb-2 space-y-3" key={index}>
+              {/* <div  className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12 mb-6"> */}
+              <div>
+              {/* <p className="lg:text-lg text-base font-semibold text-gray-800">
                 Employer :{" "}
-              </p>
-              <p className="font-light lg:text-lg text-base capitalize">{exp.employer}</p>
-              <p className="lg:text-lg text-base font-semibold text-gray-800">
+              </p> */}
+              {/* <p className="font-light lg:text-lg text-base capitalize">{exp.employer}</p> */}
+              {/* <p className="lg:text-lg text-base font-semibold text-gray-800">
                 Website :
               </p>
-              <p className="font-light lg:text-lg text-base">{exp.website}</p>
-              <p className="lg:text-lg text-base font-semibold text-gray-800">
-                Location :{" "}
+              <p className="font-light lg:text-lg text-base">{exp.website}</p> */}
+              {/* <p className="lg:text-lg text-base font-semibold text-gray-800">
+                Address :{" "}
               </p>
-              <p className="font-light lg:text-lg text-base capitalize">{exp.location}</p>
+              <p className="font-light lg:text-lg text-base capitalize">{exp.location}</p> */}
 
-              <p className="lg:text-lg text-base font-semibold text-gray-800">
-                Occupation:{" "}
-              </p>
-              <p className="font-light lg:text-lg text-base capitalize">{exp.occupation}</p>
-
-              <p className="lg:text-lg text-base font-semibold text-gray-800">
-                From :{" "}
-              </p>
-              <p className="font-light lg:text-lg text-base">
+<div className="flex items-center justify-between">
+  <div className="flex items-center">
+              <p className="font-light lg:text-base text-sm">
                   {dateFormatter(exp.from_date)}
                 </p>
-              <p className="lg:text-lg text-base font-semibold text-gray-800">
-                To :{" "}
-              </p>
+                <span className="mx-1"> - </span>
               {exp.to_date ? (
-                  <p className="font-light lg:text-lg text-base">
+                  <p className="font-light lg:text-base text-sm">
                     {dateFormatter(exp.to_date)}
                   </p>
                 ) : (
-                  "Currently working"
+                  <p className="font-light lg:text-base text-sm">Currently working</p>
                 )}
                 </div>
+                
+                <div>
+                <DeleteButton onClick={()=>deleteExperience(exp.id)}/>
+                </div>
+
+                </div>
+                <p className="font-light lg:text-base text-sm capitalize">{exp.occupation}</p>
+
+
+                </div>
+                <p className="font-semibold lg:text-base text-sm capitalize">{exp.employer}</p>
+
                 {exp.about_company && (
-              <p className="lg:text-lg text-base font-semibold text-gray-800 my-6">
-                About Company :{" "}
-                <span className="font-light lg:text-lg text-base">{exp.about_company}</span>
-              </p>
+              // <p className="lg:text-lg text-base font-semibold text-gray-800 my-6">
+              //   About Company :{" "}
+                <p className="font-light  lg:text-base text-sm">{exp.about_company}</p>
+              // </p>
                 )}
-                {exp.responsibilities && (
-              <p className="lg:text-lg text-base font-semibold text-gray-800">
-                Work Responsibilities :{" "}
-                <span className="font-light lg:text-lg text-base">{exp.responsibilities}</span>
+                {exp.responsibilities && (<>
+              <p className="lg:text-base text-sm font-semibold">
+               Dutes & Responsibilites {" "}
               </p>
+              <p className="font-light lg:text-base text-sm">{exp.responsibilities}</p>
+              <div className="flex md:flex-row flex-col">
+              <p className="lg:text-base text-sm font-semibold">
+                Address : <span className="lg:text-base text-sm font-thin">{exp.location}</span> 
+              </p>
+              <p className="lg:text-base text-sm font-semibold md:ml-5 ml-0 text-left">
+                Website : <span className="lg:text-base text-sm font-thin text-gray-800">{exp.website}</span> 
+              </p>
+              {/* <p className="font-light lg:text-lg text-base">{exp.website}</p> */}
+              {/* <p className="font-light lg:text-lg text-base capitalize">{exp.location}</p> */}
+              </div>
+              </>
               )}
-              <div>
+              {/* <div>
                 
                   <DeleteButton onClick={()=>deleteExperience(exp.id)}/>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

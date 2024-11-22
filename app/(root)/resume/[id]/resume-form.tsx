@@ -320,22 +320,13 @@ const Resume = ({ resume, isMobile }: ResumeProps) => {
               resume.others.map((other) => (
                 <div
                   key={other.id}
-                  className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md my-8"
+                  className="p-3 space-y-4 bg-gray-100 rounded-lg shadow-md my-4"
                 >
                   <div className="flex justify-between items-center text-center border-b-2 pb-2">
-                  <p className="text-black lg:text-2xl text-xl font-bold uppercase">
+                  <p className="text-black lg:text-xl text-lg font-bold uppercase">
                     {other.sectiontitle}
                   </p>
-                  {/* <button
-              onClick={() => 
-                {setAdditionalTitle(other.sectiontitle)
-                setOtherId(other.id)
-                }}
-              type="button"
-              className="md:w-24 w-14 h-12 bg-green-600 text-white hover:text-white hover:bg-green-700 p-2 font-bold rounded-md border border-gray-300"
-            >
-              Edit
-            </button> */}
+
             <EditButton 
   onClick={() => {
     setAdditionalTitle(other.sectiontitle);
@@ -343,21 +334,17 @@ const Resume = ({ resume, isMobile }: ResumeProps) => {
   }}
 />
                   </div>
-<div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12">
-                  <p className="lg:text-lg text-base font-semibold text-gray-800">
-                    Title :{" "}
-                  </p>
-                  <p className="font-light lg:text-lg text-base capitalize">{other.title}</p>
+                  <div className="flex justify-between">
+<div>
+                  <p className="font-light lg:text-base text-sm capitalize">{other.title}</p>
 
-                  <p className="lg:text-lg text-base font-semibold text-gray-800">
-                    Description :{" "}
-                  </p>
-                  <p className="font-light lg:text-lg text-base capitalize">
+                  <p className="font-light lg:text-base text-sm capitalize">
                       {other.description}
                     </p>
                   </div>
                   <div>
                 <DeleteButton onClick={()=> deleteOther(other.id)}/>
+          </div>
           </div>
                 </div>
               ))}
@@ -380,7 +367,7 @@ const Resume = ({ resume, isMobile }: ResumeProps) => {
           <div className="flex mx-6 my-10">
             <button
               type="button"
-              className="w-24 items-center capitalize bg-white border border-gray-300 hover:bg-green-600 text-black p-2 hover:text-slate-100 font-bold rounded-md"
+              className="lg:w-12 lg:h-10 w-12 h-10 items-center capitalize bg-white border border-gray-300 hover:bg-green-600 text-black p-2 hover:text-slate-100 font-bold rounded-md"
               onClick={handleHome}
             >
               Exit
@@ -388,7 +375,7 @@ const Resume = ({ resume, isMobile }: ResumeProps) => {
             <button
               onClick={handleNext}
               type="button"
-              className="w-24 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2  mx-10 font-bold rounded-md"
+              className="lg:w-12 lg:h-10 w-12 h-10 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2  mx-10 font-bold rounded-md"
             >
               Next
             </button>
@@ -409,7 +396,7 @@ const Resume = ({ resume, isMobile }: ResumeProps) => {
             <div className="flex py-4 px-8">
               <button
                 type="button"
-                className="w-16 items-center capitalize bg-white border border-gray-300 hover:bg-green-600 text-black hover:text-slate-100 p-2 font-bold rounded-md"
+                className="lg:w-12 lg:h-10 w-12 h-10 items-center capitalize bg-white border border-gray-300 hover:bg-green-600 text-black hover:text-slate-100 p-2 font-bold rounded-md"
                 onClick={handleEdit}
                 // onClick={() => setShowForm(true)}
               >
@@ -417,7 +404,7 @@ const Resume = ({ resume, isMobile }: ResumeProps) => {
               </button>
               <button
                 type="button"
-                className="w-16 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10 font-bold rounded-md"
+                className="lg:w-12 lg:h-10 w-12 h-10 items-center capitalize bg-green-600 hover:bg-green-500 text-white p-2 mx-10 font-bold rounded-md"
                 onClick={handleNext}
               >
                 next

@@ -162,17 +162,18 @@ const PersonalInformation = ({
   return (
     <div className="md:w-full lg:w-full sm:w-full xl:w-full">
       {!show && (
-        <div className="p-6 space-y-4 bg-gray-100 rounded-lg shadow-md">
+        <div className="p-3 space-y-4 bg-gray-100 rounded-lg shadow-md">
           <div className="flex justify-between text-center items-center border-b-2 pb-2">
-          <p className="text-black lg:text-2xl text-xl font-bold uppercase">
+          <p className="text-black lg:text-xl text-lg font-bold uppercase">
             Personal Information
           </p>
             <EditButton onClick={() => setShowForm(true)}/>
           </div>
 
+          <div className="flex lg:flex-row flex-col items-center">
           {!!personalInformation.resume_image && (
 
-            <div>
+            <div className="xl:w-2/6 lg:w-3/4 mx-4">
               <Image
                 src={`${SERVER_IMAGE_URL}${personalInformation.resume_image}`}
                 height={150}
@@ -182,67 +183,53 @@ const PersonalInformation = ({
               />
             </div>
           )}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12">
-  <p className="lg:text-lg text-base font-semibold text-gray-800">
-    Name:
-  </p>
-  <p className="font-light lg:text-lg text-base capitalize">
+          <div className="space-y-3">
+  <p className="font-semibold lg:text-2xl md:text-left text-center text-xl capitalize text-gray-800">
     {personalInformation.first_name} {personalInformation.last_name}
   </p>
 
-  <p className="lg:text-lg text-base font-semibold text-gray-800">
-    Date of Birth:
+  <div className="flex md:flex-row flex-col">
+  <p className="lg:text-base text-sm font-semibold">
+    Date of Birth: <span className="font-thin"> {dateFormatter(personalInformation.date_of_birth as string)} </span>
   </p>
-  <p className="font-light lg:text-lg text-base">
-    {dateFormatter(personalInformation.date_of_birth as string)}
-  </p>
-
-  <p className="lg:text-lg text-base font-semibold text-gray-800">
-    Nationality:
-  </p>
-  <p className="font-light lg:text-lg text-base capitalize">
-    {personalInformation.nationality}
-  </p>
-
-  <p className="lg:text-lg text-base font-semibold text-gray-800 ">
-    Address:
-  </p>
-  <p className="font-light lg:text-lg text-base capitalize ">
-    {personalInformation.address_line_1} {personalInformation.address_line_2} {personalInformation.postal_code} {personalInformation.city} {personalInformation.country}
-  </p>
-
-  {personalInformation.email_address && (
-    <>
-      <p className="lg:text-lg text-base font-semibold text-gray-800">
-        Email Address:
-      </p>
-      <p className="font-light lg:text-lg text-base">
-        {personalInformation.email_address}
-      </p>
-    </>
-  )}
 
   {personalInformation.contact_number && (
     <>
-      <p className="lg:text-lg text-base font-semibold text-gray-800">
-        Contact Number:
-      </p>
-      <p className="font-light lg:text-lg text-base">
-        {personalInformation.contact_number}
+    <span className="text-gray-800 mx-2 sm:inline hidden">|</span>
+      <p className="lg:text-base text-sm font-semibold">
+        Contact Number: <span className="font-thin">{personalInformation.contact_number}</span> 
       </p>
     </>
   )}
-</div>
+  </div>
 
-
+<div className="flex md:flex-row flex-col">
+  <p className="lg:text-base text-sm font-semibold">
+    Nationality: <span className="font-thin">{personalInformation.nationality}</span>
+  </p>
+  {personalInformation.email_address && (
+    <>
+    <span className="text-gray-800 mx-2 sm:inline hidden">|</span>
+      <p className="lg:text-base text-sm font-semibold">
+        Email Address: <span className="font-thin">{personalInformation.email_address}</span>
+      </p>
+    </>
+  )}
+  </div>
+  <p className="lg:text-base text-sm font-semibold">
+    Address: <span className="font-thin">{personalInformation.address_line_1} {personalInformation.address_line_2} {personalInformation.postal_code} {personalInformation.city} {personalInformation.country}</span>
+  </p>
           {personalInformation.responsibilities && (
-            <p className="lg:text-lg text-base font-semibold text-gray-800">
-              Main Activities and Responsibilities :{" "}
-              <span className="font-light lg:text-lg text-base">
+            <p className="lg:text-base text-sm font-semibold">
+              Main Activities and Responsibilities:{" "}
+              <span className="font-light lg:text-base text-sm">
                 {personalInformation.responsibilities}
               </span>
             </p>
           )}
+          </div>
+          </div>
+          
         </div>
       )}
       {show && (

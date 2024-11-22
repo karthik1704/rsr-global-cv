@@ -12,12 +12,10 @@ import {
 
 import { dateFormatter } from "@/lib/utils";
 
-import resumeConfig from "../../edit-me/resume-config";
 import { ResumeType } from "./typings";
 import { SERVER_IMAGE_URL } from "@/app/constants";
 
 
-const theme = resumeConfig.pdfTheme;
 
 
 
