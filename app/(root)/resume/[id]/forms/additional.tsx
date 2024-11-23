@@ -158,24 +158,24 @@ const Training = ({
     <div className="my-4">
       {!show && trainings.length && (
         <div className="p-3 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between items-center text-center border-b-2 pb-2">
+          <div className="flex justify-between items-center text-center border-b-2 pb-2 mx-4">
               <p className="text-black lg:text-xl text-lg font-bold uppercase">
                 Honors & Awards
               </p>
                 <EditButton onClick={() => setShowForm(true)}/>
               </div>
           {trainings.map((train, index) => (
-            <div className="flex justify-between border-b-2 pb-2"
+            <div className="flex justify-between border-b-2 pb-2 mx-4"
               
               key={train.id}
             >
               
               <div>
-              <p className="font-light lg:text-base text-sm">
+              <p className="font-normal lg:text-base text-sm">
                   {dateFormatter(train.from_date)} <span className="mx-1"> - </span> {dateFormatter(train.to_date)}
                 </p>
 
-              <p className="font-light lg:text-base text-sm capitalize">
+              <p className="font-normal lg:text-base text-sm capitalize">
               {train.title}, {train.awarding_institute}, {train.location}
                 </p>
               </div>

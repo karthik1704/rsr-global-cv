@@ -285,7 +285,7 @@ const LicenseForm = ({
         </form>
       ) : (
         <div className="p-3 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between items-center text-center border-b-2 pb-2">
+          <div className="flex justify-between items-center text-center border-b-2 pb-2 mx-4">
           <h2 className="text-black lg:text-xl text-lg font-bold uppercase">
             Driving License
           </h2>
@@ -293,11 +293,11 @@ const LicenseForm = ({
           </div>
           <ul>
             {lic.map((item, index) => (
-              <div className="flex justify-between" key={item.id}>
+              <div className="flex justify-between mx-4" key={item.id}>
                 <li key={index}>
                 <div>
                   <p className="text-black lg:text-base text-sm font-bold">{item.license_type}</p>
-                  <p className=" font-light lg:text-base text-sm">
+                  <p className=" font-normal lg:text-base text-sm">
                     {" "}
                     {dateFormatter(item.license_issued_date)} to {dateFormatter(item.license_expiry_date)}
                   </p>

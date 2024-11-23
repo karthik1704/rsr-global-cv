@@ -123,21 +123,31 @@ const Education = ({
 
   // const [fromDate, setFromDate] = useState("");
 
-  const [fromDates, setFromDates] = useState<{ [key: number]: string }>({});
+  const [dates, setDates] = useState<{ [key: number]: { fromDate: string, toDate: string } }>({});
 
-const handleFromDateChange = (index: number, value: string) => {
-  setFromDates((prevState) => ({ ...prevState, [index]: value }));
-};
+  const handleFromDateChange = (index: number, value: string) => {
+    setDates((prevState) => ({ 
+      ...prevState, 
+      [index]: { ...prevState[index], fromDate: value } 
+    }));
+  };
+
+  const handleToDateChange = (index: number, value: string) => {
+    setDates((prevState) => ({ 
+      ...prevState, 
+      [index]: { ...prevState[index], toDate: value } 
+    }));
+  }
 
   const getMinToDate = (index: number) => {
-    const fromDate = fromDates[index];
-    if (!fromDate) return undefined;
+    const fromDate = dates[index]?.fromDate;
+    if (!fromDate) return undefined; // Disable "To" date if no "From" date
     const minDate = new Date(fromDate);
-    minDate.setDate(minDate.getDate() + 1);
+    minDate.setDate(minDate.getDate() + 1); // "To" date must be after "From" date
     return minDate.toISOString().split("T")[0];
   };
 
-  const validateDateRange = (value: string | Date | undefined, index: number) => {
+  const validateDateRange = (value: string | Date | undefined, index: number, isToDate: boolean) => {
     if (!value) {
       return;
     }
@@ -151,14 +161,13 @@ const handleFromDateChange = (index: number, value: string) => {
       return "Please enter a valid year";
     }
   
-    // Add additional validation between the from and to dates
-    if (index > 0) {
-      const previousFromDate = fromDates[index - 1];
-      if (previousFromDate) {
-        const previousToDate = new Date(previousFromDate);
-        previousToDate.setDate(previousToDate.getDate() + 1);
-        if (selectedDate <= previousToDate) {
-          return "To date must be after the previous to date";
+    if (isToDate) {
+      // If it's a "To" date, check if it is after the "From" date
+      const fromDate = dates[index]?.fromDate;
+      if (fromDate) {
+        const fromDateObj = new Date(fromDate);
+        if (selectedDate <= fromDateObj) {
+          return "Please enter a correct date";
         }
       }
     }
@@ -185,20 +194,20 @@ const handleFromDateChange = (index: number, value: string) => {
     <div className="my-4">
       {!show && education.length && (
         <div className="p-3 space-y-2 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between items-center text-center border-b-2 pb-2">
+          <div className="flex justify-between items-center text-center border-b-2 pb-2 mx-4">
               <p className="text-black lg:text-xl text-lg font-bold uppercase">
                 Education and Training
               </p>
                 <EditButton onClick={() => setShowForm(true)}/>
               </div>
           {education.map((edu, index) => (
-            <div className="border-b-2 pb-2"
+            <div className="border-b-2 pb-2 mx-4"
               key={edu.id}
             >
               <div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-              <p className="font-light lg:text-base text-sm text-left">
+              <p className="font-normal lg:text-base text-sm text-left">
                   {dateFormatter(edu.from_date)} <span className="md:mx-1"> - </span> {dateFormatter(edu.to_date)}  {edu.city}, {edu.country}
                 </p>
                 </div>
@@ -302,7 +311,7 @@ const handleFromDateChange = (index: number, value: string) => {
                             value: true,
                             message: "Date is required",
                           },
-                          validate: (value) => validateDateRange(value, index),
+                          validate: (value) => validateDateRange(value, index, false),
                         })}
                         min="1980-01-01"
                         max={getCurrentDate()}
@@ -327,13 +336,14 @@ const handleFromDateChange = (index: number, value: string) => {
                             value: true,
                             message: "Date is required",
                           },
-                          validate: (value) => validateDateRange(value, index),
+                          validate: (value) => validateDateRange(value, index, true),
                         })}
                         min={getMinToDate(index)}
                         max={getCurrentDate()}
                         className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                         type="Date"
-                        disabled={false}
+                        onChange={(e) => handleToDateChange(index, e.target.value)}
+        aria-disabled={!dates[index]?.fromDate}
                       />
                       {errors.educations?.[index]?.to_date && (
                         <p className="text-red-700 text-sm">
