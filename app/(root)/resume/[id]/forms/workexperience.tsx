@@ -269,7 +269,7 @@ const WorkExperience = ({
     <div className="my-4">
       {!show && workExperience.length && (
         <div className="p-3 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between text-center border-b-2 pb-2 items-center">
+          <div className="flex justify-between text-center border-b-2 pb-2 items-center mx-4">
           <p className="text-black lg:text-xl text-lg font-bold uppercase">
             Work Experience
           </p>
@@ -282,34 +282,21 @@ const WorkExperience = ({
             </p>
           )}
           {workExperience.map((exp, index) => (
-            <div className="border-b-2 pb-2 space-y-3" key={index}>
-              {/* <div  className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-10/12 mb-6"> */}
+            <div className="border-b-2 pb-2 space-y-3 mx-4" key={index}>
               <div>
-              {/* <p className="lg:text-lg text-base font-semibold text-gray-800">
-                Employer :{" "}
-              </p> */}
-              {/* <p className="font-light lg:text-lg text-base capitalize">{exp.employer}</p> */}
-              {/* <p className="lg:text-lg text-base font-semibold text-gray-800">
-                Website :
-              </p>
-              <p className="font-light lg:text-lg text-base">{exp.website}</p> */}
-              {/* <p className="lg:text-lg text-base font-semibold text-gray-800">
-                Address :{" "}
-              </p>
-              <p className="font-light lg:text-lg text-base capitalize">{exp.location}</p> */}
 
 <div className="flex items-center justify-between">
   <div className="flex items-center">
-              <p className="font-light lg:text-base text-sm">
+              <p className="font-normal lg:text-base text-sm">
                   {dateFormatter(exp.from_date)}
                 </p>
                 <span className="mx-1"> - </span>
               {exp.to_date ? (
-                  <p className="font-light lg:text-base text-sm">
+                  <p className="font-normal lg:text-base text-sm">
                     {dateFormatter(exp.to_date)}
                   </p>
                 ) : (
-                  <p className="font-light lg:text-base text-sm">Currently working</p>
+                  <p className="font-normal lg:text-base text-sm">Currently working</p>
                 )}
                 </div>
                 
@@ -318,7 +305,7 @@ const WorkExperience = ({
                 </div>
 
                 </div>
-                <p className="font-light lg:text-base text-sm capitalize">{exp.occupation}</p>
+                <p className="font-normal lg:text-base text-sm capitalize">{exp.occupation}</p>
 
 
                 </div>
@@ -327,20 +314,20 @@ const WorkExperience = ({
                 {exp.about_company && (
               // <p className="lg:text-lg text-base font-semibold text-gray-800 my-6">
               //   About Company :{" "}
-                <p className="font-light  lg:text-base text-sm">{exp.about_company}</p>
+                <p className="font-normal lg:text-base text-sm">{exp.about_company}</p>
               // </p>
                 )}
                 {exp.responsibilities && (<>
               <p className="lg:text-base text-sm font-semibold">
                Dutes & Responsibilites {" "}
               </p>
-              <p className="font-light lg:text-base text-sm">{exp.responsibilities}</p>
+              <p className="font-normal lg:text-base text-sm">{exp.responsibilities}</p>
               <div className="flex md:flex-row flex-col">
               <p className="lg:text-base text-sm font-semibold">
-                Address : <span className="lg:text-base text-sm font-thin">{exp.location}</span> 
+                Address : <span className="lg:text-base text-sm font-normal">{exp.location}</span> 
               </p>
               <p className="lg:text-base text-sm font-semibold md:ml-5 ml-0 text-left">
-                Website : <span className="lg:text-base text-sm font-thin text-gray-800">{exp.website}</span> 
+                Website : <span className="lg:text-base text-sm font-normal text-gray-800">{exp.website}</span> 
               </p>
               {/* <p className="font-light lg:text-lg text-base">{exp.website}</p> */}
               {/* <p className="font-light lg:text-lg text-base capitalize">{exp.location}</p> */}

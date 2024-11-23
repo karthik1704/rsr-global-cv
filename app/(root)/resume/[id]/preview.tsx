@@ -121,7 +121,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
                 <div key={exp.id}>
                   <div className="flex justify-start pt-2">
                     <p className="text-gray-700 font-medium lg:text-base text-sm">
-                      {dateFormatter(exp.from_date)} {"-"}
+                      {dateFormatter(exp.from_date)} <span className="md:mx-1"> - </span>
                     </p>
                     <p className="text-gray-700 font-medium lg:text-base text-sm">
                       {exp.to_date
@@ -190,8 +190,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
                       {dateFormatter(educ.from_date)}{" "}
                     </p>
                     <p className="text-gray-700 font-medium lg:text-base text-sm ">
-                      {" "}
-                      - {dateFormatter(educ.to_date)}
+                    <span className="md:mx-1"> - </span> {dateFormatter(educ.to_date)}
                     </p>
                     <p className="text-gray-700 font-medium lg:text-base text-sm capitalize">
                       , {educ.country}
@@ -243,21 +242,15 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
 
             {data.training_awards.map((train, index) => (
               <div key={index}>
-                {/* <p className="text-gray-700 font-semibold text-base py-2">
-              {" "}
-                {train.title}
-            </p> */}
+
                 <div className="flex justify-start">
                   <p className="text-gray-700 lg:text-base text-sm">
-                    {dateFormatter(train.from_date)} {"-"}
+                    {dateFormatter(train.from_date)} <span className="md:mx-1"> - </span>
                   </p>
                   <p className="text-gray-700 lg:text-base text-sm">
                     {dateFormatter(train.to_date)}
                   </p>
                  
-                  {/* <p className="text-gray-700 font-medium text-base capitalize">,{' '}
-                {exp.location}
-                  </p> */}
                 </div>
                 <div className="flex">
   <p className="text-gray-700 font-semibold lg:text-base text-sm capitalize">

@@ -163,14 +163,14 @@ const PersonalInformation = ({
     <div className="md:w-full lg:w-full sm:w-full xl:w-full">
       {!show && (
         <div className="p-3 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between text-center items-center border-b-2 pb-2">
+          <div className="flex justify-between text-center items-center border-b-2 pb-2 mx-4">
           <p className="text-black lg:text-xl text-lg font-bold uppercase">
             Personal Information
           </p>
             <EditButton onClick={() => setShowForm(true)}/>
           </div>
 
-          <div className="flex lg:flex-row flex-col items-center">
+          <div className="flex lg:flex-row flex-col items-center mx-2">
           {!!personalInformation.resume_image && (
 
             <div className="xl:w-2/6 lg:w-3/4 mx-4">
@@ -183,46 +183,46 @@ const PersonalInformation = ({
               />
             </div>
           )}
-          <div className="space-y-3">
+          <div className="space-y-3 mx-4">
   <p className="font-semibold lg:text-2xl md:text-left text-center text-xl capitalize text-gray-800">
     {personalInformation.first_name} {personalInformation.last_name}
   </p>
 
   <div className="flex md:flex-row flex-col">
-  <p className="lg:text-base text-sm font-semibold">
-    Date of Birth: <span className="font-thin"> {dateFormatter(personalInformation.date_of_birth as string)} </span>
+  <p className="lg:text-base text-sm text-center font-semibold">
+    Date of Birth: <span className="font-normal"> {dateFormatter(personalInformation.date_of_birth as string)} </span>
   </p>
 
   {personalInformation.contact_number && (
     <>
     <span className="text-gray-800 mx-2 sm:inline hidden">|</span>
-      <p className="lg:text-base text-sm font-semibold">
-        Contact Number: <span className="font-thin">{personalInformation.contact_number}</span> 
+      <p className="lg:text-base text-sm text-center font-semibold">
+        Contact Number: <span className="font-normal">{personalInformation.contact_number}</span> 
       </p>
     </>
   )}
   </div>
 
 <div className="flex md:flex-row flex-col">
-  <p className="lg:text-base text-sm font-semibold">
-    Nationality: <span className="font-thin">{personalInformation.nationality}</span>
+  <p className="lg:text-base text-sm font-semibold text-center">
+    Nationality: <span className="font-normal">{personalInformation.nationality}</span>
   </p>
   {personalInformation.email_address && (
     <>
     <span className="text-gray-800 mx-2 sm:inline hidden">|</span>
-      <p className="lg:text-base text-sm font-semibold">
-        Email Address: <span className="font-thin">{personalInformation.email_address}</span>
+      <p className="lg:text-base text-sm font-semibold text-center">
+        Email Address: <span className="font-normal">{personalInformation.email_address}</span>
       </p>
     </>
   )}
   </div>
-  <p className="lg:text-base text-sm font-semibold">
-    Address: <span className="font-thin">{personalInformation.address_line_1} {personalInformation.address_line_2} {personalInformation.postal_code} {personalInformation.city} {personalInformation.country}</span>
+  <p className="lg:text-base text-sm font-semibold text-left">
+    Address: <span className="font-normal">{personalInformation.address_line_1} {personalInformation.address_line_2} {personalInformation.postal_code} {personalInformation.city} {personalInformation.country}</span>
   </p>
           {personalInformation.responsibilities && (
-            <p className="lg:text-base text-sm font-semibold">
+            <p className="lg:text-base text-sm font-semibold text-left">
               Main Activities and Responsibilities:{" "}
-              <span className="font-light lg:text-base text-sm">
+              <span className="font-normal lg:text-base text-sm">
                 {personalInformation.responsibilities}
               </span>
             </p>
