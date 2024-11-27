@@ -285,7 +285,7 @@ const LicenseForm = ({
         </form>
       ) : (
         <div className="p-3 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between items-center text-center border-b-2 pb-2 mx-4">
+          <div className="flex justify-between items-center text-center border-b-2 border-gray-700 pb-2 mx-4">
           <h2 className="text-black lg:text-xl text-lg font-bold uppercase">
             Driving License
           </h2>

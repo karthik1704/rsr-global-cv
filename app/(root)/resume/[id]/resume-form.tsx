@@ -322,7 +322,7 @@ const Resume = ({ resume, isMobile }: ResumeProps) => {
                   key={other.id}
                   className="p-3 space-y-4 bg-gray-100 rounded-lg shadow-md my-4"
                 >
-                  <div className="flex justify-between items-center text-center border-b-2 pb-2 mx-4">
+                  <div className="flex justify-between items-center text-center border-b-2 border-gray-700 pb-2 mx-4">
                   <p className="text-black lg:text-xl text-lg font-bold uppercase">
                     {other.sectiontitle}
                   </p>
