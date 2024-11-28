@@ -269,7 +269,7 @@ const WorkExperience = ({
     <div className="my-4">
       {!show && workExperience.length && (
         <div className="p-3 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between text-center border-b-2 pb-2 items-center mx-4">
+          <div className="flex justify-between text-center border-b-2 border-gray-500 pb-2 items-center mx-4">
           <p className="text-black lg:text-xl text-lg font-bold uppercase">
             Work Experience
           </p>
@@ -282,7 +282,7 @@ const WorkExperience = ({
             </p>
           )}
           {workExperience.map((exp, index) => (
-            <div className="border-b-2 pb-2 space-y-3 mx-4" key={index}>
+            <div className={`border-b border-gray-500 pb-2 space-y-3 mx-4 ${index === workExperience.length - 1 ? 'border-b-0' : ''}`} key={index}>
               <div>
 
 <div className="flex items-center justify-between">
@@ -319,7 +319,7 @@ const WorkExperience = ({
                 )}
                 {exp.responsibilities && (<>
               <p className="lg:text-base text-sm font-semibold">
-               Dutes & Responsibilites {" "}
+               Duties & Responsibilites {" "}
               </p>
               <p className="font-normal lg:text-base text-sm">{exp.responsibilities}</p>
               <div className="flex md:flex-row flex-col">

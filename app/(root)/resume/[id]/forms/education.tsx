@@ -194,14 +194,14 @@ const Education = ({
     <div className="my-4">
       {!show && education.length && (
         <div className="p-3 space-y-2 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between items-center text-center border-b-2 pb-2 mx-4">
+          <div className="flex justify-between items-center text-center border-b-2  border-gray-500 pb-2 mx-4">
               <p className="text-black lg:text-xl text-lg font-bold uppercase">
                 Education and Training
               </p>
                 <EditButton onClick={() => setShowForm(true)}/>
               </div>
           {education.map((edu, index) => (
-            <div className="border-b-2 pb-2 mx-4"
+            <div className={`border-b border-gray-500 pb-2 mx-4 ${index===education.length-1 ? 'border-b-0':''}`}
               key={edu.id}
             >
               <div>

@@ -163,7 +163,7 @@ const PersonalInformation = ({
     <div className="md:w-full lg:w-full sm:w-full xl:w-full">
       {!show && (
         <div className="p-3 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between text-center items-center border-b-2 pb-2 mx-4">
+          <div className="flex justify-between text-center items-center border-b-2 border-gray-500 pb-2 mx-4">
           <p className="text-black lg:text-xl text-lg font-bold uppercase">
             Personal Information
           </p>
@@ -173,13 +173,13 @@ const PersonalInformation = ({
           <div className="flex lg:flex-row flex-col items-center mx-2">
           {!!personalInformation.resume_image && (
 
-            <div className="xl:w-2/6 lg:w-3/4 mx-4">
+            <div className="xl:w-2/6 lg:w-5/6 mx-4">
               <Image
                 src={`${SERVER_IMAGE_URL}${personalInformation.resume_image}`}
                 height={150}
                 width={150}
                 alt=""
-                className=" h-36 w-36 rounded-full"
+                className=" lg:h-32 h-36 w-36 rounded-full"
               />
             </div>
           )}
@@ -189,14 +189,14 @@ const PersonalInformation = ({
   </p>
 
   <div className="flex md:flex-row flex-col">
-  <p className="lg:text-base text-sm text-center font-semibold">
+  <p className="lg:text-base text-sm font-semibold">
     Date of Birth: <span className="font-normal"> {dateFormatter(personalInformation.date_of_birth as string)} </span>
   </p>
 
   {personalInformation.contact_number && (
     <>
     <span className="text-gray-800 mx-2 sm:inline hidden">|</span>
-      <p className="lg:text-base text-sm text-center font-semibold">
+      <p className="lg:text-base text-sm text-start font-semibold">
         Contact Number: <span className="font-normal">{personalInformation.contact_number}</span> 
       </p>
     </>
@@ -204,13 +204,13 @@ const PersonalInformation = ({
   </div>
 
 <div className="flex md:flex-row flex-col">
-  <p className="lg:text-base text-sm font-semibold text-center">
+  <p className="lg:text-base text-sm font-semibold">
     Nationality: <span className="font-normal">{personalInformation.nationality}</span>
   </p>
   {personalInformation.email_address && (
     <>
     <span className="text-gray-800 mx-2 sm:inline hidden">|</span>
-      <p className="lg:text-base text-sm font-semibold text-center">
+      <p className="lg:text-base text-sm font-semibold text-start">
         Email Address: <span className="font-normal">{personalInformation.email_address}</span>
       </p>
     </>
@@ -222,7 +222,7 @@ const PersonalInformation = ({
           {personalInformation.responsibilities && (
             <p className="lg:text-base text-sm font-semibold text-left">
               Main Activities and Responsibilities:{" "}
-              <span className="font-normal lg:text-base text-sm">
+              <span className="font-normal lg:text-base text-sm text-center">
                 {personalInformation.responsibilities}
               </span>
             </p>

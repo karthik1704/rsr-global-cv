@@ -42,7 +42,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
             </p>
 
             <hr className="border-b-2 border-slate-500 w-10/12" />
-            <div className="flex md:flex-row flex-col my-2">
+            <div className="flex md:flex-row flex-col my-2 md:justify-start justify-center">
               <p className="text-black font-semibold lg:text-base text-sm head ">
                 Date of birth :{" "}
                 <span className="lg:text-base text-sm font-medium">
@@ -50,15 +50,18 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
                 </span>
               </p>
               {data.contact_number ? (
-                <p className="text-black font-semibold lg:text-base text-sm head md:ml-5">| Contact Number :{" "}
+                <>
+                <span className="text-gray-800 mx-2 sm:inline hidden">|</span>
+                <p className="text-black font-semibold lg:text-base text-sm head md:ml-5"> Contact Number :{" "}
                   <span className="lg:text-base text-sm font-medium cont">
                     {data.contact_number}
                   </span>
                 </p>
+                </>
               ) : null}
             </div>
 
-            <div className=" w-5/6 flex md:flex-row flex-col my-2">
+            <div className=" w-5/6 flex md:flex-row flex-col my-2 md:justify-start justify-center">
               <p className="text-black font-semibold lg:text-base text-sm head ">
                 Nationality :{" "}
                 <span className="lg:text-base text-sm font-medium capitalize">
@@ -66,12 +69,15 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
                 </span>
               </p>
               {data.email_address ? (
+                <>
+                <span className="text-gray-800 mx-2 sm:inline hidden">|</span>
                 <p className="text-black font-semibold lg:text-base text-sm head md:mx-5">
-                  | Email - Id :{" "}
+                 Email - Id :{" "}
                   <span className="lg:text-base text-sm font-medium cont">
                     {data.email_address}
                   </span>
                 </p>
+                </>
               ) : null}
             </div>
 
@@ -218,7 +224,7 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
             </p>
             <hr className="border-b-2 border-slate-500" />
 
-            <p className="block lg:text-base text-sm font-bold text-black my-3">
+            <p className="block text-left lg:text-base text-sm font-bold text-black my-3">
               Languages Known :{" "}
               <span className="lg:text-base text-sm font-normal text-black cont capitalize">
                 {data.language_skills.language}
@@ -303,13 +309,13 @@ const Preview = ({ data, handleNext, image,  }: PreviewProps) => {
             </div>
             {data.driving_license.map((lice, index) => (
               <div key={index} className="pl-8 pr-28">
-                <p className="block lg:text-base text-sm font-bold text-black my-3">
+                <p className="block lg:text-base text-left text-sm font-bold text-black my-3">
                   Vehicle Type :{" "}
                   <span className="text-black lg:text-base text-sm font-normal">
                     {lice.license_type}
                   </span>
                 </p>
-                <p className="block lg:text-base text-sm font-bold text-black my-3">
+                <p className="block lg:text-base text-left text-sm font-bold text-black my-3">
                   License Validation :{" "}
                   <span className="text-black lg:text-base text-sm font-normal">
                     {dateFormatter(lice.license_issued_date)} to {dateFormatter(lice.license_expiry_date)}

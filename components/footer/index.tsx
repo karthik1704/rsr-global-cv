@@ -27,7 +27,7 @@ const Footer = () => {
             <Link href={'/privacy-policy'}  className="text-green-700 lg:text-base text-sm">Privacy Policy</Link>
             <ul className="flex justify-center gap-4 sm:gap-6">
               <Link href={"https://www.facebook.com/people/RSR-Global-Training-Academy/61558372236248/"} target="unblank">
-                <li>
+                <li className="transition-transform transform hover:scale-110">
                   <Image
                     src="/images/icon/facebook.svg"
                     height={34}
@@ -37,7 +37,7 @@ const Footer = () => {
                 </li>
               </Link>
               <Link href={"https://www.instagram.com/rsrglobaltrainingacademy/"} target="unblank">
-                <li>
+                <li className="transition-transform transform hover:scale-110">
                   <Image
                     src="/images/icon/instagram.svg"
                     height={34}
@@ -47,7 +47,7 @@ const Footer = () => {
                 </li>
               </Link>
               <Link href={"https://youtube.com/@RSRGlobalTrainingAcademy?si=mtPtNkR39nu2bm4r"} target="unblank">
-                <li>
+                <li className="transition-transform transform hover:scale-110">
                   <Image
                     src="/images/icon/youtube.svg"
                     height={34}
@@ -57,7 +57,7 @@ const Footer = () => {
                 </li>
               </Link>
               <Link href={"https://www.linkedin.com/company/rsrtrainingacademy"} target="unblank">
-                <li>
+                <li className="transition-transform transform hover:scale-110">
                   <Image
                     src="/images/icon/linkedin.svg"
                     height={34}

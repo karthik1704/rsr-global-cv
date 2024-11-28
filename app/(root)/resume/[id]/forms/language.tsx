@@ -105,7 +105,7 @@ const Language = ({
     <div className="my-4">
       {!show && language && (
         <div className="p-3 space-y-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between items-center text-center border-b-2 pb-2 mx-4">
+          <div className="flex justify-between items-center text-center border-b-2 border-gray-500 pb-2 mx-4">
           <p className="text-black lg:text-xl text-lg font-bold uppercase">
             Language Information
           </p>
@@ -113,7 +113,7 @@ const Language = ({
           </div>
 
           {language.language && (
-            <div className="flex justify-between mx-4">
+            <div className="flex items-center justify-between mx-4">
             {/* <p className="lg:text-lg text-base font-semibold text-gray-800">
               Languages Known :{" "}
             </p> */}
