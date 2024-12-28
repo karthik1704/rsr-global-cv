@@ -15,24 +15,26 @@ import { createUser } from "./actions";
 import Image from "next/image";
 import logo from "@/public/images/rsr_logo.webp";
 import { useState } from "react";
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from "lucide-react";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import SubmitButton from "@/components/submit-button/submit-button";
 
 const initalState = {
   message: null,
-  fieldErrors:{
+  fieldErrors: {
     first_name: null,
     password: null,
     last_name: null,
     email: null,
     password2: null,
-  }
-}
+  },
+};
 
 const SignUp = () => {
   const [state, formAction] = useFormState(createUser, initalState);
+ 
+
 
   useEffect(() => {
     if (state?.message)
@@ -42,29 +44,26 @@ const SignUp = () => {
       });
   }, [state?.message, state]);
 
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const togglePaswword = () =>{
+  const togglePaswword = () => {
     setShowPassword(!showPassword);
-  }
+  };
 
-  const confirmTogglePassword = () =>{
+  const confirmTogglePassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
-  }
+  };
 
   return (
     <>
       <div className="flex justify-between items-center pt-3 px-10 bg-green-100">
         <Image src={logo} alt="logo" />
-        <div>
-
-        </div>
+        <div></div>
       </div>
       <div className=" min-h-screen flex flex-col md:flex-row p-5 md:p-0 justify-center items-center bg-green-100">
-
         <div className="md:h-3/4 bg-cover md:pr-10 lg:content-center basis-2/5 ">
           <div className="grid grid-rows-1 p-5 md:p-0 gap-5 lg:gap-16 text-black">
             <h1 className="w-full lg:w-4/5 text-xl sm:text-2xl lg:text-3xl font-bold md:mb-6 text-center md:text-left">
@@ -77,7 +76,7 @@ const SignUp = () => {
               </li>
               <li>Access customizable templates tailored to your industry.</li>
               <li>Save and edit your CV anytime, from anywhere.</li>
-              <li>Get tips and guidance to enhance your resume's impact.</li>
+              <li>Get tips and guidance to enhance your resume&apos;s impact.</li>
               <li>Join now and take the first step towards your dream job!</li>
             </ul>
           </div>
@@ -91,7 +90,7 @@ const SignUp = () => {
               <div className=" mb-4 mx-4 sm:mx-12 md:mx-4 lg:mx-12 gap-4">
                 <div className="mb-4">
                   <label className="block text-gray-700 font-bold mb-1">
-                    First Name  <span className="text-red-500">*</span>
+                    First Name <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -100,12 +99,14 @@ const SignUp = () => {
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
                   {state?.fieldErrors?.first_name && (
-          <p className="text-red-500">{state?.fieldErrors?.first_name}</p>
-        )}
+                    <p className="text-red-500">
+                      {state?.fieldErrors?.first_name}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-gray-700 font-bold mb-1">
-                    Last Name  <span className="text-red-500">*</span>
+                    Last Name <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -114,15 +115,17 @@ const SignUp = () => {
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
                   {state?.fieldErrors?.last_name && (
-          <p className="text-red-500">{state?.fieldErrors?.last_name}</p>
-        )}
+                    <p className="text-red-500">
+                      {state?.fieldErrors?.last_name}
+                    </p>
+                  )}
                 </div>
               </div>
 
               <div className="mb-4 mx-4 sm:mx-12 md:mx-4 lg:mx-12 gap-4">
                 <div className="mb-4">
                   <label className="block text-gray-700 font-bold">
-                    Phone Number  <span className="text-red-500">*</span>
+                    Phone Number <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -131,12 +134,12 @@ const SignUp = () => {
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
                   {state?.fieldErrors?.phone && (
-          <p className="text-red-500">{state?.fieldErrors?.phone}</p>
-        )}
+                    <p className="text-red-500">{state?.fieldErrors?.phone}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-gray-700 font-bold">
-                    E-mail  <span className="text-red-500">*</span>
+                    E-mail <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
@@ -145,83 +148,129 @@ const SignUp = () => {
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
                   {state?.fieldErrors?.email && (
-          <p className="text-red-500">{state?.fieldErrors?.email}</p>
-        )}
+                    <p className="text-red-500">{state?.fieldErrors?.email}</p>
+                  )}
                 </div>
               </div>
 
               <div className="mb-4 mx-4 sm:mx-12 md:mx-4 lg:mx-12 gap-4">
                 <div className="mb-4">
                   <label className="block text-gray-700 font-bold">
-                    Password{" "}  <span className="text-red-500">*</span>
+                    Password <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
-                    value={password}
-                    placeholder="Enter Password"
-                    onChange={(e)=> setPassword(e.target.value)}
-                    className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                  />
-                   <button
-        type="button"
-        onClick={togglePaswword}
-        style={{
-          position: 'absolute',
-          right: '10px',
-          top: '10px',
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-        }}
-      >
-        {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
-      </button>
-      </div>
-      {state?.fieldErrors?.password && (
-          <p className="text-red-500">{state?.fieldErrors?.password}</p>
-        )}
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      value={password}
+                      placeholder="Enter Password"
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                    />
+                    <button
+                      type="button"
+                      onClick={togglePaswword}
+                      style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "10px",
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                    </button>
+                  </div>
+                  {state?.fieldErrors?.password && (
+                    <p className="text-red-500">
+                      {state?.fieldErrors?.password}
+                    </p>
+                  )}
                 </div>
 
                 <div>
                   <label className="block text-gray-700 font-bold">
-                    Confirm Password  <span className="text-red-500">*</span>
+                    Confirm Password <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
+                    <input
+                      type={showConfirmPassword ? "text" : "password"}
+                      value={confirmPassword}
+                      name="password2"
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      placeholder="Enter Confirm Password"
+                      className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                    />
+                    <button
+                      type="button"
+                      onClick={confirmTogglePassword}
+                      style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "10px",
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {showConfirmPassword ? (
+                        <Eye size={20} />
+                      ) : (
+                        <EyeOff size={20} />
+                      )}
+                    </button>
+                  </div>
+                  {state?.fieldErrors?.password2 && (
+                    <p className="text-red-500">
+                      {state?.fieldErrors?.password2}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="mb-4 mx-4 sm:mx-12 md:mx-4 lg:mx-12 gap-4">
+                <div>
+                  <label className="block text-gray-700 font-bold">
+                    Referred By <span className="text-red-500">*</span>
+                  </label>
+                    <select
+                    name="referred_by"
+                    className="px-2 block w-full rounded-md border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none bg-white"
+                    >
+                    <option value="RSR_GLOBAL">RSR Global</option>
+                    <option value="INDIVIDUAL">Individual</option>
+                    </select>
+                  {state?.fieldErrors?.referred_by && (
+                    <p className="text-red-500">
+                      {state?.fieldErrors?.referred_by}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="mb-4 mx-4 sm:mx-12 md:mx-4 lg:mx-12 gap-4">
+                <div>
+                  <label className="block text-gray-700 font-bold">
+                    Whom referred
+                  </label>
                   <input
-                    type={showConfirmPassword ? 'text' : 'password'}
-                    value={confirmPassword}
-                    name="password2"
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="Enter Confirm Password"
+                    type="text"
+                    name="whom_referred"
+                    placeholder="Enter Whom Refferred"
                     className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                   />
-                  <button
-        type="button"
-        onClick={confirmTogglePassword}
-        style={{
-          position: 'absolute',
-          right: '10px',
-          top: '10px',
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-        }}
-      >
-        {showConfirmPassword ? <Eye size={20} /> : <EyeOff size={20} />}
-      </button>
-      </div>
-      {state?.fieldErrors?.password2 && (
-          <p className="text-red-500">{state?.fieldErrors?.password2}</p>
-        )}
+                  {state?.fieldErrors?.whom_referred && (
+                    <p className="text-red-500">
+                      {state?.fieldErrors?.whom_referred}
+                    </p>
+                  )}
                 </div>
-                
               </div>
 
               <div className="flex justify-center">
-                <div  className=" pt-1 lg:mx-5">
-                  <SubmitButton name="Create an account"/>
+                <div className=" pt-1 lg:mx-5">
+                  <SubmitButton name="Create an account" />
                 </div>
                 {/* <button
                   type="submit"
