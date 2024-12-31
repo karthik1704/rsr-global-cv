@@ -30,11 +30,10 @@ const initalState = {
     password2: null,
   },
 };
+type RadioChangeEvent = React.ChangeEvent<HTMLInputElement> ;
 
 const SignUp = () => {
   const [state, formAction] = useFormState(createUser, initalState);
- 
-
 
   useEffect(() => {
     if (state?.message)
@@ -48,6 +47,7 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [referredBy, setReferredBy] = useState("RSR_GLOBAL"); // Default to 'RSR_GLOBAL'
 
   const togglePaswword = () => {
     setShowPassword(!showPassword);
@@ -55,6 +55,13 @@ const SignUp = () => {
 
   const confirmTogglePassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
+  };
+
+
+
+
+  const handleRadioChange = (e: RadioChangeEvent) => {
+    setReferredBy(e.target.value);
   };
 
   return (
@@ -76,7 +83,9 @@ const SignUp = () => {
               </li>
               <li>Access customizable templates tailored to your industry.</li>
               <li>Save and edit your CV anytime, from anywhere.</li>
-              <li>Get tips and guidance to enhance your resume&apos;s impact.</li>
+              <li>
+                Get tips and guidance to enhance your resume&apos;s impact.
+              </li>
               <li>Join now and take the first step towards your dream job!</li>
             </ul>
           </div>
@@ -231,16 +240,33 @@ const SignUp = () => {
 
               <div className="mb-4 mx-4 sm:mx-12 md:mx-4 lg:mx-12 gap-4">
                 <div>
-                  <label className="block text-gray-700 font-bold">
+                  <label className="block text-gray-700 font-bold mb-2">
                     Referred By <span className="text-red-500">*</span>
                   </label>
-                    <select
-                    name="referred_by"
-                    className="px-2 block w-full rounded-md border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none bg-white"
-                    >
-                    <option value="RSR_GLOBAL">RSR Global</option>
-                    <option value="INDIVIDUAL">Individual</option>
-                    </select>
+                  <div className="flex items-center space-x-4">
+                    <label className="flex items-center">
+                      <input
+                        type="radio"
+                        name="referred_by"
+                        value="RSR_GLOBAL"
+                        className="form-radio text-indigo-600"
+                        checked={referredBy === "RSR_GLOBAL"}
+                        onChange={handleRadioChange}
+                      />
+                      <span className="ml-2">RSR Global</span>
+                    </label>
+                    <label className="flex items-center">
+                      <input
+                        type="radio"
+                        name="referred_by"
+                        value="INDIVIDUAL"
+                        className="form-radio text-indigo-600"
+                        checked={referredBy === "INDIVIDUAL"}
+                        onChange={handleRadioChange}
+                      />
+                      <span className="ml-2">Individual</span>
+                    </label>
+                  </div>
                   {state?.fieldErrors?.referred_by && (
                     <p className="text-red-500">
                       {state?.fieldErrors?.referred_by}
@@ -249,24 +275,29 @@ const SignUp = () => {
                 </div>
               </div>
 
-              <div className="mb-4 mx-4 sm:mx-12 md:mx-4 lg:mx-12 gap-4">
-                <div>
-                  <label className="block text-gray-700 font-bold">
-                    Whom referred
-                  </label>
-                  <input
-                    type="text"
-                    name="whom_referred"
-                    placeholder="Enter Whom Refferred"
-                    className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                  />
-                  {state?.fieldErrors?.whom_referred && (
-                    <p className="text-red-500">
-                      {state?.fieldErrors?.whom_referred}
-                    </p>
-                  )}
+              {/* Conditionally render "Whom referred" field */}
+              {referredBy === "RSR_GLOBAL" ? (
+                <div className="mb-4 mx-4 sm:mx-12 md:mx-4 lg:mx-12 gap-4">
+                  <div>
+                    {/* <label className="block text-gray-700 font-bold">
+                      Whom referred
+                    </label> */}
+                    <input
+                      type="text"
+                      name="whom_referred"
+                      placeholder="Enter Whom Referred"
+                      className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+                    />
+                    {state?.fieldErrors?.whom_referred && (
+                      <p className="text-red-500">
+                        {state?.fieldErrors?.whom_referred}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <input type="hidden" name="whom_referred" value="INDIVIDUAL" />
+              )}
 
               <div className="flex justify-center">
                 <div className=" pt-1 lg:mx-5">
