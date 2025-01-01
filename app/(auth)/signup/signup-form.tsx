@@ -247,7 +247,7 @@ const SignUp = () => {
                     <label className="flex items-center">
                       <input
                         type="radio"
-                        name="referred_by"
+                        name="referred_by_type"
                         value="RSR_GLOBAL"
                         className="form-radio text-indigo-600"
                         checked={referredBy === "RSR_GLOBAL"}
@@ -258,7 +258,7 @@ const SignUp = () => {
                     <label className="flex items-center">
                       <input
                         type="radio"
-                        name="referred_by"
+                        name="referred_by_type"
                         value="INDIVIDUAL"
                         className="form-radio text-indigo-600"
                         checked={referredBy === "INDIVIDUAL"}
@@ -267,9 +267,9 @@ const SignUp = () => {
                       <span className="ml-2">Individual</span>
                     </label>
                   </div>
-                  {state?.fieldErrors?.referred_by && (
+                  {state?.fieldErrors?.referred_by_type && (
                     <p className="text-red-500">
-                      {state?.fieldErrors?.referred_by}
+                      {state?.fieldErrors?.referred_by_type}
                     </p>
                   )}
                 </div>
@@ -284,19 +284,19 @@ const SignUp = () => {
                     </label> */}
                     <input
                       type="text"
-                      name="whom_referred"
-                      placeholder="Enter Whom Referred"
+                      name="referred_by"
+                      placeholder="Enter Referrer Name"
                       className="px-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
                     />
-                    {state?.fieldErrors?.whom_referred && (
+                    {state?.fieldErrors?.referred_by && (
                       <p className="text-red-500">
-                        {state?.fieldErrors?.whom_referred}
+                        {state?.fieldErrors?.referred_by}
                       </p>
                     )}
                   </div>
                 </div>
               ) : (
-                <input type="hidden" name="whom_referred" value="INDIVIDUAL" />
+                <input type="hidden" name="referred_by" value="INDIVIDUAL" />
               )}
 
               <div className="flex justify-center">

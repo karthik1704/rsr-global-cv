@@ -21,8 +21,8 @@ const schema = z
       }),
     first_name: z.string().min(1, "First name is required"),
     last_name: z.string().min(1, "Last name is required"),
-    referred_by: z.string().min(1, "Reffered by is required"),
-    whom_referred: z.string(),
+    referred_by_type: z.string().min(1, "Reffered by is required"),
+    referred_by: z.string().min(1, "Reffered user name is required"),
     phone: z.string().min(1, "Phone number is required"),
     // email: z.string().min(1, 'Email Id is Required'),
     password: z
@@ -58,23 +58,13 @@ export async function createUser(prevState: any, formData: FormData) {
         last_name: validatedFields.error.flatten().fieldErrors.last_name,
         phone: validatedFields.error.flatten().fieldErrors.phone,
         email: validatedFields.error.flatten().fieldErrors.email,
-        reffered_by: validatedFields.error.flatten().fieldErrors.referred_by,
-        whom_reffered:
-          validatedFields.error.flatten().fieldErrors.whom_referred,
+        referred_by_type: validatedFields.error.flatten().fieldErrors.referred_by_type,
+        referred_by:
+          validatedFields.error.flatten().fieldErrors.referred_by,
       },
     };
   }
 
-  const referred_by = validatedFields.data.referred_by;
-  const whom_reffered = validatedFields.data.whom_referred;
-
-  if (referred_by === "INDIVIDUAL") {
-    validatedFields.data.referred_by = "Individual";
-  }
-
-  if (referred_by === "RSR_GLOBAL") {
-    validatedFields.data.referred_by = whom_reffered;
-  }
   
   console.log(data);
 
@@ -88,6 +78,19 @@ export async function createUser(prevState: any, formData: FormData) {
   });
 
   if (res.status === 401) {
+    const error = await res.json();
+    console.log(error);
+
+    return {
+      ...prevState,
+      message: error?.detail,
+      fieldErrors: {
+        firstname: null,
+        password: null,
+      },
+    };
+  }
+  if (res.status === 403) {
     const error = await res.json();
     console.log(error);
 
