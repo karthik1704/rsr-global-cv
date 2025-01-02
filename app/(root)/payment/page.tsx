@@ -53,16 +53,16 @@ const PaymentPage = async () => {
     Welcome {user?.first_name} {user?.last_name}
   </div>
   <div className="w-full mx-auto px-auto my-10 lg:ml-28 font-bold">
-    <h1 className="text-2xl font-bold mb-2">Payment: £10</h1>
+    <h1 className="text-2xl font-bold mb-2">Payment: £20</h1>
     <p className="text-gray-700 text-justify">
-    You are about to make a payment of £10. Please confirm to proceed with the transaction securely through our Payment Gateway.
+    You are about to make a payment of £20. Please confirm to proceed with the transaction securely through our Payment Gateway.
     </p>
     <p className="text-gray-700 text-justify">
     You must authorize your own card online to allow foreign remittance and ensure sufficient funds for a smooth transaction.
     </p>
-    <p className="text-gray-700 mb-4 text-justify">
+    {/* <p className="text-gray-700 mb-4 text-justify">
     A discounted rate of £10 for the CV builder is available until 31 December 2024. Be sure to take advantage of this offer to complete your CV. The new rate will take effect from 1 January 2025.
-    </p>
+    </p> */}
     <Link href={"/payment/pay"} className="block w-full lg:w-24 max-w-xs bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300 text-center">
       Pay Now
     </Link>

@@ -11,7 +11,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY); // 
 
 const options: StripeElementsOptions = {
   mode: "payment",
-  amount: 1000,
+  amount: 2000,
   currency: "gbp",
 
   // Fully customizable with appearance API.

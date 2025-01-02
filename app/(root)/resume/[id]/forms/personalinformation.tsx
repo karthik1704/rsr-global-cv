@@ -73,7 +73,7 @@ const PersonalInformation = ({
       email_address: personalInformation?.email_address ?? "",
       contact_number: personalInformation?.contact_number ?? "",
       responsibilities: personalInformation?.responsibilities ?? "",
-      referred_by: personalInformation?.referred_by ?? "",
+      referred_by: personalInformation?.referred_by ?? "RSR Academy",
     },
   });
 
@@ -593,31 +593,16 @@ const PersonalInformation = ({
             )}
           </div>
 
-          <div className="mb-4.5 flex flex-col gap-3 lg:flex-row">
-            <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
-              <label className="block text-black font-bold text-sm head mb-2">
-                Referred By
-                <span className="text-red-700">*</span>
-              </label>
+         
               <input
                 className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                {...register("referred_by", {
-                  required: {
-                    value: true,
-                    message: "Referred is required",
-                    // maxLength : () => maxLengthValidation(10),
-                  },                 
+                {...register("referred_by", {               
                 maxLength : maxLengthValidation(20),
                 })}
                 placeholder="Independent candidate or referred by RSR Global Partner"
+                type="hidden"
               />
-              {errors.referred_by && (
-                <p className="text-red-700 text-sm">
-                  {errors.referred_by.message}
-                </p>
-              )}
-            </div>
-          </div>
+            
 
           <div className="flex mx-6">
             <button

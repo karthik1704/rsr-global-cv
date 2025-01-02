@@ -104,7 +104,7 @@ const CheckoutForm = ({ user }: { user: User }) => {
           Payment Information
         </p>
         <p className="w-full mt-4 py-2 px-4 text-2xl text-center font-semibold rounded-md transition duration-300">
-          Amount Total: 10 £
+          Amount Total: 20 £
         </p>
         <div className=" ">
           <PaymentElement />
