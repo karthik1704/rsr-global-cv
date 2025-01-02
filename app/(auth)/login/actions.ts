@@ -73,7 +73,7 @@ export async function signinJwt(prevState: any, formData:any) {
   const params = new URLSearchParams();
   params.append("username", username.toLowerCase());
   params.append("password", password);
-  params.append("grant_type", "password");
+  params.append("grant_type", "");
   params.append("client_id", "");
   params.append("client_secret", "");
 
