@@ -6,7 +6,7 @@ import { SERVER_API_URL } from "@/app/constants";
 import { cookies } from "next/headers";
 import {Card,CardTitle,CardDescription} from "@/components/ui/card";
 import {Accordion} from "@/components/ui/accordion";
-import { CreditCard, Sparkles } from "lucide-react";
+import { Bot, Brain, Cpu, CreditCard, Sparkles } from "lucide-react";
 
 export async function getData() {
   const cookiesStore = cookies();
@@ -76,7 +76,7 @@ const PaymentPage = async () => {
     A discounted rate of £10 for the CV builder is available until 31 December 2024. Be sure to take advantage of this offer to complete your CV. The new rate will take effect from 1 January 2025.
     </p> */}
     <Link href={"/payment/pay"} className="flex justify-center text-xl items-center px-5 w-full lg:w-36 max-w-xs bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-300 text-center">
-    <CreditCard className="mr-2 h-4 w-4" />
+    <CreditCard className="mr-2 h-5 w-5" />
       Pay Now
     </Link>
 
@@ -89,12 +89,12 @@ const PaymentPage = async () => {
             <CardDescription>Get ready for an enhanced experience powered by AI</CardDescription>
           {/* </CardHeader> */}
           {/* <CardContent> */}
-            {/* <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-3">
               <div className="flex items-center gap-3 p-4 rounded-lg bg-white/60 backdrop-blur-sm shadow-sm">
                 <Bot className="h-8 w-8 text-purple-500" />
                 <div>
                   <h3 className="font-medium">AI Assistant</h3>
-                  <p className="text-sm text-muted-foreground">24/7 intelligent support</p>
+                  <p className="text-sm text-muted-foreground">AI-Powered Resume Creation</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4 rounded-lg bg-white/60 backdrop-blur-sm shadow-sm">
@@ -108,10 +108,10 @@ const PaymentPage = async () => {
                 <Cpu className="h-8 w-8 text-indigo-500" />
                 <div>
                   <h3 className="font-medium">Auto Processing</h3>
-                  <p className="text-sm text-muted-foreground">Faster transactions</p>
+                  <p className="text-sm text-muted-foreground">Instant Resume Builder</p>
                 </div>
               </div>
-            </div> */}
+            </div>
           {/* </CardContent> */}
         </Card>
         
