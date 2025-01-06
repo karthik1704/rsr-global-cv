@@ -7,6 +7,7 @@ import { cookies } from "next/headers";
 import {Card,CardTitle,CardDescription} from "@/components/ui/card";
 import {Accordion} from "@/components/ui/accordion";
 import { Bot, Brain, Cpu, CreditCard, Sparkles } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 export async function getData() {
   const cookiesStore = cookies();
@@ -59,7 +60,7 @@ const PaymentPage = async () => {
   <CardTitle className="capitalize text-3xl font-bold lg:pl-28 lg:pt-7">Welcome {user?.first_name} {user?.last_name}</CardTitle>
   <CardDescription className="lg:pl-28 text-base">Complete your payment to continue</CardDescription>
   </div>
-  <Accordion className="text-xl bg-green-600 p-3 text-white rounded-full">£20</Accordion>
+  <Badge className="text-xl bg-green-500 hover:bg-green-600 p-3 text-white rounded-full"><p className="font-bold">£20</p></Badge>
   </div>
   {/* <div className="text-2xl md:text-3xl font-bold capitalize lg:pl-28 lg:pt-7">
     Welcome {user?.first_name} {user?.last_name}
@@ -83,7 +84,7 @@ const PaymentPage = async () => {
     <Card className="border-2 p-10 bg-gradient-to-br from-purple-50 to-blue-50">
           {/* <CardHeader> */}
             <CardTitle className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-green-500" />
+              <Sparkles className="h-8 w-8 text-green-500" />
               AI Features Coming Soon
             </CardTitle>
             <CardDescription>Get ready for an enhanced experience powered by AI</CardDescription>
