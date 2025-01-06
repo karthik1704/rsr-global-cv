@@ -183,13 +183,13 @@ const PersonalInformation = ({
               />
             </div>
           )}
-          <div className="space-y-3 mx-4">
+          <div className="space-y-3 mx-4 w-full">
   <p className="font-semibold lg:text-2xl md:text-left text-center text-xl capitalize text-gray-800">
     {personalInformation.first_name} {personalInformation.last_name}
   </p>
 
   <div className="flex md:flex-row flex-col">
-  <p className="lg:text-base text-sm font-semibold">
+  <p className="lg:text-base text-sm text-start font-semibold">
     Date of Birth: <span className="font-normal"> {dateFormatter(personalInformation.date_of_birth as string)} </span>
   </p>
 
@@ -222,7 +222,7 @@ const PersonalInformation = ({
           {personalInformation.responsibilities && (
             <p className="lg:text-base text-sm font-semibold text-left">
               Main Activities and Responsibilities:{" "}
-              <span className="font-normal lg:text-base text-sm text-center">
+              <span className="font-normal lg:text-base text-sm text-center break-words">
                 {personalInformation.responsibilities}
               </span>
             </p>
