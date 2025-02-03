@@ -12,6 +12,56 @@ import { textHandleChange } from "@/lib/utils";
 import { maxLengthValidation } from "@/lib/utils";
 import { Contact } from "lucide-react";
 import EditButton from "@/components/editButton/editbutton";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const schema = z.object({
+  first_name: z
+    .string()
+    .min(1, "First Name is required")
+    .max(40, "Maximum 40 characters allowed"),
+  last_name: z
+    .string()
+    .min(1, "Last Name is required")
+    .max(20, "Maximum 20 characters allowed"),
+  date_of_birth: z
+    .union([z.date(), z.string()])
+    .refine((val) => !isNaN(Date.parse(val as string)), {
+      message: "Invalid date format",
+    }),
+  nationality: z
+    .string()
+    .min(1, "Nationality is required")
+    .max(20, "Maximum 20 characters allowed"),
+  address_line_1: z
+    .string()
+    .min(1, "Address Line 1 is required")
+    .max(50, "Maximum 50 characters allowed"),
+  address_line_2: z
+    .string()
+    .max(50, "Maximum 50 characters allowed"),
+  postal_code: z.string().max(20, "Maximum 20 characters allowed"),
+  city: z
+    .string()
+    .min(1, "City is required")
+    .max(30, "Maximum 30 characters allowed"),
+  country: z
+    .string()
+    .min(1, "Country is required")
+    .max(20, "Maximum 20 characters allowed"),
+  email_address: z
+    .string()
+    .email("Invalid Email")
+    .max(30, "Maximum 30 characters allowed")
+    .trim()
+    .transform((email) => {
+      const lowercasedEmail = email.toLowerCase();
+      return lowercasedEmail;
+    }),
+  contact_number: z.string(),
+  responsibilities: z.string().max(300, "Maximum 300 characters allowed"),
+  referred_by: z.string().max(20, "Maximum 20 characters allowed"),
+});
 
 type Resume = {
   resume_title: string;
@@ -75,6 +125,7 @@ const PersonalInformation = ({
       responsibilities: personalInformation?.responsibilities ?? "",
       referred_by: personalInformation?.referred_by ?? "RSR Academy",
     },
+    resolver: zodResolver(schema),
   });
 
   const [date, setDate] = useState<Date | undefined>(new Date(personalInformation.date_of_birth) ?? undefined);
@@ -251,22 +302,7 @@ const PersonalInformation = ({
               </label>
               <input
                 className="pl-4 block w-full max-w-xs sm:max-w-full rounded-md border-0 py-2 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                {...register("first_name", {
-                  required: {
-                    value: true,
-                    message: "First Name is required",
-                  },
-                    minLength: {
-                      value: 1,
-                      message: "must have a minimum of one character.",
-                    },
-                    maxLength: {
-                      value: 20,
-                      message: "Maximum 20 characters allowed.",
-                    },
-                 
-                  // maxLength : maxLengthValidation(20),
-                })}
+                {...register("first_name")}
                 placeholder="Type name same as in the passport"
               />
               {errors.first_name && (
@@ -284,21 +320,7 @@ const PersonalInformation = ({
               </label>
               <input
                 className="pl-4 block w-full rounded-md border-0 py-2 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                {...register("last_name", {
-                  // required: {
-                  //   value: true,
-                  //   message: "Last Name is required",
-                  // },
-                  // maxLength : maxLengthValidation(20),
-                  minLength: {
-                    value: 1,
-                    message: "must have a minimum of one character.",
-                  },
-                  maxLength: {
-                    value: 20,
-                    message: "Maximum 20 characters allowed.",
-                  },
-                })}
+                {...register("last_name")}
                 placeholder="Last Name"
               />
               {errors.last_name && (
@@ -316,12 +338,7 @@ const PersonalInformation = ({
             <DatePicker
               selectedDate={date}
               onDateChange={handleDateChange}
-              {...register("date_of_birth", {
-                required: {
-                  value: true,
-                  message: "Date is required",
-                },
-              })}
+              {...register("date_of_birth")}
             />
             {errors.date_of_birth && (
               <p className="text-red-700 text-sm">
@@ -338,20 +355,7 @@ const PersonalInformation = ({
               </label>
               <input
                 className="pl-4 block w-full rounded-md border-0 py-2 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                {...register("nationality", {
-                  required: {
-                    value: true,
-                    message: "Nationality is required",
-                  },
-                  minLength: {
-                    value: 1,
-                    message: "must have a minimum of one character.",
-                  },
-                  maxLength: {
-                    value: 20,
-                    message: "Maximum 20 characters allowed.",
-                  },
-                })}
+                {...register("nationality")}
                 placeholder="Nationality"
               />
               {errors.nationality && (
@@ -371,20 +375,7 @@ const PersonalInformation = ({
             </label>
             <input
               className="pl-4 block w-full rounded-md border-0 py-2 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-              {...register("address_line_1", {
-                required: {
-                  value: true,
-                  message: "Address is required",
-                },
-                minLength: {
-                  value: 1,
-                  message: "must have a minimum of one character.",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "Maximum 20 characters allowed.",
-                },
-              })}
+              {...register("address_line_1")}
               placeholder="Street name, P.O, box"
             />
             {errors.address_line_1 && (
@@ -400,20 +391,7 @@ const PersonalInformation = ({
             </label>
             <input
               className="pl-4 block w-full rounded-md border-0 py-2 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-              {...register("address_line_2", {
-                required: {
-                  value: true,
-                  message: "Address is required",
-                },
-                minLength: {
-                  value: 1,
-                  message: "must have a minimum of one character.",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "Maximum 20 characters allowed.",
-                },
-              })}
+              {...register("address_line_2")}
               placeholder="Apartment, suite, unit, building, floor, etc"
             />
             {errors.address_line_2 && (
@@ -430,20 +408,7 @@ const PersonalInformation = ({
               </label>
               <input
                 className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                {...register("postal_code", {
-                  // required: {
-                  //   value: true,
-                  //   message: "postal code is required",
-                  // },
-                  minLength: {
-                    value: 1,
-                    message: "must have a minimum of one character.",
-                  },
-                  maxLength: {
-                    value: 20,
-                    message: "Maximum 20 characters allowed.",
-                  },
-                })}
+                {...register("postal_code")}
                 placeholder="6000 01"
               />
               {errors.postal_code && (
@@ -457,20 +422,7 @@ const PersonalInformation = ({
               </label>
               <input
                 className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 py-2 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                {...register("city", {
-                  required: {
-                    value: true,
-                    message: "City is required",
-                  },
-                  minLength: {
-                    value: 1,
-                    message: "must have a minimum of one character.",
-                  },
-                  maxLength: {
-                    value: 20,
-                    message: "Maximum 20 characters allowed.",
-                  },
-                })}
+                {...register("city")}
                 placeholder="Chennai"
               />
               {errors.city && (
@@ -484,24 +436,7 @@ const PersonalInformation = ({
               </label>
               <input
                 className="pl-4 block w-full md:w-[455px] lg:w-[300px] rounded-md border-0 py-2 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                {...register("country", {
-                  required: {
-                    value: true,
-                    message: "Country is required",
-                  },
-                  minLength: {
-                    value: 1,
-                    message: "must have a minimum of one character.",
-                  },
-                  maxLength: {
-                    value: 20,
-                    message: "Maximum 20 characters allowed.",
-                  },
-                  // validate: (value) => {
-                  //   const validation = maxLengthValidation(10);
-                  //   return value.length <= validation.value || validation.message;
-                  // },
-                })}
+                {...register("country")}
                 placeholder="India"
               />
               {errors.country && (
@@ -519,25 +454,12 @@ const PersonalInformation = ({
               </label>
               <input
                 className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                {...register("email_address", {
-                  // required: {
-                  //   value: true,
-                  //   message: "Email Id is required",
-                  // },
-                  minLength: {
-                    value: 1,
-                    message: "must have a minimum of one character.",
-                  },
-                  maxLength: {
-                    value: 30,
-                    message: "Maximum 30 characters allowed.",
-                  },
-                })}
+                {...register("email_address")}
                 placeholder="Email"
               />
-              {/* {errors.email && (
-              <p className="text-red-700 text-sm">{errors.email.message}</p>
-            )} */}
+              {errors.email_address && (
+              <p className="text-red-700 text-sm">{errors.email_address.message}</p>
+            )}
             </div>
 
             <div className="mb-4 w-full lg:w-1/2 md:px-6 md:w-[504px]">
@@ -546,17 +468,12 @@ const PersonalInformation = ({
               </label>
               <input
                 className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                {...register("contact_number", {
-                  // required: {
-                  //   value: true,
-                  //   message: "Email Id is required",
-                  // },
-                })}
+                {...register("contact_number")}
                 placeholder="Contact Number"
               />
-              {/* {errors.email && (
-              <p className="text-red-700 text-sm">{errors.email.message}</p>
-            )} */}
+              {errors.contact_number && (
+              <p className="text-red-700 text-sm">{errors.contact_number.message}</p>
+            )}
             </div>
           </div>
 
@@ -566,21 +483,7 @@ const PersonalInformation = ({
             </label>
             <textarea
               className="pl-4 block w-full lg:w-full md:w-[455px] rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-              {...register("responsibilities", {
-                minLength: {
-                  value: 0,
-                  message: "Must be at least 10 characters long",
-                },
-                maxLength: {
-                  value: 300,
-                  message: "Maximum length is 300 characters",
-                },
-                // required: {
-                //   value: true,
-                //   message: 'First Name is required'
-                // },
-                // maxLength : maxLengthValidation(300),
-              })}
+              {...register("responsibilities")}
               // onChange={(event)=>textHandleChange(event, updateText)}
               onChange={textHandleChange}
               placeholder="About us"
@@ -596,9 +499,7 @@ const PersonalInformation = ({
          
               <input
                 className="pl-4 block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
-                {...register("referred_by", {               
-                maxLength : maxLengthValidation(20),
-                })}
+                {...register("referred_by")}
                 placeholder="Independent candidate or referred by RSR Global Partner"
                 type="hidden"
               />
