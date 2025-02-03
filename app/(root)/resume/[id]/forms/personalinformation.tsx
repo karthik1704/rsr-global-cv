@@ -50,14 +50,14 @@ const schema = z.object({
     .min(1, "Country is required")
     .max(20, "Maximum 20 characters allowed"),
   email_address: z
-    .string()
-    .email("Invalid Email")
-    .max(30, "Maximum 30 characters allowed")
-    .trim()
-    .transform((email) => {
-      const lowercasedEmail = email.toLowerCase();
-      return lowercasedEmail;
-    }),
+    .string(),
+    // .email("Invalid Email")
+    // .max(30, "Maximum 30 characters allowed")
+    // .trim()
+    // .transform((email) => {
+    //   const lowercasedEmail = email.toLowerCase();
+    //   return lowercasedEmail;
+    // }),
   contact_number: z.string(),
   responsibilities: z.string().max(300, "Maximum 300 characters allowed"),
   referred_by: z.string().max(20, "Maximum 20 characters allowed"),
