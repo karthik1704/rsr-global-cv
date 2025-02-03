@@ -136,7 +136,7 @@ const WorkExperience = ({
   //Website validation
 
   const validateWebsite = (website) => {
-    const regex = /^(https:\/\/|https:\/\/www\.|www\.)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
+    const regex = /^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?(\/[a-zA-Z0-9._-]+)*\/?$/;
     if (!website) {
       return { valid: false, message: "Company’s Website is required" };
     }
