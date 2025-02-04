@@ -59,7 +59,7 @@ const schema = z.object({
     //   return lowercasedEmail;
     // }),
   contact_number: z.string(),
-  responsibilities: z.string().max(300, "Maximum 300 characters allowed"),
+  responsibilities: z.string().max(450, "Maximum 450 characters allowed"),
   referred_by: z.string().max(20, "Maximum 20 characters allowed"),
 });
 
